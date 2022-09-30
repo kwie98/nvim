@@ -1,10 +1,12 @@
-local cmp_status_ok, cmp = pcall(require, "cmp")
-if not cmp_status_ok then
+local status_ok, cmp = pcall(require, "cmp")
+if not status_ok then
+    print("Could not load cmp.")
     return
 end
 
-local snip_status_ok, luasnip = pcall(require, "luasnip")
-if not snip_status_ok then
+local status_ok, luasnip = pcall(require, "luasnip")
+if not status_ok then
+    print("Could not load luasnip.")
     return
 end
 

@@ -1,7 +1,7 @@
 if not vim.g.vscode then
     require("core.options")
     require("core.keymaps")
-    require("plugins.packer")
+    require("core.packer")
     require("plugins.colorscheme")
     require("plugins.cmp")
     require("core.lsp")

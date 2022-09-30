@@ -1,5 +1,6 @@
 local status_ok, lsp_signature = pcall(require, "lsp_signature")
 if not status_ok then
+    print("Could not load lsp_signature.")
     return
 end
 

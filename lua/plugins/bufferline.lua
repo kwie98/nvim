@@ -1,10 +1,12 @@
 local status_ok, bufferline = pcall(require, "bufferline")
 if not status_ok then
+    print("Could not load bufferline.")
     return
 end
 
 local status_ok, groups = pcall(require, "bufferline.groups")
 if not status_ok then
+    print("Could not load bufferline.groups.")
     return
 end
 

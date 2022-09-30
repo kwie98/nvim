@@ -1,5 +1,15 @@
-local configs = require("nvim-treesitter.configs")
-local context = require("treesitter-context")
+local status_ok, configs = pcall(require, "nvim-treesitter.configs")
+if not status_ok then
+    print("Could not load nvim-treesitter.configs.")
+    return
+end
+
+local status_ok, context = pcall(require, "treesitter-context")
+if not status_ok then
+    print("Could not load treesitter-context.")
+    return
+end
+
 context.setup()
 
 -- require("nvim-treesitter.parsers").filetype_to_parsername.vimwiki = "markdown"

@@ -1,5 +1,6 @@
-local status_ok, dap = pcall(require, "dap")
+local status_ok, _ = pcall(require, "dap")
 if not status_ok then
+    print("Could not load dap.")
     return
 end
 
@@ -13,6 +14,7 @@ vim.fn.sign_define("DapBreakpoint", {
 
 local status_ok, dap_python = pcall(require, "dap-python")
 if not status_ok then
+    print("Could not load dap-python.")
     return
 end
 
@@ -56,6 +58,7 @@ dap_python.setup("/usr/bin/python")
 
 local status_ok, dapui = pcall(require, "dapui")
 if not status_ok then
+    print("Could not load dapui.")
     return
 end
 

@@ -1,14 +1,11 @@
 local status_ok, telescope = pcall(require, "telescope")
 if not status_ok then
-    print("Could not load telescope")
+    print("Could not load telescope.")
     return
 end
 
-local status_ok, actions = pcall(require, "telescope.actions")
-if not status_ok then
-    print("Could not load telescope.actions")
-    return
-end
+-- local actions = telescope.actions
+local actions = require("telescope.actions")
 
 -- local pickers = require("plugins.telescope.pickers")
 
@@ -100,11 +97,5 @@ telescope.setup({
         },
     },
 })
-
--- local status_ok, telescope_dap = pcall(require, "telescope-dap")
--- if not status_ok then
---     print("Could not load telescope-dap")
---     return
--- end
 
 telescope.load_extension("dap")

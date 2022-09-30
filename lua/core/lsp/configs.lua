@@ -1,9 +1,14 @@
 local status_ok, lsp_installer = pcall(require, "nvim-lsp-installer")
 if not status_ok then
+    print("Could not load nvim-lsp-installer.")
     return
 end
 
-local lspconfig = require("lspconfig")
+local status_ok, lspconfig = pcall(require, "lspconfig")
+if not status_ok then
+    print("Could not load lspconfig.")
+    return
+end
 
 local servers = { "jsonls", "sumneko_lua", "pyright", "yamlls", "marksman" }
 
