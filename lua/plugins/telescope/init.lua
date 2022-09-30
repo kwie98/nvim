@@ -10,7 +10,7 @@ if not status_ok then
     return
 end
 
--- local pickers = require("user.telescope.pickers")
+-- local pickers = require("plugins.telescope.pickers")
 
 telescope.setup({
     defaults = {
