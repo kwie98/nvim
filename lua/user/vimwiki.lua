@@ -8,5 +8,6 @@ vim.g.vimwiki_list = {
 }
 vim.g.vimwiki_listsyms = " X" -- list fill symbols compatible with github markdown
 vim.g.vimwiki_markdown_link_ext = 1
+vim.g.vimwiki_conceallevel = 0
 
 vim.g.sync_taskwarrior = 0

@@ -3,9 +3,11 @@ if not status_ok then
     return
 end
 
+require("nvim-treesitter.parsers").filetype_to_parsername.vimwiki = "markdown"
+
 configs.setup({
     ensure_installed = "all", -- one of "all" or a list of languages
-    ignore_install = { "markdown", "phpdoc" }, -- List of parsers to ignore installing
+    --[[ ignore_install = { "markdown", "phpdoc" }, -- List of parsers to ignore installing ]]
     highlight = {
         enable = true, -- false will disable the whole extension
         disable = { "css" }, -- list of language that will be disabled
@@ -13,7 +15,7 @@ configs.setup({
     autopairs = {
         enable = true,
     },
-    indent = { enable = true, disable = { "css", "python" } },
+    indent = { enable = true, disable = { "css", "python", "yaml" } },
     incremental_selection = {
         enable = true,
         keymaps = {
@@ -22,6 +24,10 @@ configs.setup({
             -- scope_incremental = "grc",
             node_decremental = "–",
         },
+    },
+    matchup = {
+        enable = true,
+        disable_virtual_text = true,
     },
     textobjects = {
         select = {

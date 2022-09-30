@@ -33,7 +33,7 @@ bufferline.setup({
                     -- highlight = { gui = "underline", guisp = "blue" }, -- Optional
                     -- priority = 2, -- determines where it will appear relative to other groups (Optional)
                     -- icon = "", -- Optional
-                    auto_close = true,
+                    auto_close = false,
                     matcher = function(buf) -- Mandatory
                         return buf.path:match("/home/konrad/Documents/uni/masterarbeit/AutoRL")
                         -- print(vim.inspect(buf))
@@ -48,7 +48,7 @@ bufferline.setup({
                     -- highlight = { gui = "underline", guisp = "blue" }, -- Optional
                     -- priority = 2, -- determines where it will appear relative to other groups (Optional)
                     -- icon = "", -- Optional
-                    auto_close = true,
+                    auto_close = false,
                     matcher = function(buf) -- Mandatory
                         return buf.path:match("/home/konrad/.config/nvim/")
                         -- print(vim.inspect(buf))
@@ -63,9 +63,22 @@ bufferline.setup({
                     -- highlight = { gui = "underline", guisp = "blue" }, -- Optional
                     -- priority = 2, -- determines where it will appear relative to other groups (Optional)
                     -- icon = "", -- Optional
-                    auto_close = true,
+                    auto_close = false,
                     matcher = function(buf) -- Mandatory
                         return buf.filename:match("%.md")
+                    end,
+                    separator = {
+                        style = groups.separator.tab,
+                    },
+                },
+                {
+                    name = "Help",
+                    -- highlight = { gui = "underline", guisp = "blue" }, -- Optional
+                    -- priority = 2, -- determines where it will appear relative to other groups (Optional)
+                    -- icon = "", -- Optional
+                    auto_close = false,
+                    matcher = function(buf) -- Mandatory
+                        return buf.buftype == "help"
                     end,
                     separator = {
                         style = groups.separator.tab,

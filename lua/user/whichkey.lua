@@ -17,10 +17,10 @@ local setup = {
             operators = false, -- adds help for operators like d, y, ... and registers them for motion / text object completion
             motions = false, -- adds help for motions
             text_objects = false, -- help for text objects triggered after entering an operator
-            windows = true, -- default bindings on <c-w>
-            nav = true, -- misc bindings to work with windows
-            z = true, -- bindings for folds, spelling and others prefixed with z
-            g = false, -- bindings for prefixed with g
+            windows = false, -- default bindings on <c-w>
+            nav = false, -- misc bindings to work with windows
+            z = false, -- bindings for folds, spelling and others prefixed with z
+            g = true, -- bindings for prefixed with g
         },
     },
     -- add operators that will trigger motion and text object completion
@@ -70,8 +70,8 @@ local setup = {
         "<Cmd> require",
     }, -- hide mapping boilerplate
     show_help = true, -- show help message on the command line when the popup is visible
-    triggers = "auto", -- automatically setup triggers
-    -- triggers = {"<leader>"} -- or specify a list manually
+    triggers = "auto", -- automatically setup triggers TODO test
+    -- triggers = { "<leader>", "g" }, -- or specify a list manually TODO include register triggers
     triggers_blacklist = {
         -- list of mode / prefixes that should never be hooked by WhichKey
         -- this is mostly relevant for key maps that start with a native binding
@@ -87,17 +87,20 @@ local opts = {
     buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
     silent = true, -- use `silent` when CReating keymaps
     noremap = true, -- use `noremap` when CReating keymaps
-    nowait = true, -- use `nowait` when CReating keymaps
+    nowait = false, -- TODO what does this do?
 }
 
 local mappings = {
+    w = {
+        w = { "<CMD>Telekasten panel<CR>", "Wiki" },
+    },
     ["b"] = {
         "<CMD>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<CR>",
         "Buffers",
     },
     ["e"] = { "<CMD>NvimTreeToggle<CR>", "Explorer" },
     ["t"] = { "<CMD>ToggleTerm<CR>", "Terminal" },
-    ["q"] = { "<CMD>q!<CR>", "Quit" },
+    --[[ ["q"] = { "<CMD>q!<CR>", "Quit" }, ]]
     ["c"] = { "<CMD>Bdelete!<CR>", "Close Buffer" },
     -- ["h"] = { "<CMD>nohlsearch<CR>", "No Highlight" },
     ["f"] = {
@@ -130,41 +133,46 @@ local mappings = {
 
     g = {
         name = "Git",
-        g = { "<CMD>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
+        g = { "<CMD>Git<CR>", "Git" },
+        h = { "<CMD>Gitsigns toggle_linehl<CR> | <CMD>Gitsigns toggle_deleted<CR>", "View Hunks" },
+        l = { "<CMD>Gitsigns toggle_current_line_blame<CR>", "Blame" },
+        r = { "<CMD>Gitsigns reset_hunk<CR>", "Reset Hunk" },
+        R = { "<CMD>Gitsigns reset_buffer<CR>", "Reset Buffer" },
+        s = { "<CMD>Gitsigns stage_hunk<CR>", "Stage Hunk" },
+        S = { "<CMD>Gitsigns stage_buffer<CR>", "Stage Buffer" },
+        u = { "<CMD>Gitsigns undo_stage_hunk<CR>", "Undo Stage Hunk" },
+        d = { "<CMD>Gdiffsplit | wincmd x<CR>", "Diff File" },
+        D = { "<CMD>Git difftool -y HEAD | 2,$tabdo wincmd x | wincmd w | tabnext<CR>", "Diff All Files" },
+        -- m = { "<CMD>Gdiffsplit!<CR>", "Merge" },
+        m = { "<CMD>Git mergetool -y | tabprevious<CR>", "Merge" },
+
         j = { "<CMD>lua require 'gitsigns'.next_hunk()<CR>", "Next Hunk" },
         k = { "<CMD>lua require 'gitsigns'.prev_hunk()<CR>", "Prev Hunk" },
-        l = { "<CMD>lua require 'gitsigns'.blame_line()<CR>", "Blame" },
-        p = { "<CMD>lua require 'gitsigns'.preview_hunk()<CR>", "Preview Hunk" },
-        r = { "<CMD>lua require 'gitsigns'.reset_hunk()<CR>", "Reset Hunk" },
-        R = { "<CMD>lua require 'gitsigns'.reset_buffer()<CR>", "Reset Buffer" },
-        s = { "<CMD>lua require 'gitsigns'.stage_hunk()<CR>", "Stage Hunk" },
-        u = {
-            "<CMD>lua require 'gitsigns'.undo_stage_hunk()<CR>",
-            "Undo Stage Hunk",
-        },
+        -- l = { "<CMD>lua require 'gitsigns'.blame_line()<CR>", "Blame" },
+        -- p = { "<CMD>lua require 'gitsigns'.preview_hunk()<CR>", "Preview Hunk" },
         o = { "<CMD>Telescope git_status<CR>", "Open changed file" },
-        b = { "<CMD>Telescope git_branches<CR>", "Checkout branch" },
-        c = { "<CMD>Telescope git_commits<CR>", "Checkout commit" },
-        d = {
-            "<CMD>Gitsigns diffthis HEAD<CR>",
-            "Diff",
-        },
+        -- b = { "<CMD>Telescope git_branches<CR>", "Checkout branch" },
+        -- c = { "<CMD>Telescope git_commits<CR>", "Checkout commit" },
+        -- d = { "<CMD>Gitsigns diffthis HEAD<CR>", "Diff" },
+        -- d = { "<CMD>lua require('gitsigns').diffthis('HEAD'); vim.cmd('wincmd x')<CR>", "Diff" }, -- TODO
     },
 
     d = {
         name = "Debug",
-        t = { "<CMD>lua require'dap'.toggle_breakpoint()<CR>", "Breakpoint" },
-        l = { "<CMD>lua require'dap'.run_to_cursor()<CR>", "Run To Cursor" },
+        s = { "<CMD>Telescope dap variables<CR>", "List Variables" },
+        c = { "<CMD>lua require'dap'.run_to_cursor()<CR>", "Run To Cursor" },
         i = { "<CMD>lua require'dap'.step_into()<CR>", "Step Into" },
         j = { "<CMD>lua require'dap'.step_over()<CR>", "Step Over" },
         o = { "<CMD>lua require'dap'.step_out()<CR>", "Step Out" },
+        t = { "<CMD>lua require'dap'.toggle_breakpoint()<CR>", "Breakpoint" },
         T = {
             "<CMD>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
             "Conditional Breakpoint",
         },
-        L = { "<CMD>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>", "Logpoint" },
+        m = { "<CMD>lua require'dap-python'.test_method()<CR>", "Test Method" },
+        l = { "<CMD>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>", "Logpoint" },
         b = { "<CMD>lua require'telescope'.extensions.dap.list_breakpoints()<CR>", "List Breakpoints" },
-        v = { "<CMD>lua require'telescope'.extensions.dap.variables()<CR>", "List Variables" },
+        -- v = { "<CMD>lua require'telescope'.extensions.dap.variables()<CR>", "List Variables" },
         f = { "<CMD>lua require'telescope'.extensions.dap.frames()<CR>", "List Frames" },
         u = { "<CMD>lua require'dapui'.toggle()<CR>", "Toggle UI" },
         -- b = { "<CMD>lua require'dap'.step_back()<CR>", "Step Back" },
@@ -184,7 +192,7 @@ local mappings = {
             "<CMD>Telescope lsp_document_diagnostics<CR>",
             "Document Diagnostics",
         },
-        w = {
+        W = {
             "<CMD>Telescope lsp_workspace_diagnostics<CR>",
             "Workspace Diagnostics",
         },
@@ -203,7 +211,7 @@ local mappings = {
         q = { "<CMD>lua vim.diagnostic.set_loclist()<CR>", "Quickfix" },
         r = { "<CMD>lua vim.lsp.buf.rename()<CR>", "Rename" },
         s = { "<CMD>Telescope lsp_document_symbols<CR>", "Document Symbols" },
-        S = {
+        w = {
             "<CMD>Telescope lsp_dynamic_workspace_symbols<CR>",
             "Workspace Symbols",
         },
@@ -219,6 +227,7 @@ local mappings = {
         R = { "<CMD>Telescope registers<CR>", "Registers" },
         k = { "<CMD>Telescope keymaps<CR>", "Keymaps" },
         C = { "<CMD>Telescope commands<CR>", "Commands" },
+        a = { "<CMD>lua require'telescope.builtin'.find_files({cwd='~', hidden=true})<CR>", "Find All Files" },
     },
 
     -- t = {
@@ -233,5 +242,23 @@ local mappings = {
     -- },
 }
 
+local v_opts = {
+    mode = "v", -- NORMAL mode
+    prefix = "<leader>",
+    buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+    silent = true, -- use `silent` when CReating keymaps
+    noremap = true, -- use `noremap` when CReating keymaps
+    nowait = true, -- use `nowait` when CReating keymaps
+}
+
+local v_mappings = {
+    g = {
+        name = "Git",
+        s = { ":Gitsigns stage_hunk<CR>", "Stage Hunk" },
+        r = { ":Gitsigns reset_hunk<CR>", "Reset Hunk" },
+    },
+}
+
 which_key.setup(setup)
 which_key.register(mappings, opts)
+which_key.register(v_mappings, v_opts)

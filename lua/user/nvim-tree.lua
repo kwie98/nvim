@@ -26,6 +26,9 @@ nvim_tree.setup({
                 enable = false,
             },
         },
+        remove_file = {
+            close_window = false,
+        },
     },
     renderer = {
         highlight_git = true,
@@ -54,10 +57,10 @@ nvim_tree.setup({
                     unstaged = "M",
                     staged = "S",
                     unmerged = "",
-                    renamed = "➜",
-                    untracked = "U",
-                    deleted = "",
-                    ignored = "◌",
+                    renamed = "R",
+                    untracked = "?",
+                    deleted = "D",
+                    ignored = "",
                 },
             },
         },
@@ -85,14 +88,16 @@ nvim_tree.setup({
                 { key = ".", cb = tree_cb("toggle_dotfiles") },
                 { key = "<Enter>", cb = tree_cb("system_open") },
                 { key = "L", cb = tree_cb("cd") },
+                { key = "<C-t>", cb = nil }, -- TODO
             },
         },
     },
     filters = {
         dotfiles = false,
-        custom = { "^.git$" },
+        -- custom = { "^.git$" },
     },
     git = {
+        enable = true,
         ignore = false,
     },
 })

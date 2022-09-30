@@ -21,10 +21,12 @@ if not vim.g.vscode then
     require("user.autocommands")
 
     require("user.colorizer")
-    require("user.vimwiki")
+    -- require("user.vimwiki")
+    require("user.telekasten")
     require("user.markdown-preview")
     require("user.dap")
     require("user.lsp-signature")
     require("user.illuminate")
     require("user.harpoon")
+    require("user.matchup")
 end

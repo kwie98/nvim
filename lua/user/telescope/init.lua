@@ -1,9 +1,16 @@
 local status_ok, telescope = pcall(require, "telescope")
 if not status_ok then
+    print("Could not load telescope")
     return
 end
 
-local actions = require("telescope.actions")
+local status_ok, actions = pcall(require, "telescope.actions")
+if not status_ok then
+    print("Could not load telescope.actions")
+    return
+end
+
+-- local pickers = require("user.telescope.pickers")
 
 telescope.setup({
     defaults = {
@@ -78,13 +85,10 @@ telescope.setup({
         },
     },
     pickers = {
-        -- Default configuration for builtin pickers goes here:
-        -- picker_name = {
-        --   picker_config_key = value,
-        --   ...
-        -- }
-        -- Now the picker_config_key will be applied every time you call this
-        -- builtin picker
+        -- find_files = {
+        --     hidden = true,
+        --     no_ignore = true,
+        -- },
     },
     extensions = {
         fzf = {
@@ -96,5 +100,11 @@ telescope.setup({
         },
     },
 })
+
+-- local status_ok, telescope_dap = pcall(require, "telescope-dap")
+-- if not status_ok then
+--     print("Could not load telescope-dap")
+--     return
+-- end
 
 telescope.load_extension("dap")

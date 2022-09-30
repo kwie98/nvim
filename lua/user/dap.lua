@@ -66,8 +66,8 @@ dapui.setup({
         -- Use a table to apply multiple mappings
         expand = { "<CR>", "<2-LeftMouse>" },
         open = "o",
-        remove = "d",
-        edit = "e",
+        remove = "dd",
+        edit = "cc",
         repl = "r",
         toggle = "t",
     },
@@ -113,6 +113,6 @@ dapui.setup({
     windows = { indent = 2 },
     render = {
         max_type_length = nil, -- Can be integer or nil.
-        max_value_lines = 1, -- Can be integer or nil.
+        max_value_lines = 10, -- Can be integer or nil.
     },
 })

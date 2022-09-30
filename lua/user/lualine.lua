@@ -21,19 +21,19 @@ local diff = {
     "diff",
     colored = false,
     symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
-    cond = hide_in_width
+    cond = hide_in_width,
 }
 
 local python_env = {
     function()
         -- local utils = require "lvim.core.lualine.utils"
         if vim.bo.filetype == "python" then
-            local venv = os.getenv "CONDA_DEFAULT_ENV"
+            local venv = os.getenv("CONDA_DEFAULT_ENV")
             if venv then
                 -- return string.format("  (%s)", utils.env_cleanup(venv))
                 return string.format("(%s)", venv)
             end
-            venv = os.getenv "VIRTUAL_ENV"
+            venv = os.getenv("VIRTUAL_ENV")
             if venv then
                 return string.format(" %s", venv)
             end
@@ -58,7 +58,7 @@ local treesitter = {
     color = function()
         local buf = vim.api.nvim_get_current_buf()
         local ts = vim.treesitter.highlighter.active[buf]
-        return { fg = ts and not vim.tbl_isempty(ts) and "#8EA64C" or nil}
+        return { fg = ts and not vim.tbl_isempty(ts) and "#8EA64C" or nil }
     end,
     cond = hide_in_width,
 }
@@ -146,7 +146,7 @@ lualine.setup({
     sections = {
         lualine_a = { "mode" },
         lualine_b = { branch, diff, diagnostics },
-        lualine_c = { "filename"},
+        lualine_c = { "filename" },
         -- lualine_x = { "encoding", "fileformat", "filetype" },
         lualine_x = { treesitter, lsp },
         lualine_y = { filetype, python_env },

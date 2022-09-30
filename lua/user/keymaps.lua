@@ -25,6 +25,36 @@ keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 
+-- Tab navigation
+keymap("n", "<C-S-H>", "<CMD>tabprevious<CR>", opts)
+keymap("n", "<C-S-L>", "<CMD>tabnext<CR>", opts)
+
+-- Git Merging binds similar to go and gp
+vim.cmd([[
+    nnoremap dh :diffget //2/<c-r>=expand('%:t') <CR><CR>
+    nnoremap dl :diffget //3/<c-r>=expand('%:t') <CR><CR>
+]])
+
+-- TODO try these on 0.8
+-- vim.keymap("n", "[c", function()
+--     if vim.wo.diff then
+--         return "[c"
+--     end
+--     vim.schedule(function()
+--         require("gitsigns").prev_hunk()
+--     end)
+--     return "<Ignore>"
+-- end, { expr = true })
+-- vim.keymap("n", "]c", function()
+--     if vim.wo.diff then
+--         return "]c"
+--     end
+--     vim.schedule(function()
+--         require("gitsigns").next_hunk()
+--     end)
+--     return "<Ignore>"
+-- end, { expr = true })
+
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize -2<CR>", opts)
 keymap("n", "<C-Down>", ":resize +2<CR>", opts)
@@ -56,10 +86,15 @@ keymap("n", "n", "nzzzv", opts)
 keymap("n", "N", "Nzzzv", opts)
 keymap("n", "J", "mzJ`z", opts)
 
-keymap("n", "{", "{zzzv", opts)
-keymap("n", "}", "}zzzv", opts)
-keymap("n", "<C-u>", "<C-u>zzzv", opts)
-keymap("n", "<C-d>", "<C-d>zzzv", opts)
+--[[ keymap("n", "{", "{zzzv", opts) ]]
+--[[ keymap("n", "}", "}zzzv", opts) ]]
+keymap("n", "{", "<CMD>execute 'keepjumps norm! ' . v:count1 . '{zzzv'<CR>", opts)
+keymap("n", "}", "<CMD>execute 'keepjumps norm! ' . v:count1 . '}zzzv'<CR>", opts)
+keymap("n", "<C-u>", "<CMD>execute 'keepjumps norm! ' . '<C-u>'<CR>", opts)
+keymap("n", "<C-d>", "<CMD>execute 'keepjumps norm! ' . '<C-d>'<CR>", opts)
+
+--[[ keymap("n", "<C-u>", "<C-u>M", opts) ]]
+--[[ keymap("n", "<C-d>", "<C-d>M", opts) ]]
 
 -- DAP quick keys
 keymap("n", "<F5>", "<cmd>lua require('dap').continue()<cr>", opts)
@@ -86,8 +121,13 @@ keymap("n", "<C-q>", ":call QuickFixToggle()<CR>", opts)
 -- Changing some movement keys around for neoqwertz and with illuminate
 -- keymap("n", "*", "<cmd>lua require('illuminate').goto_next_reference()<cr>", opts)
 -- keymap("n", "^", "<cmd>lua require('illuminate').goto_prev_reference()<cr>", opts)
-keymap("n", "^", "#", opts)
 
+keymap("x", "^", "#", opts)
+keymap("x", "$", "^", opts) -- first symbol in line
+keymap("x", "|", "$", opts) -- last symbol in line
+keymap("x", "#", "", opts) -- free command
+
+keymap("n", "^", "#", opts)
 keymap("n", "$", "^", opts) -- first symbol in line
 keymap("n", "|", "$", opts) -- last symbol in line
 keymap("n", "#", "", opts) -- free command
@@ -100,8 +140,9 @@ keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
 -- Move text up and down
--- keymap("v", "<A-j>", ":m .+1<CR>==", opts)
--- keymap("v", "<A-k>", ":m .-2<CR>==", opts)
+keymap("v", "<C-S-J>", ":m '>+1<CR>gv=gv", opts)
+keymap("v", "<C-S-K>", ":m '<-2<CR>gv=gv", opts)
+
 keymap("v", "p", '"_dP', opts)
 
 -- Visual Block --
