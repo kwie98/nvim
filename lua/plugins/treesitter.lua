@@ -1,9 +1,8 @@
-local status_ok, configs = pcall(require, "nvim-treesitter.configs")
-if not status_ok then
-    return
-end
+local configs = require("nvim-treesitter.configs")
+local context = require("treesitter-context")
+context.setup()
 
-require("nvim-treesitter.parsers").filetype_to_parsername.vimwiki = "markdown"
+-- require("nvim-treesitter.parsers").filetype_to_parsername.vimwiki = "markdown"
 
 configs.setup({
     ensure_installed = "all", -- one of "all" or a list of languages
@@ -73,10 +72,3 @@ configs.setup({
         },
     },
 })
-
-local status_ok, context = pcall(require, "treesitter-context")
-if not status_ok then
-    return
-end
-
-context.setup()

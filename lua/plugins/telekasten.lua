@@ -1,15 +1,5 @@
--- local status_ok, telekasten = pcall(require, "telekasten")
--- if not status_ok then
---     print("Could not load telekasten")
---     return
--- end
-
 local home = vim.fn.expand("~/Documents/wiki2")
 
--- telekasten.setup({
--- home = home,
--- take_over_my_home = true,
--- })
 require("telekasten").setup({
     home = home,
 
