@@ -60,9 +60,13 @@ return packer.startup(function(use)
     use("folke/which-key.nvim")
 
     -- Colorschemes
-    -- use({ "folke/tokyonight.nvim", commit = "8223c970677e4d88c9b6b6d81bda23daf11062bb" })
+    use({ "lourenci/github-colors" })
+    use({ "folke/tokyonight.nvim" })
+    use({ "Everblush/everblush.nvim" })
+    use({ "projekt0n/github-nvim-theme" })
     -- use("lunarvim/darkplus.nvim")
     use({ "sainnhe/gruvbox-material" })
+    use({ "catppuccin/nvim", as = "catppuccin" })
 
     -- cmp plugins
     use({ "hrsh7th/nvim-cmp", commit = "df6734aa018d6feb4d76ba6bda94b1aeac2b378a" }) -- The completion plugin
@@ -77,8 +81,10 @@ return packer.startup(function(use)
     use({ "rafamadriz/friendly-snippets", commit = "d27a83a363e61009278b6598703a763ce9c8e617" }) -- a bunch of snippets to use
 
     -- LSP
+    use({ "williamboman/mason.nvim" })
+    use({ "williamboman/mason-lspconfig.nvim" })
     use({ "neovim/nvim-lspconfig" }) -- enable LSP
-    use({ "williamboman/nvim-lsp-installer", commit = "e9f13d7acaa60aff91c58b923002228668c8c9e6" }) -- simple to use language server installer
+
     use({ "jose-elias-alvarez/null-ls.nvim" }) -- for formatters and linters
     use({ "ray-x/lsp_signature.nvim" }) -- shows function parameter information when typing
     -- use({ "RRethy/vim-illuminate" }) -- highlights other uses of the thing under the cursor
@@ -104,8 +110,10 @@ return packer.startup(function(use)
     use({ "lewis6991/gitsigns.nvim" })
     use({ "tpope/vim-fugitive" })
 
-    -- Color viewer
+    -- Rice
     use({ "norcalli/nvim-colorizer.lua" })
+    use({ "stevearc/dressing.nvim" })
+    use({ "folke/trouble.nvim" })
 
     -- The Pope
     -- use({ "tpope/vim-surround" })

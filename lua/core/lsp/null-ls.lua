@@ -10,7 +10,7 @@ local formatting = null_ls.builtins.formatting
 local diagnostics = null_ls.builtins.diagnostics
 
 null_ls.setup({
-    debug = false,
+    debug = true,
     sources = {
         -- working
         formatting.black.with({
@@ -22,11 +22,14 @@ null_ls.setup({
             end,
         }),
         formatting.stylua.with({ extra_args = { "--indent-type=Spaces" } }),
+        formatting.markdownlint,
+        diagnostics.markdownlint,
         diagnostics.flake8.with({ extra_args = { "--max-line-length", "120" } }),
         diagnostics.codespell.with({
-            disabled_filetypes = { "markdown", "vimwiki" },
+            -- disabled_filetypes = { "markdown" },
         }),
-        diagnostics.luacheck.with({ extra_args = { "--globals", "vim" } }),
+        -- diagnostics.luacheck.with({ extra_args = { "--globals", "vim" } }),
+        diagnostics.selene,
         -- diagnostics.mypy,
         -- diagnostics.pydocstyle,
         formatting.isort,
@@ -34,7 +37,5 @@ null_ls.setup({
         -- to test
         -- formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
         diagnostics.chktex,
-
-        -- formatting.codespell, -- too dangerous?
     },
 })

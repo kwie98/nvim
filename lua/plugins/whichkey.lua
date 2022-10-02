@@ -189,10 +189,11 @@ local mappings = {
     },
 
     m = {
-        name = "Plugin Info",
-        m = { "<CMD>LspInstallInfo<CR>", "Mason" },
+        name = "Module Info",
+        m = { "<CMD>Mason<CR>", "Mason" },
         n = { "<CMD>NullLsInfo<CR>", "Null-ls" },
         p = { "<CMD>PackerStatus<CR>", "Packer" },
+        l = { "<CMD>LspInfo<CR>", "LSP" },
     },
 
     l = {
@@ -207,7 +208,6 @@ local mappings = {
         --     "Workspace Diagnostics",
         -- },
         -- f = { "<CMD>lua vim.lsp.buf.formatting_sync()<CR>", "Format" },
-        i = { "<CMD>LspInfo<CR>", "Info" },
         x = { "<CMD>lua vim.lsp.codelens.run()<CR>", "CodeLens Action" },
         l = { "<CMD>lua vim.diagnostic.setqflist({open=false})<CR>", "Quickfix" },
         r = { "<CMD>lua vim.lsp.buf.rename()<CR>", "Rename" },

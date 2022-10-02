@@ -8,3 +8,5 @@ vim.keymap.set("n", "<S-Tab>", "?[[\\zs<CR>", { buffer = true })
 vim.opt.wrap = true
 vim.opt.spell = true
 vim.opt.textwidth = 100
+vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
