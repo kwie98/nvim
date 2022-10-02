@@ -115,6 +115,11 @@ vim.keymap.set({ "n", "x", "o" }, "#", "", opts) -- free command
 
 -- Insert --
 
+-- typical one-handed copy paste stuff
+vim.keymap.set("i", "<C-v>", "<C-r>+", opts)
+vim.keymap.set("n", "<C-v>", "Pl", opts)
+vim.keymap.set("x", "<C-c>", "ygv", opts)
+
 -- Visual --
 -- Stay in indent mode
 vim.keymap.set("v", "<", "<gv", opts)
@@ -124,14 +129,7 @@ vim.keymap.set("v", ">", ">gv", opts)
 vim.keymap.set("v", "<C-S-J>", ":m '>+1<CR>gv=gv", opts)
 vim.keymap.set("v", "<C-S-K>", ":m '<-2<CR>gv=gv", opts)
 
-vim.keymap.set("v", "p", '"_dP', opts)
-
--- Visual Block --
--- Move text up and down
--- keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
--- keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
--- keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
--- keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
+-- vim.keymap.set("v", "p", '"_dP', opts)
 
 -- in Visual, use "s" for surround just like in Normal
 vim.keymap.set("x", "s", "<Plug>VSurround", opts)
@@ -144,10 +142,3 @@ cnoremap <expr> <down> wildmenumode() ? "\<right>" : "\<down>"
 cnoremap <expr> <left> wildmenumode() ? "\<up>" : "\<left>"
 cnoremap <expr> <right> wildmenumode() ? " \<bs>\<C-Z>" : "\<right>"
 ]])
-
--- Terminal --
--- Better terminal navigation
--- keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
--- keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
--- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
--- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
