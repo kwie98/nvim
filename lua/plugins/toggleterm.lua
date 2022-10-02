@@ -6,12 +6,12 @@ end
 
 toggleterm.setup({
     size = 20,
-    open_mapping = "<C-t>",
+    open_mapping = "<Leader><Enter>",
     hide_numbers = true,
     -- shade_filetypes = {},
     -- shade_terminals = true,
     -- shading_factor = "1",
-    start_in_insert = false,
+    start_in_insert = true,
     insert_mappings = false,
     persist_size = true,
     -- persist_mode = false,
@@ -29,13 +29,12 @@ toggleterm.setup({
 })
 
 function _G.set_terminal_keymaps()
-    local opts = { noremap = true }
-    vim.api.nvim_buf_set_keymap(0, "t", "<esc>", [[<C-\><C-n>]], opts)
-    -- vim.api.nvim_buf_set_keymap(0, 't', 'jk', [[<C-\><C-n>]], opts)
-    vim.api.nvim_buf_set_keymap(0, "t", "<C-h>", [[<C-\><C-n><C-W>h]], opts)
-    vim.api.nvim_buf_set_keymap(0, "t", "<C-j>", [[<C-\><C-n><C-W>j]], opts)
-    vim.api.nvim_buf_set_keymap(0, "t", "<C-k>", [[<C-\><C-n><C-W>k]], opts)
-    vim.api.nvim_buf_set_keymap(0, "t", "<C-l>", [[<C-\><C-n><C-W>l]], opts)
+    local opts = { buffer = true, noremap = true }
+    vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
+    vim.keymap.set("t", "<C-h>", [[<C-\><C-n><C-W>h]], opts)
+    vim.keymap.set("t", "<C-j>", [[<C-\><C-n><C-W>j]], opts)
+    vim.keymap.set("t", "<C-k>", [[<C-\><C-n><C-W>k]], opts)
+    vim.keymap.set("t", "<C-l>", [[<C-\><C-n><C-W>l]], opts)
 end
 
 vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")

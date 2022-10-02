@@ -104,7 +104,7 @@ local mappings = {
         "Buffers",
     },
     e = { "<CMD>NvimTreeToggle<CR>", "Explorer" },
-    ["<Enter>"] = { "<CMD>ToggleTerm<CR>", "Terminal" },
+    -- ["<Enter>"] = { "<CMD>ToggleTerm<CR>", "Terminal" },
     c = { "<CMD>Bdelete!<CR>", "Close Buffer" },
     f = {
         "<CMD>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<CR>",
