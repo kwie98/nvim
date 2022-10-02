@@ -1,8 +1,10 @@
 local options = {
+    formatoptions = "crqj", -- "a" also nice but breaks markdown code blocks
+    mousescroll = "ver:1,hor:1",
     diffopt = vim.opt.diffopt + "vertical,context:100", -- always do vertical diff, don't fold away so much code
     backup = false, -- creates a backup file
     clipboard = "unnamedplus", -- allows neovim to access the system clipboard
-    cmdheight = 2, -- more space in the neovim command line for displaying messages
+    cmdheight = 1, -- more space in the neovim command line for displaying messages
     completeopt = { "menu,menuone,noinsert" }, -- mostly just for cmp
     conceallevel = 0, -- so that `` is visible in markdown files
     fileencoding = "utf-8", -- the encoding written to a file
@@ -40,8 +42,8 @@ local options = {
     spell = false,
     spelllang = "",
     shell = "/usr/bin/bash",
-    -- textwidth = 120,
-    colorcolumn = "121",
+    textwidth = 120,
+    colorcolumn = "+1",
     wildmode = "longest:full,full",
     laststatus = 3, -- one lualine for everything
 }
@@ -54,5 +56,4 @@ end
 
 vim.cmd("set whichwrap+=<,>,[,],h,l")
 vim.cmd([[set iskeyword+=-]])
-vim.cmd([[set formatoptions-=cro]]) -- TODO: this doesn't seem to work
 -- vim.cmd("set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20")

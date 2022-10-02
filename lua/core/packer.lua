@@ -40,7 +40,7 @@ packer.init({
 })
 
 return packer.startup(function(use)
-    use({ "wbthomason/packer.nvim", commit = "00ec5adef58c5ff9a07f11f45903b9dbbaa1b422" }) -- Have packer manage itself
+    use({ "wbthomason/packer.nvim" }) -- Have packer manage itself
     use({ "nvim-lua/plenary.nvim", commit = "968a4b9afec0c633bc369662e78f8c5db0eba249" }) -- Useful lua functions used by lots of plugins
     use({ "windwp/nvim-autopairs", commit = "fa6876f832ea1b71801c4e481d8feca9a36215ec" }) -- Autopairs, integrates with both cmp and treesitter
     use({ "numToStr/Comment.nvim" })
@@ -77,9 +77,9 @@ return packer.startup(function(use)
     use({ "rafamadriz/friendly-snippets", commit = "d27a83a363e61009278b6598703a763ce9c8e617" }) -- a bunch of snippets to use
 
     -- LSP
-    use({ "neovim/nvim-lspconfig", commit = "148c99bd09b44cf3605151a06869f6b4d4c24455" }) -- enable LSP
+    use({ "neovim/nvim-lspconfig" }) -- enable LSP
     use({ "williamboman/nvim-lsp-installer", commit = "e9f13d7acaa60aff91c58b923002228668c8c9e6" }) -- simple to use language server installer
-    use({ "jose-elias-alvarez/null-ls.nvim", commit = "ff40739e5be6581899b43385997e39eecdbf9465" }) -- for formatters and linters
+    use({ "jose-elias-alvarez/null-ls.nvim" }) -- for formatters and linters
     use({ "ray-x/lsp_signature.nvim" }) -- shows function parameter information when typing
     -- use({ "RRethy/vim-illuminate" }) -- highlights other uses of the thing under the cursor
 

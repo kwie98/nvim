@@ -2,9 +2,10 @@ if not vim.g.vscode then
     require("core.options")
     require("core.keymaps")
     require("core.packer")
+    require("core.lsp")
+
     require("plugins.colorscheme")
     require("plugins.cmp")
-    require("core.lsp")
     require("plugins.telescope")
     require("plugins.treesitter")
     require("plugins.autopairs")
@@ -16,7 +17,6 @@ if not vim.g.vscode then
     require("plugins.toggleterm")
     require("plugins.project")
     require("plugins.impatient")
-    -- require("plugins.indentline")
     require("plugins.whichkey")
     require("plugins.autocommands")
 
@@ -26,7 +26,8 @@ if not vim.g.vscode then
     require("plugins.markdown-preview")
     require("plugins.dap")
     require("plugins.lsp-signature")
-    require("plugins.illuminate")
+    -- require("plugins.illuminate")
     require("plugins.harpoon")
     require("plugins.matchup")
+    require("plugins.nvim-surround")
 end

@@ -10,6 +10,6 @@ project.setup({
     patterns = { ".git" }, -- ">"-patterns break fugitive sadly
     ignore_lsp = {},
     show_hidden = false,
-    silent_chdir = false,
+    silent_chdir = true,
     datapath = vim.fn.stdpath("data"),
 })

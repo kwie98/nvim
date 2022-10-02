@@ -93,65 +93,67 @@ local opts = {
 
 local mappings = {
     w = {
-        w = { "<CMD>Telekasten panel<CR>", "Wiki" },
+        i = { "<CMD>edit ~/Documents/wiki2/README.md<CR>", "Wiki Index" },
+        w = { "<CMD>Telekasten goto_thisweek<CR>", "This Week" },
+        d = { "<CMD>Telekasten goto_today<CR>", "Today" },
+        n = { "<CMD>Telekasten new_note<CR>", "New Note" },
+        p = { "<CMD>Telekasten panel<CR>", "Wiki Panel" },
     },
-    ["b"] = {
+    b = {
         "<CMD>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<CR>",
         "Buffers",
     },
-    ["e"] = { "<CMD>NvimTreeToggle<CR>", "Explorer" },
-    ["t"] = { "<CMD>ToggleTerm<CR>", "Terminal" },
-    --[[ ["q"] = { "<CMD>q!<CR>", "Quit" }, ]]
-    ["c"] = { "<CMD>Bdelete!<CR>", "Close Buffer" },
-    -- ["h"] = { "<CMD>nohlsearch<CR>", "No Highlight" },
-    ["f"] = {
+    e = { "<CMD>NvimTreeToggle<CR>", "Explorer" },
+    ["<Enter>"] = { "<CMD>ToggleTerm<CR>", "Terminal" },
+    c = { "<CMD>Bdelete!<CR>", "Close Buffer" },
+    f = {
         "<CMD>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<CR>",
         "Find files",
     },
-    ["F"] = { "<CMD>Telescope live_grep theme=ivy<CR>", "Find Text" },
-    ["r"] = { "<CMD>lua require('telescope').extensions.projects.projects()<CR>", "Projects" },
+    F = { "<CMD>Telescope live_grep theme=ivy<CR>", "Find Text" },
+    j = { "<CMD>lua require('telescope').extensions.projects.projects()<CR>", "Projects" },
 
     -- harpoon
-    ["u"] = "which_key_ignore",
-    ["i"] = "which_key_ignore",
-    ["o"] = "which_key_ignore",
-    ["p"] = "which_key_ignore",
-    ["a"] = { "<CMD>lua require('harpoon.mark').add_file()<CR>", "Add to Harpoon" },
-    ["h"] = { "<CMD>lua require('harpoon.ui').toggle_quick_menu()<CR>", "Harpoon" },
+    u = "which_key_ignore",
+    i = "which_key_ignore",
+    o = "which_key_ignore",
+    p = "which_key_ignore",
+    a = { "<CMD>lua require('harpoon.mark').add_file()<CR>", "Add to Harpoon" },
+    h = { "<CMD>lua require('harpoon.ui').toggle_quick_menu()<CR>", "Harpoon" },
 
     -- quickfix
-    ["j"] = "which_key_ignore",
-    ["k"] = "which_key_ignore",
+    -- j = "which_key_ignore",
+    -- k = "which_key_ignore",
 
     P = {
         name = "Packer",
-        c = { "<CMD>PackerCompile<CR>", "Compile" },
-        i = { "<CMD>PackerInstall<CR>", "Install" },
+        -- c = { "<CMD>PackerCompile<CR>", "Compile" },
+        -- i = { "<CMD>PackerInstall<CR>", "Install" },
         s = { "<CMD>PackerSync<CR>", "Sync" },
-        S = { "<CMD>PackerStatus<CR>", "Status" },
-        u = { "<CMD>PackerUpdate<CR>", "Update" },
+        -- u = { "<CMD>PackerUpdate<CR>", "Update" },
     },
 
     g = {
         name = "Git",
         g = { "<CMD>Git<CR>", "Git" },
         h = { "<CMD>Gitsigns toggle_linehl<CR> | <CMD>Gitsigns toggle_deleted<CR>", "View Hunks" },
-        l = { "<CMD>Gitsigns toggle_current_line_blame<CR>", "Blame" },
+        b = { "<CMD>Gitsigns toggle_current_line_blame<CR>", "Blame" },
+        -- l = { "<CMD>lua require'gitsigns'.setqflist( " },
+        l = { "<CMD>Gitsigns setqflist 'all' open=false<CR>", "Quickfix" },
+
         r = { "<CMD>Gitsigns reset_hunk<CR>", "Reset Hunk" },
         R = { "<CMD>Gitsigns reset_buffer<CR>", "Reset Buffer" },
         s = { "<CMD>Gitsigns stage_hunk<CR>", "Stage Hunk" },
         S = { "<CMD>Gitsigns stage_buffer<CR>", "Stage Buffer" },
         u = { "<CMD>Gitsigns undo_stage_hunk<CR>", "Undo Stage Hunk" },
+
         d = { "<CMD>Gdiffsplit | wincmd x<CR>", "Diff File" },
         D = { "<CMD>Git difftool -y HEAD | 2,$tabdo wincmd x | wincmd w | tabnext<CR>", "Diff All Files" },
-        -- m = { "<CMD>Gdiffsplit!<CR>", "Merge" },
         m = { "<CMD>Git mergetool -y | tabprevious<CR>", "Merge" },
 
-        j = { "<CMD>lua require 'gitsigns'.next_hunk()<CR>", "Next Hunk" },
-        k = { "<CMD>lua require 'gitsigns'.prev_hunk()<CR>", "Prev Hunk" },
         -- l = { "<CMD>lua require 'gitsigns'.blame_line()<CR>", "Blame" },
         -- p = { "<CMD>lua require 'gitsigns'.preview_hunk()<CR>", "Preview Hunk" },
-        o = { "<CMD>Telescope git_status<CR>", "Open changed file" },
+        f = { "<CMD>Telescope git_status<CR>", "Open changed file" },
         -- b = { "<CMD>Telescope git_branches<CR>", "Checkout branch" },
         -- c = { "<CMD>Telescope git_commits<CR>", "Checkout commit" },
         -- d = { "<CMD>Gitsigns diffthis HEAD<CR>", "Diff" },
@@ -186,30 +188,28 @@ local mappings = {
         -- q = { "<CMD>lua require'dap'.close()<CR>", "Quit" },
     },
 
+    m = {
+        name = "Plugin Info",
+        m = { "<CMD>LspInstallInfo<CR>", "Mason" },
+        n = { "<CMD>NullLsInfo<CR>", "Null-ls" },
+        p = { "<CMD>PackerStatus<CR>", "Packer" },
+    },
+
     l = {
         name = "LSP",
         a = { "<CMD>lua vim.lsp.buf.code_action()<CR>", "Code Action" },
-        d = {
-            "<CMD>Telescope lsp_document_diagnostics<CR>",
-            "Document Diagnostics",
-        },
-        W = {
-            "<CMD>Telescope lsp_workspace_diagnostics<CR>",
-            "Workspace Diagnostics",
-        },
-        f = { "<CMD>lua vim.lsp.buf.formatting_sync()<CR>", "Format" },
+        -- d = {
+        --     "<CMD>Telescope lsp_document_diagnostics<CR>",
+        --     "Document Diagnostics",
+        -- },
+        -- W = {
+        --     "<CMD>Telescope lsp_workspace_diagnostics<CR>",
+        --     "Workspace Diagnostics",
+        -- },
+        -- f = { "<CMD>lua vim.lsp.buf.formatting_sync()<CR>", "Format" },
         i = { "<CMD>LspInfo<CR>", "Info" },
-        I = { "<CMD>LspInstallInfo<CR>", "Installer Info" },
-        j = {
-            "<CMD>lua vim.diagnostic.goto_next()<CR>",
-            "Next Diagnostic",
-        },
-        k = {
-            "<CMD>lua vim.diagnostic.goto_prev()<CR>",
-            "Prev Diagnostic",
-        },
-        l = { "<CMD>lua vim.lsp.codelens.run()<CR>", "CodeLens Action" },
-        q = { "<CMD>lua vim.diagnostic.set_loclist()<CR>", "Quickfix" },
+        x = { "<CMD>lua vim.lsp.codelens.run()<CR>", "CodeLens Action" },
+        l = { "<CMD>lua vim.diagnostic.setqflist({open=false})<CR>", "Quickfix" },
         r = { "<CMD>lua vim.lsp.buf.rename()<CR>", "Rename" },
         s = { "<CMD>Telescope lsp_document_symbols<CR>", "Document Symbols" },
         w = {

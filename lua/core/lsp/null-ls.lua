@@ -32,7 +32,7 @@ null_ls.setup({
         formatting.isort,
 
         -- to test
-        formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
+        -- formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
         diagnostics.chktex,
 
         -- formatting.codespell, -- too dangerous?

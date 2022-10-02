@@ -30,7 +30,8 @@ require("telekasten").setup({
     -- "title-uuid" - Suffix title with uuid
     new_note_filename = "title",
     -- file uuid type ("rand" or input for os.date()")
-    uuid_type = "%Y%m%d%H%M",
+    -- uuid_type = "%Y%m%d%H%M",
+    uuid_type = "%Y-%m-%d",
     -- UUID separator
     uuid_sep = "-",
 
@@ -63,7 +64,7 @@ require("telekasten").setup({
     sort = "filename",
 
     -- integrate with calendar-vim
-    plug_into_calendar = true,
+    plug_into_calendar = false,
     calendar_opts = {
         -- calendar week display mode: 1 .. 'WK01', 2 .. 'WK 1', 3 .. 'KW01', 4 .. 'KW 1', 5 .. '1'
         weeknm = 4,
