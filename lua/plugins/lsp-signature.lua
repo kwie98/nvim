@@ -37,7 +37,7 @@ lsp_signature.setup({
     hint_scheme = "String",
     hi_parameter = "LspSignatureActiveParameter", -- how your parameter will be highlight
     handler_opts = {
-        border = "none", -- double, rounded, single, shadow, none
+        border = U.small_border, -- double, rounded, single, shadow, none
     },
 
     always_trigger = false, -- sometime show signature on new line or in middle of parameter can be confusing, set it to false for #58

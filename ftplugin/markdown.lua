@@ -5,8 +5,8 @@ vim.keymap.set("n", "<Enter>", "<CMD>Telescope lsp_definitions theme=ivy<CR>", {
 vim.keymap.set("n", "<Tab>", "/[[\\zs<CR>", { buffer = true })
 vim.keymap.set("n", "<S-Tab>", "?[[\\zs<CR>", { buffer = true })
 
-vim.opt.wrap = true
-vim.opt.spell = true
-vim.opt.textwidth = 100
-vim.opt.shiftwidth = 2
-vim.opt.tabstop = 2
+-- vim.wo.wrap = true
+-- vim.bo.spell = true
+vim.bo.textwidth = 100
+vim.bo.shiftwidth = 2
+vim.bo.tabstop = 2

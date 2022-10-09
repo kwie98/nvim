@@ -1,5 +1,5 @@
 local options = {
-    formatoptions = "crqj", -- "a" also nice but breaks markdown code blocks
+    formatoptions = "cqj", -- "a" also nice but breaks markdown code blocks
     mousescroll = "ver:1,hor:1",
     diffopt = vim.opt.diffopt + "vertical,context:100", -- always do vertical diff, don't fold away so much code
     backup = false, -- creates a backup file
@@ -14,7 +14,7 @@ local options = {
     mouse = "a", -- allow the mouse to be used in neovim
     pumheight = 10, -- pop up menu height
     showmode = false, -- we don't need to see things like -- INSERT -- anymore
-    showtabline = 2, -- always show tabs
+    showtabline = 0, -- never show tabs
     smartindent = true, -- make indenting smarter again
     splitbelow = true, -- force all horizontal splits to go below current window
     splitright = true, -- force all vertical splits to go to the right of current window
@@ -40,12 +40,15 @@ local options = {
     guifont = "monospace:h17", -- the font used in graphical neovim applications
     gdefault = true, -- for :s
     spell = false,
-    spelllang = "",
+    -- spelllang = "",
     shell = "/usr/bin/bash",
     textwidth = 120,
     colorcolumn = "+1",
     wildmode = "longest:full,full",
     laststatus = 3, -- one lualine for everything
+    foldlevel = 20,
+    foldmethod = "expr",
+    foldexpr = "nvim_treesitter#foldexpr()",
 }
 
 vim.opt.shortmess:append("c")

@@ -32,7 +32,7 @@ nvim_tree.setup({
         },
     },
     renderer = {
-        highlight_git = true,
+        highlight_git = false,
         highlight_opened_files = "name",
         root_folder_modifier = ":t",
         indent_markers = {

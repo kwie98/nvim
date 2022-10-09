@@ -26,7 +26,7 @@ M.setup = function()
         float = {
             focusable = false,
             style = "minimal",
-            border = "none",
+            border = U.small_border,
             source = "always",
             header = "",
             prefix = "",
@@ -36,26 +36,23 @@ M.setup = function()
     vim.diagnostic.config(config)
 
     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-        border = "none",
+        border = U.small_border,
         -- width = 60,
     })
 
     vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-        border = "none",
+        border = U.small_border,
         -- width = 60,
     })
 end
 
 local function lsp_keymaps()
     local opts = { buffer = true, noremap = true, silent = true }
-    vim.keymap.set("n", "gD", "<CMD>lua vim.lsp.buf.declaration()<CR>", opts)
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
     vim.keymap.set("n", "gd", "<CMD>Telescope lsp_definitions theme=ivy<CR>", opts)
-    vim.keymap.set("n", "K", "<CMD>lua vim.lsp.buf.hover()<CR>", opts)
-    vim.keymap.set("n", "gI", "<CMD>lua vim.lsp.buf.implementation()<CR>", opts)
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+    vim.keymap.set("n", "gI", vim.lsp.buf.implementation, opts)
     vim.keymap.set("n", "gr", "<CMD>Telescope lsp_references theme=ivy<CR>", opts)
-    vim.keymap.set("n", "[l", "<CMD>lua vim.diagnostic.goto_prev()<CR>", opts)
-    vim.keymap.set("n", "gl", "<CMD>lua vim.diagnostic.open_float()<CR>", opts)
-    vim.keymap.set("n", "]l", "<CMD>lua vim.diagnostic.goto_next()<CR>", opts)
 end
 
 M.on_attach = function(client, bufnr)

@@ -5,62 +5,67 @@ if not status_ok then
 end
 
 local hide_in_width = function()
-    return vim.fn.winwidth(0) > 80
+    return vim.fn.winwidth(0) > 60
 end
 
-local diagnostics = {
-    "diagnostics",
-    sources = { "nvim_diagnostic" },
-    sections = { "error", "warn" },
-    symbols = { error = " ", warn = " " },
-    colored = false,
-    update_in_insert = false,
-    always_visible = true,
-}
+local c = require("gruvbox-baby.colors").config()
+c.bright_gray = "#928374"
+c.other_gray = "#4F4743"
+c.bright_orange = "#fe8019"
 
-local diff = {
-    "diff",
-    colored = false,
-    symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
-    cond = hide_in_width,
-}
-
-local python_env = {
-    function()
-        -- local utils = require "lvim.core.lualine.utils"
-        if vim.bo.filetype == "python" then
-            local venv = os.getenv("CONDA_DEFAULT_ENV")
-            if venv then
-                -- return string.format("  (%s)", utils.env_cleanup(venv))
-                return string.format("(%s)", venv)
-            end
-            venv = os.getenv("VIRTUAL_ENV")
-            if venv then
-                return string.format(" %s", venv)
-            end
-            return ""
-        end
-        return ""
-    end,
-    cond = hide_in_width,
+local theme = {
+    normal = {
+        a = { bg = c.bright_gray, fg = c.dark, gui = "bold" },
+        b = { bg = c.background, fg = c.milk },
+        c = { bg = c.background, fg = c.foreground },
+    },
+    insert = {
+        a = { bg = c.dark_gray, fg = c.dark, gui = "bold" },
+        b = { bg = c.background, fg = c.milk },
+        c = { bg = c.background, fg = c.milk },
+    },
+    visual = {
+        a = { bg = c.bright_orange, fg = c.dark, gui = "bold" },
+        b = { bg = c.medium_gray, fg = c.milk },
+        c = { bg = c.medium_gray, fg = c.milk },
+    },
+    replace = {
+        a = { bg = c.error_red, fg = c.dark, gui = "bold" },
+        b = { bg = c.background, fg = c.milk },
+        c = { bg = c.background, fg = c.milk },
+    },
+    command = {
+        a = { bg = c.magenta, fg = c.dark, gui = "bold" },
+        b = { bg = c.background, fg = c.milk },
+        c = { bg = c.background, fg = c.milk },
+    },
+    -- inactive = {
+    --     a = { bg = c.dark_gray, fg = c.gray, gui = "bold" },
+    --     b = { bg = c.dark_gray, fg = c.gray },
+    --     c = { bg = c.dark_gray, fg = c.gray },
+    -- },
 }
 
 local treesitter = {
     function()
-        return ""
-        -- local buf = vim.api.nvim_get_current_buf()
-        -- local ts = vim.treesitter.highlighter.active[buf]
-        -- if ts and not vim.tbl_isempty(ts) then
-        --     return ""
-        -- else
-        --     return " "
-        -- end
-    end,
-    color = function()
+        -- return ""
         local buf = vim.api.nvim_get_current_buf()
         local ts = vim.treesitter.highlighter.active[buf]
-        return { fg = ts and not vim.tbl_isempty(ts) and "#8EA64C" or nil }
+        if ts and not vim.tbl_isempty(ts) then
+            return ""
+        else
+            return ""
+        end
     end,
+    color = { fg = c.clean_green, bg = c.medium_gray },
+    -- color = function()
+    --     local buf = vim.api.nvim_get_current_buf()
+    --     local ts = vim.treesitter.highlighter.active[buf]
+    --     return {
+    --         fg = ts and not vim.tbl_isempty(ts) and "#8EA64C" or nil,
+    --         bg = c.medium_gray,
+    --     }
+    -- end,
     cond = hide_in_width,
 }
 
@@ -87,36 +92,25 @@ local lsp = {
 
         -- if #buf_client_names == 0 then
         if #buf_client_names == 0 then
-            return "LS Inactive"
+            return ""
         end
 
-        -- add formatter
-        -- local formatters = require "lvim.lsp.null-ls.formatters"
+        -- -- add formatter
+        -- local formatters = require("null-ls.utils.formatters")
         -- local supported_formatters = formatters.list_registered(buf_ft)
         -- vim.list_extend(buf_client_names, supported_formatters)
 
-        -- add linter
-        -- local linters = require "lvim.lsp.null-ls.linters"
+        -- -- add linter
+        -- local linters = require("lvim.lsp.null-ls.linters")
         -- local supported_linters = linters.list_registered(buf_ft)
         -- vim.list_extend(buf_client_names, supported_linters)
 
         local unique_client_names = vim.fn.uniq(buf_client_names)
-        return "[" .. table.concat(unique_client_names, ", ") .. "]"
+        return table.concat(unique_client_names, ", ")
     end,
-    color = { gui = "bold" },
+    color = { fg = c.milk, bg = c.medium_gray },
     cond = hide_in_width,
-}
-
-local filetype = {
-    "filetype",
-    icons_enabled = false,
-    icon = nil,
-}
-
-local branch = {
-    "branch",
-    icons_enabled = true,
-    icon = "",
+    padding = { left = 0, right = 1 },
 }
 
 -- cool function for progress
@@ -137,30 +131,96 @@ lualine.setup({
     options = {
         icons_enabled = true,
         theme = "gruvbox",
-        component_separators = { left = "|", right = "" },
+        component_separators = { left = "", right = "" },
         section_separators = { left = "", right = "" },
         -- component_separators = { left = '', right = ''},
         -- section_separators = { left = '', right = ''},
-        disabled_filetypes = { "alpha", "dashboard", "NvimTree", "Outline" },
+        -- disabled_filetypes = { "alpha", "dashboard", "NvimTree", "Outline" },
         always_divide_middle = true,
+        refresh = {
+            statuslines = 1000,
+            winbar = 1000,
+        },
     },
     sections = {
         lualine_a = { "mode" },
-        lualine_b = { branch, diff, diagnostics },
-        lualine_c = { "filename" },
-        -- lualine_x = { "encoding", "fileformat", "filetype" },
+        lualine_b = {
+            {
+                "filename",
+            },
+            -- {
+            --     "diagnostics",
+            --     sources = { "nvim_diagnostic" },
+            --     sections = { "error", "warn" },
+            --     symbols = { error = " ", warn = " " },
+            --     colored = false,
+            --     update_in_insert = false,
+            --     always_visible = true,
+            --     colors = { fg = c.milk, bg = c.background },
+            -- },
+            {
+                "branch",
+                color = { fg = c.milk, bg = c.other_gray }, -- other_gray not working here idk
+                icon = "",
+            },
+            {
+                "diff",
+                -- diff_color = {
+                --     added = "GitGutterAdd",
+                --     modified = "GitSignsChange",
+                -- },
+                colored = false,
+                color = { fg = c.milk, bg = c.other_gray },
+                padding = { left = 0, right = 1 },
+                cond = hide_in_width,
+            },
+        },
+        lualine_c = {},
         lualine_x = { treesitter, lsp },
-        lualine_y = { filetype, python_env },
-        lualine_z = { "location" },
+        lualine_y = {
+            {
+                "filetype",
+                icons_enabled = true,
+                -- color = { fg = c.milk, bg = c.background },
+            },
+            {
+                function()
+                    -- local utils = require "lvim.core.lualine.utils"
+                    if vim.bo.filetype == "python" then
+                        local venv = os.getenv("CONDA_DEFAULT_ENV")
+                        if venv then
+                            -- return string.format("  (%s)", utils.env_cleanup(venv))
+                            return string.format("(%s)", venv)
+                        end
+                        venv = os.getenv("VIRTUAL_ENV")
+                        if venv then
+                            return string.format(" %s", venv)
+                        end
+                        return ""
+                    end
+                    return ""
+                end,
+                padding = { left = 0, right = 1 },
+                cond = hide_in_width,
+                color = { fg = c.milk, bg = c.background },
+            },
+        },
+        lualine_z = { "progress" },
     },
-    inactive_sections = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = { "filename" },
-        lualine_x = { "location" },
-        lualine_y = {},
-        lualine_z = {},
-    },
+    -- inactive_sections = {
+    --     lualine_a = {},
+    --     lualine_b = {},
+    --     lualine_c = { "filename" },
+    --     lualine_x = { "location" },
+    --     lualine_y = {},
+    --     lualine_z = {},
+    -- },
+    -- winbar = {
+    --     lualine_b = { "filename" },
+    -- },
+    -- inactive_winbar = {
+    --     lualine_b = { "filename" },
+    -- },
     tabline = {},
     extensions = {},
 })

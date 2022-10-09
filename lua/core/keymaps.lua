@@ -87,6 +87,11 @@ vim.keymap.set("n", "<F8>", "<cmd>lua require('dap').step_over()<cr>", opts)
 vim.keymap.set("n", "<M-k>", "<cmd>lua require('dapui').eval()<cr>", opts)
 vim.keymap.set("v", "<M-k>", "<cmd>lua require('dapui').eval()<cr>", opts)
 
+-- LSP/diagnostics binds
+vim.keymap.set("n", "gl", vim.diagnostic.open_float, opts)
+vim.keymap.set("n", "]l", vim.diagnostic.goto_next, opts)
+vim.keymap.set("n", "[l", vim.diagnostic.goto_prev, opts)
+
 -- vim.keymap.set("n", "<Leader>j", "<CMD>cn<CR>", opts)
 -- vim.keymap.set("n", "<Leader>k", "<CMD>cp<CR>", opts)
 vim.keymap.set("n", "]n", "<CMD>cn<CR>", opts)
@@ -101,8 +106,7 @@ vim.cmd([[
         endif
     endfunction
 ]])
--- vim.keymap.set("n", "<C-q>", ":call QuickFixToggle()<CR>", opts)
-vim.keymap.set("n", "<Leader>q", ":call QuickFixToggle()<CR>", opts)
+vim.keymap.set("n", "<Leader>n", ":call QuickFixToggle()<CR>", opts)
 
 -- Changing some movement keys around for neoqwertz and with illuminate
 -- keymap("n", "*", "<cmd>lua require('illuminate').goto_next_reference()<cr>", opts)

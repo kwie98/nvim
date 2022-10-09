@@ -4,5 +4,5 @@ vim.cmd([[
     nnoremap <buffer> <S-Tab> ?\|\zs\S\{-}\|?<cr>
 ]])
 
-vim.opt.buflisted = true
-vim.opt.conceallevel = 0
+vim.bo.buflisted = true
+vim.wo.conceallevel = 0

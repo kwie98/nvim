@@ -44,7 +44,7 @@ local setup = {
         sCRoll_up = "<c-u>", -- binding to sCRoll up inside the popup
     },
     window = {
-        border = "none", -- none, single, double, shadow
+        border = U.small_border, -- none, single, double, shadow
         position = "bottom", -- bottom, top
         margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
         padding = { 1, 1, 1, 1 }, -- extra window padding [top, right, bottom, left]
@@ -93,7 +93,9 @@ local opts = {
 
 local mappings = {
     w = {
-        i = { "<CMD>edit ~/Documents/wiki2/README.md<CR>", "Wiki Index" },
+        name = "Wiki",
+        t = { "<CMD>edit ~/Documents/wiki/todo.md<CR>", "Todo" },
+        i = { "<CMD>edit ~/Documents/wiki/README.md<CR>", "Wiki Index" },
         w = { "<CMD>Telekasten goto_thisweek<CR>", "This Week" },
         d = { "<CMD>Telekasten goto_today<CR>", "Today" },
         n = { "<CMD>Telekasten new_note<CR>", "New Note" },
@@ -139,7 +141,14 @@ local mappings = {
         h = { "<CMD>Gitsigns toggle_linehl<CR> | <CMD>Gitsigns toggle_deleted<CR>", "View Hunks" },
         b = { "<CMD>Gitsigns toggle_current_line_blame<CR>", "Blame" },
         -- l = { "<CMD>lua require'gitsigns'.setqflist( " },
-        l = { "<CMD>Gitsigns setqflist 'all' open=false<CR>", "Quickfix" },
+        -- l = { "<CMD>Gitsigns setqflist 'all' open=false<CR> | <CMD>cfirst<CR>", "Quickfix" },
+        l = {function ()
+            require("gitsigns").setqflist("all")
+            -- vim.schedule(function ()
+            --     -- vim.cmd("cfirst")
+            --     vim.cmd.wincmd("p")
+            -- end)
+        end, "Quickfix"},
 
         r = { "<CMD>Gitsigns reset_hunk<CR>", "Reset Hunk" },
         R = { "<CMD>Gitsigns reset_buffer<CR>", "Reset Buffer" },
@@ -173,8 +182,8 @@ local mappings = {
             "Conditional Breakpoint",
         },
         m = { "<CMD>lua require'dap-python'.test_method()<CR>", "Test Method" },
-        l = { "<CMD>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>", "Logpoint" },
-        b = { "<CMD>lua require'telescope'.extensions.dap.list_breakpoints()<CR>", "List Breakpoints" },
+        L = { "<CMD>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>", "Logpoint" },
+        l = { "<CMD>lua require'dap'.list_breakpoints()<CR>", "List Breakpoints" },
         -- v = { "<CMD>lua require'telescope'.extensions.dap.variables()<CR>", "List Variables" },
         f = { "<CMD>lua require'telescope'.extensions.dap.frames()<CR>", "List Frames" },
         u = { "<CMD>lua require'dapui'.toggle()<CR>", "Toggle UI" },
@@ -199,6 +208,7 @@ local mappings = {
     l = {
         name = "LSP",
         a = { "<CMD>lua vim.lsp.buf.code_action()<CR>", "Code Action" },
+        f = { vim.lsp.buf.format, "Format" },
         -- d = {
         --     "<CMD>Telescope lsp_document_diagnostics<CR>",
         --     "Document Diagnostics",
@@ -209,7 +219,7 @@ local mappings = {
         -- },
         -- f = { "<CMD>lua vim.lsp.buf.formatting_sync()<CR>", "Format" },
         x = { "<CMD>lua vim.lsp.codelens.run()<CR>", "CodeLens Action" },
-        l = { "<CMD>lua vim.diagnostic.setqflist({open=false})<CR>", "Quickfix" },
+        l = { "<CMD>lua vim.diagnostic.setqflist({open=true})<CR>", "Quickfix" },
         r = { "<CMD>lua vim.lsp.buf.rename()<CR>", "Rename" },
         s = { "<CMD>Telescope lsp_document_symbols<CR>", "Document Symbols" },
         w = {
@@ -228,7 +238,7 @@ local mappings = {
         R = { "<CMD>Telescope registers<CR>", "Registers" },
         k = { "<CMD>Telescope keymaps<CR>", "Keymaps" },
         C = { "<CMD>Telescope commands<CR>", "Commands" },
-        a = { "<CMD>lua require'telescope.builtin'.find_files({cwd='~', hidden=true})<CR>", "Find All Files" },
+        a = { "<CMD>lua require'telescope.builtin'.find_files({cwd='~', hidden=true})<CR>", "Find in Home" },
     },
 
     -- t = {

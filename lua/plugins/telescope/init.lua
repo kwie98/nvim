@@ -13,9 +13,14 @@ telescope.setup({
     defaults = {
         border = true,
 
+        borderchars = {
+            prompt = { "─", " ", " ", " ", "─", "─", " ", " " },
+            results = { " " },
+            preview = { " " },
+        },
         prompt_prefix = " ",
         selection_caret = " ",
-        path_display = { "smart" },
+        path_display = { "truncate" },
 
         mappings = {
             i = {
@@ -43,10 +48,10 @@ telescope.setup({
 
                 ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
                 ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
-                ["<C-q>"] = actions.send_to_qflist,
-                ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
-                ["<C-l>"] = actions.complete_tag,
-                ["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
+                ["<C-l>"] = actions.send_to_qflist + actions.open_qflist,
+                -- ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+                ["<C-Space>"] = actions.complete_tag,
+                -- ["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
             },
 
             n = {
@@ -58,8 +63,8 @@ telescope.setup({
 
                 ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
                 ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
-                ["<C-q>"] = actions.send_to_qflist,
-                ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+                -- ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+                -- ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
 
                 ["j"] = actions.move_selection_next,
                 ["k"] = actions.move_selection_previous,

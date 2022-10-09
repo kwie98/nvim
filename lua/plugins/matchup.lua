@@ -1,6 +1,6 @@
 vim.g.matchup_matchparen_offscreen = {} -- disable weird float that shows match
 
-vim.g.matchup_matchparen_deferred = 1
+vim.g.matchup_matchparen_deferred = 0
 vim.g.matchup_matchparen_hi_surround_always = 0 -- 1 is extremely laggy in some filetypes
 
 -- highlighting for matching parents and words is the same, grey background

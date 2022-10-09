@@ -34,7 +34,7 @@ end
 packer.init({
     display = {
         open_fn = function()
-            return require("packer.util").float({ border = "none" })
+            return require("packer.util").float({ border = U.big_border })
         end,
     },
 })
@@ -47,10 +47,10 @@ return packer.startup(function(use)
     use({ "JoosepAlviste/nvim-ts-context-commentstring", commit = "88343753dbe81c227a1c1fd2c8d764afb8d36269" })
     use({ "kyazdani42/nvim-web-devicons", commit = "8d2c5337f0a2d0a17de8e751876eeb192b32310e" })
     use({ "kyazdani42/nvim-tree.lua", commit = "bdb6d4a25410da35bbf7ce0dbdaa8d60432bc243" })
-    -- use({ "akinsho/bufferline.nvim", commit = "c78b3ecf9539a719828bca82fc7ddb9b3ba0c353" })
     use({ "akinsho/bufferline.nvim" })
     use({ "moll/vim-bbye", commit = "25ef93ac5a87526111f43e5110675032dbcacf56" })
-    use({ "nvim-lualine/lualine.nvim", commit = "3362b28f917acc37538b1047f187ff1b5645ecdd" })
+    use({ "nvim-lualine/lualine.nvim" })
+    -- use({ "feline-nvim/feline.nvim" })
     use({ "akinsho/toggleterm.nvim", commit = "aaeed9e02167c5e8f00f25156895a6fd95403af8" })
     -- use({ "ahmedkhalf/project.nvim", commit = "541115e762764bc44d7d3bf501b6e367842d3d4f" })
     use({ "ahmedkhalf/project.nvim" })
@@ -60,13 +60,26 @@ return packer.startup(function(use)
     use("folke/which-key.nvim")
 
     -- Colorschemes
-    use({ "lourenci/github-colors" })
-    use({ "folke/tokyonight.nvim" })
-    use({ "Everblush/everblush.nvim" })
-    use({ "projekt0n/github-nvim-theme" })
+    -- use({ "sainnhe/gruvbox-material" })
+    use({ "luisiacc/gruvbox-baby" })
+    use({ "NTBBloodbath/doom-one.nvim" })
+    use({ "EdenEast/nightfox.nvim" })
+    -- use({ "navarasu/onedark.nvim" }) -- somehow looks better in pictures d
+    -- use({ "lourenci/github-colors" })
+    -- use({ "folke/tokyonight.nvim" })
+    -- use({ "Everblush/everblush.nvim" })
+    -- use({ "projekt0n/github-nvim-theme" })
     -- use("lunarvim/darkplus.nvim")
-    use({ "sainnhe/gruvbox-material" })
-    use({ "catppuccin/nvim", as = "catppuccin" })
+    -- use({ "catppuccin/nvim", as = "catppuccin" })
+    -- use({
+    --     "mcchrish/zenbones.nvim",
+    --     requires = "rktjmp/lush.nvim",
+    -- })
+    use({ "Mofiqul/vscode.nvim" })
+    -- use({ "marko-cerovac/material.nvim" })
+    -- use({ "EdenEast/nightfox.nvim" })
+    -- use({ "yazeed1s/minimal.nvim" })
+    -- use({ "PHSix/nvim-hybrid" })
 
     -- cmp plugins
     use({ "hrsh7th/nvim-cmp", commit = "df6734aa018d6feb4d76ba6bda94b1aeac2b378a" }) -- The completion plugin
@@ -113,7 +126,9 @@ return packer.startup(function(use)
     -- Rice
     use({ "norcalli/nvim-colorizer.lua" })
     use({ "stevearc/dressing.nvim" })
-    use({ "folke/trouble.nvim" })
+    use({
+        "petertriho/nvim-scrollbar",
+    })
 
     -- The Pope
     -- use({ "tpope/vim-surround" })
@@ -139,6 +154,7 @@ return packer.startup(function(use)
 
     -- file navigation
     use({ "ThePrimeagen/harpoon" })
+    use({ "farmergreg/vim-lastplace" })
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins

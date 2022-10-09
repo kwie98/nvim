@@ -4,6 +4,8 @@ if not status_ok then
     return
 end
 
+local index = require("mason-registry.index")
+
 local status_ok, mason_lspconfig = pcall(require, "mason-lspconfig")
 if not status_ok then
     print("Could not load mason-lspconfig.")
@@ -16,7 +18,24 @@ if not status_ok then
     return
 end
 
-mason.setup()
+index["pydocstyle"] = "core.mason.pydocstyle"
+
+mason.setup({
+    ui = {
+        border = U.big_border,
+    },
+})
+
+-- -- manually install pydocstyle with toml support
+-- Pkg.new({
+--     name = "pydocstyle-toml",
+--     desc = "pydocstyle is a static analysis tool for checking compliance with Python docstring conventions",
+--     homepage = "https://www.pydocstyle.org/",
+--     languages = { Pkg.Lang.Python },
+--     categories = { Pkg.Cat.Linter },
+--     install = pip3.packages({ "pydocstyle[toml]", bin = { "pydocstyle" } }),
+-- }):uninstall()
+
 mason_lspconfig.setup()
 
 mason_lspconfig.setup_handlers({
