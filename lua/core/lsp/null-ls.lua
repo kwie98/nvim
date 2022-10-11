@@ -23,8 +23,16 @@ null_ls.setup({
             end,
         }),
         formatting.stylua.with({ extra_args = { "--indent-type=Spaces" } }),
-        formatting.markdownlint,
-        diagnostics.markdownlint,
+        formatting.markdownlint.with({
+            cwd = function()
+                return null_ls_utils.root_pattern(".git")(vim.fn.expand("%:p"))
+            end,
+        }),
+        diagnostics.markdownlint.with({
+            cwd = function()
+                return null_ls_utils.root_pattern(".git")(vim.fn.expand("%:p"))
+            end,
+        }),
         -- diagnostics.flake8.with({
         --     extra_args = { "--max-line-length", "120" },
         --     cwd = function()

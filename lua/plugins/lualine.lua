@@ -8,43 +8,43 @@ local hide_in_width = function()
     return vim.fn.winwidth(0) > 60
 end
 
-local c = require("gruvbox-baby.colors").config()
-c.bright_gray = "#928374"
-c.other_gray = "#4F4743"
-c.bright_orange = "#fe8019"
+-- local c = require("gruvbox-baby.colors").config()
+-- c.bright_gray = "#928374"
+-- c.other_gray = "#4F4743"
+-- c.bright_orange = "#fe8019"
 
-local theme = {
-    normal = {
-        a = { bg = c.bright_gray, fg = c.dark, gui = "bold" },
-        b = { bg = c.background, fg = c.milk },
-        c = { bg = c.background, fg = c.foreground },
-    },
-    insert = {
-        a = { bg = c.dark_gray, fg = c.dark, gui = "bold" },
-        b = { bg = c.background, fg = c.milk },
-        c = { bg = c.background, fg = c.milk },
-    },
-    visual = {
-        a = { bg = c.bright_orange, fg = c.dark, gui = "bold" },
-        b = { bg = c.medium_gray, fg = c.milk },
-        c = { bg = c.medium_gray, fg = c.milk },
-    },
-    replace = {
-        a = { bg = c.error_red, fg = c.dark, gui = "bold" },
-        b = { bg = c.background, fg = c.milk },
-        c = { bg = c.background, fg = c.milk },
-    },
-    command = {
-        a = { bg = c.magenta, fg = c.dark, gui = "bold" },
-        b = { bg = c.background, fg = c.milk },
-        c = { bg = c.background, fg = c.milk },
-    },
-    -- inactive = {
-    --     a = { bg = c.dark_gray, fg = c.gray, gui = "bold" },
-    --     b = { bg = c.dark_gray, fg = c.gray },
-    --     c = { bg = c.dark_gray, fg = c.gray },
-    -- },
-}
+-- local theme = {
+--     normal = {
+--         a = { bg = c.bright_gray, fg = c.dark, gui = "bold" },
+--         b = { bg = c.background, fg = c.milk },
+--         c = { bg = c.background, fg = c.foreground },
+--     },
+--     insert = {
+--         a = { bg = c.dark_gray, fg = c.dark, gui = "bold" },
+--         b = { bg = c.background, fg = c.milk },
+--         c = { bg = c.background, fg = c.milk },
+--     },
+--     visual = {
+--         a = { bg = c.bright_orange, fg = c.dark, gui = "bold" },
+--         b = { bg = c.medium_gray, fg = c.milk },
+--         c = { bg = c.medium_gray, fg = c.milk },
+--     },
+--     replace = {
+--         a = { bg = c.error_red, fg = c.dark, gui = "bold" },
+--         b = { bg = c.background, fg = c.milk },
+--         c = { bg = c.background, fg = c.milk },
+--     },
+--     command = {
+--         a = { bg = c.magenta, fg = c.dark, gui = "bold" },
+--         b = { bg = c.background, fg = c.milk },
+--         c = { bg = c.background, fg = c.milk },
+--     },
+--     -- inactive = {
+--     --     a = { bg = c.dark_gray, fg = c.gray, gui = "bold" },
+--     --     b = { bg = c.dark_gray, fg = c.gray },
+--     --     c = { bg = c.dark_gray, fg = c.gray },
+--     -- },
+-- }
 
 local treesitter = {
     function()
@@ -57,7 +57,7 @@ local treesitter = {
             return ""
         end
     end,
-    color = { fg = c.clean_green, bg = c.medium_gray },
+    -- color = { fg = c.clean_green, bg = c.medium_gray },
     -- color = function()
     --     local buf = vim.api.nvim_get_current_buf()
     --     local ts = vim.treesitter.highlighter.active[buf]
@@ -80,7 +80,7 @@ local lsp = {
             end
             return msg
         end
-        local buf_ft = vim.bo.filetype
+        -- local buf_ft = vim.bo.filetype
         local buf_client_names = {}
 
         -- add client
@@ -108,7 +108,7 @@ local lsp = {
         local unique_client_names = vim.fn.uniq(buf_client_names)
         return table.concat(unique_client_names, ", ")
     end,
-    color = { fg = c.milk, bg = c.medium_gray },
+    -- color = { fg = c.milk, bg = c.medium_gray },
     cond = hide_in_width,
     padding = { left = 0, right = 1 },
 }
@@ -130,7 +130,7 @@ end
 lualine.setup({
     options = {
         icons_enabled = true,
-        theme = "gruvbox",
+        theme = "auto",
         component_separators = { left = "", right = "" },
         section_separators = { left = "", right = "" },
         -- component_separators = { left = '', right = ''},
@@ -160,7 +160,7 @@ lualine.setup({
             -- },
             {
                 "branch",
-                color = { fg = c.milk, bg = c.other_gray }, -- other_gray not working here idk
+                -- color = { fg = c.milk, bg = c.other_gray }, -- other_gray not working here idk
                 icon = "",
             },
             {
@@ -170,7 +170,7 @@ lualine.setup({
                 --     modified = "GitSignsChange",
                 -- },
                 colored = false,
-                color = { fg = c.milk, bg = c.other_gray },
+                -- color = { fg = c.milk, bg = c.other_gray },
                 padding = { left = 0, right = 1 },
                 cond = hide_in_width,
             },
@@ -202,7 +202,7 @@ lualine.setup({
                 end,
                 padding = { left = 0, right = 1 },
                 cond = hide_in_width,
-                color = { fg = c.milk, bg = c.background },
+                -- color = { fg = c.milk, bg = c.background },
             },
         },
         lualine_z = { "progress" },

@@ -1,4 +1,4 @@
-local home = vim.fn.expand("~/Documents/wiki2")
+local home = vim.fn.expand("~/Documents/wiki")
 
 require("telekasten").setup({
     home = home,

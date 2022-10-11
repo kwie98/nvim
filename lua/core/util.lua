@@ -1,6 +1,6 @@
-local M = {}
+local U = {}
 
-M.load = function(module_names, func)
+U.load = function(module_names, func)
     local modules = {}
     for _, module_name in ipairs(module_names) do
         local ok, module = pcall(require, module_name)
@@ -15,7 +15,7 @@ M.load = function(module_names, func)
     func(unpack(modules))
 end
 
-M.small_border = "double" -- smaller helper floats
-M.big_border = "shadow" -- ui window floats
+U.small_border = "double" -- smaller helper floats
+U.big_border = "shadow" -- ui window floats
 
-return M
+return U

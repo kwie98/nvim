@@ -7,12 +7,12 @@ vim.cmd([[
     autocmd BufWinEnter * :set formatoptions-=o
     augroup end
 
-    " assumes set ignorecase smartcase
-    augroup _dynamic_smartcase
-    autocmd!
-    autocmd CmdLineEnter : set nosmartcase
-    autocmd CmdLineLeave : set smartcase
-    augroup end
+    " " assumes set ignorecase smartcase
+    " augroup _dynamic_smartcase
+    " autocmd!
+    " autocmd CmdLineEnter : set nosmartcase
+    " autocmd CmdLineLeave : set smartcase
+    " augroup end
 
     augroup _fugitive
     autocmd!

@@ -13,7 +13,7 @@ toggleterm.setup({
     -- shading_factor = "1",
     start_in_insert = true,
     insert_mappings = false,
-    terminal_mappings = false,
+    terminal_mappings = true,
     persist_size = true,
     -- persist_mode = false,
     direction = "horizontal",
