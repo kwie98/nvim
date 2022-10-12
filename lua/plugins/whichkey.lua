@@ -92,10 +92,13 @@ local opts = {
 }
 
 local mappings = {
+    t = {
+        "<CMD>ToggleTerm direction=tab<CR>", "Terminal Tab"
+    },
     w = {
         name = "Wiki",
-        t = { "<CMD>edit ~/Documents/wiki/todo.md<CR>", "Todo" },
-        i = { "<CMD>edit ~/Documents/wiki/README.md<CR>", "Wiki Index" },
+        t = { "<CMD>edit ~/Sync/wiki/todo.md<CR>", "Todo" },
+        i = { "<CMD>edit ~/Sync/wiki/README.md<CR>", "Wiki Index" },
         w = { "<CMD>Telekasten goto_thisweek<CR>", "This Week" },
         d = { "<CMD>Telekasten goto_today<CR>", "Today" },
         n = { "<CMD>Telekasten new_note<CR>", "New Note" },

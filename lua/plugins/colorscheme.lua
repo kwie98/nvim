@@ -63,7 +63,11 @@ U.load({ "gruvbox-baby.colors", "nightfox" }, function(gruvbox_baby_colors, fox)
     end
 
     -- vim.opt.background = background
-    vim.cmd.colorscheme(colorscheme)
+    -- vim.cmd.colorscheme(colorscheme)
+    local ok, _ = pcall(vim.cmd.colorscheme, colorscheme)
+    if not ok then
+        return
+    end
 
     -- vim.cmd([[
     --     try
