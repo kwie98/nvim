@@ -6,14 +6,13 @@ end
 
 local null_ls_utils = require("null-ls.utils")
 
--- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
 local formatting = null_ls.builtins.formatting
--- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
 local diagnostics = null_ls.builtins.diagnostics
 
 null_ls.setup({
     -- border = u.big_border, -- not supported yet
-    debug = true,
+    -- debug = true,
+    on_attach = require("core.lsp.handlers").on_attach,
     sources = {
         -- working
         formatting.black.with({

@@ -56,6 +56,7 @@ local function lsp_keymaps()
 end
 
 M.on_attach = function(client, bufnr)
+    vim.opt.formatexpr = ""
     lsp_keymaps()
 end
 
