@@ -1,5 +1,10 @@
 local U = {}
 
+---Tries to load the given modules. If at least one cannot be loaded, an error is printed and nothing else is done.
+---Otherwise, run the given function with the modules as parameters
+---@param module_names table
+---@param func any
+---@return unknown
 U.load = function(module_names, func)
     local modules = {}
     for _, module_name in ipairs(module_names) do
@@ -12,7 +17,7 @@ U.load = function(module_names, func)
             table.insert(modules, module)
         end
     end
-    func(unpack(modules))
+    return func(unpack(modules))
 end
 
 U.small_border = "double" -- smaller helper floats

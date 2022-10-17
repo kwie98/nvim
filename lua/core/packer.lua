@@ -98,9 +98,9 @@ return packer.startup(function(use)
     use({ "williamboman/mason-lspconfig.nvim" })
     use({ "neovim/nvim-lspconfig" }) -- enable LSP
 
+    -- language specific LSP plugins
+    use({ "b0o/SchemaStore.nvim" })
     use({ "jose-elias-alvarez/null-ls.nvim" }) -- for formatters and linters
-    use({ "ray-x/lsp_signature.nvim" }) -- shows function parameter information when typing
-    -- use({ "RRethy/vim-illuminate" }) -- highlights other uses of the thing under the cursor
 
     -- Telescope
     use({ "nvim-telescope/telescope.nvim" })
@@ -124,6 +124,7 @@ return packer.startup(function(use)
     use({ "tpope/vim-fugitive" })
 
     -- Rice
+    use({ "ray-x/lsp_signature.nvim" }) -- shows function parameter information when typing
     use({ "norcalli/nvim-colorizer.lua" })
     use({ "stevearc/dressing.nvim" })
     use({
