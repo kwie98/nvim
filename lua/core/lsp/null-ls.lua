@@ -3,12 +3,12 @@ U.load({ "null-ls", "null-ls.utils" }, function(null_ls, null_ls_utils)
     local diagnostics = null_ls.builtins.diagnostics
 
     local function root_finder()
-        null_ls_utils.root_pattern(".git")(vim.fn.expand("%:p"))
+        return null_ls_utils.root_pattern(".git")(vim.fn.expand("%:p"))
     end
 
     null_ls.setup({
         -- border = u.big_border, -- not supported yet
-        -- debug = true,
+        debug = true,
         on_attach = require("core.lsp.handlers").on_attach,
         sources = {
             -- working
