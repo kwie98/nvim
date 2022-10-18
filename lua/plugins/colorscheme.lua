@@ -46,9 +46,9 @@ U.load({ "gruvbox-baby.colors", "nightfox" }, function(gruvbox_baby_colors, fox)
         vim.g.gruvbox_baby_telescope_theme = 1
     elseif colorscheme == "fox" then
         if background == "light" then
-            colorscheme = "dayfox"
+            colorscheme = "nightfox"
         else
-            colorscheme = "terafox"
+            colorscheme = "nightfox"
         end
         require("nightfox").setup({
             -- dim_inactive = true,
@@ -57,6 +57,36 @@ U.load({ "gruvbox-baby.colors", "nightfox" }, function(gruvbox_baby_colors, fox)
                     comments = "italic",
                     functions = "bold",
                     types = "italic",
+                },
+            },
+            palettes = {
+                nightfox = {
+                    black = "#393b44",
+                    red = "#c94f6d",
+                    green = "#81b29a",
+                    yellow = "#dbc074",
+                    blue = "#719cd6",
+                    magenta = "#9d79d6",
+                    cyan = "#63cdcf",
+                    white = "#dfdfe0",
+                    orange = "#f4a261",
+                    pink = "#d67ad2",
+
+                    comment = "#738091",
+
+                    bg0 = "#242424", -- DONE Dark bg (status line and float)
+                    bg1 = "#282828", -- DONE Default bg
+                    bg2 = "#212e3f", -- Lighter bg (colorcolm folds)
+                    bg3 = "#32302F", -- DONE Lighter bg (cursor line)
+                    bg4 = "#39506d", -- Conceal, border fg
+
+                    fg0 = "#d6d6d7", -- Lighter fg
+                    fg1 = "#ebdbb2", -- DONE Default fg
+                    fg2 = "#aeafb0", -- Darker fg (status line)
+                    fg3 = "#71839b", -- Darker fg (line numbers, fold colums)
+
+                    sel0 = "#2b3b51", -- Popup bg, visual selection bg
+                    sel1 = "#3c5372", -- Popup sel bg, search bg
                 },
             },
         })
