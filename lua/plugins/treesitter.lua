@@ -4,8 +4,12 @@ U.load({ "nvim-treesitter.configs", "treesitter-context" }, function(configs, co
     -- require("nvim-treesitter.parsers").filetype_to_parsername.vimwiki = "markdown"
 
     configs.setup({
+        playground = {
+            enable = true
+        },
         ensure_installed = "all", -- one of "all" or a list of languages
         --[[ ignore_install = { "markdown", "phpdoc" }, -- List of parsers to ignore installing ]]
+        -- ignore_install = { "yaml" },
         highlight = {
             enable = true, -- false will disable the whole extension
             disable = { "css" }, -- list of language that will be disabled

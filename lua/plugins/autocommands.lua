@@ -14,6 +14,11 @@ vim.cmd([[
     " autocmd CmdLineLeave : set smartcase
     " augroup end
 
+    augroup _titlestring
+    autocmd!
+    autocmd BufWinEnter * :set titlestring=%{substitute(getcwd(),\ $HOME,\ '~',\ '')}
+    augroup end
+
     augroup _fugitive
     autocmd!
     autocmd User FugitiveIndex nnoremap <buffer> S <CMD>Git add .<CR>

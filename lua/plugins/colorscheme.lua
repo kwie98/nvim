@@ -1,8 +1,16 @@
 U.load({ "gruvbox-baby.colors", "nightfox" }, function(gruvbox_baby_colors, fox)
+    -- query current color scheme
+    local background = vim.fn.system("darkman get")
+    -- vim.opt.background = background
+    -- print(background)
+    if U.string_starts(background, "light") then
+        vim.opt.background = "light"
+    elseif U.string_starts(background, "dark") then
+        vim.opt.background = "dark"
+    end
+
     local colorscheme = "fox"
     -- local colorscheme = "gruvbox-baby"
-    local background = "light"
-    -- vim.opt.background = "dark"
 
     if colorscheme == "gruvbox-material" then
         vim.g.gruvbox_material_palette = "original"
@@ -45,48 +53,73 @@ U.load({ "gruvbox-baby.colors", "nightfox" }, function(gruvbox_baby_colors, fox)
         }
         vim.g.gruvbox_baby_telescope_theme = 1
     elseif colorscheme == "fox" then
-        if background == "light" then
-            colorscheme = "nightfox"
+        if vim.opt.background:get() == "light" then
+            colorscheme = "dayfox"
         else
             colorscheme = "nightfox"
         end
-        require("nightfox").setup({
+        local Shade = require("nightfox.lib.shade")
+        fox.reset()
+        fox.setup({
             -- dim_inactive = true,
             options = {
                 styles = {
                     comments = "italic",
                     functions = "bold",
                     types = "italic",
+                    keywords = "italic",
                 },
             },
             palettes = {
                 nightfox = {
-                    black = "#393b44",
-                    red = "#c94f6d",
-                    green = "#81b29a",
-                    yellow = "#dbc074",
-                    blue = "#719cd6",
-                    magenta = "#9d79d6",
-                    cyan = "#63cdcf",
-                    white = "#dfdfe0",
-                    orange = "#f4a261",
-                    pink = "#d67ad2",
+                    -- black = Shade.new("#393b44"),
+                    red = Shade.new("#fb4934", "#fb4934", "#fb4934"),
+                    green = Shade.new("#98971a", "#8ec07c", "#689d6a"),
+                    yellow = Shade.new("#eebd35", "#eebd35", "#eebd35"),
+                    blue = Shade.new("#458588", "#458588", "#458588"),
+                    magenta = Shade.new("#b16286", "#b16286", "#b16286"),
+                    cyan = Shade.new("#7fa2ac", "#7fa2ac", "#7fa2ac"),
+                    white = Shade.new("#e7d7ad", "#e7d7ad", "#e7d7ad"),
+                    orange = Shade.new("#d65d0e", "#d65d0e", "#d65d0e"),
+                    pink = Shade.new("#d4879c", "#d4879c", "#d4879c"),
 
-                    comment = "#738091",
+                    comment = "#665c54",
 
                     bg0 = "#242424", -- DONE Dark bg (status line and float)
                     bg1 = "#282828", -- DONE Default bg
-                    bg2 = "#212e3f", -- Lighter bg (colorcolm folds)
-                    bg3 = "#32302F", -- DONE Lighter bg (cursor line)
-                    bg4 = "#39506d", -- Conceal, border fg
+                    bg2 = "#32302f", -- DONE Lighter bg (colorcolm folds)
+                    bg3 = "#32302f", -- DONE Lighter bg (cursor line)
+                    bg4 = "#8094B4", -- DONE nvim-tree folder lines Conceal, border fg
 
-                    fg0 = "#d6d6d7", -- Lighter fg
+                    -- fg0 = "#d6d6d7", -- Lighter fg
                     fg1 = "#ebdbb2", -- DONE Default fg
-                    fg2 = "#aeafb0", -- Darker fg (status line)
-                    fg3 = "#71839b", -- Darker fg (line numbers, fold colums)
+                    -- fg2 = "#aeafb0", -- Darker fg (status line)
+                    -- fg3 = "#71839b", -- Darker fg (line numbers, fold columns)
 
-                    sel0 = "#2b3b51", -- Popup bg, visual selection bg
-                    sel1 = "#3c5372", -- Popup sel bg, search bg
+                    sel0 = "#504945", -- Popup bg, visual selection bg
+                    -- sel1 = "#3c5372", -- Popup sel bg, search bg
+                },
+            },
+            specs = {
+                nightfox = {
+                    syntax = {
+                        func = "yellow",
+                        keyword = "red",
+                        type = "green.bright",
+                        ident = "blue",
+                        conditional = "red",
+                        -- variable = "red"
+                    },
+                },
+            },
+            groups = {
+                nightfox = {
+                    ["@punctuation.delimiter"] = { fg = "palette.fg1" }, -- brackets
+                    ["@constructor"] = { fg = "palette.green.bright" }, -- lua tables
+                    ["@field"] = { fg = "palette.cyan" }, -- lua table fields
+                    ["@constant.builtin"] = { fg = "palette.pink" }, -- python None
+                    ["@keyword.operator"] = { fg = "palette.red" }, -- lua "not" with no italics
+                    ["@variable"] = { fg = "palette.blue" },
                 },
             },
         })

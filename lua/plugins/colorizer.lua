@@ -5,8 +5,12 @@ if not status_ok then
 end
 
 colorizer.setup({
-    ["*"] = {
+    -- ["*"] = {
+    --     names = false,
+    -- },
+    -- "!packer",
+    filetypes = { "*", "!packer" },
+    user_default_options = {
         names = false,
     },
-    "!packer",
 })

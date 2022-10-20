@@ -1,6 +1,8 @@
 local options = {
+    -- background = "light",
+    title = true,
     formatoptions = "cqj", -- "a" also nice but breaks markdown code blocks
-    mousescroll = "ver:1,hor:1",
+    mousescroll = "ver:2,hor:2",
     diffopt = vim.opt.diffopt + "vertical,context:100", -- always do vertical diff, don't fold away so much code
     backup = false, -- creates a backup file
     clipboard = "unnamedplus", -- allows neovim to access the system clipboard

@@ -20,6 +20,10 @@ U.load = function(module_names, func)
     return func(unpack(modules))
 end
 
+U.string_starts = function(string, start)
+    return string.sub(string, 1, string.len(start)) == start
+end
+
 U.small_border = "double" -- smaller helper floats
 U.big_border = "shadow" -- ui window floats
 

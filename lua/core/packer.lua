@@ -52,7 +52,6 @@ return packer.startup(function(use)
     use({ "nvim-lualine/lualine.nvim" })
     -- use({ "feline-nvim/feline.nvim" })
     use({ "akinsho/toggleterm.nvim", commit = "aaeed9e02167c5e8f00f25156895a6fd95403af8" })
-    -- use({ "ahmedkhalf/project.nvim", commit = "541115e762764bc44d7d3bf501b6e367842d3d4f" })
     use({ "ahmedkhalf/project.nvim" })
     use({ "lewis6991/impatient.nvim", commit = "969f2c5c90457612c09cf2a13fee1adaa986d350" })
     -- use({ "lukas-reineke/indent-blankline.nvim", commit = "6177a59552e35dfb69e1493fd68194e673dc3ee2" })
@@ -60,10 +59,12 @@ return packer.startup(function(use)
     use("folke/which-key.nvim")
 
     -- Colorschemes
-    -- use({ "sainnhe/gruvbox-material" })
+    use({ "sainnhe/gruvbox-material" })
     use({ "luisiacc/gruvbox-baby" })
     use({ "NTBBloodbath/doom-one.nvim" })
     use({ "EdenEast/nightfox.nvim" })
+    use({ "Mofiqul/vscode.nvim" })
+    -- use({"tjdevries/gruvbuddy.nvim", requires = "tjdevries/colorbuddy.nvim"})
     -- use({ "navarasu/onedark.nvim" }) -- somehow looks better in pictures d
     -- use({ "lourenci/github-colors" })
     -- use({ "folke/tokyonight.nvim" })
@@ -75,7 +76,6 @@ return packer.startup(function(use)
     --     "mcchrish/zenbones.nvim",
     --     requires = "rktjmp/lush.nvim",
     -- })
-    use({ "Mofiqul/vscode.nvim" })
     -- use({ "marko-cerovac/material.nvim" })
     -- use({ "EdenEast/nightfox.nvim" })
     -- use({ "yazeed1s/minimal.nvim" })
@@ -110,14 +110,13 @@ return packer.startup(function(use)
     })
 
     -- Treesitter
-    use({
-        "nvim-treesitter/nvim-treesitter",
-        -- run = ":TSUpdate",
-    })
+    use({ "nvim-treesitter/nvim-treesitter" })
+    use({ "nvim-treesitter/playground" })
     use({ "nvim-treesitter/nvim-treesitter-textobjects" })
     use({ "nvim-treesitter/nvim-treesitter-context" })
     use({ "andymass/vim-matchup" })
     use({ "kylechui/nvim-surround" })
+    use({ "danymat/neogen", requires = "nvim-treesitter/nvim-treesitter" })
 
     -- Git
     use({ "lewis6991/gitsigns.nvim" })
@@ -125,19 +124,16 @@ return packer.startup(function(use)
 
     -- Rice
     use({ "ray-x/lsp_signature.nvim" }) -- shows function parameter information when typing
-    use({ "norcalli/nvim-colorizer.lua" })
+    use({ "NvChad/nvim-colorizer.lua" })
     use({ "stevearc/dressing.nvim" })
     use({
         "petertriho/nvim-scrollbar",
     })
 
     -- The Pope
-    -- use({ "tpope/vim-surround" })
     use({ "tpope/vim-repeat" })
 
     -- Vimwiki and other Markdown things
-    -- use({ "vimwiki/vimwiki" })
-    -- use({ "michal-h21/vimwiki-sync" })
     use({
         "renerocksai/telekasten.nvim",
         requires = "nvim-telescope/telescope.nvim",

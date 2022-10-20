@@ -20,6 +20,10 @@ U.load({ "null-ls", "null-ls.utils" }, function(null_ls, null_ls_utils)
             formatting.markdownlint.with({
                 cwd = root_finder,
             }),
+            formatting.isort.with({
+                cwd = root_finder,
+            }),
+            formatting.yamlfmt,
             diagnostics.markdownlint.with({
                 cwd = root_finder,
             }),
@@ -47,9 +51,6 @@ U.load({ "null-ls", "null-ls.utils" }, function(null_ls, null_ls_utils)
                 end,
             }),
             diagnostics.pydocstyle.with({
-                cwd = root_finder,
-            }),
-            formatting.isort.with({
                 cwd = root_finder,
             }),
 
