@@ -9,10 +9,12 @@ vim.g.maplocalleader = " "
 
 -- NORMAL --
 -- Better window navigation
-vim.keymap.set("n", "<C-h>", "<C-w>h", opts)
-vim.keymap.set("n", "<C-j>", "<C-w>j", opts)
-vim.keymap.set("n", "<C-k>", "<C-w>k", opts)
-vim.keymap.set("n", "<C-l>", "<C-w>l", opts)
+-- vim.keymap.set("n", "<C-h>", "<C-w>h", opts)
+-- vim.keymap.set("n", "<C-j>", "<C-w>j", opts)
+-- vim.keymap.set("n", "<C-k>", "<C-w>k", opts)
+-- vim.keymap.set("n", "<C-l>", "<C-w>l", opts)
+vim.keymap.set("n", "<C-j>", "<C-w>w", opts)
+vim.keymap.set("n", "<C-k>", "<C-w>W", opts)
 
 -- Tab navigation
 vim.keymap.set("n", "<C-S-H>", "<CMD>tabprevious<CR>", opts)
