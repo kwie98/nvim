@@ -75,7 +75,7 @@ U.load({ "gruvbox-baby.colors", "nightfox" }, function(gruvbox_baby_colors, fox)
                     diff = {
                         add = "#aec5b9",
                         change = "#a1b3cc",
-                        delete = "#dcaeba"
+                        delete = "#dcaeba",
                     },
                     number0 = "#182a40", -- fg0
                     number1 = "#1d344f", -- fg1
@@ -133,8 +133,7 @@ U.load({ "gruvbox-baby.colors", "nightfox" }, function(gruvbox_baby_colors, fox)
                 },
             },
             groups = {
-                dayfox = {
-                },
+                dayfox = {},
                 nightfox = {
                     -- better syntax:
                     ["@punctuation.delimiter"] = { fg = "palette.fg1" }, -- brackets

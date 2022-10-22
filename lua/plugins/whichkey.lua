@@ -147,13 +147,16 @@ local mappings = {
         b = { "<CMD>Gitsigns toggle_current_line_blame<CR>", "Blame" },
         -- l = { "<CMD>lua require'gitsigns'.setqflist( " },
         -- l = { "<CMD>Gitsigns setqflist 'all' open=false<CR> | <CMD>cfirst<CR>", "Quickfix" },
-        l = {function ()
-            require("gitsigns").setqflist("all")
-            -- vim.schedule(function ()
-            --     -- vim.cmd("cfirst")
-            --     vim.cmd.wincmd("p")
-            -- end)
-        end, "Quickfix"},
+        l = {
+            function()
+                require("gitsigns").setqflist("all")
+                -- vim.schedule(function ()
+                --     -- vim.cmd("cfirst")
+                --     vim.cmd.wincmd("p")
+                -- end)
+            end,
+            "Quickfix",
+        },
 
         r = { "<CMD>Gitsigns reset_hunk<CR>", "Reset Hunk" },
         R = { "<CMD>Gitsigns reset_buffer<CR>", "Reset Buffer" },

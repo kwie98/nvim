@@ -50,39 +50,9 @@ local full = Terminal:new({
     direction = "tab",
     hidden = true,
 })
-vim.keymap.set({"n", "t"}, "<Leader><S-Enter>", function()
+vim.keymap.set({ "n", "t" }, "<Leader><S-Enter>", function()
     full:toggle()
-end, {noremap = true, desc = "Terminal Tab"})
-
-local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
-
-function _LAZYGIT_TOGGLE()
-    lazygit:toggle()
-end
-
-local node = Terminal:new({ cmd = "node", hidden = true })
-
-function _NODE_TOGGLE()
-    node:toggle()
-end
-
-local ncdu = Terminal:new({ cmd = "ncdu", hidden = true })
-
-function _NCDU_TOGGLE()
-    ncdu:toggle()
-end
-
-local htop = Terminal:new({ cmd = "htop", hidden = true })
-
-function _HTOP_TOGGLE()
-    htop:toggle()
-end
-
-local python = Terminal:new({ cmd = "python", hidden = true })
-
-function _PYTHON_TOGGLE()
-    python:toggle()
-end
+end, { noremap = true, desc = "Terminal Tab" })
 
 local function go_to_file()
     local cursor = vim.api.nvim_win_get_cursor(0)
