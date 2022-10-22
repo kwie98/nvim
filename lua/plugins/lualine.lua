@@ -147,6 +147,11 @@ lualine.setup({
         lualine_b = {
             {
                 "filename",
+                path = 1,
+                symbols = {
+                    modified = "●",
+                    readonly = "[READONLY]",
+                },
             },
             -- {
             --     "diagnostics",

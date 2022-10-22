@@ -14,6 +14,7 @@ local options = {
     ignorecase = true, -- ignore case in search patterns
     smartcase = true, -- smart case
     mouse = "a", -- allow the mouse to be used in neovim
+    selectmode = "mouse", -- dragging mouse starts SELECT instead of VISUAL
     pumheight = 10, -- pop up menu height
     showmode = false, -- we don't need to see things like -- INSERT -- anymore
     showtabline = 0, -- never show tabs

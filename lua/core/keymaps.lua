@@ -1,7 +1,5 @@
 local opts = { noremap = true, silent = true }
 
-local term_opts = { silent = true }
-
 -- Shorten function name
 
 --Remap space as leader key
@@ -69,7 +67,7 @@ vim.keymap.set("n", "<Leader>p", "<CMD>lua require('harpoon.ui').nav_file(4)<CR>
 vim.keymap.set("n", "<C-S-J>", "<Esc>:m .+1<CR>==", opts)
 vim.keymap.set("n", "<C-S-K>", "<Esc>:m .-2<CR>==", opts)
 
--- keep the view (or cursor) entered
+-- keep the view (or cursor) centered
 vim.keymap.set("n", "n", "nzzzv", opts)
 vim.keymap.set("n", "N", "Nzzzv", opts)
 vim.keymap.set("n", "J", "mzJ`z", opts)
@@ -116,13 +114,15 @@ vim.keymap.set({ "n", "x", "o" }, "^", "#", opts)
 vim.keymap.set({ "n", "x", "o" }, "$", "^", opts) -- first symbol in line
 vim.keymap.set({ "n", "x", "o" }, "|", "$", opts) -- last symbol in line
 vim.keymap.set({ "n", "x", "o" }, "#", "", opts) -- free command
+vim.keymap.set("n", "s", "ge", opts)
 
 -- Insert --
 
 -- typical one-handed copy paste stuff
 vim.keymap.set("i", "<C-v>", "<C-r>+", opts)
 vim.keymap.set("n", "<C-v>", "Pl", opts)
-vim.keymap.set("x", "<C-c>", "ygv", opts)
+vim.keymap.set("s", "<C-c>", "<Esc>gvygv<C-g>", opts)
+vim.keymap.set("s", "<C-v>", "<Del>i<C-r>+<Esc>", opts)
 
 -- Visual --
 -- Stay in indent mode

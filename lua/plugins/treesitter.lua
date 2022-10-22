@@ -1,7 +1,12 @@
-U.load({ "nvim-treesitter.configs", "treesitter-context" }, function(configs, context)
-    context.setup()
+U.load({ "nvim-treesitter.configs", "treesitter-context", "tsht" }, function(configs, context, tsht)
 
-    -- require("nvim-treesitter.parsers").filetype_to_parsername.vimwiki = "markdown"
+    -- nvim-treehopper
+    -- vim.keymap.set("o", "m", tsht.nodes, {noremap = true, silent = true, desc = "Treehopper"})
+    -- vim.keymap.set("x", "m", tsht.nodes, {noremap = true, silent = true, desc = "Treehopper"})
+    vim.cmd([[
+        omap     <silent> m :<C-U>lua require('tsht').nodes()<CR>
+        xnoremap <silent> m :lua require('tsht').nodes()<CR>
+    ]])
 
     configs.setup({
         playground = {
@@ -22,9 +27,9 @@ U.load({ "nvim-treesitter.configs", "treesitter-context" }, function(configs, co
             enable = true,
             keymaps = {
                 -- init_selection = "gnn",
-                node_incremental = ",",
+                -- node_incremental = ",",
                 -- scope_incremental = "grc",
-                node_decremental = "–",
+                -- node_decremental = "–",
             },
         },
         matchup = {
@@ -36,22 +41,22 @@ U.load({ "nvim-treesitter.configs", "treesitter-context" }, function(configs, co
                 enable = true,
                 lookahead = true,
                 keymaps = {
-                    ["ab"] = "@block.outer", -- meh
-                    ["ib"] = "@block.inner",
-                    ["ac"] = "@call.outer",
-                    ["ic"] = "@call.inner",
-                    ["aC"] = "@comment.outer", -- only does one line
-                    ["iC"] = "@comment.outer",
-                    ["ai"] = "@conditional.outer", -- eh
-                    ["ii"] = "@conditional.inner",
+                    -- ["ab"] = "@block.outer", -- meh
+                    -- ["ib"] = "@block.inner",
+                    ["af"] = "@call.outer",
+                    ["if"] = "@call.inner",
+                    ["ac"] = "@comment.outer", -- only does one line
+                    ["ic"] = "@comment.outer",
+                    -- ["ai"] = "@conditional.outer", -- eh
+                    -- ["ii"] = "@conditional.inner",
                     ["am"] = "@function.outer", -- actually goated
                     ["im"] = "@function.inner",
-                    ["al"] = "@loop.outer", -- meh
-                    ["il"] = "@loop.inner",
+                    -- ["al"] = "@loop.outer", -- meh
+                    -- ["il"] = "@loop.inner",
                     ["aa"] = "@parameter.outer",
                     ["ia"] = "@parameter.inner",
-                    ["aS"] = "@statement.outer", -- meh
-                    ["iS"] = "@statement.outer",
+                    -- ["aS"] = "@statement.outer", -- meh
+                    -- ["iS"] = "@statement.outer",
                 },
             },
             move = {
@@ -62,12 +67,14 @@ U.load({ "nvim-treesitter.configs", "treesitter-context" }, function(configs, co
                     ["]]"] = "@class.outer",
                     ["]m"] = "@function.outer",
                     ["]f"] = "@call.outer",
+                    ["]c"] = "@comment.outer",
                 },
                 goto_next_end = {
                     [",e"] = "@parameter.inner",
                     ["]A"] = "@parameter.inner",
                     ["]M"] = "@function.outer",
                     ["]F"] = "@call.outer",
+                    ["]C"] = "@comment.outer",
                 },
                 goto_previous_start = {
                     [",b"] = "@parameter.inner",
@@ -75,14 +82,17 @@ U.load({ "nvim-treesitter.configs", "treesitter-context" }, function(configs, co
                     ["[["] = "@class.outer",
                     ["[m"] = "@function.outer",
                     ["[f"] = "@call.outer",
+                    ["[c"] = "@comment.outer",
                 },
                 goto_previous_end = {
-                    [",ge"] = "@parameter.inner",
+                    [",s"] = "@parameter.inner",
                     ["[A"] = "@parameter.inner",
                     ["[M"] = "@function.outer",
                     ["[F"] = "@call.outer",
+                    ["[C"] = "@comment.outer",
                 },
             },
         },
     })
+    context.setup()
 end)

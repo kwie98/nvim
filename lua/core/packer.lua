@@ -113,10 +113,11 @@ return packer.startup(function(use)
     use({ "nvim-treesitter/nvim-treesitter" })
     use({ "nvim-treesitter/playground" })
     use({ "nvim-treesitter/nvim-treesitter-textobjects" })
-    use({ "nvim-treesitter/nvim-treesitter-context" })
+    use({ "nvim-treesitter/nvim-treesitter-context", commit = "c46a8a0a60412a8fe43aa6bd3a01845c46de6bf2" })
     use({ "andymass/vim-matchup" })
     use({ "kylechui/nvim-surround" })
     use({ "danymat/neogen", requires = "nvim-treesitter/nvim-treesitter" })
+    use({"mfussenegger/nvim-treehopper", requires = "nvim-treesitter/nvim-treesitter"})
 
     -- Git
     use({ "lewis6991/gitsigns.nvim" })

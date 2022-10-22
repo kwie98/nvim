@@ -71,6 +71,15 @@ U.load({ "gruvbox-baby.colors", "nightfox" }, function(gruvbox_baby_colors, fox)
                 },
             },
             palettes = {
+                dayfox = {
+                    diff = {
+                        add = "#aec5b9",
+                        change = "#a1b3cc",
+                        delete = "#dcaeba"
+                    },
+                    number0 = "#182a40", -- fg0
+                    number1 = "#1d344f", -- fg1
+                },
                 nightfox = {
                     -- black = Shade.new("#393b44"),
                     red = Shade.new("#fb4934", "#fb4934", "#fb4934"),
@@ -84,12 +93,13 @@ U.load({ "gruvbox-baby.colors", "nightfox" }, function(gruvbox_baby_colors, fox)
                     pink = Shade.new("#d4879c", "#d4879c", "#d4879c"),
 
                     comment = "#665c54",
+                    -- comment = "#ff0000",
 
                     bg0 = "#242424", -- DONE Dark bg (status line and float)
                     bg1 = "#282828", -- DONE Default bg
                     bg2 = "#32302f", -- DONE Lighter bg (colorcolm folds)
                     bg3 = "#32302f", -- DONE Lighter bg (cursor line)
-                    bg4 = "#8094B4", -- DONE nvim-tree folder lines Conceal, border fg
+                    bg4 = "#504945", -- DONE nvim-tree folder lines Conceal, telescope border fg
 
                     -- fg0 = "#d6d6d7", -- Lighter fg
                     fg1 = "#ebdbb2", -- DONE Default fg
@@ -97,7 +107,17 @@ U.load({ "gruvbox-baby.colors", "nightfox" }, function(gruvbox_baby_colors, fox)
                     -- fg3 = "#71839b", -- Darker fg (line numbers, fold columns)
 
                     sel0 = "#504945", -- Popup bg, visual selection bg
+
+                    number0 = "#665c54", -- current number
+                    number1 = "#504945", -- number
+
                     -- sel1 = "#3c5372", -- Popup sel bg, search bg
+                    diff = {
+                        add = "#26332c",
+                        change = "#273842",
+                        delete = "#572e33",
+                        text = "#26332c",
+                    },
                 },
             },
             specs = {
@@ -113,13 +133,49 @@ U.load({ "gruvbox-baby.colors", "nightfox" }, function(gruvbox_baby_colors, fox)
                 },
             },
             groups = {
+                dayfox = {
+                },
                 nightfox = {
+                    -- better syntax:
                     ["@punctuation.delimiter"] = { fg = "palette.fg1" }, -- brackets
-                    ["@constructor"] = { fg = "palette.green.bright" }, -- lua tables
+                    ["@punctuation.bracket"] = { fg = "palette.fg1" }, -- brackets
+                    ["@constructor"] = { fg = "palette.green.bright" }, -- lua table brackets
                     ["@field"] = { fg = "palette.cyan" }, -- lua table fields
                     ["@constant.builtin"] = { fg = "palette.pink" }, -- python None
-                    ["@keyword.operator"] = { fg = "palette.red" }, -- lua "not" with no italics
-                    ["@variable"] = { fg = "palette.blue" },
+                    ["@keyword.operator"] = { fg = "palette.red", style = "NONE" }, -- lua "not" with no italics/bold
+                    ["@variable"] = { fg = "palette.blue" }, -- "normal" variables different from fields :)
+                    -- window borders:
+                    VertSplit = { fg = "palette.bg4" },
+                    FloatBorder = { fg = "palette.bg4" },
+                    NormalFloat = { bg = "palette.bg1" },
+                    ColorColumn = { bg = "palette.bg0" },
+                    TreesitterContext = { bg = "palette.bg0" },
+                },
+                all = {
+                    -- line numbers:
+                    LineNr = { fg = "palette.number1" },
+                    CursorLineNr = { fg = "palette.number0" },
+                    -- gitsigns stuff:
+                    GitSignsAddNr = { fg = "palette.number1", bg = "palette.diff.add" },
+                    GitSignsChangeNr = { fg = "palette.number1", bg = "palette.diff.change" },
+                    GitSignsDeleteNr = { fg = "palette.number1", bg = "palette.diff.delete" },
+                    DiffAdd = { bg = "palette.diff.add" },
+                    DiffChange = { bg = "palette.diff.change" },
+                    DiffDelete = { bg = "palette.diff.delete" },
+                    -- telescope:
+                    TelescopeBorder = { fg = "palette.bg0", bg = "palette.bg0" },
+                    TelescopePromptCounter = { fg = "palette.fg1", bg = "palette.sel0" },
+                    TelescopePromptBorder = { fg = "palette.sel0", bg = "palette.sel0" },
+                    TelescopePromptNormal = { fg = "palette.fg1", bg = "palette.sel0" },
+                    TelescopePromptPrefix = { fg = "palette.cyan", bg = "palette.sel0" },
+
+                    TelescopeNormal = { bg = "palette.bg0" },
+
+                    TelescopePreviewTitle = { fg = "palette.bg1", bg = "palette.green.dim" },
+                    TelescopePromptTitle = { fg = "palette.bg1", bg = "palette.yellow" },
+                    TelescopeResultsTitle = { fg = "palette.bg0", bg = "palette.fg1" },
+
+                    -- TelescopeSelection = { bg = "palette.diff.change" },
                 },
             },
         })

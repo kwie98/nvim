@@ -92,9 +92,9 @@ local opts = {
 }
 
 local mappings = {
-    t = {
-        "<CMD>ToggleTerm direction=tab<CR>", "Terminal Tab"
-    },
+    -- t = {
+    --     "<CMD>ToggleTerm direction=tab<CR>", "Terminal Tab"
+    -- },
     w = {
         name = "Wiki",
         t = { "<CMD>edit ~/Sync/wiki/todo.md<CR>", "Todo" },
@@ -112,7 +112,8 @@ local mappings = {
     -- ["<Enter>"] = { "<CMD>ToggleTerm<CR>", "Terminal" },
     c = { "<CMD>Bdelete!<CR>", "Close Buffer" },
     f = {
-        "<CMD>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<CR>",
+        -- "<CMD>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<CR>",
+        "<CMD>lua require('telescope.builtin').find_files()<CR>",
         "Find files",
     },
     F = { "<CMD>Telescope live_grep theme=ivy<CR>", "Find Text" },
@@ -141,6 +142,7 @@ local mappings = {
     g = {
         name = "Git",
         g = { "<CMD>Git<CR>", "Git" },
+        -- h = { "<CMD>Gitsigns toggle_linehl<CR> | <CMD>Gitsigns toggle_word_diff<CR> | <CMD>Gitsigns toggle_deleted<CR>", "View Hunks" },
         h = { "<CMD>Gitsigns toggle_linehl<CR> | <CMD>Gitsigns toggle_deleted<CR>", "View Hunks" },
         b = { "<CMD>Gitsigns toggle_current_line_blame<CR>", "Blame" },
         -- l = { "<CMD>lua require'gitsigns'.setqflist( " },
@@ -189,7 +191,7 @@ local mappings = {
         l = { "<CMD>lua require'dap'.list_breakpoints()<CR>", "List Breakpoints" },
         -- v = { "<CMD>lua require'telescope'.extensions.dap.variables()<CR>", "List Variables" },
         f = { "<CMD>lua require'telescope'.extensions.dap.frames()<CR>", "List Frames" },
-        u = { "<CMD>lua require'dapui'.toggle()<CR>", "Toggle UI" },
+        h = { "<CMD>lua require'dapui'.toggle()<CR>", "Toggle UI" },
         -- b = { "<CMD>lua require'dap'.step_back()<CR>", "Step Back" },
         -- c = { "<CMD>lua require'dap'.continue()<CR>", "Continue" },
         -- d = { "<CMD>lua require'dap'.disconnect()<CR>", "Disconnect" },
