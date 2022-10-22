@@ -1,122 +1,68 @@
 U.load({ "cmp", "luasnip", "luasnip.loaders.from_vscode" }, function(cmp, luasnip, luasnip_loaders_from_vscode)
     luasnip_loaders_from_vscode.lazy_load()
 
-    local check_backspace = function()
-        local col = vim.fn.col(".") - 1
-        return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
-    end
-
-    --   פּ ﯟ   some other good icons
-    local kind_icons = {
-        Text = "",
-        Method = "m",
-        Function = "",
-        Constructor = "",
-        Field = "",
-        Variable = "",
-        Class = "",
-        Interface = "",
-        Module = "",
-        Property = "",
-        Unit = "",
-        Value = "",
-        Enum = "",
-        Keyword = "",
-        Snippet = "",
-        Color = "",
-        File = "",
-        Reference = "",
-        Folder = "",
-        EnumMember = "",
-        Constant = "",
-        Struct = "",
-        Event = "",
-        Operator = "",
-        TypeParameter = "",
-    }
-    -- find more here: https://www.nerdfonts.com/cheat-sheet
-
     cmp.setup({
-        completion = {
-            completeopt = "menu,menuone,noinsert",
-        },
+        -- for cmp-dap:
+        enabled = function()
+            return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or require("cmp_dap").is_dap_buffer()
+        end,
         snippet = {
             expand = function(args)
-                luasnip.lsp_expand(args.body) -- For `luasnip` users.
+                luasnip.lsp_expand(args.body)
             end,
-        },
-        mapping = {
-            ["<Up>"] = cmp.mapping.select_prev_item(),
-            ["<Down>"] = cmp.mapping.select_next_item(),
-            ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
-            ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
-            -- ["<Right>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-            ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-            ["<Left>"] = cmp.mapping({
-                i = cmp.mapping.abort(),
-                c = cmp.mapping.close(),
-            }),
-            ["<C-Space>"] = cmp.mapping.complete(),
-            -- Accept currently selected item. If none selected, `select` first item.
-            -- Set `select` to `false` to only confirm explicitly selected items.
-            ["<Right>"] = cmp.mapping.confirm({ select = true }),
-            ["<Tab>"] = cmp.mapping(function(fallback)
-                if luasnip.expandable() then
-                    luasnip.expand()
-                elseif luasnip.expand_or_jumpable() then
-                    luasnip.expand_or_jump()
-                elseif check_backspace() then
-                    fallback()
-                else
-                    fallback()
-                end
-            end, {
-                "i",
-                "s",
-            }),
-            ["<S-Tab>"] = cmp.mapping(function(fallback)
-                if luasnip.jumpable(-1) then
-                    luasnip.jump(-1)
-                else
-                    fallback()
-                end
-            end, {
-                "i",
-                "s",
-            }),
-        },
-        formatting = {
-            fields = { "abbr", "kind" },
-            format = function(entry, vim_item)
-                -- Kind icons
-                vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
-                -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatenates the icons with the name of the item kind
-                -- vim_item.menu = ({
-                --     nvim_lsp = "[LSP]",
-                --     luasnip = "[Snippet]",
-                --     buffer = "[Buffer]",
-                --     path = "[Path]",
-                -- })[entry.source.name]
-                return vim_item
-            end,
-        },
-        sources = {
-            { name = "nvim_lsp" },
-            { name = "luasnip" },
-            { name = "buffer" },
-            { name = "path" },
-        },
-        confirm_opts = {
-            behavior = cmp.ConfirmBehavior.Replace,
-            select = false,
         },
         window = {
+            -- no border for pop-up menu; but border for documentation
             documentation = {
-                border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+                border = U.small_border,
+                winhighlight = "", -- works for some reason?
             },
         },
-        experimental = {
-            ghost_text = false,
+        mapping = {
+            ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }), -- open the completion menu
+
+            ["<Up>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
+            ["<Down>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
+            ["<Left>"] = cmp.mapping(cmp.mapping.close(), { "i", "c" }),
+            ["<Right>"] = cmp.mapping(
+                cmp.mapping.confirm({
+                    behavior = cmp.ConfirmBehavior.Replace,
+                    select = true,
+                }),
+                { "i", "c" }
+            ),
+
+            ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
+            ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
         },
+        sources = cmp.config.sources({
+            -- order matters, sets sorting preference
+            { name = "luasnip" },
+            { name = "nvim_lsp" },
+            { name = "path" },
+        }, {
+            { name = "buffer", max_item_count = 5 },
+        }),
+    })
+
+    cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+        sources = {
+            { name = "dap" },
+        },
+    })
+
+    cmp.setup.cmdline({ "/", "?" }, {
+        sources = {
+            { name = "buffer", keyword_length = 3 },
+        },
+    })
+
+    cmp.setup.cmdline(":", {
+        sources = cmp.config.sources({
+            { name = "path" },
+        }, {
+            { name = "cmdline", keyword_length = 3 },
+            { name = "cmdline_history", keyword_length = 3 },
+        }),
     })
 end)

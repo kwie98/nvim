@@ -1,5 +1,6 @@
 require("plugins.colorscheme")
 require("plugins.cmp")
+require("plugins.luasnip")
 require("plugins.telescope")
 require("plugins.treesitter")
 require("plugins.autopairs")

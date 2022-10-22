@@ -25,7 +25,8 @@ end
 -- end
 -- local cmd = prefix .. "/bin/python"
 
-dap_python.setup("/usr/bin/python")
+dap_python.setup("~/.local/share/nvim/mason/packages/debugpy/venv/bin/python")
+
 
 -- dap.adapters.python = {
 --     type = "executable",
@@ -76,7 +77,7 @@ dapui.setup({
     },
     -- Expand lines larger than the window
     -- Requires >= 0.7
-    expand_lines = vim.fn.has("nvim-0.7"),
+    expand_lines = true,
     -- Layouts define sections of the screen to place windows.
     -- The position can be "left", "right", "top" or "bottom".
     -- The size specifies the height/width depending on position. It can be an Int
@@ -104,6 +105,9 @@ dapui.setup({
             size = 0.25, -- 25% of total lines
             position = "bottom",
         },
+    },
+    controls = {
+        enabled = false,
     },
     floating = {
         max_height = nil, -- These can be integers or a float between 0 and 1.

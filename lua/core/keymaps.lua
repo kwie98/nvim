@@ -80,7 +80,11 @@ vim.keymap.set("n", "<C-u>", "<CMD>execute 'keepjumps norm! ' . '<C-u>'<CR>", op
 vim.keymap.set("n", "<C-d>", "<CMD>execute 'keepjumps norm! ' . '<C-d>'<CR>", opts)
 
 -- DAP quick keys
-vim.keymap.set("n", "<F5>", "<cmd>lua require('dap').continue()<cr>", opts)
+-- TODO better launchjs loading
+vim.keymap.set("n", "<F5>", function ()
+    require("dap.ext.vscode").load_launchjs()
+    require("dap").continue()
+end, opts)
 vim.keymap.set("n", "<F6>", "<cmd>lua require('dap').close()<cr>", opts)
 vim.keymap.set("n", "<F7>", "<cmd>lua require('dap').run_last()<cr>", opts)
 vim.keymap.set("n", "<F8>", "<cmd>lua require('dap').step_over()<cr>", opts)
@@ -141,10 +145,10 @@ vim.keymap.set("v", "<C-S-K>", ":m '<-2<CR>gv=gv", opts)
 vim.keymap.set("x", "s", "<Plug>VSurround", opts)
 
 -- Wildmode (Command Menu) --
-vim.cmd([[
-set wildcharm=<C-Z>
-cnoremap <expr> <up> wildmenumode() ? "\<left>" : "\<up>"
-cnoremap <expr> <down> wildmenumode() ? "\<right>" : "\<down>"
-cnoremap <expr> <left> wildmenumode() ? "\<up>" : "\<left>"
-cnoremap <expr> <right> wildmenumode() ? " \<bs>\<C-Z>" : "\<right>"
-]])
+-- vim.cmd([[
+-- set wildcharm=<C-Z>
+-- cnoremap <expr> <up> wildmenumode() ? "\<left>" : "\<up>"
+-- cnoremap <expr> <down> wildmenumode() ? "\<right>" : "\<down>"
+-- cnoremap <expr> <left> wildmenumode() ? "\<up>" : "\<left>"
+-- cnoremap <expr> <right> wildmenumode() ? " \<bs>\<C-Z>" : "\<right>"
+-- ]])
