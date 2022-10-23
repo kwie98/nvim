@@ -1,4 +1,4 @@
-U.load({ "gruvbox-baby.colors", "nightfox" }, function(gruvbox_baby_colors, fox)
+local function setup(gruvbox_baby_colors, fox, C, Shade)
     -- query current color scheme
     local background = vim.fn.system("darkman get")
     -- vim.opt.background = background
@@ -58,7 +58,6 @@ U.load({ "gruvbox-baby.colors", "nightfox" }, function(gruvbox_baby_colors, fox)
         else
             colorscheme = "nightfox"
         end
-        local Shade = require("nightfox.lib.shade")
         fox.reset()
         fox.setup({
             -- dim_inactive = true,
@@ -112,12 +111,12 @@ U.load({ "gruvbox-baby.colors", "nightfox" }, function(gruvbox_baby_colors, fox)
                     number1 = "#504945", -- number
 
                     -- sel1 = "#3c5372", -- Popup sel bg, search bg
-                    diff = {
-                        add = "#26332c",
-                        change = "#273842",
-                        delete = "#572e33",
-                        text = "#26332c",
-                    },
+                    -- diff = {
+                    --     add = "#26332c",
+                    --     change = "#273842",
+                    --     delete = "#572e33",
+                    --     text = "#26332c",
+                    -- },
                 },
             },
             specs = {
@@ -129,6 +128,9 @@ U.load({ "gruvbox-baby.colors", "nightfox" }, function(gruvbox_baby_colors, fox)
                         ident = "blue",
                         conditional = "red",
                         -- variable = "red"
+                    },
+                    diff = {
+                        change = C("#282828"):blend(C("#7fa2ac"), 0.2):to_css(),
                     },
                 },
             },
@@ -155,12 +157,12 @@ U.load({ "gruvbox-baby.colors", "nightfox" }, function(gruvbox_baby_colors, fox)
                     LineNr = { fg = "palette.number1" },
                     CursorLineNr = { fg = "palette.number0" },
                     -- gitsigns stuff:
-                    GitSignsAddNr = { fg = "palette.number1", bg = "palette.diff.add" },
-                    GitSignsChangeNr = { fg = "palette.number1", bg = "palette.diff.change" },
-                    GitSignsDeleteNr = { fg = "palette.number1", bg = "palette.diff.delete" },
-                    DiffAdd = { bg = "palette.diff.add" },
-                    DiffChange = { bg = "palette.diff.change" },
-                    DiffDelete = { bg = "palette.diff.delete" },
+                    -- GitSignsAddNr = { fg = "palette.number1", bg = "palette.diff.add" },
+                    -- GitSignsChangeNr = { fg = "palette.number1", bg = "palette.diff.change" },
+                    -- GitSignsDeleteNr = { fg = "palette.number1", bg = "palette.diff.delete" },
+                    -- DiffAdd = { bg = "palette.diff.add" },
+                    -- DiffChange = { bg = "palette.diff.change" },
+                    -- DiffDelete = { bg = "palette.diff.delete" },
                     -- telescope:
                     TelescopeBorder = { fg = "palette.bg0", bg = "palette.bg0" },
                     TelescopePromptCounter = { fg = "palette.fg1", bg = "palette.sel0" },
@@ -195,4 +197,6 @@ U.load({ "gruvbox-baby.colors", "nightfox" }, function(gruvbox_baby_colors, fox)
     --         colorscheme default
     --     endtry
     -- ]])
-end)
+end
+
+U.load({ "gruvbox-baby.colors", "nightfox", "nightfox.lib.color", "nightfox.lib.shade" }, setup)
