@@ -5,6 +5,9 @@ local function setup(mason, index, mason_lspconfig, lspconfig)
     mason.setup({
         ui = {
             border = U.big_border,
+            keymaps = {
+                apply_language_filter = "f",
+            },
         },
     })
 

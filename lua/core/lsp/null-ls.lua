@@ -8,7 +8,7 @@ U.load({ "null-ls", "null-ls.utils" }, function(null_ls, null_ls_utils)
 
     null_ls.setup({
         -- border = u.big_border, -- not supported yet
-        debug = true,
+        debug = false,
         on_attach = require("core.lsp.handlers").on_attach,
         sources = {
             -- working

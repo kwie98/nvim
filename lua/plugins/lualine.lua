@@ -149,7 +149,7 @@ lualine.setup({
                 "filename",
                 path = 1,
                 symbols = {
-                    modified = "●",
+                    modified = U.modified_icon,
                     readonly = "[READONLY]",
                 },
             },

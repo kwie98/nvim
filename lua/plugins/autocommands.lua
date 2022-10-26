@@ -7,7 +7,7 @@ vim.cmd([[
     autocmd BufWinEnter * :set formatoptions-=o
     augroup end
 
-    " " assumes set ignorecase smartcase
+    " " assumes set ignorecase smartcase MESSES UP :s REPLACE
     " augroup _dynamic_smartcase
     " autocmd!
     " autocmd CmdLineEnter : set nosmartcase

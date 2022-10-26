@@ -14,6 +14,7 @@ end
 
 bufferline.setup({
     options = {
+        modified_icon = U.modified_icon,
         debug = {
             logging = true,
         },

@@ -8,13 +8,17 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- NORMAL --
--- Better window navigation
+-- Window navigation
 -- vim.keymap.set("n", "<C-h>", "<C-w>h", opts)
 -- vim.keymap.set("n", "<C-j>", "<C-w>j", opts)
 -- vim.keymap.set("n", "<C-k>", "<C-w>k", opts)
 -- vim.keymap.set("n", "<C-l>", "<C-w>l", opts)
 vim.keymap.set("n", "<C-j>", "<C-w>w", opts)
 vim.keymap.set("n", "<C-k>", "<C-w>W", opts)
+
+-- Buffer navigation
+vim.keymap.set("n", "<C-l>", "<CMD>BufferLineCycleNext<CR>", opts)
+vim.keymap.set("n", "<C-h>", "<CMD>BufferLineCyclePrev<CR>", opts)
 
 -- Tab navigation
 vim.keymap.set("n", "<C-S-H>", "<CMD>tabprevious<CR>", opts)
@@ -51,9 +55,6 @@ vim.keymap.set("n", "<C-Down>", ":resize +2<CR>", opts)
 vim.keymap.set("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
--- Navigate buffers
-vim.keymap.set("n", "<S-l>", "<CMD>BufferLineCycleNext<CR>", opts)
-vim.keymap.set("n", "<S-h>", "<CMD>BufferLineCyclePrev<CR>", opts)
 
 -- Explorer
 -- vim.keymap.set("n", "<C-b>", "<cmd>NvimTreeToggle<cr>", opts)

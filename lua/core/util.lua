@@ -20,10 +20,15 @@ U.load = function(module_names, func)
     return func(unpack(modules))
 end
 
-U.string_starts = function(string, start)
-    return string.sub(string, 1, string.len(start)) == start
+---Helper function to check whether a string starts with a prefix
+---@param string string The string to check
+---@param prefix string The prefix
+---@return boolean
+U.string_starts = function(string, prefix)
+    return string.sub(string, 1, string.len(prefix)) == prefix
 end
 
+U.modified_icon = "" -- for bufferline, lualine
 U.small_border = "single" -- smaller helper floats
 U.big_border = "shadow" -- ui window floats
 
