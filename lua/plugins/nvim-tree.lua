@@ -4,12 +4,10 @@ if not status_ok then
     return
 end
 
-local config_status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
-if not config_status_ok then
-    return
-end
-
-local tree_cb = nvim_tree_config.nvim_tree_callback
+-- local config_status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
+-- if not config_status_ok then
+--     return
+-- end
 
 nvim_tree.setup({
     -- sync_root_with_cwd = true,
@@ -24,7 +22,8 @@ nvim_tree.setup({
         },
         open_file = {
             window_picker = {
-                enable = false,
+                enable = true,
+                chars = "UIOPABCDEFGHJKLMNQRSTVWXYZ",
             },
         },
         remove_file = {
@@ -41,18 +40,18 @@ nvim_tree.setup({
         icons = {
             git_placement = "signcolumn",
             glyphs = {
-                default = "",
-                symlink = "",
-                folder = {
-                    arrow_open = "",
-                    arrow_closed = "",
-                    default = "",
-                    open = "",
-                    empty = "",
-                    empty_open = "",
-                    symlink = "",
-                    symlink_open = "",
-                },
+                -- default = "",
+                -- symlink = "",
+                -- folder = {
+                --     arrow_open = "",
+                --     arrow_closed = "",
+                --     default = "",
+                --     open = "",
+                --     empty = "",
+                --     empty_open = "",
+                --     symlink = "",
+                --     symlink_open = "",
+                -- },
                 git = {
                     -- unstaged = "",
                     unstaged = "M",
@@ -66,30 +65,33 @@ nvim_tree.setup({
             },
         },
     },
-    diagnostics = {
-        enable = false,
-        show_on_dirs = true,
-        icons = {
-            hint = "",
-            info = "",
-            warning = "",
-            error = "",
-        },
-    },
+    -- diagnostics = {
+    --     enable = false,
+    --     show_on_dirs = true,
+    --     icons = {
+    --         hint = "",
+    --         info = "",
+    --         warning = "",
+    --         error = "",
+    --     },
+    -- },
     view = {
         width = 30,
-        height = 30,
+        -- height = 30,
         side = "left",
         mappings = {
             list = {
-                { key = { "l", "<CR>", "o", "e" }, cb = tree_cb("edit") },
-                { key = "h", cb = tree_cb("close_node") },
-                { key = "v", cb = tree_cb("vsplit") },
-                { key = "n", cb = tree_cb("create") },
-                { key = ".", cb = tree_cb("toggle_dotfiles") },
-                { key = "<Enter>", cb = tree_cb("system_open") },
-                { key = "L", cb = tree_cb("cd") },
-                { key = "<C-t>", cb = nil }, -- TODO
+                { key = { "l", "o", "e" }, action = "edit" },
+                { key = "h", action = "close_node" },
+                { key = "<C-v>", action = "vsplit" },
+                { key = "<C-s>", action = "split" },
+                { key = "n", action = "create" },
+                { key = ".", action = "toggle_dotfiles" },
+                { key = "<CR>", action = "system_open" },
+                { key = "L", action = "cd" },
+                { key = "<C-t>", action = "" },
+                { key = "<C-k>", action = "" },
+                { key = "K", action = "toggle_file_info" },
             },
         },
     },

@@ -53,10 +53,100 @@ local function setup(gruvbox_baby_colors, fox, C, Shade)
         }
         vim.g.gruvbox_baby_telescope_theme = 1
     elseif colorscheme == "fox" then
+        local p
         if vim.opt.background:get() == "light" then
             colorscheme = "dayfox"
+            p = {
+                -- black = Shade.new("#1d344f", "#24476f", "#1c2f44", true),
+                red = Shade.new("#b95d76", "#c76882", "#ac5169", true),
+                green = Shade.new("#618774", "#629f81", "#597668", true),
+                yellow = Shade.new("#ba793e", "#ca884a", "#a36f3e", true),
+                blue = Shade.new("#4d688e", "#4e75aa", "#485e7d", true),
+                magenta = Shade.new("#8e6f98", "#9f75ac", "#806589", true),
+                cyan = Shade.new("#6ca7bd", "#74b2c9", "#5a99b0", true),
+                white = Shade.new("#cdd1d5", "#cfd6dd", "#b6bcc2", true),
+                orange = Shade.new("#e3786c", "#e8857a", "#d76558", true),
+                pink = Shade.new("#d685af", "#de8db7", "#c9709e", true),
+
+                bg0 = "#dbdbdb", -- Dark bg (status line and float)
+                bg1 = "#eaeaea", -- Default bg
+                bg2 = "#dbcece", -- Lighter bg (colorcolm folds)
+                bg3 = "#ced6db", -- Lighter bg (cursor line)
+                bg4 = "#bebebe", -- Conceal, border fg
+
+                fg0 = "#182a40", -- Lighter fg
+                fg1 = "#1d344f", -- Default fg
+                comment = "#7f848e",
+
+                -- fg2 = "#233f5e", -- Darker fg (status line)
+                -- fg3 = "#2e537d", -- Darker fg (line numbers, fold columns)
+
+                -- sel0 = "#ced5de", -- Popup bg, visual selection bg
+                -- sel1 = "#b6c4d9", -- Popup sel bg, search bg
+            }
+            p.diff = {
+                add = C(p.bg1):blend(C(p.green.base), 0.3):to_css(),
+                delete = C(p.bg1):blend(C(p.red.base), 0.3):to_css(),
+                change = C(p.bg1):blend(C(p.blue.base), 0.3):to_css(),
+                text = C(p.bg1):blend(C(p.cyan.base), 0.2):to_css(),
+            }
+
+            p.git = {
+                add = p.green.base,
+                removed = p.red.base,
+                changed = p.blue.base,
+                conflict = p.orange.base,
+                ignored = p.comment,
+            }
         else
             colorscheme = "nightfox"
+            p = {
+                red = Shade.new("#fb4934", 0.15, -0.15),
+                green = Shade.new("#98971a", "#8ec07c", "#689d6a"),
+                yellow = Shade.new("#eebd35", 0.15, -0.15),
+                blue = Shade.new("#458588", 0.15, -0.15),
+                magenta = Shade.new("#b16286", 0.15, -0.15),
+                cyan = Shade.new("#7fa2ac", 0.15, -0.15),
+                white = Shade.new("#e7d7ad", 0.15, -0.15),
+                orange = Shade.new("#d65d0e", 0.15, -0.15),
+                pink = Shade.new("#d4879c", 0.15, -0.15),
+
+                bg0 = "#242424", -- DONE Dark bg (status line and float)
+                bg1 = "#282828", -- DONE Default bg
+                bg2 = "#32302f", -- DONE Lighter bg (colorcolm folds)
+                bg3 = "#32302f", -- DONE Lighter bg (cursor line)
+                bg4 = "#504945", -- DONE nvim-tree folder lines Conceal, telescope border fg
+
+                fg1 = "#ebdbb2", -- DONE Default fg
+                comment = "#665c54",
+            }
+            -- p.diag = {
+            --     error = p.red.base,
+            --     warn = p.yellow.base,
+            --     info = p.blue.base,
+            --     hint = p.green.base,
+            -- }
+
+            -- p.diag_bg = {
+            --     error = C(p.bg1):blend(C(p.diag.error), 0.2):to_css(),
+            --     warn = C(p.bg1):blend(C(p.diag.warn), 0.2):to_css(),
+            --     info = C(p.bg1):blend(C(p.diag.info), 0.2):to_css(),
+            --     hint = C(p.bg1):blend(C(p.diag.hint), 0.2):to_css(),
+            -- }
+            p.diff = {
+                add = C(p.bg1):blend(C(p.green.dim), 0.15):to_css(),
+                delete = C(p.bg1):blend(C(p.red.dim), 0.15):to_css(),
+                change = C(p.bg1):blend(C(p.blue.dim), 0.15):to_css(),
+                text = C(p.bg1):blend(C(p.cyan.dim), 0.2):to_css(),
+            }
+
+            p.git = {
+                add = p.green.dim,
+                removed = p.red.dim,
+                changed = p.blue.dim,
+                conflict = p.orange.dim,
+                ignored = p.comment,
+            }
         end
         fox.reset()
         fox.setup({
@@ -71,110 +161,117 @@ local function setup(gruvbox_baby_colors, fox, C, Shade)
             },
             palettes = {
                 dayfox = {
-                    diff = {
-                        add = "#aec5b9",
-                        change = "#a1b3cc",
-                        delete = "#dcaeba",
-                    },
-                    number0 = "#182a40", -- fg0
-                    number1 = "#1d344f", -- fg1
+                    -- diff = {
+                    --     add = "#aec5b9",
+                    --     change = "#a1b3cc",
+                    --     delete = "#dcaeba",
+                    -- },
+                    -- number0 = "#182a40", -- fg0
+                    -- number1 = "#1d344f", -- fg1
                 },
                 nightfox = {
-                    -- black = Shade.new("#393b44"),
-                    red = Shade.new("#fb4934", "#fb4934", "#fb4934"),
-                    green = Shade.new("#98971a", "#8ec07c", "#689d6a"),
-                    yellow = Shade.new("#eebd35", "#eebd35", "#eebd35"),
-                    blue = Shade.new("#458588", "#458588", "#458588"),
-                    magenta = Shade.new("#b16286", "#b16286", "#b16286"),
-                    cyan = Shade.new("#7fa2ac", "#7fa2ac", "#7fa2ac"),
-                    white = Shade.new("#e7d7ad", "#e7d7ad", "#e7d7ad"),
-                    orange = Shade.new("#d65d0e", "#d65d0e", "#d65d0e"),
-                    pink = Shade.new("#d4879c", "#d4879c", "#d4879c"),
+                    red = p.red,
+                    green = p.green,
+                    yellow = p.yellow,
+                    blue = p.blue,
+                    magenta = p.magenta,
+                    cyan = p.cyan,
+                    white = p.white,
+                    orange = p.orange,
+                    pink = p.pink,
 
-                    comment = "#665c54",
-                    -- comment = "#ff0000",
+                    comment = p.comment,
+                    bg0 = p.bg0, -- dark bg
+                    bg1 = p.bg1, -- default bg
+                    bg2 = p.bg2, -- colorcolumn folds
+                    bg3 = p.bg3, -- cursor line
+                    bg4 = p.bg4,
+                    fg1 = p.fg1, -- DONE Default fg
+                    sel0 = p.bg4, -- Popup bg, visual selection bg
 
-                    bg0 = "#242424", -- DONE Dark bg (status line and float)
-                    bg1 = "#282828", -- DONE Default bg
-                    bg2 = "#32302f", -- DONE Lighter bg (colorcolm folds)
-                    bg3 = "#32302f", -- DONE Lighter bg (cursor line)
-                    bg4 = "#504945", -- DONE nvim-tree folder lines Conceal, telescope border fg
-
-                    -- fg0 = "#d6d6d7", -- Lighter fg
-                    fg1 = "#ebdbb2", -- DONE Default fg
-                    -- fg2 = "#aeafb0", -- Darker fg (status line)
-                    -- fg3 = "#71839b", -- Darker fg (line numbers, fold columns)
-
-                    sel0 = "#504945", -- Popup bg, visual selection bg
-
-                    number0 = "#665c54", -- current number
-                    number1 = "#504945", -- number
-
-                    -- sel1 = "#3c5372", -- Popup sel bg, search bg
-                    -- diff = {
-                    --     add = "#26332c",
-                    --     change = "#273842",
-                    --     delete = "#572e33",
-                    --     text = "#26332c",
-                    -- },
+                    number0 = p.comment, -- current number
+                    number1 = p.bg4, -- number
                 },
             },
             specs = {
                 nightfox = {
                     syntax = {
-                        func = "yellow",
-                        keyword = "red",
-                        type = "green.bright",
-                        ident = "blue",
-                        conditional = "red",
-                        -- variable = "red"
+                        func = p.yellow,
+                        keyword = p.red,
+                        type = p.green.bright,
+                        ident = p.blue,
+                        conditional = p.red,
                     },
-                    diff = {
-                        change = C("#282828"):blend(C("#7fa2ac"), 0.2):to_css(),
-                    },
+                    diff = p.diff,
+                    git = p.git,
+                },
+                dayfox = {
+                    diff = p.diff,
+                    git = p.git,
                 },
             },
             groups = {
-                dayfox = {},
+                dayfox = {
+                    LineNr = { fg = p.fg0 },
+                    CursorLineNr = { fg = p.fg1 },
+                    -- gitsigns stuff:
+                    -- GitSignsAddNr = { fg = p.bg0, bg = p.diff.add },
+                    -- GitSignsChangeNr = { fg = p.bg0, bg = p.diff.change },
+                    -- GitSignsDeleteNr = { fg = p.bg0, bg = p.diff.delete },
+                    -- DiffAdd = { bg = p.diff.add },
+                    -- DiffChange = { bg = p.diff.change },
+                    -- DiffDelete = { bg = p.diff.delete },
+                    -- telescope:
+                    -- TelescopeBorder = { fg = p.fg1, bg = p.fg1 },
+                    -- TelescopePromptCounter = { fg = p.fg1, bg = p.bg4 },
+                    -- TelescopePromptBorder = { fg = p.bg4, bg = p.bg4 },
+                    -- TelescopePromptNormal = { fg = p.fg1, bg = p.bg4 },
+                    -- TelescopePromptPrefix = { fg = p.cyan, bg = p.bg4 },
+
+                    -- TelescopeNormal = { bg = p.bg0 },
+
+                    -- TelescopePreviewTitle = { fg = p.bg1, bg = p.green.dim },
+                    -- TelescopePromptTitle = { fg = p.bg1, bg = p.yellow },
+                    -- TelescopeResultsTitle = { fg = p.bg0, bg = p.fg1 },
+                },
                 nightfox = {
+                    LineNr = { fg = p.bg4 },
+                    CursorLineNr = { fg = p.comment },
                     -- better syntax:
-                    ["@punctuation.delimiter"] = { fg = "palette.fg1" }, -- brackets
-                    ["@punctuation.bracket"] = { fg = "palette.fg1" }, -- brackets
-                    ["@constructor"] = { fg = "palette.green.bright" }, -- lua table brackets
-                    ["@field"] = { fg = "palette.cyan" }, -- lua table fields
-                    ["@constant.builtin"] = { fg = "palette.pink" }, -- python None
-                    ["@keyword.operator"] = { fg = "palette.red", style = "NONE" }, -- lua "not" with no italics/bold
-                    ["@variable"] = { fg = "palette.blue" }, -- "normal" variables different from fields :)
+                    ["@punctuation.delimiter"] = { fg = p.fg1 }, -- brackets
+                    ["@punctuation.bracket"] = { fg = p.fg1 }, -- brackets
+                    ["@constructor"] = { fg = p.green.bright }, -- lua table brackets
+                    ["@field"] = { fg = p.cyan }, -- lua table fields
+                    ["@constant.builtin"] = { fg = p.pink }, -- python None
+                    ["@keyword.operator"] = { fg = p.red, style = "NONE" }, -- lua "not" with no italics/bold
+                    ["@variable"] = { fg = p.blue }, -- "normal" variables different from fields :)
                     -- window borders:
-                    VertSplit = { fg = "palette.bg4" },
-                    FloatBorder = { fg = "palette.bg4" },
-                    NormalFloat = { bg = "palette.bg1" },
-                    ColorColumn = { bg = "palette.bg0" },
-                    TreesitterContext = { bg = "palette.bg0" },
+                    VertSplit = { fg = p.bg4 },
+                    FloatBorder = { fg = p.bg4 },
+                    NormalFloat = { bg = p.bg1 },
+                    ColorColumn = { bg = p.bg0 },
+                    TreesitterContext = { bg = p.bg0 },
                 },
                 all = {
-                    -- line numbers:
-                    LineNr = { fg = "palette.number1" },
-                    CursorLineNr = { fg = "palette.number0" },
                     -- gitsigns stuff:
-                    -- GitSignsAddNr = { fg = "palette.number1", bg = "palette.diff.add" },
-                    -- GitSignsChangeNr = { fg = "palette.number1", bg = "palette.diff.change" },
-                    -- GitSignsDeleteNr = { fg = "palette.number1", bg = "palette.diff.delete" },
-                    -- DiffAdd = { bg = "palette.diff.add" },
-                    -- DiffChange = { bg = "palette.diff.change" },
-                    -- DiffDelete = { bg = "palette.diff.delete" },
+                    -- GitSignsAddNr = { fg = p.bg0, bg = p.diff.add },
+                    -- GitSignsChangeNr = { fg = p.bg0, bg = p.diff.change },
+                    -- GitSignsDeleteNr = { fg = p.bg0, bg = p.diff.delete },
+                    -- DiffAdd = { bg = p.diff.add },
+                    -- DiffChange = { bg = p.diff.change },
+                    -- DiffDelete = { bg = p.diff.delete },
                     -- telescope:
-                    TelescopeBorder = { fg = "palette.bg0", bg = "palette.bg0" },
-                    TelescopePromptCounter = { fg = "palette.fg1", bg = "palette.sel0" },
-                    TelescopePromptBorder = { fg = "palette.sel0", bg = "palette.sel0" },
-                    TelescopePromptNormal = { fg = "palette.fg1", bg = "palette.sel0" },
-                    TelescopePromptPrefix = { fg = "palette.cyan", bg = "palette.sel0" },
+                    TelescopeBorder = { fg = p.bg0, bg = p.bg0 },
+                    TelescopePromptCounter = { fg = p.fg1, bg = p.bg4 },
+                    TelescopePromptBorder = { fg = p.bg4, bg = p.bg4 },
+                    TelescopePromptNormal = { fg = p.fg1, bg = p.bg4 },
+                    TelescopePromptPrefix = { fg = p.cyan, bg = p.bg4 },
 
-                    TelescopeNormal = { bg = "palette.bg0" },
+                    TelescopeNormal = { bg = p.bg0 },
 
-                    TelescopePreviewTitle = { fg = "palette.bg1", bg = "palette.green.dim" },
-                    TelescopePromptTitle = { fg = "palette.bg1", bg = "palette.yellow" },
-                    TelescopeResultsTitle = { fg = "palette.bg0", bg = "palette.fg1" },
+                    TelescopePreviewTitle = { fg = p.bg1, bg = p.green.dim },
+                    TelescopePromptTitle = { fg = p.bg1, bg = p.yellow },
+                    TelescopeResultsTitle = { fg = p.bg0, bg = p.fg1 },
 
                     -- TelescopeSelection = { bg = "palette.diff.change" },
                 },

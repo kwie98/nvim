@@ -41,19 +41,19 @@ packer.init({
 
 return packer.startup(function(use)
     use({ "wbthomason/packer.nvim" }) -- Have packer manage itself
-    use({ "nvim-lua/plenary.nvim", commit = "968a4b9afec0c633bc369662e78f8c5db0eba249" }) -- Useful lua functions used by lots of plugins
-    use({ "windwp/nvim-autopairs", commit = "fa6876f832ea1b71801c4e481d8feca9a36215ec" }) -- Autopairs, integrates with both cmp and treesitter
+    use({ "nvim-lua/plenary.nvim" }) -- Useful lua functions used by lots of plugins
+    use({ "windwp/nvim-autopairs" }) -- Autopairs, integrates with both cmp and treesitter
     use({ "numToStr/Comment.nvim" })
-    use({ "JoosepAlviste/nvim-ts-context-commentstring", commit = "88343753dbe81c227a1c1fd2c8d764afb8d36269" })
-    use({ "kyazdani42/nvim-web-devicons", commit = "8d2c5337f0a2d0a17de8e751876eeb192b32310e" })
-    use({ "kyazdani42/nvim-tree.lua", commit = "bdb6d4a25410da35bbf7ce0dbdaa8d60432bc243" })
+    use({ "JoosepAlviste/nvim-ts-context-commentstring" })
+    use({ "kyazdani42/nvim-web-devicons" })
+    use({ "kyazdani42/nvim-tree.lua" })
     use({ "akinsho/bufferline.nvim" })
-    use({ "moll/vim-bbye", commit = "25ef93ac5a87526111f43e5110675032dbcacf56" })
+    use({ "moll/vim-bbye" })
     use({ "nvim-lualine/lualine.nvim" })
     -- use({ "feline-nvim/feline.nvim" })
-    use({ "akinsho/toggleterm.nvim", commit = "aaeed9e02167c5e8f00f25156895a6fd95403af8" })
+    use({ "akinsho/toggleterm.nvim" })
     use({ "ahmedkhalf/project.nvim" })
-    use({ "lewis6991/impatient.nvim", commit = "969f2c5c90457612c09cf2a13fee1adaa986d350" })
+    use({ "lewis6991/impatient.nvim" })
     -- use({ "lukas-reineke/indent-blankline.nvim", commit = "6177a59552e35dfb69e1493fd68194e673dc3ee2" })
     -- use({ "goolord/alpha-nvim", commit = "ef27a59e5b4d7b1c2fe1950da3fe5b1c5f3b4c94" })
     use("folke/which-key.nvim")
@@ -89,9 +89,10 @@ return packer.startup(function(use)
     use({ "saadparwaiz1/cmp_luasnip" }) -- snippet completions
     use({ "hrsh7th/cmp-nvim-lsp" })
     -- use({ "hrsh7th/cmp-nvim-lua" })
-    use({"hrsh7th/cmp-cmdline"})
-    use({"dmitmel/cmp-cmdline-history"})
-    use({"rcarriga/cmp-dap"})
+    use({ "hrsh7th/cmp-cmdline" })
+    use({ "dmitmel/cmp-cmdline-history" })
+    use({ "rcarriga/cmp-dap" })
+    use({ "ray-x/cmp-treesitter" })
     -- use({ "hrsh7th/nvim-cmp", commit = "df6734aa018d6feb4d76ba6bda94b1aeac2b378a" }) -- The completion plugin
     -- use({ "hrsh7th/cmp-buffer", commit = "62fc67a2b0205136bc3e312664624ba2ab4a9323" }) -- buffer completions
     -- use({ "hrsh7th/cmp-path", commit = "466b6b8270f7ba89abd59f402c73f63c7331ff6e" }) -- path completions
