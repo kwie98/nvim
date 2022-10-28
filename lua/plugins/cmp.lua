@@ -63,6 +63,7 @@ U.load({ "cmp", "luasnip", "luasnip.loaders.from_vscode" }, function(cmp, luasni
             { name = "path" },
         }, {
             { name = "cmdline", keyword_length = 3 },
+        }, {
             { name = "cmdline_history", keyword_length = 3 },
         }),
     })

@@ -18,9 +18,11 @@ telescope.setup({
             results = { " " },
             preview = { " " },
         },
+        dynamic_preview_title = true, -- trying this out
         prompt_prefix = " ",
         selection_caret = " ",
         path_display = { "truncate" },
+        file_ignore_patterns = { "^.git/" },
 
         mappings = {
             i = {
@@ -88,10 +90,16 @@ telescope.setup({
         },
     },
     pickers = {
-        -- find_files = {
-        --     hidden = true,
-        --     no_ignore = true,
-        -- },
+        find_files = {
+            -- find_command = { "fd", vim.fn.expand("<cword>") },
+            hidden = true,
+            -- no_ignore = true,
+        },
+        live_grep = {
+            additional_args = function()
+                return { "--hidden" }
+            end,
+        },
     },
     extensions = {
         fzf = {
@@ -99,9 +107,8 @@ telescope.setup({
             override_generic_sorter = true, -- override the generic sorter
             override_file_sorter = true, -- override the file sorter
             case_mode = "smart_case", -- or "ignore_case" or "respect_case"
-            -- the default case_mode is "smart_case"}
         },
     },
 })
-
+telescope.load_extension("fzf")
 telescope.load_extension("dap")

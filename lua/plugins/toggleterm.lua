@@ -13,7 +13,7 @@ toggleterm.setup({
     -- shading_factor = "1",
     start_in_insert = true,
     insert_mappings = false,
-    terminal_mappings = true,
+    terminal_mappings = false,
     persist_size = true,
     -- persist_mode = false,
     direction = "horizontal",
@@ -44,15 +44,15 @@ end
 
 vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
 
-local Terminal = require("toggleterm.terminal").Terminal
+-- local Terminal = require("toggleterm.terminal").Terminal
 
-local full = Terminal:new({
-    direction = "tab",
-    hidden = true,
-})
-vim.keymap.set({ "n", "t" }, "<Leader><S-Enter>", function()
-    full:toggle()
-end, { noremap = true, desc = "Terminal Tab" })
+-- local full = Terminal:new({
+--     direction = "tab",
+--     hidden = true,
+-- })
+-- vim.keymap.set("n", "<Leader>t", function()
+--     full:toggle()
+-- end, { noremap = true, desc = "Terminal Tab" })
 
 local function go_to_file()
     local cursor = vim.api.nvim_win_get_cursor(0)

@@ -81,13 +81,13 @@ nvim_tree.setup({
         side = "left",
         mappings = {
             list = {
-                { key = { "l", "o", "e" }, action = "edit" },
+                { key = { "l", "<CR>", "e" }, action = "edit" },
                 { key = "h", action = "close_node" },
                 { key = "<C-v>", action = "vsplit" },
                 { key = "<C-s>", action = "split" },
                 { key = "n", action = "create" },
                 { key = ".", action = "toggle_dotfiles" },
-                { key = "<CR>", action = "system_open" },
+                { key = "o", action = "system_open" },
                 { key = "L", action = "cd" },
                 { key = "<C-t>", action = "" },
                 { key = "<C-k>", action = "" },

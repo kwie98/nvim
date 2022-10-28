@@ -112,7 +112,6 @@ local mappings = {
     -- ["<Enter>"] = { "<CMD>ToggleTerm<CR>", "Terminal" },
     c = { "<CMD>Bdelete!<CR>", "Close Buffer" },
     f = {
-        -- "<CMD>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<CR>",
         "<CMD>lua require('telescope.builtin').find_files()<CR>",
         "Find files",
     },
@@ -245,7 +244,7 @@ local mappings = {
         r = { "<CMD>Telescope oldfiles<CR>", "Open Recent File" },
         R = { "<CMD>Telescope registers<CR>", "Registers" },
         k = { "<CMD>Telescope keymaps<CR>", "Keymaps" },
-        C = { "<CMD>Telescope commands<CR>", "Commands" },
+        -- C = { "<CMD>Telescope commands<CR>", "Commands" },
         a = { "<CMD>lua require'telescope.builtin'.find_files({cwd='~', hidden=true})<CR>", "Find in Home" },
     },
 
