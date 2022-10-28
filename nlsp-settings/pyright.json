@@ -1,0 +1,8 @@
+{
+  "python.analysis.stubPath": "typings",
+  "python.analysis.typeCheckingMode": "strict",
+  "python.analysis.useLibraryCodeForTypes": true,
+  "python.analysis.diagnosticSeverityOverrides": {
+    "reportMissingTypeStubs": "warning"
+  }
+}

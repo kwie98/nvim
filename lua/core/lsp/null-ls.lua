@@ -8,12 +8,13 @@ U.load({ "null-ls", "null-ls.utils" }, function(null_ls, null_ls_utils)
 
     null_ls.setup({
         -- border = u.big_border, -- not supported yet
-        debug = false,
+        debug = true,
         on_attach = require("core.lsp.handlers").on_attach,
         sources = {
             -- working
             formatting.black.with({
-                extra_args = { "--fast", "--line-length", "120" },
+                -- extra_args = { "--fast", "--line-length", "120" },
+                extra_args = { "--fast" },
                 cwd = root_finder,
             }),
             formatting.stylua.with({ extra_args = { "--indent-type=Spaces" } }),
@@ -40,9 +41,13 @@ U.load({ "null-ls", "null-ls.utils" }, function(null_ls, null_ls_utils)
             }),
             diagnostics.mypy.with({
                 extra_args = {
-                    "--python-executable=python", -- use env python
+                    -- NOTE: Probably nicer to have mypy installed either by conda or globally, so that we can use the
+                    -- stubgen module
+                    -- "--python-executable=python", -- use the python that has all the packages
                     "--namespace-packages", -- find stuff where __init__.py file is missing
                 },
+                timeout = -1, -- mypy can take really long sometimes
+                method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
                 cwd = root_finder,
                 runtime_condition = function()
                     -- needed because mypy does not like code from packages

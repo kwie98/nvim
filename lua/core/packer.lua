@@ -110,6 +110,7 @@ return packer.startup(function(use)
     use({ "williamboman/mason.nvim" })
     use({ "williamboman/mason-lspconfig.nvim" })
     use({ "neovim/nvim-lspconfig" }) -- enable LSP
+    use({ "tamago324/nlsp-settings.nvim" })
 
     -- language specific LSP plugins
     use({ "b0o/SchemaStore.nvim" })
