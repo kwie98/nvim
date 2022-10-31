@@ -124,8 +124,8 @@ local mappings = {
 
     g = {
         name = "Git",
-        -- g = { "<CMD>72vsplit<BAR>0Git<CR>", "Git" },
-        g = { "<CMD>vertical Git<CR>", "Git" },
+        g = { "<CMD>72vsplit<BAR>0Git<CR>", "Git" },
+        -- g = { "<CMD>vertical Git<CR>", "Git" },
         -- h = { "<CMD>Gitsigns toggle_linehl<CR> | <CMD>Gitsigns toggle_word_diff<CR> | <CMD>Gitsigns toggle_deleted<CR>", "View Hunks" },
         h = { "<CMD>Gitsigns toggle_linehl<CR> | <CMD>Gitsigns toggle_deleted<CR>", "View Hunks" },
         b = { "<CMD>Gitsigns toggle_current_line_blame<CR>", "Blame" },
