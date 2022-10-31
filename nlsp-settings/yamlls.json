@@ -1,8 +1,0 @@
-{
-  "yaml.format.enable": true,
-  "yaml.hover": true,
-  "yaml.completion": true,
-  "yaml.validate": true,
-  "yaml.schemaStore.enable": true,
-  "yaml.schemaStore.url": "https://www.schemastore.org/api/json/catalog.json"
-}
