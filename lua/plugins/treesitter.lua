@@ -1,4 +1,4 @@
-U.load({ "nvim-treesitter.configs", "treesitter-context", "tsht" }, function(configs, context, tsht)
+U.load({ "nvim-treesitter.configs", "treesitter-context", "tsht" }, function(configs, context)
     -- nvim-treehopper
     -- vim.keymap.set("o", "m", tsht.nodes, {noremap = true, silent = true, desc = "Treehopper"})
     -- vim.keymap.set("x", "m", tsht.nodes, {noremap = true, silent = true, desc = "Treehopper"})
@@ -11,9 +11,7 @@ U.load({ "nvim-treesitter.configs", "treesitter-context", "tsht" }, function(con
         playground = {
             enable = true,
         },
-        ensure_installed = "all", -- one of "all" or a list of languages
-        --[[ ignore_install = { "markdown", "phpdoc" }, -- List of parsers to ignore installing ]]
-        -- ignore_install = { "yaml" },
+        auto_install = true,
         highlight = {
             enable = true, -- false will disable the whole extension
             disable = { "css" }, -- list of language that will be disabled

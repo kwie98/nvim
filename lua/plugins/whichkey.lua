@@ -124,7 +124,8 @@ local mappings = {
 
     g = {
         name = "Git",
-        g = { "<CMD>Git<CR>", "Git" },
+        -- g = { "<CMD>72vsplit<BAR>0Git<CR>", "Git" },
+        g = { "<CMD>vertical Git<CR>", "Git" },
         -- h = { "<CMD>Gitsigns toggle_linehl<CR> | <CMD>Gitsigns toggle_word_diff<CR> | <CMD>Gitsigns toggle_deleted<CR>", "View Hunks" },
         h = { "<CMD>Gitsigns toggle_linehl<CR> | <CMD>Gitsigns toggle_deleted<CR>", "View Hunks" },
         b = { "<CMD>Gitsigns toggle_current_line_blame<CR>", "Blame" },
@@ -147,8 +148,8 @@ local mappings = {
         S = { "<CMD>Gitsigns stage_buffer<CR>", "Stage Buffer" },
         u = { "<CMD>Gitsigns undo_stage_hunk<CR>", "Undo Stage Hunk" },
 
-        d = { "<CMD>Gdiffsplit | wincmd x<CR>", "Diff File" },
-        D = { "<CMD>Git difftool -y HEAD | 2,$tabdo wincmd x | wincmd w | tabnext<CR>", "Diff All Files" },
+        d = { "<CMD>Gdiffsplit<CR>", "Diff File" },
+        D = { "<CMD>Git difftool -y HEAD<CR>", "Diff All Files" },
         m = { "<CMD>Git mergetool -y | tabprevious<CR>", "Merge" },
 
         -- l = { "<CMD>lua require 'gitsigns'.blame_line()<CR>", "Blame" },

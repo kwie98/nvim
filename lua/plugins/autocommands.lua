@@ -1,13 +1,13 @@
 vim.cmd([[
     augroup _general_settings
     autocmd!
-    autocmd FileType fugitive,qf,help,man,lspinfo nnoremap <silent> <buffer> q :close<CR>
+    autocmd FileType fugitive,qf,man nnoremap <silent> <buffer> q :close<CR>
     autocmd FileType TelescopePrompt nnoremap <silent> <buffer> q :close!<CR>
     autocmd TextYankPost * silent!lua require('vim.highlight').on_yank({higroup = 'Visual', timeout = 100})
     autocmd BufWinEnter * :set formatoptions-=o
     augroup end
 
-    " " assumes set ignorecase smartcase MESSES UP :s REPLACE
+    " " assumes set ignorecase smartcase MESSES UP :s REPLACE (could use \C)
     " augroup _dynamic_smartcase
     " autocmd!
     " autocmd CmdLineEnter : set nosmartcase
@@ -22,11 +22,14 @@ vim.cmd([[
     augroup _fugitive
     autocmd!
     autocmd User FugitiveIndex nnoremap <buffer> S <CMD>Git add .<CR>
+    " autocmd User FugitiveIndex nnoremap <buffer> cc <CMD>vertical Git commit<CR> " gets overwritten by fugitive :(
     augroup end
 
     augroup _auto_resize
     autocmd!
     autocmd VimResized * tabdo wincmd =
+    " called when doing dd or <CR> in fugitive index:
+    " autocmd User FugitiveBlob 3windo vertical resize 10
     augroup end
 
     " Markdown darker code blocks
@@ -55,11 +58,4 @@ vim.cmd([[
     endfunction
 ]])
 
--- local format_on_save = vim.api.nvim_create_augroup("_format_on_save", { clear = true })
--- vim.api.nvim_create_autocmd("BufWritePre", {
---     group = format_on_save,
---     pattern = "*",
---     callback = function()
---         vim.lsp.buf.format()
---     end,
--- })
+

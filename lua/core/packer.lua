@@ -81,16 +81,18 @@ return packer.startup(function(use)
     -- Treesitter
     use("nvim-treesitter/nvim-treesitter")
     use("nvim-treesitter/playground")
-    use({ "nvim-treesitter/nvim-treesitter-textobjects", after = "nvim-treesitter" })
-    use({ "nvim-treesitter/nvim-treesitter-context", after = "nvim-treesitter" })
+    use( "nvim-treesitter/nvim-treesitter-textobjects" )
+    use( "nvim-treesitter/nvim-treesitter-context" )
     use("andymass/vim-matchup")
     use("kylechui/nvim-surround")
-    use({ "danymat/neogen", after = "nvim-treesitter" })
-    use({ "mfussenegger/nvim-treehopper", after = "nvim-treesitter" })
+    use( "danymat/neogen" )
+    use( "mfussenegger/nvim-treehopper" )
 
     -- Git
     use("lewis6991/gitsigns.nvim")
     use("tpope/vim-fugitive")
+    -- use("TimUntersberger/neogit")
+    -- use("sindrets/diffview.nvim")
 
     -- Rice
     use("ray-x/lsp_signature.nvim") -- shows function parameter information when typing
@@ -102,7 +104,7 @@ return packer.startup(function(use)
     use("tpope/vim-repeat")
 
     -- Vimwiki and other Markdown things
-    use({ "renerocksai/telekasten.nvim", after = "telescope.nvim" })
+    use( "renerocksai/telekasten.nvim" )
     use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install" })
 
     -- DAP

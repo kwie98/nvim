@@ -78,16 +78,15 @@ local function setup(gruvbox_baby_colors, fox, C, Shade)
                 fg1 = "#1d344f", -- Default fg
                 comment = "#7f848e",
 
-                -- fg2 = "#233f5e", -- Darker fg (status line)
-                -- fg3 = "#2e537d", -- Darker fg (line numbers, fold columns)
-
                 -- sel0 = "#ced5de", -- Popup bg, visual selection bg
                 -- sel1 = "#b6c4d9", -- Popup sel bg, search bg
+
+
             }
 
             p.git = {
                 add = p.green.bright,
-                removed = p.pink.bright,
+                removed = p.yellow.bright,
                 changed = p.blue.bright,
                 conflict = p.orange.bright,
                 ignored = p.comment,
@@ -103,7 +102,8 @@ local function setup(gruvbox_baby_colors, fox, C, Shade)
             colorscheme = "nightfox"
             p = {
                 red = Shade.new("#fb4934", 0.15, -0.15),
-                green = Shade.new("#98971a", "#8ec07c", "#689d6a"),
+                -- green = Shade.new("#98971a", "#8ec07c", "#689d6a"),
+                green = Shade.new("#98971a", 0.15, -0.15),
                 yellow = Shade.new("#eebd35", 0.15, -0.15),
                 blue = Shade.new("#458588", 0.15, -0.15),
                 magenta = Shade.new("#b16286", 0.15, -0.15),
@@ -111,6 +111,12 @@ local function setup(gruvbox_baby_colors, fox, C, Shade)
                 white = Shade.new("#e7d7ad", 0.15, -0.15),
                 orange = Shade.new("#d65d0e", 0.15, -0.15),
                 pink = Shade.new("#d4879c", 0.15, -0.15),
+
+                -- bright_yellow = Shade.new("#fabd2f", 0.15, -0.15),
+                -- dark_red = Shade.new("#cc241d", 0.15, -0.15),
+                -- dark_gray = Shade.new("#83a598", 0.15, -0.15),
+                forest_green = Shade.new("#689d6a", 0.15, -0.15),
+                clean_green = Shade.new("#8ec07c", 0.15, -0.15),
 
                 bg0 = "#242424", -- DONE Dark bg (status line and float)
                 bg1 = "#282828", -- DONE Default bg
@@ -136,9 +142,9 @@ local function setup(gruvbox_baby_colors, fox, C, Shade)
             -- }
 
             p.git = {
-                add = p.green.dim,
-                removed = p.magenta.dim,
-                changed = p.cyan.dim,
+                add = p.clean_green.dim,
+                removed = p.yellow.dim,
+                changed = p.blue.dim,
                 conflict = p.orange.dim,
                 ignored = p.comment,
             }
@@ -200,7 +206,7 @@ local function setup(gruvbox_baby_colors, fox, C, Shade)
                     syntax = {
                         func = p.yellow,
                         keyword = p.red,
-                        type = p.green.bright,
+                        type = p.clean_green,
                         ident = p.blue,
                         conditional = p.red,
                     },
@@ -242,7 +248,7 @@ local function setup(gruvbox_baby_colors, fox, C, Shade)
                     -- better syntax:
                     ["@punctuation.delimiter"] = { fg = p.fg1 }, -- brackets
                     ["@punctuation.bracket"] = { fg = p.fg1 }, -- brackets
-                    ["@constructor"] = { fg = p.green.bright }, -- lua table brackets
+                    ["@constructor"] = { fg = p.clean_green }, -- lua table brackets
                     ["@field"] = { fg = p.cyan }, -- lua table fields
                     ["@constant.builtin"] = { fg = p.pink }, -- python None
                     ["@keyword.operator"] = { fg = p.red, style = "NONE" }, -- lua "not" with no italics/bold
