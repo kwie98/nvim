@@ -21,7 +21,7 @@ return U.load({ "cmp_nvim_lsp" }, function(cmp_nvim_lsp)
                 active = signs,
                 priority = 1,
             },
-            update_in_insert = true,
+            update_in_insert = false,
             underline = true,
             severity_sort = true,
             float = {

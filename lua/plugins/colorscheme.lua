@@ -84,19 +84,20 @@ local function setup(gruvbox_baby_colors, fox, C, Shade)
                 -- sel0 = "#ced5de", -- Popup bg, visual selection bg
                 -- sel1 = "#b6c4d9", -- Popup sel bg, search bg
             }
-            p.diff = {
-                add = C(p.bg1):blend(C(p.green.base), 0.3):to_css(),
-                delete = C(p.bg1):blend(C(p.red.base), 0.3):to_css(),
-                change = C(p.bg1):blend(C(p.blue.base), 0.3):to_css(),
-                text = C(p.bg1):blend(C(p.cyan.base), 0.2):to_css(),
-            }
 
             p.git = {
-                add = p.green.base,
-                removed = p.red.base,
-                changed = p.blue.base,
-                conflict = p.orange.base,
+                add = p.green.bright,
+                removed = p.pink.bright,
+                changed = p.blue.bright,
+                conflict = p.orange.bright,
                 ignored = p.comment,
+            }
+
+            p.diff = {
+                add = C(p.bg1):blend(C(p.git.add), 0.4):to_css(),
+                delete = C(p.bg1):blend(C(p.git.removed), 0.4):to_css(),
+                change = C(p.bg1):blend(C(p.git.changed), 0.4):to_css(),
+                text = C(p.bg1):blend(C(p.git.conflict), 0.2):to_css(),
             }
         else
             colorscheme = "nightfox"
@@ -133,19 +134,20 @@ local function setup(gruvbox_baby_colors, fox, C, Shade)
             --     info = C(p.bg1):blend(C(p.diag.info), 0.2):to_css(),
             --     hint = C(p.bg1):blend(C(p.diag.hint), 0.2):to_css(),
             -- }
-            p.diff = {
-                add = C(p.bg1):blend(C(p.green.dim), 0.15):to_css(),
-                delete = C(p.bg1):blend(C(p.red.dim), 0.15):to_css(),
-                change = C(p.bg1):blend(C(p.blue.dim), 0.15):to_css(),
-                text = C(p.bg1):blend(C(p.cyan.dim), 0.2):to_css(),
-            }
 
             p.git = {
                 add = p.green.dim,
-                removed = p.red.dim,
-                changed = p.blue.dim,
+                removed = p.magenta.dim,
+                changed = p.cyan.dim,
                 conflict = p.orange.dim,
                 ignored = p.comment,
+            }
+
+            p.diff = {
+                add = C(p.bg1):blend(C(p.git.add), 0.25):to_css(),
+                delete = C(p.bg1):blend(C(p.git.removed), 0.25):to_css(),
+                change = C(p.bg1):blend(C(p.git.changed), 0.25):to_css(),
+                text = C(p.bg1):blend(C(p.git.conflict), 0.2):to_css(),
             }
         end
         fox.reset()
@@ -284,6 +286,11 @@ local function setup(gruvbox_baby_colors, fox, C, Shade)
     local ok, _ = pcall(vim.cmd.colorscheme, colorscheme)
     if not ok then
         return
+    end
+    if colorscheme == "dayfox" then
+        vim.cmd("highlight codeBlockBackground guibg=#dbdbdb")
+    else
+        vim.cmd("highlight codeBlockBackground guibg=#242424")
     end
 
     -- vim.cmd([[

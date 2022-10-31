@@ -10,3 +10,7 @@ vim.keymap.set("n", "<S-Tab>", "?[[\\zs<CR>", { buffer = true })
 vim.bo.textwidth = 100
 vim.bo.shiftwidth = 2
 vim.bo.tabstop = 2
+
+vim.cmd([[
+    call ColorCodeBlocks()
+]])

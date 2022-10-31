@@ -6,6 +6,18 @@ U.load({ "cmp", "luasnip", "luasnip.loaders.from_vscode" }, function(cmp, luasni
         enabled = function()
             return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or require("cmp_dap").is_dap_buffer()
         end,
+        formatting = {
+            format = function(entry, vim_item)
+                if entry.source.name ~= "nvim_lsp" then
+                    if vim_item.kind ~= "Text" then
+                        vim_item.kind = string.format("%s %s", vim_item.kind, entry.source.name)
+                    else
+                        vim_item.kind = entry.source.name
+                    end
+                end
+                return vim_item
+            end,
+        },
         snippet = {
             expand = function(args)
                 luasnip.lsp_expand(args.body)

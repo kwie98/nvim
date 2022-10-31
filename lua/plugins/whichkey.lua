@@ -92,9 +92,6 @@ local opts = {
 }
 
 local mappings = {
-    -- t = {
-    --     "<CMD>ToggleTerm direction=tab<CR>", "Terminal Tab"
-    -- },
     w = {
         name = "Wiki",
         t = { "<CMD>edit ~/Sync/wiki/todo.md<CR>", "Todo" },
@@ -109,7 +106,6 @@ local mappings = {
         "Buffers",
     },
     e = { "<CMD>NvimTreeToggle<CR>", "Explorer" },
-    -- ["<Enter>"] = { "<CMD>ToggleTerm<CR>", "Terminal" },
     c = { "<CMD>Bdelete!<CR>", "Close Buffer" },
     f = {
         "<CMD>lua require('telescope.builtin').find_files()<CR>",
@@ -126,18 +122,6 @@ local mappings = {
     a = { "<CMD>lua require('harpoon.mark').add_file()<CR>", "Add to Harpoon" },
     h = { "<CMD>lua require('harpoon.ui').toggle_quick_menu()<CR>", "Harpoon" },
 
-    -- quickfix
-    -- j = "which_key_ignore",
-    -- k = "which_key_ignore",
-
-    P = {
-        name = "Packer",
-        -- c = { "<CMD>PackerCompile<CR>", "Compile" },
-        -- i = { "<CMD>PackerInstall<CR>", "Install" },
-        s = { "<CMD>PackerSync<CR>", "Sync" },
-        -- u = { "<CMD>PackerUpdate<CR>", "Update" },
-    },
-
     g = {
         name = "Git",
         g = { "<CMD>Git<CR>", "Git" },
@@ -146,7 +130,7 @@ local mappings = {
         b = { "<CMD>Gitsigns toggle_current_line_blame<CR>", "Blame" },
         -- l = { "<CMD>lua require'gitsigns'.setqflist( " },
         -- l = { "<CMD>Gitsigns setqflist 'all' open=false<CR> | <CMD>cfirst<CR>", "Quickfix" },
-        l = {
+        n = {
             function()
                 require("gitsigns").setqflist("all")
                 -- vim.schedule(function ()
@@ -206,28 +190,25 @@ local mappings = {
 
     m = {
         name = "Module Info",
+        l = { "<CMD>LspInfo<CR>", "LSP" },
         m = { "<CMD>Mason<CR>", "Mason" },
         n = { "<CMD>NullLsInfo<CR>", "Null-ls" },
         p = { "<CMD>PackerStatus<CR>", "Packer" },
-        l = { "<CMD>LspInfo<CR>", "LSP" },
+        s = { "<CMD>PackerSync<CR>", "Packer Sync" },
     },
 
     l = {
         name = "LSP",
         a = { "<CMD>lua vim.lsp.buf.code_action()<CR>", "Code Action" },
         f = { vim.lsp.buf.format, "Format" },
-        -- d = {
-        --     "<CMD>Telescope lsp_document_diagnostics<CR>",
-        --     "Document Diagnostics",
-        -- },
-        -- W = {
-        --     "<CMD>Telescope lsp_workspace_diagnostics<CR>",
-        --     "Workspace Diagnostics",
-        -- },
-        -- f = { "<CMD>lua vim.lsp.buf.formatting_sync()<CR>", "Format" },
-        x = { "<CMD>lua vim.lsp.codelens.run()<CR>", "CodeLens Action" },
-        l = { "<CMD>lua vim.diagnostic.setqflist({open=true})<CR>", "Quickfix" },
-        r = { "<CMD>lua vim.lsp.buf.rename()<CR>", "Rename" },
+        x = { vim.lsp.codelens.run, "CodeLens Action" },
+        n = {
+            function()
+                vim.diagnostic.setqflist({ open = true })
+            end,
+            "Quickfix",
+        },
+        r = { vim.lsp.buf.rename, "Rename" },
         s = { "<CMD>Telescope lsp_document_symbols<CR>", "Document Symbols" },
         w = {
             "<CMD>Telescope lsp_dynamic_workspace_symbols<CR>",

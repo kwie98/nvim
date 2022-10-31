@@ -29,6 +29,30 @@ vim.cmd([[
     autocmd VimResized * tabdo wincmd =
     augroup end
 
+    " Markdown darker code blocks
+    function! s:place_signs()
+        let l:continue = 0
+        let l:file = expand('%')
+        execute 'sign unplace * file=' . l:file
+        for l:lnum in range(1, line('$'))
+            let l:line = getline(l:lnum)
+            if l:continue || l:line =~# '^\s*```'
+                execute printf('sign place %d line=%d name=codeblock file=%s', l:lnum, l:lnum, l:file)
+            endif
+            let l:continue = l:continue ? l:line !~# '^\s*```$' : l:line =~# '^\s*```'
+        endfor
+    endfunction
+
+    function! ColorCodeBlocks() abort
+        " setlocal signcolumn=no
+        sign define codeblock linehl=codeBlockBackground
+        augroup code_block_background
+            autocmd! * <buffer>
+            autocmd InsertLeave <buffer> call s:place_signs()
+            autocmd BufEnter <buffer> call s:place_signs()
+            autocmd BufWritePost <buffer> call s:place_signs()
+        augroup END
+    endfunction
 ]])
 
 -- local format_on_save = vim.api.nvim_create_augroup("_format_on_save", { clear = true })

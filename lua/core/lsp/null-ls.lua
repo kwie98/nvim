@@ -6,6 +6,14 @@ U.load({ "null-ls", "null-ls.utils" }, function(null_ls, null_ls_utils)
         return null_ls_utils.root_pattern(".git")(vim.fn.expand("%:p"))
     end
 
+    vim.api.nvim_create_user_command("NullLsStop", function()
+        null_ls.disable({})
+    end, {})
+
+    vim.api.nvim_create_user_command("NullLsStart", function()
+        null_ls.enable({})
+    end, {})
+
     null_ls.setup({
         -- border = u.big_border, -- not supported yet
         debug = true,
@@ -24,7 +32,10 @@ U.load({ "null-ls", "null-ls.utils" }, function(null_ls, null_ls_utils)
             formatting.isort.with({
                 cwd = root_finder,
             }),
-            formatting.yamlfmt,
+            formatting.prettierd.with({
+                filetypes = { "yaml" },
+            }),
+            -- breaks code block bg highlighting?
             diagnostics.markdownlint.with({
                 cwd = root_finder,
             }),
@@ -33,7 +44,7 @@ U.load({ "null-ls", "null-ls.utils" }, function(null_ls, null_ls_utils)
             --     cwd = root_finder,
             -- }), TODO disabled for now because pyright finds all of this anyways?
             diagnostics.codespell.with({
-                -- disabled_filetypes = { "markdown" },
+                disabled_filetypes = { "markdown" },
             }),
             diagnostics.gitlint,
             diagnostics.selene.with({
@@ -49,6 +60,7 @@ U.load({ "null-ls", "null-ls.utils" }, function(null_ls, null_ls_utils)
                 timeout = -1, -- mypy can take really long sometimes
                 method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
                 cwd = root_finder,
+                method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
                 runtime_condition = function()
                     -- needed because mypy does not like code from packages
                     local cur_path = vim.fn.expand("%:p")
