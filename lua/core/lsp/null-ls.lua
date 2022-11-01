@@ -6,6 +6,13 @@ U.load({ "null-ls", "null-ls.utils" }, function(null_ls, null_ls_utils)
         return null_ls_utils.root_pattern(".git")(vim.fn.expand("%:p"))
     end
 
+    local function not_conda_or_fugitive()
+        -- needed because mypy does not like code from packages and this stuff is not needed in fugitive (except for
+        -- gitlint).
+        local cur_path = vim.fn.expand("%:p")
+        return cur_path:find("/data/conda/") == nil and cur_path:find("fugitive:") == nil
+    end
+
     vim.api.nvim_create_user_command("NullLsStop", function()
         null_ls.disable({})
     end, {})
@@ -23,20 +30,28 @@ U.load({ "null-ls", "null-ls.utils" }, function(null_ls, null_ls_utils)
             formatting.black.with({
                 extra_args = { "--fast", "--line-length", "120" },
                 cwd = root_finder,
+                runtime_condition = not_conda_or_fugitive,
             }),
-            formatting.stylua.with({ extra_args = { "--indent-type=Spaces" } }),
+            formatting.stylua.with({
+                extra_args = { "--indent-type=Spaces" },
+                runtime_condition = not_conda_or_fugitive,
+            }),
             formatting.markdownlint.with({
                 cwd = root_finder,
+                runtime_condition = not_conda_or_fugitive,
             }),
             formatting.isort.with({
                 cwd = root_finder,
+                runtime_condition = not_conda_or_fugitive,
             }),
             formatting.prettierd.with({
                 filetypes = { "yaml" },
+                runtime_condition = not_conda_or_fugitive,
             }),
             -- breaks code block bg highlighting?
             diagnostics.markdownlint.with({
                 cwd = root_finder,
+                runtime_condition = not_conda_or_fugitive,
             }),
             -- diagnostics.flake8.with({
             --     extra_args = { "--max-line-length", "120" },
@@ -44,10 +59,12 @@ U.load({ "null-ls", "null-ls.utils" }, function(null_ls, null_ls_utils)
             -- }), TODO disabled for now because pyright finds all of this anyways?
             diagnostics.codespell.with({
                 disabled_filetypes = { "markdown" },
+                runtime_condition = not_conda_or_fugitive,
             }),
             diagnostics.gitlint,
             diagnostics.selene.with({
                 cwd = root_finder,
+                runtime_condition = not_conda_or_fugitive,
             }),
             diagnostics.mypy.with({
                 extra_args = {
@@ -56,14 +73,11 @@ U.load({ "null-ls", "null-ls.utils" }, function(null_ls, null_ls_utils)
                 },
                 cwd = root_finder,
                 method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
-                runtime_condition = function()
-                    -- needed because mypy does not like code from packages
-                    local cur_path = vim.fn.expand("%:p")
-                    return cur_path:find("/data/conda/") == nil
-                end,
+                runtime_condition = not_conda_or_fugitive,
             }),
             diagnostics.pydocstyle.with({
                 cwd = root_finder,
+                runtime_condition = not_conda_or_fugitive,
             }),
 
             -- to test
