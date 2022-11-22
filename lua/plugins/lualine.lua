@@ -81,7 +81,6 @@ local lsp = {
             return msg
         end
         -- local buf_ft = vim.bo.filetype
-        local buf_client_names = {}
 
         -- add client
         for _, client in pairs(buf_clients) do
@@ -212,20 +211,12 @@ lualine.setup({
         },
         lualine_z = { "progress" },
     },
-    -- inactive_sections = {
-    --     lualine_a = {},
-    --     lualine_b = {},
-    --     lualine_c = { "filename" },
-    --     lualine_x = { "location" },
-    --     lualine_y = {},
-    --     lualine_z = {},
-    -- },
     -- winbar = {
-    --     lualine_b = { "filename" },
+    --     lualine_c = { "filename" },
     -- },
     -- inactive_winbar = {
-    --     lualine_b = { "filename" },
+    --     lualine_c = { "filename" },
     -- },
     tabline = {},
-    extensions = {},
+    extensions = {"fugitive", "man", "nvim-dap-ui", "nvim-tree", "quickfix", "toggleterm"},
 })

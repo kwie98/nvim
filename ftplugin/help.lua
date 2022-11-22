@@ -1,8 +1,9 @@
 vim.keymap.set("n", "<Enter>", "<C-]>", { buffer = true })
-vim.cmd([[
-    nnoremap <buffer> <Tab> /\|\zs\S\{-}\|/<cr>
-    nnoremap <buffer> <S-Tab> ?\|\zs\S\{-}\|?<cr>
-]])
 
--- vim.bo.buflisted = true
-vim.wo.conceallevel = 0
+local move = require("nvim-treesitter.textobjects.move")
+vim.keymap.set("n", "<Tab>", function()
+    move.goto_next_start("@link")
+end, { buffer = true })
+vim.keymap.set("n", "<S-Tab>", function()
+    move.goto_previous_start("@link")
+end, { buffer = true })

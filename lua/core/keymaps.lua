@@ -55,7 +55,6 @@ vim.keymap.set("n", "<C-Down>", ":resize +2<CR>", opts)
 vim.keymap.set("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
-
 -- Explorer
 -- vim.keymap.set("n", "<C-b>", "<cmd>NvimTreeToggle<cr>", opts)
 -- Projects
@@ -82,7 +81,7 @@ vim.keymap.set("n", "<C-d>", "<CMD>execute 'keepjumps norm! ' . '<C-d>'<CR>", op
 
 -- DAP quick keys
 -- TODO better launchjs loading
-vim.keymap.set("n", "<F5>", function ()
+vim.keymap.set("n", "<F5>", function()
     require("dap.ext.vscode").load_launchjs()
     require("dap").continue()
 end, opts)
@@ -122,6 +121,11 @@ vim.keymap.set({ "n", "x", "o" }, "$", "^", opts) -- first symbol in line
 vim.keymap.set({ "n", "x", "o" }, "|", "$", opts) -- last symbol in line
 vim.keymap.set({ "n", "x", "o" }, "#", "", opts) -- free command
 vim.keymap.set("n", "s", "ge", opts)
+
+vim.keymap.set({"x", "o"}, "ir", "i[")
+vim.keymap.set({"x", "o"}, "ar", "a[")
+vim.keymap.set({"x", "o"}, "ia", "i<")
+vim.keymap.set({"x", "o"}, "aa", "a<")
 
 -- Insert --
 

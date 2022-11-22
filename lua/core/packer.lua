@@ -117,6 +117,13 @@ return packer.startup(function(use)
     use("ThePrimeagen/harpoon")
     use("farmergreg/vim-lastplace")
 
+    -- jupyter notebooks
+    use("untitled-ai/jupyter_ascending.vim")
+    -- use("jpalardy/vim-slime")
+    -- use("hanschen/vim-ipython-cell")
+    use("kana/vim-textobj-user")
+    -- use("GCBallesteros/vim-textobj-hydrogen")
+
     if packer_bootstrap then
         require("packer").sync()
     end

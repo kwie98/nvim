@@ -65,7 +65,7 @@ end
 
 -- dapui
 dapui.setup({
-    icons = { expanded = "▾", collapsed = "▸" },
+    icons = { expanded = "▾", collapsed = "▸", current_frame = "▸" },
     mappings = {
         -- Use a table to apply multiple mappings
         expand = { "<CR>", "<2-LeftMouse>" },
@@ -110,8 +110,8 @@ dapui.setup({
         enabled = false,
     },
     floating = {
-        max_height = nil, -- These can be integers or a float between 0 and 1.
-        max_width = nil, -- Floats will be treated as percentage of your screen.
+        max_height = 0.85, -- These can be integers or a float between 0 and 1.
+        max_width = 0.85, -- Floats will be treated as percentage of your screen.
         border = "single", -- Border style. Can be "single", "double" or "rounded"
         mappings = {
             close = { "q", "<Esc>" },

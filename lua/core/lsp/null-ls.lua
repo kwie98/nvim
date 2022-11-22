@@ -57,24 +57,24 @@ U.load({ "null-ls", "null-ls.utils" }, function(null_ls, null_ls_utils)
             --     extra_args = { "--max-line-length", "120" },
             --     cwd = root_finder,
             -- }), TODO disabled for now because pyright finds all of this anyways?
-            diagnostics.codespell.with({
-                disabled_filetypes = { "markdown" },
-                runtime_condition = not_conda_or_fugitive,
-            }),
+            -- diagnostics.codespell.with({
+            --     disabled_filetypes = { "markdown" },
+            --     runtime_condition = not_conda_or_fugitive,
+            -- }),
             diagnostics.gitlint,
             diagnostics.selene.with({
                 cwd = root_finder,
                 runtime_condition = not_conda_or_fugitive,
             }),
-            diagnostics.mypy.with({
-                extra_args = {
-                    "--python-executable=python", -- use env python
-                    "--namespace-packages", -- find stuff where __init__.py file is missing
-                },
-                cwd = root_finder,
-                method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
-                runtime_condition = not_conda_or_fugitive,
-            }),
+            -- diagnostics.mypy.with({
+            --     extra_args = {
+            --         "--python-executable=python", -- use env python
+            --         "--namespace-packages", -- find stuff where __init__.py file is missing
+            --     },
+            --     cwd = root_finder,
+            --     method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
+            --     runtime_condition = not_conda_or_fugitive,
+            -- }),
             diagnostics.pydocstyle.with({
                 cwd = root_finder,
                 runtime_condition = not_conda_or_fugitive,

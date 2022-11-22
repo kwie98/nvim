@@ -1,8 +1,6 @@
 local function setup(gruvbox_baby_colors, fox, C, Shade)
     -- query current color scheme
     local background = vim.fn.system("darkman get")
-    -- vim.opt.background = background
-    -- print(background)
     if U.string_starts(background, "light") then
         vim.opt.background = "light"
     elseif U.string_starts(background, "dark") then
@@ -10,7 +8,6 @@ local function setup(gruvbox_baby_colors, fox, C, Shade)
     end
 
     local colorscheme = "fox"
-    -- local colorscheme = "gruvbox-baby"
 
     if colorscheme == "gruvbox-material" then
         vim.g.gruvbox_material_palette = "original"
@@ -80,8 +77,6 @@ local function setup(gruvbox_baby_colors, fox, C, Shade)
 
                 -- sel0 = "#ced5de", -- Popup bg, visual selection bg
                 -- sel1 = "#b6c4d9", -- Popup sel bg, search bg
-
-
             }
 
             p.git = {
@@ -99,6 +94,7 @@ local function setup(gruvbox_baby_colors, fox, C, Shade)
                 text = C(p.bg1):blend(C(p.git.conflict), 0.2):to_css(),
             }
         else
+            -- print("yo")
             colorscheme = "nightfox"
             p = {
                 red = Shade.new("#fb4934", 0.15, -0.15),
@@ -160,6 +156,8 @@ local function setup(gruvbox_baby_colors, fox, C, Shade)
         fox.setup({
             -- dim_inactive = true,
             options = {
+                terminal_colors = false,
+                -- dim_inactive = true,
                 styles = {
                     comments = "italic",
                     functions = "bold",
@@ -253,6 +251,7 @@ local function setup(gruvbox_baby_colors, fox, C, Shade)
                     ["@constant.builtin"] = { fg = p.pink }, -- python None
                     ["@keyword.operator"] = { fg = p.red, style = "NONE" }, -- lua "not" with no italics/bold
                     ["@variable"] = { fg = p.blue }, -- "normal" variables different from fields :)
+                    ["@parameter"] = { fg = p.blue.dim }, -- python foo(x=...)
                     -- window borders:
                     VertSplit = { fg = p.bg4 },
                     FloatBorder = { fg = p.bg4 },
@@ -261,30 +260,26 @@ local function setup(gruvbox_baby_colors, fox, C, Shade)
                     TreesitterContext = { bg = p.bg0 },
                 },
                 all = {
-                    -- gitsigns stuff:
-                    -- GitSignsAddNr = { fg = p.bg0, bg = p.diff.add },
-                    -- GitSignsChangeNr = { fg = p.bg0, bg = p.diff.change },
-                    -- GitSignsDeleteNr = { fg = p.bg0, bg = p.diff.delete },
-                    -- DiffAdd = { bg = p.diff.add },
-                    -- DiffChange = { bg = p.diff.change },
-                    -- DiffDelete = { bg = p.diff.delete },
-                    -- telescope:
                     TelescopeBorder = { fg = p.bg0, bg = p.bg0 },
                     TelescopePromptCounter = { fg = p.fg1, bg = p.bg4 },
                     TelescopePromptBorder = { fg = p.bg4, bg = p.bg4 },
                     TelescopePromptNormal = { fg = p.fg1, bg = p.bg4 },
                     TelescopePromptPrefix = { fg = p.cyan, bg = p.bg4 },
-
                     TelescopeNormal = { bg = p.bg0 },
-
                     TelescopePreviewTitle = { fg = p.bg1, bg = p.green.dim },
                     TelescopePromptTitle = { fg = p.bg1, bg = p.yellow },
                     TelescopeResultsTitle = { fg = p.bg0, bg = p.fg1 },
 
-                    -- TelescopeSelection = { bg = "palette.diff.change" },
+                    ["@text.title"] = { style = "bold" },
+                    ["@text.note"] = { fg = p.cyan.dim, style = "bold" },
+                    ["@text.warning"] = { fg = p.yellow.dim, style = "bold" },
+                    ["@function.builtin"] = { fg = p.magenta },
+                    ["@variable.builtin"] = { fg = p.magenta },
+                    ["@punctuation.special"] = { fg = p.comment },
                 },
             },
         })
+        fox.compile()
     end
 
     -- vim.opt.background = background

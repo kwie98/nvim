@@ -2,7 +2,7 @@ return {
     settings = {
         python = {
             analysis = {
-                stubPath = "typings",
+                stubPath = "/home/konrad/Documents/projects/Python/python-type-stubs",
                 typeCheckingMode = "strict",
                 useLibraryCodeForTypes = true,
                 diagnosticSeverityOverrides = {

@@ -67,7 +67,7 @@ local setup = {
         "^:",
         "^ ",
         "<Plug>",
-        "require'nvim--treesitter.textobjects.select'.select_textobject",
+        -- "require'nvim--treesitter.textobjects.select'.select_textobject",
         "<Cmd> require",
     }, -- hide mapping boilerplate
     show_help = true, -- show help message on the command line when the popup is visible
@@ -177,7 +177,7 @@ local mappings = {
         L = { "<CMD>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>", "Logpoint" },
         l = { "<CMD>lua require'dap'.list_breakpoints()<CR>", "List Breakpoints" },
         -- v = { "<CMD>lua require'telescope'.extensions.dap.variables()<CR>", "List Variables" },
-        f = { "<CMD>lua require'telescope'.extensions.dap.frames()<CR>", "List Frames" },
+        w = { "<CMD>lua require'telescope'.extensions.dap.frames()<CR>", "List Frames" },
         h = { "<CMD>lua require'dapui'.toggle()<CR>", "Toggle UI" },
         -- b = { "<CMD>lua require'dap'.step_back()<CR>", "Step Back" },
         -- c = { "<CMD>lua require'dap'.continue()<CR>", "Continue" },
