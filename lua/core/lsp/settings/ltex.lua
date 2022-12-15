@@ -1,4 +1,5 @@
 return {
+    filetypes = { "bib", "markdown", "org", "plaintex", "rst", "rnoweb", "tex" },
     on_attach = function(client, bufnr)
         require("core.lsp.handlers").on_attach()
         require("ltex_extra").setup({

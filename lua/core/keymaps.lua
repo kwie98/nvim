@@ -136,7 +136,7 @@ vim.keymap.set({"x", "o"}, "aa", "a<")
 vim.keymap.set("i", "<C-v>", "<C-r><C-o>+", opts)
 -- vim.keymap.set("n", "<C-v>", "Pl", opts)
 vim.keymap.set("s", "<C-c>", "<Esc>gvygv<C-g>", opts)
-vim.keymap.set("s", "<C-v>", "<Del>i<C-r>+<Esc>", opts)
+vim.keymap.set("s", "<C-v>", "<C-r>_<Del>i<C-r>+<Esc>", opts)
 
 -- Visual --
 -- Stay in indent mode
