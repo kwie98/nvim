@@ -15,6 +15,8 @@ dressing.setup({
             conf.col = -2
             return conf
         end,
-        winblend = 0,
+        win_options = {
+            winblend = 0,
+        },
     },
 })

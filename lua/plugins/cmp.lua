@@ -51,10 +51,11 @@ U.load({ "cmp", "luasnip", "luasnip.loaders.from_vscode" }, function(cmp, luasni
             -- order matters, sets sorting preference
             { name = "luasnip" },
             { name = "nvim_lsp" },
-            { name = "treesitter" },
             { name = "path" },
         }, {
+            -- these get shown if the above sources return no results
             { name = "buffer", max_item_count = 5 },
+            { name = "treesitter" },
         }),
     })
 

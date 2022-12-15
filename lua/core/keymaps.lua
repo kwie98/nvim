@@ -30,6 +30,9 @@ vim.cmd([[
     nnoremap dl :diffget //3/<c-r>=expand('%:t') <CR><CR>
 ]])
 
+-- goto last pasted
+vim.keymap.set("n", "gp", "`[v`]", opts)
+
 vim.keymap.set("n", "[h", function()
     if vim.wo.diff then
         return "[c"
@@ -130,8 +133,8 @@ vim.keymap.set({"x", "o"}, "aa", "a<")
 -- Insert --
 
 -- typical one-handed copy paste stuff
-vim.keymap.set("i", "<C-v>", "<C-r>+", opts)
-vim.keymap.set("n", "<C-v>", "Pl", opts)
+vim.keymap.set("i", "<C-v>", "<C-r><C-o>+", opts)
+-- vim.keymap.set("n", "<C-v>", "Pl", opts)
 vim.keymap.set("s", "<C-c>", "<Esc>gvygv<C-g>", opts)
 vim.keymap.set("s", "<C-v>", "<Del>i<C-r>+<Esc>", opts)
 

@@ -81,6 +81,7 @@ local lsp = {
             return msg
         end
         -- local buf_ft = vim.bo.filetype
+        local buf_client_names = {}
 
         -- add client
         for _, client in pairs(buf_clients) do

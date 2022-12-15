@@ -81,7 +81,7 @@ U.load({ "null-ls", "null-ls.utils" }, function(null_ls, null_ls_utils)
             }),
 
             -- to test
-            diagnostics.chktex,
+            -- diagnostics.chktex,
         },
     })
 end)

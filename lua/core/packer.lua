@@ -1,12 +1,12 @@
 local ensure_packer = function()
-  local fn = vim.fn
-  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-  if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-    vim.cmd [[packadd packer.nvim]]
-    return true
-  end
-  return false
+    local fn = vim.fn
+    local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+    if fn.empty(fn.glob(install_path)) > 0 then
+        fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
+        vim.cmd([[packadd packer.nvim]])
+        return true
+    end
+    return false
 end
 
 local packer_bootstrap = ensure_packer()
@@ -42,15 +42,33 @@ return packer.startup(function(use)
     use("ahmedkhalf/project.nvim")
     use("lewis6991/impatient.nvim")
     use("folke/which-key.nvim")
+    use("tpope/vim-repeat")
 
-    -- Colorschemes
-    use("sainnhe/gruvbox-material")
-    use("luisiacc/gruvbox-baby")
-    use("NTBBloodbath/doom-one.nvim")
-    use("EdenEast/nightfox.nvim")
-    use("Mofiqul/vscode.nvim")
+    -- Telescope
+    use("nvim-telescope/telescope.nvim")
+    use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
-    -- Cmp
+    -- file navigation
+    use("ThePrimeagen/harpoon")
+    use("farmergreg/vim-lastplace")
+
+    -- Treesitter
+    use("nvim-treesitter/nvim-treesitter")
+    use("nvim-treesitter/playground")
+    use("nvim-treesitter/nvim-treesitter-textobjects")
+    use("nvim-treesitter/nvim-treesitter-context")
+    use("andymass/vim-matchup")
+    use("kylechui/nvim-surround")
+    use("danymat/neogen")
+    use("mfussenegger/nvim-treehopper")
+
+    -- LSP
+    use("williamboman/mason.nvim")
+    use("williamboman/mason-lspconfig.nvim")
+    use("neovim/nvim-lspconfig")
+    use("jose-elias-alvarez/null-ls.nvim")
+
+    -- completion, snippets
     use("hrsh7th/nvim-cmp")
     use("hrsh7th/cmp-buffer")
     use("hrsh7th/cmp-path")
@@ -60,52 +78,15 @@ return packer.startup(function(use)
     use("dmitmel/cmp-cmdline-history")
     use("rcarriga/cmp-dap")
     use("ray-x/cmp-treesitter")
-
-    -- Snippets
     use("L3MON4D3/LuaSnip")
     use("rafamadriz/friendly-snippets")
 
-    -- LSP
-    use("williamboman/mason.nvim")
-    use("williamboman/mason-lspconfig.nvim")
-    use("neovim/nvim-lspconfig")
-
-    -- language specific LSP plugins
-    use("b0o/SchemaStore.nvim")
-    use("jose-elias-alvarez/null-ls.nvim")
-
-    -- Telescope
-    use("nvim-telescope/telescope.nvim")
-    use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
-
-    -- Treesitter
-    use("nvim-treesitter/nvim-treesitter")
-    use("nvim-treesitter/playground")
-    use( "nvim-treesitter/nvim-treesitter-textobjects" )
-    use( "nvim-treesitter/nvim-treesitter-context" )
-    use("andymass/vim-matchup")
-    use("kylechui/nvim-surround")
-    use( "danymat/neogen" )
-    use( "mfussenegger/nvim-treehopper" )
-
-    -- Git
-    use("lewis6991/gitsigns.nvim")
-    use("tpope/vim-fugitive")
-    -- use("TimUntersberger/neogit")
-    -- use("sindrets/diffview.nvim")
-
-    -- Rice
-    use("ray-x/lsp_signature.nvim") -- shows function parameter information when typing
-    use("NvChad/nvim-colorizer.lua")
-    use("stevearc/dressing.nvim")
-    use("petertriho/nvim-scrollbar")
-
-    -- The Pope
-    use("tpope/vim-repeat")
-
-    -- Vimwiki and other Markdown things
-    use( "renerocksai/telekasten.nvim" )
+    -- language specific plugins
+    use("b0o/SchemaStore.nvim") -- for jsonls
+    use("renerocksai/telekasten.nvim") -- some markdown wiki commands
     use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install" })
+    use("IllustratedMan-code/telescope-conda.nvim")
+    use("barreiroleo/ltex_extra.nvim") -- alternative: vigoux/ltex-ls.nvim
 
     -- DAP
     use("mfussenegger/nvim-dap")
@@ -113,16 +94,22 @@ return packer.startup(function(use)
     use("rcarriga/nvim-dap-ui")
     use("nvim-telescope/telescope-dap.nvim")
 
-    -- file navigation
-    use("ThePrimeagen/harpoon")
-    use("farmergreg/vim-lastplace")
+    -- Git
+    use("lewis6991/gitsigns.nvim")
+    use("tpope/vim-fugitive")
 
-    -- jupyter notebooks
-    use("untitled-ai/jupyter_ascending.vim")
-    -- use("jpalardy/vim-slime")
-    -- use("hanschen/vim-ipython-cell")
-    use("kana/vim-textobj-user")
-    -- use("GCBallesteros/vim-textobj-hydrogen")
+    -- Rice
+    use("ray-x/lsp_signature.nvim") -- shows function parameter information when typing
+    use("NvChad/nvim-colorizer.lua")
+    use("stevearc/dressing.nvim")
+    use("petertriho/nvim-scrollbar")
+
+    -- Colorschemes
+    use("sainnhe/gruvbox-material")
+    use("luisiacc/gruvbox-baby")
+    use("NTBBloodbath/doom-one.nvim")
+    use("EdenEast/nightfox.nvim")
+    use("Mofiqul/vscode.nvim")
 
     if packer_bootstrap then
         require("packer").sync()

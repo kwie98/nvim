@@ -13,7 +13,7 @@ local setup = {
             suggestions = 20, -- how many suggestions should be shown in the list?
         },
         -- the presets plugin, adds help for a bunch of default keybindings in Neovim
-        -- No actual key bindings are CReated
+        -- No actual key bindings are created
         presets = {
             operators = false, -- adds help for operators like d, y, ... and registers them for motion / text object completion
             motions = false, -- adds help for motions
@@ -35,13 +35,13 @@ local setup = {
         -- ["<tab>"] = "TAB",
     },
     icons = {
-        breadCRumb = "»", -- symbol used in the command line area that shows your active key combo
+        breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
         separator = ":", -- symbol used between a key and it's label
         group = "+", -- symbol prepended to a group
     },
     popup_mappings = {
-        sCRoll_down = "<c-d>", -- binding to sCRoll down inside the popup
-        sCRoll_up = "<c-u>", -- binding to sCRoll up inside the popup
+        scroll_down = "<c-d>", -- binding to scroll down inside the popup
+        scroll_up = "<c-u>", -- binding to scroll up inside the popup
     },
     window = {
         border = U.small_border, -- none, single, double, shadow
@@ -86,8 +86,8 @@ local opts = {
     mode = "n", -- NORMAL mode
     prefix = "<leader>",
     buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-    silent = true, -- use `silent` when CReating keymaps
-    noremap = true, -- use `noremap` when CReating keymaps
+    silent = true, -- use `silent` when creating keymaps
+    noremap = true, -- use `noremap` when creating keymaps
     nowait = false, -- TODO what does this do?
 }
 
@@ -246,9 +246,9 @@ local v_opts = {
     mode = "v", -- NORMAL mode
     prefix = "<leader>",
     buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-    silent = true, -- use `silent` when CReating keymaps
-    noremap = true, -- use `noremap` when CReating keymaps
-    nowait = true, -- use `nowait` when CReating keymaps
+    silent = true, -- use `silent` when creating keymaps
+    noremap = true, -- use `noremap` when creating keymaps
+    nowait = true, -- use `nowait` when creating keymaps
 }
 
 local v_mappings = {
