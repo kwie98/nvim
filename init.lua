@@ -1,9 +1,5 @@
-if not vim.g.vscode then
-    U = require("core.util")
-    require("core.options")
-    require("core.keymaps")
-    require("core.packer")
-    require("core.lsp")
-
-    require("plugins")
-end
+require("kwie.set")
+require("kwie.remap")
+require("kwie.autocmd")
+require("kwie.packer")
+require("kwie.colorscheme")

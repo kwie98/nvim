@@ -1,0 +1,14 @@
+-- local illuminate = require("illuminate")
+
+-- illuminate.configure({
+--     delay = 500,
+--     providers = {
+--         "lsp",
+--         "treesitter",
+--     },
+--     filetypes_denylist = {
+--         "dirvish",
+--         "fugitive",
+--         "NvimTree",
+--     },
+-- })
