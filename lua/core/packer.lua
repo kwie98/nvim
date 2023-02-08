@@ -108,7 +108,7 @@ return packer.startup(function(use)
     use("sainnhe/gruvbox-material")
     use("luisiacc/gruvbox-baby")
     use("NTBBloodbath/doom-one.nvim")
-    use("EdenEast/nightfox.nvim")
+    use({ "EdenEast/nightfox.nvim", commit = "c88664b18e593319aea1ded731dd252d4f9e0f9a" })
     use("Mofiqul/vscode.nvim")
 
     if packer_bootstrap then

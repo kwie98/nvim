@@ -8,17 +8,18 @@ return {
                 onSave = true,
             },
             chktex = {
-                onEdit = true,
-                onOpenAndSave = true,
+                onEdit = false,
+                onOpenAndSave = false,
+            },
+            forwardSearch = {
+                executable = "zathura",
+                args = { "--synctex-forward", "%l:1:%f", "%p" },
             },
             -- forwardSearch = {
-            --     executable = "zathura",
-            --     args = { "--synctex-forward", "%l:1:%f", "%p" },
+            --     executable = "okular",
+            --     args = { "--unique", "file:%p#src:%l%f" },
             -- },
-            forwardSearch = {
-                executable = "okular",
-                args = { "--unique", "file:%p#src:%l%f" },
-            },
+            latexFormatter = "texlab",
         },
     },
 }

@@ -32,6 +32,11 @@ U.load({ "null-ls", "null-ls.utils" }, function(null_ls, null_ls_utils)
                 cwd = root_finder,
                 runtime_condition = not_conda_or_fugitive,
             }),
+            formatting.latexindent.with({
+                extra_args = {"-l", "indentconfig.yaml"},
+                cwd = root_finder,
+                runtime_condition = not_conda_or_fugitive,
+            }),
             formatting.stylua.with({
                 extra_args = { "--indent-type=Spaces" },
                 runtime_condition = not_conda_or_fugitive,

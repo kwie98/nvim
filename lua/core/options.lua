@@ -55,6 +55,7 @@ local options = {
 }
 
 vim.opt.shortmess:append("c")
+vim.g.tex_flavor = "latex"
 
 for k, v in pairs(options) do
     vim.opt[k] = v

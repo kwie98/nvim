@@ -8,18 +8,7 @@ local function setup(gruvbox_baby_colors, fox, C, Shade)
     end
 
     local colorscheme = "fox"
-
-    if colorscheme == "gruvbox-material" then
-        vim.g.gruvbox_material_palette = "original"
-        vim.g.gruvbox_material_background = "medium"
-        vim.g.gruvbox_material_enable_italic = 1
-        vim.g.gruvbox_material_disable_italic_comment = 0
-        vim.g.gruvbox_material_enable_bold = 1
-        vim.g.gruvbox_material_sign_column_background = "none"
-        vim.g.gruvbox_material_ui_contrast = "high"
-        vim.g.gruvbox_material_statusline_style = "original"
-        vim.g.gruvbox_material_disable_terminal_colors = 1
-    elseif colorscheme == "gruvbox-baby" then
+    if colorscheme == "gruvbox-baby" then
         local colors = gruvbox_baby_colors.config()
         colors.custom = {
             split = "#504945",
@@ -93,6 +82,12 @@ local function setup(gruvbox_baby_colors, fox, C, Shade)
                 change = C(p.bg1):blend(C(p.git.changed), 0.4):to_css(),
                 text = C(p.bg1):blend(C(p.git.conflict), 0.2):to_css(),
             }
+
+            p.keyword = {
+                flow = p.magenta,
+                defs = p.magenta.dim,
+            }
+            p.type = p.yellow
         else
             -- print("yo")
             colorscheme = "nightfox"
@@ -123,19 +118,6 @@ local function setup(gruvbox_baby_colors, fox, C, Shade)
                 fg1 = "#ebdbb2", -- DONE Default fg
                 comment = "#665c54",
             }
-            -- p.diag = {
-            --     error = p.red.base,
-            --     warn = p.yellow.base,
-            --     info = p.blue.base,
-            --     hint = p.green.base,
-            -- }
-
-            -- p.diag_bg = {
-            --     error = C(p.bg1):blend(C(p.diag.error), 0.2):to_css(),
-            --     warn = C(p.bg1):blend(C(p.diag.warn), 0.2):to_css(),
-            --     info = C(p.bg1):blend(C(p.diag.info), 0.2):to_css(),
-            --     hint = C(p.bg1):blend(C(p.diag.hint), 0.2):to_css(),
-            -- }
 
             p.git = {
                 add = p.clean_green.dim,
@@ -151,20 +133,15 @@ local function setup(gruvbox_baby_colors, fox, C, Shade)
                 change = C(p.bg1):blend(C(p.git.changed), 0.25):to_css(),
                 text = C(p.bg1):blend(C(p.git.conflict), 0.2):to_css(),
             }
+
+            p.keyword = {
+                flow = p.red,
+                defs = p.red.bright,
+            }
+            p.type = p.clean_green
         end
         fox.reset()
         fox.setup({
-            -- dim_inactive = true,
-            options = {
-                terminal_colors = false,
-                -- dim_inactive = true,
-                styles = {
-                    comments = "italic",
-                    functions = "bold",
-                    types = "italic",
-                    keywords = "italic",
-                },
-            },
             palettes = {
                 dayfox = {
                     -- diff = {
@@ -199,14 +176,24 @@ local function setup(gruvbox_baby_colors, fox, C, Shade)
                     number1 = p.bg4, -- number
                 },
             },
+            options = {
+                terminal_colors = false,
+                -- dim_inactive = true,
+                styles = {
+                    comments = "italic",
+                    -- functions = "bold",
+                    -- types = "italic",
+                    -- keywords = "italic",
+                },
+            },
             specs = {
                 nightfox = {
                     syntax = {
-                        func = p.yellow,
-                        keyword = p.red,
-                        type = p.clean_green,
+                        -- func = p.yellow,
+                        -- keyword = p.red,
+                        -- type = p.clean_green,
                         ident = p.blue,
-                        conditional = p.red,
+                        -- conditional = p.red,
                     },
                     diff = p.diff,
                     git = p.git,
@@ -220,25 +207,8 @@ local function setup(gruvbox_baby_colors, fox, C, Shade)
                 dayfox = {
                     LineNr = { fg = p.fg0 },
                     CursorLineNr = { fg = p.fg1 },
-                    -- gitsigns stuff:
-                    -- GitSignsAddNr = { fg = p.bg0, bg = p.diff.add },
-                    -- GitSignsChangeNr = { fg = p.bg0, bg = p.diff.change },
-                    -- GitSignsDeleteNr = { fg = p.bg0, bg = p.diff.delete },
-                    -- DiffAdd = { bg = p.diff.add },
-                    -- DiffChange = { bg = p.diff.change },
-                    -- DiffDelete = { bg = p.diff.delete },
-                    -- telescope:
-                    -- TelescopeBorder = { fg = p.fg1, bg = p.fg1 },
-                    -- TelescopePromptCounter = { fg = p.fg1, bg = p.bg4 },
-                    -- TelescopePromptBorder = { fg = p.bg4, bg = p.bg4 },
-                    -- TelescopePromptNormal = { fg = p.fg1, bg = p.bg4 },
-                    -- TelescopePromptPrefix = { fg = p.cyan, bg = p.bg4 },
-
-                    -- TelescopeNormal = { bg = p.bg0 },
-
-                    -- TelescopePreviewTitle = { fg = p.bg1, bg = p.green.dim },
-                    -- TelescopePromptTitle = { fg = p.bg1, bg = p.yellow },
-                    -- TelescopeResultsTitle = { fg = p.bg0, bg = p.fg1 },
+                    ["@function"] = { fg = p.red, style = "bold" },
+                    ["@function.builtin"] = { fg = p.red.dim, style = "bold" },
                 },
                 nightfox = {
                     LineNr = { fg = p.bg4 },
@@ -249,9 +219,10 @@ local function setup(gruvbox_baby_colors, fox, C, Shade)
                     ["@constructor"] = { fg = p.clean_green }, -- lua table brackets
                     ["@field"] = { fg = p.cyan }, -- lua table fields
                     ["@constant.builtin"] = { fg = p.pink }, -- python None
-                    ["@keyword.operator"] = { fg = p.red, style = "NONE" }, -- lua "not" with no italics/bold
-                    ["@variable"] = { fg = p.blue }, -- "normal" variables different from fields :)
+                    ["@variable"] = { fg = p.blue}, -- "normal" variables different from fields :)
                     ["@parameter"] = { fg = p.blue.dim }, -- python foo(x=...)
+                    ["@function"] = { fg = p.yellow, style = "bold" },
+                    ["@function.builtin"] = { fg = p.yellow.bright, style = "bold" },
                     -- window borders:
                     VertSplit = { fg = p.bg4 },
                     FloatBorder = { fg = p.bg4 },
@@ -260,6 +231,21 @@ local function setup(gruvbox_baby_colors, fox, C, Shade)
                     TreesitterContext = { bg = p.bg0 },
                 },
                 all = {
+                    Conditional = { fg = p.keyword.flow },
+                    ["@keyword.operator"] = { fg = p.keyword.flow },
+                    Keyword = { fg = p.keyword.defs },
+                    ["@keyword.function"] = { fg = p.keyword.defs }, -- def
+
+                    ["@type"] = { fg = p.type, style = "italic" },
+                    ["@type.builtin"] = { fg = p.type, style = "italic" },
+
+                    ["@text.title"] = { style = "bold" }, -- for markdown headers
+                    -- ["@text.note"] = { fg = p.cyan.dim, style = "bold" },
+                    -- ["@text.warning"] = { fg = p.yellow.dim, style = "bold" },
+                    -- ["@function.builtin"] = { fg = p.magenta },
+                    ["@variable.builtin"] = { fg = p.blue },
+                    ["@punctuation.special"] = { fg = p.comment }, -- for mardown list symbols and stuff
+
                     TelescopeBorder = { fg = p.bg0, bg = p.bg0 },
                     TelescopePromptCounter = { fg = p.fg1, bg = p.bg4 },
                     TelescopePromptBorder = { fg = p.bg4, bg = p.bg4 },
@@ -270,12 +256,8 @@ local function setup(gruvbox_baby_colors, fox, C, Shade)
                     TelescopePromptTitle = { fg = p.bg1, bg = p.yellow },
                     TelescopeResultsTitle = { fg = p.bg0, bg = p.fg1 },
 
-                    ["@text.title"] = { style = "bold" },
-                    ["@text.note"] = { fg = p.cyan.dim, style = "bold" },
-                    ["@text.warning"] = { fg = p.yellow.dim, style = "bold" },
-                    ["@function.builtin"] = { fg = p.magenta },
-                    ["@variable.builtin"] = { fg = p.magenta },
-                    ["@punctuation.special"] = { fg = p.comment },
+                    -- latex:
+                    Conceal = {fg = p.magenta},
                 },
             },
         })

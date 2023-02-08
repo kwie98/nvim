@@ -32,6 +32,12 @@ vim.cmd([[
     " autocmd User FugitiveBlob 3windo vertical resize 10
     augroup end
 
+    augroup matchup_matchparen_disable_ft
+    autocmd!
+    autocmd FileType julia let [b:matchup_matchparen_fallback,
+    \ b:matchup_matchparen_enabled] = [0, 0]
+    augroup END
+
     " Markdown darker code blocks
     function! s:place_signs()
         let l:continue = 0
