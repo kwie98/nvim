@@ -97,18 +97,8 @@ local mappings = {
         n = { "<CMD>Telekasten new_note<CR>", "New Note" },
         p = { "<CMD>Telekasten panel<CR>", "Wiki Panel" },
     },
-    b = {
-        "<CMD>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<CR>",
-        "Buffers",
-    },
     e = { "<CMD>NvimTreeToggle<CR>", "Explorer" },
     c = { "<CMD>Bdelete!<CR>", "Close Buffer" },
-    f = {
-        "<CMD>lua require('telescope.builtin').find_files()<CR>",
-        "Find files",
-    },
-    F = { "<CMD>Telescope live_grep theme=ivy<CR>", "Find Text" },
-    j = { "<CMD>lua require('telescope').extensions.projects.projects()<CR>", "Projects" },
     -- harpoon
     u = "which_key_ignore",
     i = "which_key_ignore",
@@ -119,10 +109,9 @@ local mappings = {
     g = {
         name = "Git",
         g = { "<CMD>72vsplit<BAR>0Git<CR>", "Git" },
-        -- g = { "<CMD>vertical Git<CR>", "Git" },
         -- h = { "<CMD>Gitsigns toggle_linehl<CR> | <CMD>Gitsigns toggle_word_diff<CR> | <CMD>Gitsigns toggle_deleted<CR>", "View Hunks" },
         h = { "<CMD>Gitsigns toggle_linehl<CR> | <CMD>Gitsigns toggle_deleted<CR>", "View Hunks" },
-        b = { "<CMD>Gitsigns toggle_current_line_blame<CR>", "Blame" },
+        B = { "<CMD>Gitsigns toggle_current_line_blame<CR>", "Blame" },
         -- l = { "<CMD>lua require'gitsigns'.setqflist( " },
         -- l = { "<CMD>Gitsigns setqflist 'all' open=false<CR> | <CMD>cfirst<CR>", "Quickfix" },
         n = {
@@ -148,9 +137,6 @@ local mappings = {
 
         -- l = { "<CMD>lua require 'gitsigns'.blame_line()<CR>", "Blame" },
         -- p = { "<CMD>lua require 'gitsigns'.preview_hunk()<CR>", "Preview Hunk" },
-        f = { "<CMD>Telescope git_status<CR>", "Open changed file" },
-        -- b = { "<CMD>Telescope git_branches<CR>", "Checkout branch" },
-        -- c = { "<CMD>Telescope git_commits<CR>", "Checkout commit" },
         -- d = { "<CMD>Gitsigns diffthis HEAD<CR>", "Diff" },
         -- d = { "<CMD>lua require('gitsigns').diffthis('HEAD'); vim.cmd('wincmd x')<CR>", "Diff" }, -- TODO
     },
@@ -169,7 +155,6 @@ local mappings = {
         m = { "<CMD>lua require'dap-python'.test_method()<CR>", "Test Method" },
         L = { "<CMD>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>", "Logpoint" },
         l = { "<CMD>lua require'dap'.list_breakpoints()<CR>", "List Breakpoints" },
-        -- v = { "<CMD>lua require'telescope'.extensions.dap.variables()<CR>", "List Variables" },
         w = { "<CMD>lua require'telescope'.extensions.dap.frames()<CR>", "List Frames" },
         h = { "<CMD>lua require'dapui'.toggle()<CR>", "Toggle UI" },
         -- b = { "<CMD>lua require'dap'.step_back()<CR>", "Step Back" },
@@ -181,43 +166,22 @@ local mappings = {
         -- s = { "<CMD>lua require'dap'.continue()<CR>", "Start" },
         -- q = { "<CMD>lua require'dap'.close()<CR>", "Quit" },
     },
-    m = {
-        name = "Module Info",
-        l = { "<CMD>LspInfo<CR>", "LSP" },
-        m = { "<CMD>Mason<CR>", "Mason" },
-        n = { "<CMD>NullLsInfo<CR>", "Null-ls" },
-        p = { "<CMD>PackerStatus<CR>", "Packer" },
-        s = { "<CMD>PackerSync<CR>", "Packer Sync" },
-    },
     l = {
         name = "LSP",
         a = { "<CMD>lua vim.lsp.buf.code_action()<CR>", "Code Action" },
         f = { vim.lsp.buf.format, "Format" },
         x = { vim.lsp.codelens.run, "CodeLens Action" },
-        n = {
-            function()
-                vim.diagnostic.setqflist({ open = true })
-            end,
-            "Quickfix",
-        },
-        r = { vim.lsp.buf.rename, "Rename" },
-        s = { "<CMD>Telescope lsp_document_symbols<CR>", "Document Symbols" },
-        w = {
-            "<CMD>Telescope lsp_dynamic_workspace_symbols<CR>",
-            "Workspace Symbols",
-        },
+    },
+    m = {
+        name = "Module Info",
+        l = { "<CMD>LspInfo<CR>", "LSP" },
+        m = { "<CMD>Mason<CR>", "Mason" },
+        n = { "<CMD>NullLsInfo<CR>", "Null-ls" },
+        -- p = { "<CMD>PackerStatus<CR>", "Packer" },
+        -- s = { "<CMD>PackerSync<CR>", "Packer Sync" },
     },
     s = {
         name = "Search",
-        b = { "<CMD>Telescope git_branches<CR>", "Checkout branch" },
-        c = { "<CMD>Telescope colorscheme<CR>", "Colorscheme" },
-        h = { "<CMD>Telescope help_tags<CR>", "Find Help" },
-        M = { "<CMD>Telescope man_pages<CR>", "Man Pages" },
-        r = { "<CMD>Telescope oldfiles<CR>", "Open Recent File" },
-        R = { "<CMD>Telescope registers<CR>", "Registers" },
-        k = { "<CMD>Telescope keymaps<CR>", "Keymaps" },
-        -- C = { "<CMD>Telescope commands<CR>", "Commands" },
-        a = { "<CMD>lua require'telescope.builtin'.find_files({cwd='~', hidden=true})<CR>", "Find in Home" },
     },
     -- t = {
     --     name = "Terminal",

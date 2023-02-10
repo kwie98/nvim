@@ -33,7 +33,6 @@ return packer.startup(function(use)
     use("wbthomason/packer.nvim")
 
     -- LSP basics:
-    use({ "VonHeikemen/lsp-zero.nvim", branch = "v1.x" })
     use("neovim/nvim-lspconfig")
     use("williamboman/mason.nvim")
     use("williamboman/mason-lspconfig.nvim")
@@ -44,12 +43,13 @@ return packer.startup(function(use)
     use("hrsh7th/cmp-buffer")
     use("hrsh7th/cmp-path")
     use("saadparwaiz1/cmp_luasnip")
-    use("hrsh7th/cmp-nvim-lua")
+    -- use("hrsh7th/cmp-nvim-lua")
 
     use("hrsh7th/cmp-cmdline")
     use("dmitmel/cmp-cmdline-history")
     use("rcarriga/cmp-dap")
-    use("ray-x/cmp-treesitter")
+    -- use("ray-x/cmp-treesitter")
+    use("hrsh7th/cmp-nvim-lsp-signature-help")
 
     -- Snippets:
     use("L3MON4D3/LuaSnip")
@@ -59,7 +59,7 @@ return packer.startup(function(use)
 
     use("windwp/nvim-autopairs")
     use("numToStr/Comment.nvim")
-    use("JoosepAlviste/nvim-ts-context-commentstring")
+    -- use("JoosepAlviste/nvim-ts-context-commentstring")
     use("kyazdani42/nvim-web-devicons")
     use("kyazdani42/nvim-tree.lua")
     use("akinsho/bufferline.nvim")
@@ -70,6 +70,7 @@ return packer.startup(function(use)
     use("lewis6991/impatient.nvim")
     use("folke/which-key.nvim")
     use("tpope/vim-repeat")
+    use("AndrewRadev/splitjoin.vim")
 
     -- Telescope
     use("nvim-telescope/telescope.nvim")
@@ -86,7 +87,7 @@ return packer.startup(function(use)
     use("nvim-treesitter/nvim-treesitter-context")
     use("andymass/vim-matchup")
     use("kylechui/nvim-surround")
-    use("danymat/neogen")
+    -- use("danymat/neogen")
     use("mfussenegger/nvim-treehopper")
 
     -- language specific plugins
@@ -95,6 +96,8 @@ return packer.startup(function(use)
     use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install" })
     use("IllustratedMan-code/telescope-conda.nvim")
     use("barreiroleo/ltex_extra.nvim") -- alternative: vigoux/ltex-ls.nvim
+    use("simrat39/rust-tools.nvim")
+    use("folke/neodev.nvim")
 
     -- DAP
     use("mfussenegger/nvim-dap")
@@ -107,17 +110,18 @@ return packer.startup(function(use)
     use("tpope/vim-fugitive")
 
     -- Rice
-    use("ray-x/lsp_signature.nvim") -- shows function parameter information when typing
+    -- use("ray-x/lsp_signature.nvim") -- shows function parameter information when typing
     use("NvChad/nvim-colorizer.lua")
     use("stevearc/dressing.nvim")
     use("petertriho/nvim-scrollbar")
+    use("smjonas/inc-rename.nvim")
 
     -- Colorschemes
-    use("sainnhe/gruvbox-material")
-    use("luisiacc/gruvbox-baby")
-    use("NTBBloodbath/doom-one.nvim")
+    -- use("sainnhe/gruvbox-material")
+    -- use("luisiacc/gruvbox-baby")
+    -- use("NTBBloodbath/doom-one.nvim")
     use({ "EdenEast/nightfox.nvim", commit = "c88664b18e593319aea1ded731dd252d4f9e0f9a" })
-    use("Mofiqul/vscode.nvim")
+    -- use("Mofiqul/vscode.nvim")
 
     if packer_bootstrap then
         require("packer").sync()

@@ -2,10 +2,7 @@ local fox = require("nightfox")
 local C = require("nightfox.lib.color")
 local Shade = require("nightfox.lib.shade")
 
-local function string_starts(string, prefix)
-    return string.sub(string, 1, string.len(prefix)) == prefix
-end
-function trim(s)
+local function trim(s)
    return (s:gsub("^%s*(.-)%s*$", "%1"))
 end
 
@@ -19,6 +16,7 @@ local background = trim(vim.fn.system("darkman get"))
 -- local colorscheme = ""
 vim.opt.background = background
 local colorscheme
+local p
 
 if background == "light" then
     colorscheme = "dayfox"

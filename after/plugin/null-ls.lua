@@ -2,7 +2,7 @@ local null_ls = require("null-ls")
 local null_ls_utils = require("null-ls.utils")
 local formatting = null_ls.builtins.formatting
 local diagnostics = null_ls.builtins.diagnostics
-local handlers = require("lsp-configs.handlers")
+local handlers = require("util.handlers")
 
 local function root_finder()
     return null_ls_utils.root_pattern(".git")(vim.fn.expand("%:p"))

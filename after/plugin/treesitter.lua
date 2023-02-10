@@ -91,7 +91,7 @@ configs.setup({
             goto_next_start = {
                 [",w"] = "@parameter.inner",
                 ["]v"] = "@parameter.inner",
-                ["]]"] = "@class.outer",
+                -- ["]]"] = "@class.outer",
                 ["]m"] = "@function.outer",
                 ["]f"] = "@call.outer",
                 ["]c"] = "@comment.outer",
@@ -107,7 +107,7 @@ configs.setup({
             goto_previous_start = {
                 [",b"] = "@parameter.inner",
                 ["[v"] = "@parameter.inner",
-                ["[["] = "@class.outer",
+                -- ["[["] = "@class.outer",
                 ["[m"] = "@function.outer",
                 ["[f"] = "@call.outer",
                 ["[c"] = "@comment.outer",

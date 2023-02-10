@@ -1,4 +1,5 @@
 local project = require("project_nvim")
+local telescope = require("telescope")
 
 project.setup({
     manual_mode = false,
@@ -10,3 +11,5 @@ project.setup({
     silent_chdir = true,
     datapath = vim.fn.stdpath("data"),
 })
+
+vim.keymap.set("n", "<Leader>j", telescope.extensions.projects.projects, { desc = "Projects" })

@@ -2,7 +2,13 @@ local mason = require("mason")
 local index = require("mason-registry.index")
 local mason_lspconfig = require("mason-lspconfig")
 local lspconfig = require("lspconfig")
-local handlers = require("lsp-configs.handlers")
+local handlers = require("util.handlers")
+local rust_tools = require("rust-tools")
+local neodev = require("neodev")
+
+neodev.setup({
+    setup_jsonls = false,
+})
 
 -- Add custom pydocstyle package
 index["pydocstyle[toml]"] = "mason-packages.pydocstyle-toml"
@@ -18,7 +24,6 @@ mason.setup({
 
 mason_lspconfig.setup()
 
-
 -- auto setup installed LSPs:
 mason_lspconfig.setup_handlers({
     function(server) -- default handler (optional)
@@ -32,6 +37,34 @@ mason_lspconfig.setup_handlers({
             opts = vim.tbl_deep_extend("force", opts, server_custom_opts)
         end
         lspconfig[server].setup(opts)
+    end,
+    ["rust_analyzer"] = function()
+        rust_tools.setup({
+            tools = {
+                inlay_hints = {
+                    auto = false,
+                },
+            },
+            server = {
+                on_attach = function(_, bufnr)
+                    handlers.on_attach()
+                    -- Hover actions
+                    vim.keymap.set(
+                        "n",
+                        "<Leader>lh",
+                        rust_tools.hover_actions.hover_actions,
+                        { buffer = bufnr, desc = "Hover Actions" }
+                    )
+                    -- Code action groups
+                    vim.keymap.set(
+                        "n",
+                        "<Leader>lA",
+                        rust_tools.code_action_group.code_action_group,
+                        { buffer = bufnr, desc = "Code Action Group" }
+                    )
+                end,
+            },
+        })
     end,
 })
 
