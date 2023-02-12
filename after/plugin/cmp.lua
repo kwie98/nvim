@@ -53,7 +53,7 @@ cmp.setup({
     sources = cmp.config.sources({
         -- order matters, sets sorting preference
         { name = "nvim_lsp_signature_help" },
-        { name = "luasnip" },
+        -- { name = "luasnip" },
         { name = "nvim_lsp" },
         { name = "path" },
     }, {

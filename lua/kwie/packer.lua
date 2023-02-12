@@ -42,7 +42,7 @@ return packer.startup(function(use)
     use("hrsh7th/cmp-nvim-lsp")
     use("hrsh7th/cmp-buffer")
     use("hrsh7th/cmp-path")
-    use("saadparwaiz1/cmp_luasnip")
+    -- use("saadparwaiz1/cmp_luasnip")
     -- use("hrsh7th/cmp-nvim-lua")
 
     use("hrsh7th/cmp-cmdline")
@@ -113,8 +113,10 @@ return packer.startup(function(use)
     -- use("ray-x/lsp_signature.nvim") -- shows function parameter information when typing
     use("NvChad/nvim-colorizer.lua")
     use("stevearc/dressing.nvim")
-    use("petertriho/nvim-scrollbar")
+    -- use("petertriho/nvim-scrollbar")
+    use("dstein64/nvim-scrollview")
     use("smjonas/inc-rename.nvim")
+    use("lukas-reineke/indent-blankline.nvim")
 
     -- Colorschemes
     -- use("sainnhe/gruvbox-material")

@@ -42,7 +42,7 @@ mason_lspconfig.setup_handlers({
         rust_tools.setup({
             tools = {
                 inlay_hints = {
-                    auto = false,
+                    show_parameter_hints = false,
                 },
             },
             server = {

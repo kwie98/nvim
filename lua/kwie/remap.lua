@@ -98,6 +98,15 @@ vim.keymap.set("v", "<M-k>", "<cmd>lua require('dapui').eval()<cr>", opts)
 vim.keymap.set("n", "gl", vim.diagnostic.open_float, opts)
 vim.keymap.set("n", "]l", vim.diagnostic.goto_next, opts)
 vim.keymap.set("n", "[l", vim.diagnostic.goto_prev, opts)
+vim.keymap.set("n", "<Leader>lz", function ()
+    if vim.g.diagnostics_visible then
+        vim.diagnostic.disable()
+        vim.g.diagnostics_visible = false
+    else
+        vim.diagnostic.enable()
+        vim.g.diagnostics_visible = true
+    end
+end, {desc="Toggle Diagnostics"})
 
 -- vim.keymap.set("n", "<Leader>j", "<CMD>cn<CR>", opts)
 -- vim.keymap.set("n", "<Leader>k", "<CMD>cp<CR>", opts)

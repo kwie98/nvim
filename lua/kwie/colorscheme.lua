@@ -3,7 +3,7 @@ local C = require("nightfox.lib.color")
 local Shade = require("nightfox.lib.shade")
 
 local function trim(s)
-   return (s:gsub("^%s*(.-)%s*$", "%1"))
+    return (s:gsub("^%s*(.-)%s*$", "%1"))
 end
 
 -- query current color scheme
@@ -31,17 +31,14 @@ if background == "light" then
         white = Shade.new("#cdd1d5", "#cfd6dd", "#b6bcc2", true),
         orange = Shade.new("#e3786c", "#e8857a", "#d76558", true),
         pink = Shade.new("#d685af", "#de8db7", "#c9709e", true),
-
         bg0 = "#dbdbdb", -- Dark bg (status line and float)
         bg1 = "#eaeaea", -- Default bg
         bg2 = "#dbcece", -- Lighter bg (colorcolm folds)
         bg3 = "#ced6db", -- Lighter bg (cursor line)
         bg4 = "#bebebe", -- Conceal, border fg
-
         fg0 = "#182a40", -- Lighter fg
         fg1 = "#1d344f", -- Default fg
         comment = "#7f848e",
-
         -- sel0 = "#ced5de", -- Popup bg, visual selection bg
         -- sel1 = "#b6c4d9", -- Popup sel bg, search bg
     }
@@ -79,19 +76,16 @@ else
         white = Shade.new("#e7d7ad", 0.15, -0.15),
         orange = Shade.new("#d65d0e", 0.15, -0.15),
         pink = Shade.new("#d4879c", 0.15, -0.15),
-
         -- bright_yellow = Shade.new("#fabd2f", 0.15, -0.15),
         -- dark_red = Shade.new("#cc241d", 0.15, -0.15),
         -- dark_gray = Shade.new("#83a598", 0.15, -0.15),
         forest_green = Shade.new("#689d6a", 0.15, -0.15),
         clean_green = Shade.new("#8ec07c", 0.15, -0.15),
-
         bg0 = "#242424", -- DONE Dark bg (status line and float)
         bg1 = "#282828", -- DONE Default bg
         bg2 = "#32302f", -- DONE Lighter bg (colorcolm folds)
         bg3 = "#32302f", -- DONE Lighter bg (cursor line)
         bg4 = "#504945", -- DONE nvim-tree folder lines Conceal, telescope border fg
-
         fg1 = "#ebdbb2", -- DONE Default fg
         comment = "#665c54",
     }
@@ -198,7 +192,7 @@ fox.setup({
             ["@constructor"] = { fg = p.clean_green }, -- lua table brackets
             ["@field"] = { fg = p.cyan }, -- lua table fields
             ["@constant.builtin"] = { fg = p.pink }, -- python None
-            ["@variable"] = { fg = p.blue}, -- "normal" variables different from fields :)
+            ["@variable"] = { fg = p.blue }, -- "normal" variables different from fields :)
             ["@parameter"] = { fg = p.blue.dim }, -- python foo(x=...)
             ["@function"] = { fg = p.yellow, style = "bold" },
             ["@function.builtin"] = { fg = p.yellow.bright, style = "bold" },
@@ -236,7 +230,10 @@ fox.setup({
             TelescopeResultsTitle = { fg = p.bg0, bg = p.fg1 },
 
             -- latex:
-            Conceal = {fg = p.magenta},
+            Conceal = { fg = p.magenta },
+
+            IndentBlanklineIndent0 = { bg = p.bg0, style = "nocombine" },
+            IndentBlanklineIndent1 = { bg = p.bg1, style = "nocombine" },
         },
     },
 })
