@@ -1,4 +1,3 @@
-require("impatient")
 require("kwie.set")
 require("kwie.lazy")
 require("kwie.remap")

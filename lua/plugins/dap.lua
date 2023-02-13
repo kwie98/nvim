@@ -7,6 +7,7 @@ return {
             "nvim-telescope/telescope.nvim",
             "mfussenegger/nvim-dap-python",
         },
+        lazy = true,
         keys = {
             { "<F5>", mode = "n" },
         },
@@ -48,7 +49,7 @@ return {
             vim.keymap.set("n", "<Leader>do", dap.step_out, { desc = "Step Out" })
 
             vim.keymap.set("n", "<Leader>dt", dap.toggle_breakpoint, { desc = "Breakpoint" })
-            vim.keymap.set("n", "<Leader>dt", function()
+            vim.keymap.set("n", "<Leader>dT", function()
                 dap.set_breakpoint({ condition = vim.fn.input("Breakpoint Condition: ") })
             end, { desc = "Breakpoint" })
             vim.keymap.set("n", "<Leader>dl", function()
@@ -83,7 +84,7 @@ return {
                     {
                         elements = {
                             -- Elements can be strings or table with id and size keys.
-                            { id = "scopes", size = 0.5 },
+                            { id = "scopes",  size = 0.5 },
                             { id = "watches", size = 0.5 },
                             -- { id = "stacks", size = 0.15 },
                         },

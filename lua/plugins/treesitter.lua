@@ -4,7 +4,7 @@ return {
         dependencies = {
             "nvim-treesitter/playground",
             "nvim-treesitter/nvim-treesitter-textobjects",
-            "nvim-treesitter/nvim-treesitter-context",
+            {"nvim-treesitter/nvim-treesitter-context", commit = "cacee4828152dd3a83736169ae61bbcd29a3d213"},
             "mfussenegger/nvim-treehopper", -- tsht
         },
         build = ":TSUpdate",

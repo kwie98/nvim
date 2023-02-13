@@ -12,4 +12,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup("plugins") -- lua/plugins/ folder
+local lazy = require("lazy")
+vim.keymap.set("n", "<Leader>P", lazy.show, {desc="Plugins"})
+lazy.setup("plugins") -- lua/plugins/ folder

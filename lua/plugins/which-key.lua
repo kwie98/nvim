@@ -1,9 +1,7 @@
 return {
     {
         "folke/which-key.nvim",
-        keys = {
-            { "<Leader>", mode = "n" },
-        },
+        event = "VeryLazy",
 
         config = function()
             local which_key = require("which-key")
@@ -113,6 +111,10 @@ return {
                 s = {
                     name = "Search",
                 },
+                u = "which_key_ignore",
+                i = "which_key_ignore",
+                o = "which_key_ignore",
+                p = "which_key_ignore",
             }
 
             local v_opts = {

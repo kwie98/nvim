@@ -1,11 +1,5 @@
 local opts = { noremap = true, silent = true }
 
--- Shorten function name
-
---Remap space as leader key
-vim.keymap.set("", "<Space>", "<Nop>", opts)
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
 
 -- NORMAL --
 -- Window navigation
@@ -85,22 +79,6 @@ vim.keymap.set("n", "<Leader>lz", function ()
         vim.g.diagnostics_visible = true
     end
 end, {desc="Toggle Diagnostics"})
-
--- vim.keymap.set("n", "<Leader>j", "<CMD>cn<CR>", opts)
--- vim.keymap.set("n", "<Leader>k", "<CMD>cp<CR>", opts)
-vim.keymap.set("n", "]n", "<CMD>cn<CR>", opts)
-vim.keymap.set("n", "[n", "<CMD>cp<CR>", opts)
-vim.cmd([[
-    function! QuickFixToggle()
-        if empty(filter(getwininfo(), 'v:val.quickfix'))
-            copen
-            wincmd p " go back to previous window
-        else
-            cclose
-        endif
-    endfunction
-]])
-vim.keymap.set("n", "<Leader>n", ":call QuickFixToggle()<CR>", opts)
 
 -- Changing some movement keys around for neoqwertz and with illuminate
 -- keymap("n", "*", "<cmd>lua require('illuminate').goto_next_reference()<cr>", opts)

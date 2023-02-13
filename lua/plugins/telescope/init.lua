@@ -110,9 +110,7 @@ return {
         dependencies = {
             "nvim-telescope/telescope.nvim",
         },
-        keys = {
-            { "<Leader>j", mode = "n" },
-        },
+        event = "VeryLazy",
 
         config = function()
             local project = require("project_nvim")

@@ -1,10 +1,6 @@
 return {
     {
         "akinsho/bufferline.nvim",
-        event = "VeryLazy", -- from LazyVim
-        keys = {
-            {"<Leader>C", mode="n"}
-        },
 
         config = function()
             local bufferline = require("bufferline")

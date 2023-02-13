@@ -5,7 +5,6 @@ return {
             -- Bracket completion:
             "windwp/nvim-autopairs",
             -- Completion sources:
-            "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
             "saadparwaiz1/cmp_luasnip",
@@ -30,7 +29,7 @@ return {
 
             -- Snippet sources:
             ls_loader_vscode.lazy_load()
-            ls_loader_lua.lazy_load({ paths = vim.fn.stdpath("config") .. "/lua/snippets" })
+            ls_loader_lua.lazy_load({ paths = vim.fn.stdpath("config") .. "/lua/plugins/completion/snippets/" })
 
             -- ls.config.set_config({
             --     history = true,
@@ -108,7 +107,7 @@ return {
                 sources = cmp.config.sources({
                     -- order matters, sets sorting preference
                     { name = "nvim_lsp_signature_help" },
-                    -- { name = "luasnip" },
+                    { name = "luasnip" },
                     { name = "nvim_lsp" },
                     { name = "path" },
                 }, {

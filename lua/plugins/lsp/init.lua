@@ -8,8 +8,15 @@ return {
             "simrat39/rust-tools.nvim",
             "barreiroleo/ltex_extra.nvim", -- in ltex config
             "b0o/SchemaStore.nvim", -- in jsonls config
+            {
+                "hrsh7th/cmp-nvim-lsp",
+                cond = function()
+                    return require("lazy.core.config").plugins["nvim-cmp"] ~= nil
+                end,
+            },
         },
-        event = { "BufReadPre", "BufNewFile" },
+        -- event = { "BufReadPre", "BufNewFile" },
+        event = "VeryLazy",
 
         config = function()
             local mason = require("mason")
@@ -18,9 +25,10 @@ return {
             local lspconfig = require("lspconfig")
             local handlers = require("plugins.lsp.handlers")
             local neodev = require("neodev")
+            local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-            vim.keymap.set("n", "<Leader>ml", "<CMD>LspInfo<CR>", {desc="LSP"})
-            vim.keymap.set("n", "<Leader>mm", "<CMD>Mason<CR>", {desc="Mason"})
+            vim.keymap.set("n", "<Leader>L", "<CMD>LspInfo<CR>", { desc = "LSP" })
+            vim.keymap.set("n", "<Leader>M", "<CMD>Mason<CR>", { desc = "Mason" })
 
             neodev.setup({
                 setup_jsonls = false,
@@ -40,12 +48,14 @@ return {
 
             mason_lspconfig.setup()
 
+            local capabilities = vim.lsp.protocol.make_client_capabilities()
+            capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
             -- auto setup installed LSPs:
             mason_lspconfig.setup_handlers({
                 function(server) -- default handler (optional)
                     local opts = {
                         on_attach = handlers.on_attach,
-                        capabilities = handlers.capabilities,
+                        capabilities = capabilities,
                     }
                     -- use custom configurations from the settings folder:
                     local has_custom_opts, server_custom_opts = pcall(require, "plugins.lsp.configs." .. server)
@@ -87,9 +97,9 @@ return {
 
             local signs = {
                 { name = "DiagnosticSignError", text = "" },
-                { name = "DiagnosticSignWarn", text = "" },
-                { name = "DiagnosticSignHint", text = "" },
-                { name = "DiagnosticSignInfo", text = "" },
+                { name = "DiagnosticSignWarn",  text = "" },
+                { name = "DiagnosticSignHint",  text = "" },
+                { name = "DiagnosticSignInfo",  text = "" },
             }
 
             for _, sign in ipairs(signs) do
@@ -120,19 +130,23 @@ return {
             vim.diagnostic.config(config)
 
             vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-                border = vim.g.small_border,
-                -- width = 60,
-            })
+                    border = vim.g.small_border,
+                    -- width = 60,
+                })
 
             vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-                border = vim.g.small_border,
-                -- width = 60,
-            })
+                    border = vim.g.small_border,
+                    -- width = 60,
+                })
         end,
     },
     {
         "jose-elias-alvarez/null-ls.nvim",
-        event = { "BufReadPre", "BufNewFile" },
+        -- event = { "BufReadPre", "BufNewFile" },
+        event = "VeryLazy",
+        dependencies = {
+            "williamboman/mason.nvim",
+        },
 
         config = function()
             local null_ls = require("null-ls")
@@ -141,7 +155,7 @@ return {
             local diagnostics = null_ls.builtins.diagnostics
             local handlers = require("plugins.lsp.handlers")
 
-            vim.keymap.set("n", "<Leader>mn", "<CMD>NullLsInfo<CR>", {desc="Null LS"})
+            vim.keymap.set("n", "<Leader>N", "<CMD>NullLsInfo<CR>", { desc = "Null LS" })
 
             local function root_finder()
                 return null_ls_utils.root_pattern(".git")(vim.fn.expand("%:p"))

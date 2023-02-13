@@ -1,9 +1,5 @@
 return {
     {
-        "lewis6991/impatient.nvim",
-        lazy = false,
-    },
-    {
         "tpope/vim-repeat",
         lazy = false,
     },
