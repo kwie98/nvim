@@ -4,7 +4,7 @@ return {
         dependencies = {
             "nvim-treesitter/playground",
             "nvim-treesitter/nvim-treesitter-textobjects",
-            {"nvim-treesitter/nvim-treesitter-context", commit = "cacee4828152dd3a83736169ae61bbcd29a3d213"},
+            { "nvim-treesitter/nvim-treesitter-context", commit = "cacee4828152dd3a83736169ae61bbcd29a3d213" },
             "mfussenegger/nvim-treehopper", -- tsht
         },
         build = ":TSUpdate",
@@ -30,6 +30,7 @@ return {
             }
 
             configs.setup({
+                additional_vim_regex_highlighting = false,
                 ensure_installed = {
                     "bash",
                     "comment",

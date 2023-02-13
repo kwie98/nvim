@@ -79,7 +79,6 @@ else
         -- dark_gray = Shade.new("#83a598", 0.15, -0.15),
         forest_green = Shade.new("#689d6a", 0.15, -0.15),
         clean_green = Shade.new("#8ec07c", 0.15, -0.15),
-
         hard_bg = "#242424", -- DONE Dark bg (status line and float)
         bg = "#282828", -- DONE Default bg
         soft_bg = "#32302f", -- DONE Lighter bg (colorcolm folds)
@@ -115,16 +114,16 @@ fox.reset()
 
 fox.setup({
     palettes = {
-        dayfox = {
-            -- diff = {
-            --     add = "#aec5b9",
-            --     change = "#a1b3cc",
-            --     delete = "#dcaeba",
-            -- },
-            -- number0 = "#182a40", -- fg0
-            -- number1 = "#1d344f", -- fg1
-        },
-        nightfox = {
+        -- dayfox = {
+        --     -- diff = {
+        --     --     add = "#aec5b9",
+        --     --     change = "#a1b3cc",
+        --     --     delete = "#dcaeba",
+        --     -- },
+        --     -- number0 = "#182a40", -- fg0
+        --     -- number1 = "#1d344f", -- fg1
+        -- },
+        all = {
             red = p.red,
             green = p.green,
             yellow = p.yellow,
@@ -181,6 +180,7 @@ fox.setup({
             CursorLineNr = { fg = p.fg },
             ["@function"] = { fg = p.red, style = "bold" },
             ["@function.builtin"] = { fg = p.red.dim, style = "bold" },
+            ["@variable"] = { fg = p.fg }, -- "normal" variables different from fields :)
         },
         nightfox = {
             LineNr = { fg = p.softer_bg },
@@ -239,8 +239,6 @@ fox.setup({
 
 fox.compile()
 
--- vim.opt.background = background
--- vim.cmd.colorscheme(colorscheme)
 local ok, _ = pcall(vim.cmd.colorscheme, colorscheme)
 if not ok then
     return
@@ -251,12 +249,3 @@ if colorscheme == "dayfox" then
 else
     vim.cmd("highlight codeBlockBackground guibg=#242424")
 end
-
--- vim.cmd([[
---     try
---         " colorscheme gruvbox-material
---         colorscheme gruvbox-baby
---     catch /^Vim\%((\a\+)\)\=:E185/
---         colorscheme default
---     endtry
--- ]])
