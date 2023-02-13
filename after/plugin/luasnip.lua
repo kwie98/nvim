@@ -1,5 +1,6 @@
 local luasnip = require("luasnip")
 local types = require("luasnip.util.types")
+local loader = require("luasnip.loaders.from_lua")
 
 luasnip.config.set_config({
     history = true,
@@ -30,3 +31,5 @@ vim.keymap.set("i", "<C-l>", function()
         luasnip.change_choice(1)
     end
 end)
+
+loader.lazy_load({ paths = vim.fn.stdpath("config") .. "/lua/snippets" })
