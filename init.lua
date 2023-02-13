@@ -1,5 +1,5 @@
 require("impatient")
 require("kwie.set")
+require("kwie.lazy")
 require("kwie.remap")
 require("kwie.autocmd")
-require("kwie.colorscheme")

@@ -58,16 +58,6 @@ vim.keymap.set("n", "<C-Down>", ":resize +2<CR>", opts)
 vim.keymap.set("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
--- Explorer
--- vim.keymap.set("n", "<C-b>", "<cmd>NvimTreeToggle<cr>", opts)
--- Projects
--- vim.keymap.set("n", "<C-p>", "<CMD>lua require('telescope').extensions.projects.projects()<CR>", opts)
--- Harpoon
-vim.keymap.set("n", "<Leader>u", "<CMD>lua require('harpoon.ui').nav_file(1)<CR>", opts)
-vim.keymap.set("n", "<Leader>i", "<CMD>lua require('harpoon.ui').nav_file(2)<CR>", opts)
-vim.keymap.set("n", "<Leader>o", "<CMD>lua require('harpoon.ui').nav_file(3)<CR>", opts)
-vim.keymap.set("n", "<Leader>p", "<CMD>lua require('harpoon.ui').nav_file(4)<CR>", opts)
-
 -- Move text up and down
 vim.keymap.set("n", "<C-S-J>", "<Esc>:m .+1<CR>==", opts)
 vim.keymap.set("n", "<C-S-K>", "<Esc>:m .-2<CR>==", opts)
@@ -81,18 +71,6 @@ vim.keymap.set("n", "{", "<CMD>execute 'keepjumps norm! ' . v:count1 . '{zzzv'<C
 vim.keymap.set("n", "}", "<CMD>execute 'keepjumps norm! ' . v:count1 . '}zzzv'<CR>", opts)
 vim.keymap.set("n", "<C-u>", "<CMD>execute 'keepjumps norm! ' . '<C-u>'<CR>", opts)
 vim.keymap.set("n", "<C-d>", "<CMD>execute 'keepjumps norm! ' . '<C-d>'<CR>", opts)
-
--- DAP quick keys
--- TODO better launchjs loading
-vim.keymap.set("n", "<F5>", function()
-    require("dap.ext.vscode").load_launchjs()
-    require("dap").continue()
-end, opts)
-vim.keymap.set("n", "<F6>", "<cmd>lua require('dap').close()<cr>", opts)
-vim.keymap.set("n", "<F7>", "<cmd>lua require('dap').run_last()<cr>", opts)
-vim.keymap.set("n", "<F8>", "<cmd>lua require('dap').step_over()<cr>", opts)
-vim.keymap.set("n", "<M-k>", "<cmd>lua require('dapui').eval()<cr>", opts)
-vim.keymap.set("v", "<M-k>", "<cmd>lua require('dapui').eval()<cr>", opts)
 
 -- LSP/diagnostics binds
 vim.keymap.set("n", "gl", vim.diagnostic.open_float, opts)
