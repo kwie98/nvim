@@ -5,7 +5,7 @@ return {
             "kyazdani42/nvim-web-devicons",
         },
         keys = {
-            { "<Leader>e", mode = "n", desc = "Explorer"},
+            { "<Leader>e", mode = "n", desc = "Explorer" },
         },
 
         config = function()
@@ -63,16 +63,16 @@ return {
                     mappings = {
                         list = {
                             { key = { "l", "<CR>", "e" }, action = "edit" },
-                            { key = "h",                  action = "close_node" },
-                            { key = "<C-v>",              action = "vsplit" },
-                            { key = "<C-s>",              action = "split" },
-                            { key = "n",                  action = "create" },
-                            { key = ".",                  action = "toggle_dotfiles" },
-                            { key = "o",                  action = "system_open" },
-                            { key = "L",                  action = "cd" },
-                            { key = "<C-t>",              action = "" },
-                            { key = "<C-k>",              action = "" },
-                            { key = "K",                  action = "toggle_file_info" },
+                            { key = "h", action = "close_node" },
+                            { key = "<C-v>", action = "vsplit" },
+                            { key = "<C-s>", action = "split" },
+                            { key = "n", action = "create" },
+                            { key = ".", action = "toggle_dotfiles" },
+                            { key = "o", action = "system_open" },
+                            { key = "L", action = "cd" },
+                            { key = "<C-t>", action = "" },
+                            { key = "<C-k>", action = "" },
+                            { key = "K", action = "toggle_file_info" },
                         },
                     },
                 },

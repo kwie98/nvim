@@ -158,7 +158,7 @@ return {
             "nvim-treesitter/nvim-treesitter",
         },
         keys = {
-            {"<Leader><Leader>", mode = "n", desc="Node Action"}
+            { "<Leader><Leader>", mode = "n", desc = "Node Action" },
         },
 
         config = function()

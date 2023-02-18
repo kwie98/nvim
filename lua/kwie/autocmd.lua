@@ -71,4 +71,3 @@ vim.cmd([[
         augroup END
     endfunction
 ]])
-

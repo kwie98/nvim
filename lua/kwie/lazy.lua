@@ -14,10 +14,8 @@ vim.opt.rtp:prepend(lazypath)
 
 local lazy = require("lazy")
 vim.keymap.set("n", "<Leader>P", lazy.show, { desc = "Plugins" })
-lazy.setup( "plugins",
-    {
-        change_detection = {
-            notify = false,
-        },
-    }
-) -- lua/plugins/ folder
+lazy.setup("plugins", {
+    change_detection = {
+        notify = false,
+    },
+}) -- lua/plugins/ folder

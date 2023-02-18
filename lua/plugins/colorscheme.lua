@@ -74,7 +74,6 @@ return {
                     c.bg_medium = blend(c.bg, c.bg_statusline, 0.5)
                 end,
                 on_highlights = function(hl, c)
-
                     hl.codeBlockBackground = { bg = c.bg_medium }
                     hl.SignColumn = { bg = c.bg_medium }
                     hl.GitSignsAddNr = { bg = c.bg_medium, fg = c.gitSigns.add }
@@ -83,9 +82,9 @@ return {
 
                     hl.LineNr = { fg = c.fg_gutter, bg = c.bg_medium }
                     hl.CursorLineNr = { fg = c.dark5, bg = c.bg_medium }
-                    hl.CursorLineCurrent = {bg=c.bg_highlight_strong}
+                    hl.CursorLineCurrent = { bg = c.bg_highlight_strong }
 
-                    hl.TreesitterContext = {bg=c.bg_highlight_strong}
+                    hl.TreesitterContext = { bg = c.bg_highlight_strong }
 
                     hl["@keyword"] = { fg = c.purple, style = "NONE" } -- def, struct, pub, let. WAS purple
                     hl["@keyword.function"] = { link = "@keyword" } -- WAS magenta
@@ -122,7 +121,7 @@ return {
                     hl["@punctuation.delimiter"] = { fg = c.lighter_comment } -- , ;
                     hl["@operator"] = { fg = c.fg } -- + &
                     hl["@punctuation.special"] = { link = "@operator" } -- python f-string {} brackets
-                    hl["@formatSpecifier"] = { link = "@operator"} -- rust string formatting {} brackets
+                    hl["@formatSpecifier"] = { link = "@operator" } -- rust string formatting {} brackets
 
                     hl["@constructor"] = { link = "Type" } -- __init__, object constructors
                 end,

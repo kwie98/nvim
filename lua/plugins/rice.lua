@@ -68,7 +68,7 @@ return {
         "smjonas/inc-rename.nvim",
         lazy = true,
         keys = {
-            { "<Leader>lr", mode = "n" , desc="Rename Symbol"},
+            { "<Leader>lr", mode = "n", desc = "Rename Symbol" },
         },
 
         config = function()

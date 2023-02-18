@@ -9,7 +9,7 @@ return {
             { "<Leader>gg", mode = "n", desc = "Fugitive" },
             { "<Leader>gd", mode = "n", desc = "Diff File" },
             { "<Leader>gD", mode = "n", desc = "Diff All Files" },
-            { "<Leader>gm", mode = "n", desc = "Merge", },
+            { "<Leader>gm", mode = "n", desc = "Merge" },
         },
 
         config = function()

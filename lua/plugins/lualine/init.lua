@@ -9,7 +9,6 @@ return {
             local lualine = require("lualine")
             local components = require("plugins.lualine.components")
 
-
             lualine.setup({
                 options = {
                     icons_enabled = true,
