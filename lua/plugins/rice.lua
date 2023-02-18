@@ -68,7 +68,7 @@ return {
         "smjonas/inc-rename.nvim",
         lazy = true,
         keys = {
-            { "<Leader>lr", mode = "n" },
+            { "<Leader>lr", mode = "n" , desc="Rename Symbol"},
         },
 
         config = function()
@@ -76,7 +76,7 @@ return {
 
             vim.keymap.set("n", "<leader>lr", function()
                 return ":IncRename " .. vim.fn.expand("<cword>")
-            end, { desc = "Rename", expr = true })
+            end, { desc = "Rename Symbol", expr = true })
         end,
     },
     {

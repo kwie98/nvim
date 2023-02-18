@@ -66,7 +66,7 @@ return {
                         init_selection = "<C-space>",
                         node_incremental = "<C-space>",
                         -- idk where I got this from but it's wrong, makes < lag in VISUAL mode:
-                        -- scope_incremental = "<nop>", 
+                        -- scope_incremental = "<nop>",
                         node_decremental = "<bs>",
                     },
                 },
@@ -150,6 +150,23 @@ return {
                     visual_line = "gs",
                 },
             })
+        end,
+    },
+    {
+        "CKolkey/ts-node-action",
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+        },
+        keys = {
+            {"<Leader><Leader>", mode = "n", desc="Node Action"}
+        },
+
+        config = function()
+            local node_action = require("ts-node-action")
+
+            node_action.setup()
+
+            vim.keymap.set("n", "<Leader><Leader>", node_action.node_action, { desc = "Node Action" })
         end,
     },
 }

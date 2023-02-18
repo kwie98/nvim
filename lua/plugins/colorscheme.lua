@@ -121,8 +121,10 @@ return {
                     hl.luaParenError = { link = "@punctuation.bracket" } -- fix for LSP hover windows in lua having red parens
                     hl["@punctuation.delimiter"] = { fg = c.lighter_comment } -- , ;
                     hl["@operator"] = { fg = c.fg } -- + &
-                    hl["@punctuation.special"] = { link = "@operator" } -- f string {} brackets
-                    hl["@constructor"] = { link = "Type" } -- lua table {}, __init__
+                    hl["@punctuation.special"] = { link = "@operator" } -- python f-string {} brackets
+                    hl["@formatSpecifier"] = { link = "@operator"} -- rust string formatting {} brackets
+
+                    hl["@constructor"] = { link = "Type" } -- __init__, object constructors
                 end,
             })
             require("kwie.darkman")

@@ -11,23 +11,17 @@ return {
         },
         cmd = "Telescope",
         keys = {
-            { "<Leader>f", mode = "n" },
-            { "<Leader>F", mode = "n" },
-            { "<Leader>gb", mode = "n" },
-            { "<Leader>gc", mode = "n" },
-            { "<Leader>lm", mode = "n" },
-            { "<Leader>lc", mode = "n" },
-            { "<Leader>ls", mode = "n" },
-            { "<Leader>lw", mode = "n" },
-            { "<Leader>ld", mode = "n" },
-            { "<Leader>lD", mode = "n" },
-            { "<Leader>sh", mode = "n" },
-            { "<Leader>sc", mode = "n" },
-            { "<Leader>sm", mode = "n" },
-            { "<Leader>sr", mode = "n" },
-            { "<Leader>sk", mode = "n" },
-            { "<Leader>sa", mode = "n" },
-            { "<Leader>t", mode = "n" },
+            { "<Leader>f", mode = "n", desc = "Find File"},
+            { "<Leader>F", mode = "n", desc = "Find Text"},
+            { "<Leader>gb", mode = "n", desc = "Checkout Branch"},
+            { "<Leader>gc", mode = "n", desc = "Find Revision"},
+            { "<Leader>sh", mode = "n", desc = "Find Help"},
+            { "<Leader>sc", mode = "n", desc = "Find Highlight"},
+            { "<Leader>sm", mode = "n", desc = "Man Pages"},
+            { "<Leader>sr", mode = "n", desc = "Open Recent File"},
+            { "<Leader>sk", mode = "n", desc = "Keymaps"},
+            { "<Leader>sa", mode = "n", desc = "Find in Home"},
+            { "<Leader>t", mode = "n", desc = "Resume Search"},
         },
 
         config = function()
@@ -43,7 +37,7 @@ return {
             vim.keymap.set("n", "<Leader>gc", my_pickers.my_bcommits, { desc = "Find Revision" })
 
             vim.keymap.set("n", "<Leader>sh", builtin.help_tags, { desc = "Find Help" })
-            vim.keymap.set("n", "<Leader>sc", builtin.highlights, { desc = "Find Highlights" })
+            vim.keymap.set("n", "<Leader>sc", builtin.highlights, { desc = "Find Highlight" })
             vim.keymap.set("n", "<Leader>sm", builtin.man_pages, { desc = "Man Pages" })
             vim.keymap.set("n", "<Leader>sr", builtin.oldfiles, { desc = "Open Recent File" })
             vim.keymap.set("n", "<Leader>sk", builtin.keymaps, { desc = "Keymaps" })

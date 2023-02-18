@@ -1,4 +1,5 @@
 std="lua51+vim"
+# exclude = ["lua/plugins/completion/snippets/*"]
 
-# [rules]
-# undefined_variable = "allow" # because of global U
+[rules]
+undefined_variable = "allow" # because of global U

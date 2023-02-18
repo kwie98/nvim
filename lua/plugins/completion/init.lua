@@ -16,7 +16,7 @@ return {
             "L3MON4D3/LuaSnip",
             "rafamadriz/friendly-snippets",
         },
-        event = {"InsertEnter", "CmdlineEnter"},
+        lazy = false,
 
         config = function()
             local cmp = require("cmp")
@@ -50,8 +50,8 @@ return {
                 end
             end, { silent = true })
             vim.keymap.set({ "i", "s" }, "<S-Tab>", function()
-                if ls.jumpable(-1) then
-                    ls.jump(-1)
+                if ls.jumpable( -1) then
+                    ls.jump( -1)
                 end
             end, { silent = true })
             vim.keymap.set("i", "<C-l>", function()
@@ -102,7 +102,7 @@ return {
                         }),
                         { "i", "c" }
                     ),
-                    ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
+                    ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs( -1), { "i", "c" }),
                     ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
                 },
                 sources = cmp.config.sources({

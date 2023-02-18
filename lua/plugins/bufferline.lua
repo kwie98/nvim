@@ -5,9 +5,6 @@ return {
             "kyazdani42/nvim-web-devicons",
         },
         event = "VeryLazy", -- from LazyVim
-        keys = {
-            {"<Leader>CC", mode="n"}
-        },
 
         config = function()
             local bufferline = require("bufferline")

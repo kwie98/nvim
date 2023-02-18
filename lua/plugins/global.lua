@@ -5,13 +5,6 @@ return {
         -- priority = 100, -- start early
     },
     {
-        "AndrewRadev/splitjoin.vim",
-        keys = {
-            { "gS", mode = "n" },
-            { "gJ", mode = "n" },
-        },
-    },
-    {
         "ethanholz/nvim-lastplace",
         lazy = false,
 

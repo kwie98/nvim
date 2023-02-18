@@ -5,7 +5,7 @@ return {
             "kyazdani42/nvim-web-devicons",
         },
         keys = {
-            { "<Leader>e", mode = "n" },
+            { "<Leader>e", mode = "n", desc = "Explorer"},
         },
 
         config = function()

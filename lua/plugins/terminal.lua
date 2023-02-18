@@ -2,7 +2,7 @@ return {
     {
         "akinsho/toggleterm.nvim",
         keys = {
-            { "<Leader><Enter>", mode = "n" },
+            { "<Leader><Enter>", mode = "n", desc="Toggle Terminal" },
         },
 
         config = function()

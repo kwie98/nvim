@@ -5,12 +5,12 @@ return {
             "nvim-telescope/telescope.nvim",
         },
         keys = {
-            { "<Leader>wt", mode = "n" },
-            { "<Leader>wi", mode = "n" },
-            { "<Leader>ww", mode = "n" },
-            { "<Leader>wd", mode = "n" },
-            { "<Leader>wn", mode = "n" },
-            { "<Leader>wp", mode = "n" },
+            { "<Leader>wt", mode = "n", desc = "Todo"},
+            { "<Leader>wi", mode = "n", desc = "Wiki Index"},
+            { "<Leader>ww", mode = "n", desc = "This Week"},
+            { "<Leader>wd", mode = "n", desc = "Today"},
+            { "<Leader>wn", mode = "n", desc = "New Note"},
+            { "<Leader>wp", mode = "n", desc = "Wiki Panel"},
         },
 
         config = function()

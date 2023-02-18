@@ -2,7 +2,7 @@ return {
     {
         "moll/vim-bbye",
         keys = {
-            { "<Leader>c", mode = "n" },
+            { "<Leader>c", mode = "n", desc= "Close Buffer" },
         },
 
         config = function()

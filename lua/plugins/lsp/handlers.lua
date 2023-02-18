@@ -16,6 +16,7 @@ M.on_attach = function(client, _) -- client, bufnr
 
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = true, desc = "" })
     vim.keymap.set("n", "gd", telescope.lsp_definitions, { buffer = true, desc = "" })
+    vim.keymap.set("n", "<Enter>", telescope.lsp_definitions, { buffer = true, desc = "" })
     vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = true, desc = "" })
     vim.keymap.set("n", "gI", vim.lsp.buf.implementation, { buffer = true, desc = "" })
     vim.keymap.set("n", "gr", telescope.lsp_references, { buffer = true, desc = "" })
@@ -41,7 +42,9 @@ M.on_attach = function(client, _) -- client, bufnr
     end, { buffer = true, desc = "Document Diagnostics" })
     vim.keymap.set("n", "<Leader>lD", telescope.diagnostics, { buffer = true, desc = "Workspace Diagnostics" })
 
-    vim.keymap.set("n", "<Leader>lh", vim.show_pos, { desc = "Inspect Semantic Highlight" })
+    if vim.fn.has("nvim-0.9") == 1 then
+        vim.keymap.set("n", "<Leader>lh", vim.show_pos, { desc = "Inspect Semantic Highlight" })
+    end
 end
 
 return M

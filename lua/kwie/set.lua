@@ -7,7 +7,9 @@ vim.opt.title = true
 vim.opt.formatoptions = "cqj" -- "a" is also nice but breaks markdown code blocks
 vim.opt.mousescroll = "ver:1,hor:1"
 vim.opt.diffopt = vim.opt.diffopt + "vertical,context:100" -- always do vertical diff, don't fold away so much code
-vim.opt.diffopt = vim.opt.diffopt + "linematch:50" -- better diff matches
+if vim.fn.has("nvim-0.9") == 1 then
+    vim.opt.diffopt = vim.opt.diffopt + "linematch:50" -- better diff matches
+end
 vim.opt.backup = false -- creates a backup file
 vim.opt.clipboard = "unnamedplus" -- allows neovim to access the system clipboard
 vim.opt.cmdheight = 1 -- more space in the neovim command line for displaying messages

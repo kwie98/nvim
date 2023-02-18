@@ -6,8 +6,8 @@ return {
         },
         lazy = true,
         keys = {
-            { "<Leader>a", mode = "n" },
-            { "<Leader>h", mode = "n" },
+            { "<Leader>a", mode = "n", desc = "Add to Harpoon" },
+            { "<Leader>h", mode = "n", desc = "Harpoon" },
             { "<Leader>u", mode = "n" },
             { "<Leader>i", mode = "n" },
             { "<Leader>o", mode = "n" },

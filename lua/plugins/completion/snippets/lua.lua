@@ -1,8 +1,13 @@
+---@diagnostic disable: undefined-global
 return {
     s("lazy", {
         t({
             "{",
-            '    "url",',
+            '    "',
+        }),
+        i(1, "url"),
+        t({
+            '",',
             "    dependencies = {",
             '        "url_1",',
             '        "url_2",',
@@ -12,13 +17,13 @@ return {
             '    cmd = "",',
             '    ft = "lua",',
             "    keys = {",
-            '        {"lhs", mode = "n"}',
+            '        {"lhs", mode = "n", desc = "desc"}',
             "    },",
             "",
             "    config = function()",
-            "    -- ...",
+            "        -- ...",
             "    end,",
-            "}",
+            "},",
         }),
     }),
     s("S", {
