@@ -22,7 +22,8 @@ return {
             { "<Leader>ld", mode = "n" },
             { "<Leader>lD", mode = "n" },
             { "<Leader>sh", mode = "n" },
-            { "<Leader>sM", mode = "n" },
+            { "<Leader>sc", mode = "n" },
+            { "<Leader>sm", mode = "n" },
             { "<Leader>sr", mode = "n" },
             { "<Leader>sk", mode = "n" },
             { "<Leader>sa", mode = "n" },
@@ -42,7 +43,8 @@ return {
             vim.keymap.set("n", "<Leader>gc", my_pickers.my_bcommits, { desc = "Find Revision" })
 
             vim.keymap.set("n", "<Leader>sh", builtin.help_tags, { desc = "Find Help" })
-            vim.keymap.set("n", "<Leader>sM", builtin.man_pages, { desc = "Man Pages" })
+            vim.keymap.set("n", "<Leader>sc", builtin.highlights, { desc = "Find Highlights" })
+            vim.keymap.set("n", "<Leader>sm", builtin.man_pages, { desc = "Man Pages" })
             vim.keymap.set("n", "<Leader>sr", builtin.oldfiles, { desc = "Open Recent File" })
             vim.keymap.set("n", "<Leader>sk", builtin.keymaps, { desc = "Keymaps" })
             vim.keymap.set("n", "<Leader>sa", function()
@@ -60,8 +62,8 @@ return {
                         preview = { " " },
                     },
                     dynamic_preview_title = true, -- trying this out
-                    prompt_prefix = " ",
-                    selection_caret = " ",
+                    prompt_prefix = " ",
+                    -- selection_caret = " ",
                     path_display = { "truncate" },
                     file_ignore_patterns = { "^.git/" },
                     mappings = {

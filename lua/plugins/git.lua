@@ -6,8 +6,8 @@ return {
             "Gdiffsplit",
         },
         keys = {
-            { "<Leader>gg", mode = "n" },
-            { "<Leader>gd", mode = "n" },
+            { "<Leader>gg", mode = "n", desc = "Git" },
+            { "<Leader>gd", mode = "n", desc = "Diff File" },
             { "<Leader>gD", mode = "n" },
             { "<Leader>gm", mode = "n" },
         },
@@ -31,8 +31,8 @@ return {
                 gitsigns.toggle_deleted()
             end, { desc = "Toggle Hunks" })
             vim.keymap.set("n", "<Leader>gB", gitsigns.toggle_current_line_blame, { desc = "Blame" })
-            vim.keymap.set("n", "<Leader>gB", gitsigns.reset_hunk, { desc = "Reset Hunk" })
-            vim.keymap.set("n", "<Leader>gr", gitsigns.reset_buffer, { desc = "Reset Buffer" })
+            vim.keymap.set("n", "<Leader>gr", gitsigns.reset_hunk, { desc = "Reset Hunk" })
+            vim.keymap.set("n", "<Leader>gR", gitsigns.reset_buffer, { desc = "Reset Buffer" })
             vim.keymap.set("n", "<Leader>gs", gitsigns.stage_hunk, { desc = "Stage Hunk" })
             vim.keymap.set("n", "<Leader>gS", gitsigns.stage_buffer, { desc = "Stage Buffer" })
             vim.keymap.set("n", "<Leader>gu", gitsigns.undo_stage_hunk, { desc = "Undo Stage Hunk" })
@@ -41,35 +41,6 @@ return {
             vim.keymap.set("v", "<Leader>gr", gitsigns.reset_hunk, { desc = "Reset Hunk" })
 
             gitsigns.setup({
-                signs = {
-                    add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
-                    change = {
-                        hl = "GitSignsChange",
-                        text = "▎",
-                        numhl = "GitSignsChangeNr",
-                        linehl = "GitSignsChangeLn",
-                    },
-                    delete = {
-                        hl = "GitSignsDelete",
-                        text = "契",
-                        numhl = "GitSignsDeleteNr",
-                        linehl = "GitSignsDeleteLn",
-                    },
-                    topdelete = { hl = "GitSignsDelete", text = "契", numhl = "GitSignsDeleteNr" },
-                    changedelete = {
-                        hl = "GitSignsChange",
-                        text = "▎",
-                        numhl = "GitSignsChangeNr",
-                        linehl = "GitSignsChangeLn",
-                    },
-                },
-                -- signs = {
-                --     add = { numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
-                --     change = { numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
-                --     delete = { numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
-                --     topdelete = { numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
-                --     changedelete = { numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
-                -- },
                 signcolumn = false, -- Toggle with `:Gitsigns toggle_signs`
                 numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
                 linehl = false, -- Toggle with `:Gitsigns toggle_linehl`

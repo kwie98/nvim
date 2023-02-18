@@ -1,15 +1,28 @@
 return {
     {
         "akinsho/bufferline.nvim",
+        dependencies = {
+            "kyazdani42/nvim-web-devicons",
+        },
+        event = "VeryLazy", -- from LazyVim
+        keys = {
+            {"<Leader>CC", mode="n"}
+        },
 
         config = function()
             local bufferline = require("bufferline")
             local groups = require("bufferline.groups")
 
-            vim.keymap.set("n", "<Leader>C", function ()
+            vim.keymap.set("n", "<Leader>CC", function ()
                 bufferline.close_in_direction("left")
                 bufferline.close_in_direction("right")
             end, {desc="Close Other Buffers"})
+            vim.keymap.set("n", "<Leader>CH", function ()
+                bufferline.close_in_direction("left")
+            end, {desc="Close Left"})
+            vim.keymap.set("n", "<Leader>CL", function ()
+                bufferline.close_in_direction("right")
+            end, {desc="Close Right"})
 
             bufferline.setup({
                 options = {

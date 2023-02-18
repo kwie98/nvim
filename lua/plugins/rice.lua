@@ -1,13 +1,13 @@
 return {
     {
         "NvChad/nvim-colorizer.lua",
-        event = "VeryLazy",
+        event = "BufReadPost",
 
         config = function()
             local colorizer = require("colorizer")
 
             colorizer.setup({
-                filetypes = { "*", "!packer" },
+                filetypes = { "*", "!lazy" },
                 user_default_options = {
                     names = false,
                 },
@@ -55,20 +55,11 @@ return {
 
         config = function()
             local indent_blankline = require("indent_blankline")
-            vim.g.indent_blankline_filetype_exclude = { "haskell" }
+            vim.g.indent_blankline_filetype_exclude = { "haskell", "help" }
+            vim.g.indent_blankline_show_first_indent_level = false
 
             indent_blankline.setup({
                 char = "▏",
-                -- space_char_blankline = " ",
-                -- char = "",
-                -- char_highlight_list = {
-                --     "IndentBlanklineIndent0",
-                --     "IndentBlanklineIndent1",
-                -- },
-                -- space_char_highlight_list = {
-                --     "IndentBlanklineIndent0",
-                --     "IndentBlanklineIndent1",
-                -- },
                 show_trailing_blankline_indent = false,
             })
         end,
@@ -111,4 +102,23 @@ return {
             })
         end,
     },
+    -- {
+    --     "karb94/neoscroll.nvim",
+    --     event = "VeryLazy",
+
+    --     config = function()
+    --         local neoscroll = require("neoscroll")
+
+    --         neoscroll.setup({
+    --             mappings = {},
+    --             -- performance_mode = true,
+    --         })
+    --         vim.keymap.set("n", "<C-u>", function ()
+    --             neoscroll.scroll(-0.4, true, 10)
+    --         end)
+    --         vim.keymap.set("n", "<C-d>", function ()
+    --             neoscroll.scroll(0.4, true, 10)
+    --         end)
+    --     end,
+    -- },
 }

@@ -7,11 +7,15 @@ return {
         keys = {
             { "<Leader>e", mode = "n" },
         },
+        commit = "8b8d457e07d279976a9baac6bbff5aa036afdc5f",
 
         config = function()
             local nvim_tree = require("nvim-tree")
 
-            vim.keymap.set("n", "<Leader>e", nvim_tree.toggle, { desc = "Explorer" })
+            vim.keymap.set("n", "<Leader>e", function()
+                nvim_tree.toggle()
+                vim.cmd("setlocal winhighlight+=CursorLine:CursorLineCurrent")
+            end, { desc = "Explorer" })
             nvim_tree.setup({
                 respect_buf_cwd = true,
                 update_focused_file = {
@@ -60,16 +64,16 @@ return {
                     mappings = {
                         list = {
                             { key = { "l", "<CR>", "e" }, action = "edit" },
-                            { key = "h", action = "close_node" },
-                            { key = "<C-v>", action = "vsplit" },
-                            { key = "<C-s>", action = "split" },
-                            { key = "n", action = "create" },
-                            { key = ".", action = "toggle_dotfiles" },
-                            { key = "o", action = "system_open" },
-                            { key = "L", action = "cd" },
-                            { key = "<C-t>", action = "" },
-                            { key = "<C-k>", action = "" },
-                            { key = "K", action = "toggle_file_info" },
+                            { key = "h",                  action = "close_node" },
+                            { key = "<C-v>",              action = "vsplit" },
+                            { key = "<C-s>",              action = "split" },
+                            { key = "n",                  action = "create" },
+                            { key = ".",                  action = "toggle_dotfiles" },
+                            { key = "o",                  action = "system_open" },
+                            { key = "L",                  action = "cd" },
+                            { key = "<C-t>",              action = "" },
+                            { key = "<C-k>",              action = "" },
+                            { key = "K",                  action = "toggle_file_info" },
                         },
                     },
                 },

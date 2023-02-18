@@ -15,8 +15,8 @@ return {
                 end,
             },
         },
-        -- event = { "BufReadPre", "BufNewFile" },
-        event = "VeryLazy",
+        event = { "BufReadPre", "BufNewFile" },
+        -- event = "VeryLazy",
 
         config = function()
             local mason = require("mason")
@@ -73,12 +73,12 @@ return {
                             },
                         },
                         server = {
-                            on_attach = function(_, bufnr)
-                                handlers.on_attach()
+                            on_attach = function(client, bufnr)
+                                handlers.on_attach(client, bufnr)
                                 -- Hover actions
                                 vim.keymap.set(
                                     "n",
-                                    "<Leader>lh",
+                                    "K",
                                     rust_tools.hover_actions.hover_actions,
                                     { buffer = bufnr, desc = "Hover Actions" }
                                 )
@@ -96,10 +96,10 @@ return {
             })
 
             local signs = {
-                { name = "DiagnosticSignError", text = "" },
-                { name = "DiagnosticSignWarn",  text = "" },
-                { name = "DiagnosticSignHint",  text = "" },
-                { name = "DiagnosticSignInfo",  text = "" },
+                { name = "DiagnosticSignError", text = "" },
+                { name = "DiagnosticSignWarn",  text = "" },
+                { name = "DiagnosticSignHint",  text = "" },
+                { name = "DiagnosticSignInfo",  text = "" },
             }
 
             for _, sign in ipairs(signs) do
@@ -107,8 +107,8 @@ return {
             end
 
             local config = {
-                -- disable virtual text
-                virtual_text = false,
+                virtual_text = { spacing = 4, prefix = "●" },
+
                 -- show signs
                 signs = {
                     active = signs,
@@ -130,14 +130,14 @@ return {
             vim.diagnostic.config(config)
 
             vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-                    border = vim.g.small_border,
-                    -- width = 60,
-                })
+                border = vim.g.small_border,
+                -- width = 60,
+            })
 
             vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-                    border = vim.g.small_border,
-                    -- width = 60,
-                })
+                border = vim.g.small_border,
+                -- width = 60,
+            })
         end,
     },
     {

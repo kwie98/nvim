@@ -1,0 +1,41 @@
+-- local light_colors = {
+--     -- black = Shade.new("#1d344f", "#24476f", "#1c2f44", true),
+--     red = Shade.new("#b95d76", "#c76882", "#ac5169", true),
+--     green = Shade.new("#618774", "#629f81", "#597668", true),
+--     yellow = Shade.new("#ba793e", "#ca884a", "#a36f3e", true),
+--     blue = Shade.new("#4d688e", "#4e75aa", "#485e7d", true),
+--     magenta = Shade.new("#8e6f98", "#9f75ac", "#806589", true),
+--     cyan = Shade.new("#6ca7bd", "#74b2c9", "#5a99b0", true),
+--     white = Shade.new("#cdd1d5", "#cfd6dd", "#b6bcc2", true),
+--     orange = Shade.new("#e3786c", "#e8857a", "#d76558", true),
+--     pink = Shade.new("#d685af", "#de8db7", "#c9709e", true),
+--     hard_bg = "#f0f0f0", -- Dark bg (status line and float)
+--     bg = "#eaeaea", -- Default bg
+--     soft_bg = "#dbcece", -- Lighter bg (colorcolm folds)
+--     cursor_bg = "#ced6db", -- Lighter bg (cursor line)
+--     softer_bg = "#bebebe", -- Conceal, border fg
+--     hard_fg = "#182a40", -- Lighter fg
+--     fg = "#1d344f", -- Default fg
+--     comment = "#7f848e",
+-- }
+
+-- light_colors.git = {
+--     add = light_colors.green.bright,
+--     removed = light_colors.yellow.bright,
+--     changed = light_colors.blue.bright,
+--     conflict = light_colors.orange.bright,
+--     ignored = light_colors.comment,
+-- }
+
+-- light_colors.diff = {
+--     add = C(light_colors.bg):blend(C(light_colors.git.add), 0.4):to_css(),
+--     delete = C(light_colors.bg):blend(C(light_colors.git.removed), 0.4):to_css(),
+--     change = C(light_colors.bg):blend(C(light_colors.git.changed), 0.4):to_css(),
+--     text = C(light_colors.bg):blend(C(light_colors.git.conflict), 0.2):to_css(),
+-- }
+
+-- light_colors.keyword = {
+--     flow = light_colors.magenta,
+--     defs = light_colors.magenta.dim,
+-- }
+-- light_colors.type = light_colors.yellow

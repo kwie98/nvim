@@ -5,6 +5,8 @@ return {
             "nvim-telescope/telescope.nvim",
         },
         keys = {
+            { "<Leader>wt", mode = "n" },
+            { "<Leader>wi", mode = "n" },
             { "<Leader>ww", mode = "n" },
             { "<Leader>wd", mode = "n" },
             { "<Leader>wn", mode = "n" },

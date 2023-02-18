@@ -16,7 +16,7 @@ return {
             "L3MON4D3/LuaSnip",
             "rafamadriz/friendly-snippets",
         },
-        event = "InsertEnter",
+        event = {"InsertEnter", "CmdlineEnter"},
 
         config = function()
             local cmp = require("cmp")
@@ -25,10 +25,10 @@ return {
             local ls = require("luasnip")
             -- local ls_types = require("luasnip.util.types")
             local ls_loader_lua = require("luasnip.loaders.from_lua")
-            local ls_loader_vscode = require("luasnip.loaders.from_vscode")
+            -- local ls_loader_vscode = require("luasnip.loaders.from_vscode")
 
             -- Snippet sources:
-            ls_loader_vscode.lazy_load()
+            -- ls_loader_vscode.lazy_load()
             ls_loader_lua.lazy_load({ paths = vim.fn.stdpath("config") .. "/lua/plugins/completion/snippets/" })
 
             -- ls.config.set_config({
@@ -59,6 +59,7 @@ return {
                     ls.change_choice(1)
                 end
             end)
+            -- vim.keymap.set("n", "<Leader>lS", ls_loader_lua.load())
 
             cmp.setup({
                 -- for cmp-dap:
@@ -107,8 +108,8 @@ return {
                 sources = cmp.config.sources({
                     -- order matters, sets sorting preference
                     { name = "nvim_lsp_signature_help" },
-                    { name = "luasnip" },
                     { name = "nvim_lsp" },
+                    { name = "luasnip" },
                     { name = "path" },
                 }, {
                     -- these get shown if the above sources return no results

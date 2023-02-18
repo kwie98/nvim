@@ -1,6 +1,5 @@
 local opts = { noremap = true, silent = true }
 
-
 -- NORMAL --
 -- Window navigation
 -- vim.keymap.set("n", "<C-h>", "<C-w>h", opts)
@@ -70,7 +69,7 @@ vim.keymap.set("n", "<C-d>", "<CMD>execute 'keepjumps norm! ' . '<C-d>'<CR>", op
 vim.keymap.set("n", "gl", vim.diagnostic.open_float, opts)
 vim.keymap.set("n", "]l", vim.diagnostic.goto_next, opts)
 vim.keymap.set("n", "[l", vim.diagnostic.goto_prev, opts)
-vim.keymap.set("n", "<Leader>lz", function ()
+vim.keymap.set("n", "<Leader>lz", function()
     if vim.g.diagnostics_visible then
         vim.diagnostic.disable()
         vim.g.diagnostics_visible = false
@@ -78,7 +77,14 @@ vim.keymap.set("n", "<Leader>lz", function ()
         vim.diagnostic.enable()
         vim.g.diagnostics_visible = true
     end
-end, {desc="Toggle Diagnostics"})
+end, { desc = "Toggle Diagnostics" })
+vim.keymap.set("n", "<Leader>lZ", function()
+    local bufnr = vim.api.nvim_get_current_buf()
+    local clients = vim.lsp.get_active_clients({ bufnr = bufnr })
+    for _, v in pairs(clients) do
+        vim.lsp.semantic_tokens.stop(bufnr, v.id)
+    end
+end, { desc = "Turn Off Semantic Highlighting" })
 
 -- Changing some movement keys around for neoqwertz and with illuminate
 -- keymap("n", "*", "<cmd>lua require('illuminate').goto_next_reference()<cr>", opts)
@@ -90,15 +96,15 @@ vim.keymap.set({ "n", "x", "o" }, "|", "$", opts) -- last symbol in line
 vim.keymap.set({ "n", "x", "o" }, "#", "", opts) -- free command
 vim.keymap.set("n", "s", "ge", opts)
 
-vim.keymap.set({"x", "o"}, "ir", "i[")
-vim.keymap.set({"x", "o"}, "ar", "a[")
-vim.keymap.set({"x", "o"}, "ia", "i<")
-vim.keymap.set({"x", "o"}, "aa", "a<")
+vim.keymap.set({ "x", "o" }, "ir", "i[")
+vim.keymap.set({ "x", "o" }, "ar", "a[")
+vim.keymap.set({ "x", "o" }, "ia", "i<")
+vim.keymap.set({ "x", "o" }, "aa", "a<")
 
 -- Insert --
 
 -- typical one-handed copy paste stuff
-vim.keymap.set({"i", "c"}, "<C-v>", "<C-r><C-o>+", opts)
+vim.keymap.set({ "i", "c" }, "<C-v>", "<C-r><C-o>+", opts)
 -- vim.keymap.set("n", "<C-v>", "Pl", opts)
 vim.keymap.set("s", "<C-c>", "<Esc>gvygv<C-g>", opts)
 vim.keymap.set("s", "<C-v>", "<C-r>_<Del>i<C-r>+<Esc>", opts)

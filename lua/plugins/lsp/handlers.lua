@@ -1,8 +1,13 @@
 local M = {}
 
-M.on_attach = function()
+M.on_attach = function(client, _) -- client, bufnr
+    -- print(vim.inspect(client.id))
+    -- print(vim.inspect(client.name))
+    -- print(vim.inspect(client.server_capabilities.semanticTokensProvider))
     local telescope = require("telescope.builtin")
 
+    -- semantic tokens are laggier than treesitter only, and mess up my rust highlights. might be nice in lua tho?
+    -- client.server_capabilities.semanticTokensProvider = nil
     vim.opt.formatexpr = ""
 
     vim.keymap.set("n", "<Leader>la", vim.lsp.buf.code_action, { buffer = true, desc = "Code Action" })
@@ -25,11 +30,18 @@ M.on_attach = function()
     end, { buffer = true, desc = "Workspace Constants" })
 
     vim.keymap.set("n", "<Leader>ls", telescope.lsp_document_symbols, { buffer = true, desc = "Document Symbols" })
-    vim.keymap.set("n", "<Leader>lw", telescope.lsp_dynamic_workspace_symbols, { buffer = true, desc = "Workspace Symbols" })
+    vim.keymap.set(
+        "n",
+        "<Leader>lw",
+        telescope.lsp_dynamic_workspace_symbols,
+        { buffer = true, desc = "Workspace Symbols" }
+    )
     vim.keymap.set("n", "<Leader>ld", function()
         telescope.diagnostics({ bufnr = 0 })
     end, { buffer = true, desc = "Document Diagnostics" })
     vim.keymap.set("n", "<Leader>lD", telescope.diagnostics, { buffer = true, desc = "Workspace Diagnostics" })
+
+    vim.keymap.set("n", "<Leader>lh", vim.show_pos, { desc = "Inspect Semantic Highlight" })
 end
 
 return M

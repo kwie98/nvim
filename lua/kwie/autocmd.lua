@@ -1,10 +1,18 @@
 vim.cmd([[
     augroup _general_settings
     autocmd!
-    autocmd FileType fugitive,qf,man nnoremap <silent> <buffer> q :close<CR>
+    autocmd FileType fugitive,qf,man,help nnoremap <silent> <buffer> q :close<CR>
     autocmd FileType TelescopePrompt nnoremap <silent> <buffer> q :close!<CR>
     autocmd TextYankPost * silent!lua require('vim.highlight').on_yank({higroup = 'IncSearch', timeout = 100})
     autocmd BufWinEnter * :set formatoptions-=o
+    augroup end
+
+    augroup _cursor_line
+    autocmd!
+    autocmd VimEnter * setlocal winhighlight+=CursorLine:CursorLineCurrent
+    autocmd WinEnter * setlocal winhighlight+=CursorLine:CursorLineCurrent
+    autocmd BufWinEnter * setlocal winhighlight+=CursorLine:CursorLineCurrent
+    autocmd WinLeave * setlocal winhighlight-=CursorLine:CursorLineCurrent
     augroup end
 
     " " assumes set ignorecase smartcase MESSES UP :s REPLACE (could use \C)

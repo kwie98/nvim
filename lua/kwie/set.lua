@@ -60,3 +60,4 @@ vim.g.modified_icon = "" -- for bufferline, lualine
 vim.g.small_border = "single" -- smaller helper floats
 vim.g.big_border = "shadow" -- ui window floats
 vim.g.diagnostics_visible = true
+vim.g.semantic_highlighting = true

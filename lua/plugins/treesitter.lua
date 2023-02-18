@@ -58,13 +58,15 @@ return {
                 autopairs = {
                     enable = true,
                 },
-                indent = { enable = true, disable = { "css", "python", "yaml" } },
+                -- indent = { enable = true, disable = { "css", "python", "yaml" } },
+                indent = { enable = true, disable = { "css", "yaml" } },
                 incremental_selection = {
                     enable = true,
                     keymaps = {
                         init_selection = "<C-space>",
                         node_incremental = "<C-space>",
-                        scope_incremental = "<nop>",
+                        -- idk where I got this from but it's wrong, makes < lag in VISUAL mode:
+                        -- scope_incremental = "<nop>", 
                         node_decremental = "<bs>",
                     },
                 },

@@ -14,7 +14,7 @@ return {
                 hide_numbers = true,
                 -- shade_filetypes = {},
                 -- shade_terminals = true,
-                -- shading_factor = "1",
+                shading_factor = "0",
                 start_in_insert = true,
                 insert_mappings = false,
                 terminal_mappings = false,
