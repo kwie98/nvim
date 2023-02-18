@@ -102,23 +102,4 @@ return {
             })
         end,
     },
-    -- {
-    --     "karb94/neoscroll.nvim",
-    --     event = "VeryLazy",
-
-    --     config = function()
-    --         local neoscroll = require("neoscroll")
-
-    --         neoscroll.setup({
-    --             mappings = {},
-    --             -- performance_mode = true,
-    --         })
-    --         vim.keymap.set("n", "<C-u>", function ()
-    --             neoscroll.scroll(-0.4, true, 10)
-    --         end)
-    --         vim.keymap.set("n", "<C-d>", function ()
-    --             neoscroll.scroll(0.4, true, 10)
-    --         end)
-    --     end,
-    -- },
 }

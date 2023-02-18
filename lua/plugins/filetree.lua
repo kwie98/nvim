@@ -7,7 +7,6 @@ return {
         keys = {
             { "<Leader>e", mode = "n" },
         },
-        commit = "8b8d457e07d279976a9baac6bbff5aa036afdc5f",
 
         config = function()
             local nvim_tree = require("nvim-tree")
