@@ -16,3 +16,4 @@ vim.keymap.set("n", "[[", function()
 end, { buffer = true })
 
 vim.wo.colorcolumn = ""
+vim.wo.signcolumn = "no"
