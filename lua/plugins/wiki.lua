@@ -12,6 +12,9 @@ return {
             { "<Leader>wn", mode = "n", desc = "New Note" },
             { "<Leader>wp", mode = "n", desc = "Wiki Panel" },
         },
+        cmd = {
+            "Telekasten",
+        },
 
         config = function()
             local telekasten = require("telekasten")

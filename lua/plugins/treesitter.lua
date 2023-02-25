@@ -158,7 +158,7 @@ return {
             "nvim-treesitter/nvim-treesitter",
         },
         keys = {
-            { "<Leader><Leader>", mode = "n", desc = "Node Action" },
+            { "<Enter>", mode = "n", desc = "Node Action" },
         },
 
         config = function()
@@ -166,7 +166,7 @@ return {
 
             node_action.setup()
 
-            vim.keymap.set("n", "<Leader><Leader>", node_action.node_action, { desc = "Node Action" })
+            vim.keymap.set("n", "<Enter>", node_action.node_action, { desc = "Node Action" })
         end,
     },
 }

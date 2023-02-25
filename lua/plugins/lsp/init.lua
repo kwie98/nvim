@@ -1,11 +1,38 @@
 return {
     {
+        "williamboman/mason.nvim",
+        lazy = true,
+
+        config = function()
+            local mason = require("mason")
+            local m_index = require("mason-registry.index")
+            local m_ui = require("mason.ui")
+
+            vim.keymap.set("n", "<Leader>M", m_ui.open, { desc = "Mason" })
+
+            -- Add custom pydocstyle package
+            m_index["pydocstyle[toml]"] = "plugins.lsp.packages.pydocstyle-toml"
+
+            mason.setup({
+                ui = {
+                    border = vim.g.big_border,
+                    keymaps = {
+                        apply_language_filter = "f",
+                    },
+                },
+            })
+        end,
+    },
+    {
         "neovim/nvim-lspconfig",
         dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope.nvim",
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
             "folke/neodev.nvim",
             "simrat39/rust-tools.nvim",
+            -- { "mrcjkb/haskell-tools.nvim", branch = "1.x.x" },
             "barreiroleo/ltex_extra.nvim", -- in ltex config
             "b0o/SchemaStore.nvim", -- in jsonls config
             {
@@ -16,104 +43,88 @@ return {
             },
         },
         event = { "BufReadPre", "BufNewFile" },
-        -- event = "VeryLazy",
 
         config = function()
-            local mason = require("mason")
-            local index = require("mason-registry.index")
             local mason_lspconfig = require("mason-lspconfig")
             local lspconfig = require("lspconfig")
             local handlers = require("plugins.lsp.handlers")
-            local neodev = require("neodev")
             local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-            vim.keymap.set("n", "<Leader>L", "<CMD>LspInfo<CR>", { desc = "LSP" })
-            vim.keymap.set("n", "<Leader>M", "<CMD>Mason<CR>", { desc = "Mason" })
+            local neodev = require("neodev")
+            local rt = require("rust-tools")
+            -- local ht = require("haskell-tools")
 
+            vim.keymap.set("n", "<Leader>L", "<CMD>LspInfo<CR>", { desc = "LSP Info" })
+
+            -- IMPORTANT: make sure to setup neodev BEFORE lspconfig
             neodev.setup({
                 setup_jsonls = false,
             })
 
-            -- Add custom pydocstyle package
-            index["pydocstyle[toml]"] = "plugins.lsp.packages.pydocstyle-toml"
-
-            mason.setup({
-                ui = {
-                    border = vim.g.big_border,
-                    keymaps = {
-                        apply_language_filter = "f",
-                    },
-                },
-            })
-
-            mason_lspconfig.setup()
-
-            local capabilities = vim.lsp.protocol.make_client_capabilities()
-            capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
-            -- auto setup installed LSPs:
-            mason_lspconfig.setup_handlers({
-                function(server) -- default handler (optional)
-                    local opts = {
-                        on_attach = handlers.on_attach,
-                        capabilities = capabilities,
-                    }
-                    -- use custom configurations from the settings folder:
-                    local has_custom_opts, server_custom_opts = pcall(require, "plugins.lsp.configs." .. server)
-                    if has_custom_opts then
-                        opts = vim.tbl_deep_extend("force", opts, server_custom_opts)
-                    end
-                    lspconfig[server].setup(opts)
-                end,
-                ["rust_analyzer"] = function()
-                    local rust_tools = require("rust-tools")
-                    rust_tools.setup({
-                        tools = {
-                            inlay_hints = {
-                                show_parameter_hints = false,
-                            },
-                        },
-                        server = {
-                            on_attach = function(client, bufnr)
-                                handlers.on_attach(client, bufnr)
-                                -- Hover actions
-                                vim.keymap.set(
-                                    "n",
-                                    "K",
-                                    rust_tools.hover_actions.hover_actions,
-                                    { buffer = bufnr, desc = "Hover Actions" }
-                                )
-                                -- Code action groups
-                                vim.keymap.set(
-                                    "n",
-                                    "<Leader>lA",
-                                    rust_tools.code_action_group.code_action_group,
-                                    { buffer = bufnr, desc = "Code Action Group" }
-                                )
-                            end,
-                        },
-                    })
-                end,
-            })
-
-            local signs = {
-                { name = "DiagnosticSignError", text = "" },
-                { name = "DiagnosticSignWarn", text = "" },
-                { name = "DiagnosticSignHint", text = "" },
-                { name = "DiagnosticSignInfo", text = "" },
-            }
-
-            for _, sign in ipairs(signs) do
-                vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+            local function setup_lsp(server)
+                -- default config:
+                local lsp_conf = {
+                    on_attach = handlers.on_attach,
+                    capabilities = cmp_nvim_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities()),
+                }
+                -- use per-server custom configs from the configs folder:
+                local has_custom_conf, custom_conf = pcall(require, "plugins.lsp.configs." .. server)
+                if has_custom_conf then
+                    lsp_conf = vim.tbl_deep_extend("force", lsp_conf, custom_conf)
+                end
+                lspconfig[server].setup(lsp_conf)
             end
 
-            local config = {
-                virtual_text = { spacing = 4, prefix = "●" },
+            -- auto setup Mason's LSPs:
+            mason_lspconfig.setup()
+            mason_lspconfig.setup_handlers({ setup_lsp })
 
-                -- show signs
-                signs = {
-                    active = signs,
-                    priority = 1,
+            -- setup other LSPs:
+            -- ht.setup({
+            --     hls = {
+            --         on_attach = function(client, bufnr)
+            --             handlers.on_attach(client, bufnr)
+            --             vim.keymap.set("n", "<Leader>lg", ht.hoogle.hoogle_signature, { desc = "Hoogle Signature" })
+            --         end,
+            --     },
+            --     hover = {
+            --         border = nil, -- not working?
+            --     },
+            -- })
+            setup_lsp("hls")
+
+            rt.setup({
+                tools = {
+                    inlay_hints = {
+                        show_parameter_hints = false,
+                    },
                 },
+                server = {
+                    cmd = { "rustup", "run", "stable", "rust-analyzer" },
+                    on_attach = function(client, bufnr)
+                        handlers.on_attach(client, bufnr)
+                        -- Hover actions
+                        vim.keymap.set(
+                            "n",
+                            "K",
+                            rt.hover_actions.hover_actions,
+                            { buffer = bufnr, desc = "Hover Actions" }
+                        )
+                        -- Code action groups
+                        vim.keymap.set(
+                            "n",
+                            "<Leader>lA",
+                            rt.code_action_group.code_action_group,
+                            { buffer = bufnr, desc = "Code Action Group" }
+                        )
+                    end,
+                },
+            })
+
+            -- diagnostic settings:
+            vim.diagnostic.config({
+                virtual_text = false,
+                signs = false,
                 update_in_insert = false,
                 underline = true,
                 severity_sort = true,
@@ -125,18 +136,12 @@ return {
                     header = "",
                     prefix = "",
                 },
-            }
-
-            vim.diagnostic.config(config)
-
+            })
             vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
                 border = vim.g.small_border,
-                -- width = 60,
             })
-
             vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
                 border = vim.g.small_border,
-                -- width = 60,
             })
         end,
     },
@@ -145,7 +150,7 @@ return {
         -- event = { "BufReadPre", "BufNewFile" },
         event = "VeryLazy",
         dependencies = {
-            "williamboman/mason.nvim",
+            "williamboman/mason.nvim", -- load after mason so that used binaries are available on the path
         },
 
         config = function()
@@ -195,6 +200,7 @@ return {
                         runtime_condition = not_conda_or_fugitive,
                     }),
                     formatting.markdownlint.with({
+                        -- extra_args = { "--disable", "line_length"}, -- does not work :(
                         cwd = root_finder,
                         runtime_condition = not_conda_or_fugitive,
                     }),

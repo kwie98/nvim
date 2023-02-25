@@ -10,7 +10,6 @@ return {
             "saadparwaiz1/cmp_luasnip",
             "hrsh7th/cmp-cmdline",
             "dmitmel/cmp-cmdline-history",
-            "rcarriga/cmp-dap",
             "hrsh7th/cmp-nvim-lsp-signature-help",
             -- Snippets:
             "L3MON4D3/LuaSnip",
@@ -21,27 +20,11 @@ return {
         config = function()
             local cmp = require("cmp")
             local autopairs = require("nvim-autopairs")
-
             local ls = require("luasnip")
-            -- local ls_types = require("luasnip.util.types")
             local ls_loader_lua = require("luasnip.loaders.from_lua")
-            -- local ls_loader_vscode = require("luasnip.loaders.from_vscode")
 
             -- Snippet sources:
-            -- ls_loader_vscode.lazy_load()
             ls_loader_lua.lazy_load({ paths = vim.fn.stdpath("config") .. "/lua/plugins/completion/snippets/" })
-
-            -- ls.config.set_config({
-            --     history = true,
-            --     updateevents = "TextChanged,TextChangedI",
-            --     ext_opts = {
-            --         [types.choiceNode] = {
-            --             active = {
-            --                 virt_text = { { " « ", "NonTest" } },
-            --             },
-            --         },
-            --     },
-            -- })
 
             -- Snippet keys:
             vim.keymap.set({ "i", "s" }, "<Tab>", function()
@@ -50,8 +33,8 @@ return {
                 end
             end, { silent = true })
             vim.keymap.set({ "i", "s" }, "<S-Tab>", function()
-                if ls.jumpable(-1) then
-                    ls.jump(-1)
+                if ls.jumpable( -1) then
+                    ls.jump( -1)
                 end
             end, { silent = true })
             vim.keymap.set("i", "<C-l>", function()
@@ -59,12 +42,23 @@ return {
                     ls.change_choice(1)
                 end
             end)
-            -- vim.keymap.set("n", "<Leader>lS", ls_loader_lua.load())
+
+            local function is_dap_buffer(bufnr)
+                local filetype = vim.api.nvim_buf_get_option(bufnr or 0, "filetype")
+                if vim.startswith(filetype, "dapui_") then
+                    return true
+                end
+                if filetype == "dap-repl" then
+                    return true
+                end
+
+                return false
+            end
 
             cmp.setup({
                 -- for cmp-dap:
                 enabled = function()
-                    return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or require("cmp_dap").is_dap_buffer()
+                    return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or is_dap_buffer()
                 end,
                 formatting = {
                     format = function(entry, vim_item)
@@ -102,7 +96,7 @@ return {
                         }),
                         { "i", "c" }
                     ),
-                    ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
+                    ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs( -1), { "i", "c" }),
                     ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
                 },
                 sources = cmp.config.sources({
@@ -115,11 +109,6 @@ return {
                     -- these get shown if the above sources return no results
                     { name = "buffer", max_item_count = 5 },
                 }),
-            })
-            cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
-                sources = {
-                    { name = "dap" },
-                },
             })
             cmp.setup.cmdline(":", {
                 sources = cmp.config.sources({

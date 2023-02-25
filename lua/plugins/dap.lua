@@ -6,10 +6,17 @@ return {
             "nvim-telescope/telescope-dap.nvim",
             "nvim-telescope/telescope.nvim",
             "mfussenegger/nvim-dap-python",
+            "rcarriga/cmp-dap",
         },
         lazy = true,
+        module = false, -- don't load dap even if required (e.g., by rust-tools.nvim)
         keys = {
-            { "<F5>", mode = "n" },
+            { "<F5>",       mode = "n" },
+            { "<Leader>dh", mode = "n", desc = "Toggle UI" },
+            { "<Leader>dm", mode = "n", desc = "Debug Test" },
+            { "<Leader>dt", mode = "n", desc = "Breakpoint" },
+            { "<Leader>dT", mode = "n", desc = "Conditional Breakpoint" },
+            { "<Leader>dl", mode = "n", desc = "Logpoint" },
         },
 
         config = function()
@@ -18,10 +25,18 @@ return {
             local dap_python = require("dap-python")
             local dapui = require("dapui")
             local telescope = require("telescope")
+            local cmp = require("cmp")
+            -- TODO do rust-tools dap setup
+
+            cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+                sources = {
+                    { name = "dap" },
+                },
+            })
 
             vim.fn.sign_define("DapBreakpoint", {
                 text = "⏺",
-                texthl = "LspDiagnosticsSignError",
+                texthl = "Error",
                 linehl = "",
                 numhl = "",
             })
@@ -35,13 +50,13 @@ return {
             vim.keymap.set("n", "<F8>", dap.step_over)
             vim.keymap.set("n", "<M-k>", dapui.eval)
             vim.keymap.set("v", "<M-k>", dapui.eval)
-            vim.keymap.set("n", "<Leader>dz", dapui.toggle, { desc = "Toggle UI" })
+            vim.keymap.set("n", "<Leader>dh", dapui.toggle, { desc = "Toggle UI" })
 
             vim.keymap.set("n", "<Leader>ds", telescope.extensions.dap.variables, { desc = "Variables" })
             vim.keymap.set("n", "<Leader>db", telescope.extensions.dap.list_breakpoints, { desc = "Breakpoints" })
             vim.keymap.set("n", "<Leader>df", telescope.extensions.dap.frames, { desc = "Frames" })
 
-            vim.keymap.set("n", "<Leader>dm", dap_python.test_method, { desc = "Test Method" })
+            vim.keymap.set("n", "<Leader>dm", dap_python.test_method, { desc = "Debug Test" })
 
             vim.keymap.set("n", "<Leader>dc", dap.run_to_cursor, { desc = "Run To Cursor" })
             vim.keymap.set("n", "<Leader>di", dap.step_into, { desc = "Step Into" })
@@ -51,10 +66,10 @@ return {
             vim.keymap.set("n", "<Leader>dt", dap.toggle_breakpoint, { desc = "Breakpoint" })
             vim.keymap.set("n", "<Leader>dT", function()
                 dap.set_breakpoint({ condition = vim.fn.input({ "Breakpoint Condition: " }) })
-            end, { desc = "Breakpoint" })
+            end, { desc = "Conditional Breakpoint" })
             vim.keymap.set("n", "<Leader>dl", function()
                 dap.set_breakpoint({ log_message = vim.fn.input({ "Logpoint Message: " }) })
-            end, { desc = "Breakpoint" })
+            end, { desc = "Logpoint" })
 
             dap_python.setup(vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python")
 
@@ -70,34 +85,24 @@ return {
                     repl = "r",
                     toggle = "t",
                 },
-                -- Expand lines larger than the window
-                -- Requires >= 0.7
                 expand_lines = true,
-                -- Layouts define sections of the screen to place windows.
-                -- The position can be "left", "right", "top" or "bottom".
-                -- The size specifies the height/width depending on position. It can be an Int
-                -- or a Float. Integer specifies height/width directly (i.e. 20 lines/columns) while
-                -- Float value specifies percentage (i.e. 0.3 - 30% of available lines/columns)
-                -- Elements are the elements shown in the layout (in order).
-                -- Layouts are opened in order so that earlier layouts take priority in window sizing.
                 layouts = {
-                    {
-                        elements = {
-                            -- Elements can be strings or table with id and size keys.
-                            { id = "scopes", size = 0.5 },
-                            { id = "watches", size = 0.5 },
-                            -- { id = "stacks", size = 0.15 },
-                        },
-                        size = 0.25, -- 25% of total columns
-                        position = "left",
-                    },
                     {
                         elements = {
                             "repl",
                             "console",
                         },
-                        size = 0.25, -- 25% of total lines
+                        size = 0.25,
                         position = "bottom",
+                    },
+                    {
+                        elements = {
+                            { id = "scopes",  size = 0.5 },
+                            { id = "watches", size = 0.5 },
+                            -- { id = "frames", size = 0.25 },
+                        },
+                        size = 0.25,
+                        position = "left",
                     },
                 },
                 controls = {
@@ -114,7 +119,7 @@ return {
                 windows = { indent = 2 },
                 render = {
                     max_type_length = nil, -- Can be integer or nil.
-                    max_value_lines = 10, -- Can be integer or nil.
+                    max_value_lines = 20, -- Can be integer or nil.
                 },
             })
         end,

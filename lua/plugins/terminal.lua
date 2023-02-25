@@ -2,20 +2,55 @@ return {
     {
         "akinsho/toggleterm.nvim",
         keys = {
-            { "<Leader><Enter>", mode = "n", desc = "Toggle Terminal" },
+            { "<Leader><Enter>", mode = "n", desc = "Focus Terminal" },
+            { "<Leader><S-Enter>", mode = "n", desc = "Toggle Terminal" },
         },
 
         config = function()
             local toggleterm = require("toggleterm")
+            local terminal = require("toggleterm.terminal")
+
+            vim.g.toggleterm_prev_win = vim.api.nvim_get_current_win()
+
+            vim.keymap.set("n", "<Leader><Enter>", function ()
+                -- local terms = terminal.get_all()
+                local count = vim.fn.max({vim.v.count, 1})
+                local term = terminal.get(count)
+                if term == nil then
+                    -- requested terminal does not exist
+                    vim.g.toggleterm_prev_win = vim.api.nvim_get_current_win()
+                    vim.cmd(count .. "ToggleTerm")
+                elseif term:is_focused() then
+                    -- was in terminal
+                    vim.api.nvim_set_current_win(vim.g.toggleterm_prev_win)
+                elseif term:is_open() then
+                    -- focus open terminal
+                    vim.g.toggleterm_prev_win = vim.api.nvim_get_current_win()
+                    term:focus()
+                else
+                    -- open closed terminal
+                    vim.g.toggleterm_prev_win = vim.api.nvim_get_current_win()
+                    term:open()
+                end
+            end, {desc = "Focus Terminal"})
+            vim.keymap.set("n", "<Leader><S-Enter>", function ()
+                local count = vim.fn.max({vim.v.count, 1})
+                if vim.bo.filetype == "toggleterm" then
+                    vim.cmd(count .. "ToggleTerm")
+                else
+                    vim.g.toggleterm_prev_win = vim.api.nvim_get_current_win()
+                    vim.cmd(count .. "ToggleTerm")
+                end
+            end, {desc = "Toggle Terminal"})
 
             toggleterm.setup({
                 size = 20,
-                open_mapping = "<Leader><Enter>",
+                open_mapping = nil,
                 hide_numbers = true,
                 -- shade_filetypes = {},
                 -- shade_terminals = true,
                 shading_factor = "0",
-                start_in_insert = true,
+                start_in_insert = false,
                 insert_mappings = false,
                 terminal_mappings = false,
                 persist_size = true,
@@ -23,6 +58,7 @@ return {
                 direction = "horizontal",
                 close_on_exit = true,
                 shell = "fish",
+                auto_scroll = false,
                 float_opts = {
                     border = "curved",
                     winblend = 0,
@@ -33,14 +69,14 @@ return {
                 },
             })
 
-            local function go_to_file()
-                local cursor = vim.api.nvim_win_get_cursor(0)
-                local bufnr = vim.api.nvim_get_current_buf()
-                toggleterm.toggle(0)
-                vim.api.nvim_win_set_buf(0, bufnr)
-                vim.api.nvim_win_set_cursor(0, cursor)
-                vim.cmd("norm! gF")
-            end
+            -- local function go_to_file(norm_cmd)
+            --     local cursor = vim.api.nvim_win_get_cursor(0)
+            --     local bufnr = vim.api.nvim_get_current_buf()
+            --     toggleterm.toggle(0)
+            --     vim.api.nvim_win_set_buf(0, bufnr)
+            --     vim.api.nvim_win_set_cursor(0, cursor)
+            --     vim.cmd("norm! " .. norm_cmd)
+            -- end
 
             vim.api.nvim_create_augroup("ToggleTerm", {})
             vim.api.nvim_create_autocmd("TermOpen", {
@@ -48,10 +84,14 @@ return {
                 callback = function()
                     local opts = { buffer = true }
                     vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
-                    vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd w<CR>]], opts)
-                    vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd W<CR>]], opts)
-                    vim.keymap.set("n", "gF", go_to_file, opts)
-                    vim.keymap.set("n", "gf", go_to_file, opts)
+                    -- vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd w<CR>]], opts)
+                    -- vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd W<CR>]], opts)
+                    -- vim.keymap.set("n", "gf", function()
+                    --     go_to_file("gf")
+                    -- end, opts)
+                    -- vim.keymap.set("n", "gF", function()
+                    --     go_to_file("gF")
+                    -- end, opts)
                 end,
                 group = "ToggleTerm",
             })

@@ -15,12 +15,8 @@ return {
             local lighten = util.lighten
             local blend = util.blend
 
-            local function starts_with(str, start)
-                return str:sub(1, #start) == start
-            end
-
             local function is_bright(key) -- match colors that I find too bright
-                if starts_with(key, "bg_") then
+                if vim.startswith(key, "bg_") then
                     return false
                 elseif key == "diff" or key == "none" or key == "gitSigns" then
                     return false
@@ -45,6 +41,7 @@ return {
 
             hlargs.setup({
                 -- highlight = { link = "@keyword" },
+                excluded_filetypes = { "TelescopePrompt", "TelescopeResults" },
                 extras = {
                     named_parameters = true,
                     -- excluded_argnames = {
@@ -75,6 +72,11 @@ return {
                 end,
                 on_highlights = function(hl, c)
                     hl.codeBlockBackground = { bg = c.bg_medium }
+
+                    hl.IlluminatedWordText = { sp = c.bg } -- would highlight lua function, end
+                    hl.IlluminatedWordRead = { style = "underline", sp = c.comment }
+                    hl.IlluminatedWordWrite = { style = "underline", sp = c.comment }
+
                     hl.SignColumn = { bg = c.bg_medium }
                     hl.GitSignsAddNr = { bg = c.bg_medium, fg = c.gitSigns.add }
                     hl.GitSignsChangeNr = { bg = c.bg_medium, fg = c.gitSigns.change }

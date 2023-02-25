@@ -7,12 +7,12 @@ return {
                 "nvim-telescope/telescope-fzf-native.nvim",
                 build = "make",
             },
-            "IllustratedMan-code/telescope-conda.nvim",
+            "kwie98/telescope-conda.nvim",
         },
         cmd = "Telescope",
         keys = {
-            { "<Leader>f", mode = "n", desc = "Find File" },
-            { "<Leader>F", mode = "n", desc = "Find Text" },
+            { "<Leader>f",  mode = "n", desc = "Find File" },
+            { "<Leader>F",  mode = "n", desc = "Find Text" },
             { "<Leader>gb", mode = "n", desc = "Checkout Branch" },
             { "<Leader>gc", mode = "n", desc = "Find Revision" },
             { "<Leader>sh", mode = "n", desc = "Find Help" },
@@ -21,7 +21,7 @@ return {
             { "<Leader>sr", mode = "n", desc = "Open Recent File" },
             { "<Leader>sk", mode = "n", desc = "Keymaps" },
             { "<Leader>sa", mode = "n", desc = "Find in Home" },
-            { "<Leader>t", mode = "n", desc = "Resume Search" },
+            { "<Leader>t",  mode = "n", desc = "Resume Search" },
         },
 
         config = function()
@@ -67,6 +67,9 @@ return {
 
                             ["<C-b>"] = actions.results_scrolling_up,
                             ["<C-f>"] = actions.results_scrolling_down,
+
+                            ["<C-i>"] = actions.cycle_history_next,
+                            ["<C-o>"] = actions.cycle_history_prev,
 
                             ["<C-Space>"] = actions.cycle_previewers_next,
 

@@ -14,15 +14,18 @@ return {
                 bufferline.close_in_direction("left")
                 bufferline.close_in_direction("right")
             end, { desc = "Close Other Buffers" })
-            vim.keymap.set("n", "<Leader>CH", function()
+            vim.keymap.set("n", "<Leader>Ch", function()
                 bufferline.close_in_direction("left")
             end, { desc = "Close Left" })
-            vim.keymap.set("n", "<Leader>CL", function()
+            vim.keymap.set("n", "<Leader>Cl", function()
                 bufferline.close_in_direction("right")
             end, { desc = "Close Right" })
 
             bufferline.setup({
                 options = {
+                    custom_filter = function (bufnr, _)
+                        return vim.fn.bufname(bufnr) ~= ""
+                    end,
                     modified_icon = vim.g.modified_icon,
                     debug = {
                         logging = true,

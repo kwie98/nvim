@@ -1,4 +1,4 @@
-require("kwie.set")
+require("kwie.options")
 require("kwie.lazy")
-require("kwie.remap")
-require("kwie.autocmd")
+require("kwie.keys")
+require("kwie.autocommands")

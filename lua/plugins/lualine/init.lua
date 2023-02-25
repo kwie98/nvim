@@ -3,11 +3,13 @@ return {
         "nvim-lualine/lualine.nvim",
         dependencies = {
             "kyazdani42/nvim-web-devicons",
+            "folke/tokyonight.nvim",
         },
 
         config = function()
             local lualine = require("lualine")
             local components = require("plugins.lualine.components")
+            local tokyonight = require("tokyonight")
 
             lualine.setup({
                 options = {
@@ -52,6 +54,11 @@ return {
                 tabline = {},
                 extensions = { "fugitive", "man", "nvim-dap-ui", "nvim-tree", "quickfix", "toggleterm" },
             })
+            local red = "#e16d84"
+            vim.cmd("hi lualine_a_terminal guibg=" .. red)
+            vim.cmd("hi lualine_a_command guibg=" .. red)
+            vim.cmd("hi lualine_b_terminal guifg=" .. red)
+            vim.cmd("hi lualine_b_command guifg=" .. red)
         end,
     },
 }

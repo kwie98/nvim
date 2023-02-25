@@ -65,11 +65,15 @@ vim.keymap.set("n", "}", "<CMD>execute 'keepjumps norm! ' . v:count1 . '}zzzv'<C
 vim.keymap.set("n", "<C-u>", "<CMD>execute 'keepjumps norm! ' . '<C-u>'<CR>", opts)
 vim.keymap.set("n", "<C-d>", "<CMD>execute 'keepjumps norm! ' . '<C-d>'<CR>", opts)
 
+if vim.fn.has("nvim-0.9") == 1 then
+    vim.keymap.set("n", "<Leader>lH", vim.show_pos, { desc = "Inspect Highlight" })
+end
+
 -- LSP/diagnostics binds
 vim.keymap.set("n", "gl", vim.diagnostic.open_float, opts)
 vim.keymap.set("n", "]l", vim.diagnostic.goto_next, opts)
 vim.keymap.set("n", "[l", vim.diagnostic.goto_prev, opts)
-vim.keymap.set("n", "<Leader>lz", function()
+vim.keymap.set("n", "<Leader>lh", function()
     if vim.g.diagnostics_visible then
         vim.diagnostic.disable()
         vim.g.diagnostics_visible = false
@@ -78,13 +82,13 @@ vim.keymap.set("n", "<Leader>lz", function()
         vim.g.diagnostics_visible = true
     end
 end, { desc = "Toggle Diagnostics" })
-vim.keymap.set("n", "<Leader>lZ", function()
-    local bufnr = vim.api.nvim_get_current_buf()
-    local clients = vim.lsp.get_active_clients({ bufnr = bufnr })
-    for _, v in pairs(clients) do
-        vim.lsp.semantic_tokens.stop(bufnr, v.id)
-    end
-end, { desc = "Turn Off Semantic Highlighting" })
+-- vim.keymap.set("n", "<Leader>lZ", function()
+--     local bufnr = vim.api.nvim_get_current_buf()
+--     local clients = vim.lsp.get_active_clients({ bufnr = bufnr })
+--     for _, v in pairs(clients) do
+--         vim.lsp.semantic_tokens.stop(bufnr, v.id)
+--     end
+-- end, { desc = "Turn Off Semantic Highlighting" })
 
 -- Changing some movement keys around for neoqwertz and with illuminate
 -- keymap("n", "*", "<cmd>lua require('illuminate').goto_next_reference()<cr>", opts)

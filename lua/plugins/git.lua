@@ -26,7 +26,7 @@ return {
         config = function()
             local gitsigns = require("gitsigns")
 
-            vim.keymap.set("n", "<Leader>gz", function()
+            vim.keymap.set("n", "<Leader>gh", function()
                 gitsigns.toggle_linehl()
                 gitsigns.toggle_deleted()
             end, { desc = "Toggle Hunks" })
