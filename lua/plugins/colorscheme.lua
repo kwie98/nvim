@@ -73,6 +73,14 @@ return {
                 on_highlights = function(hl, c)
                     hl.codeBlockBackground = { bg = c.bg_medium }
 
+                    hl.NvimTreeWinSeparator = { fg = c.fg_gutter, bg = c.bg_sidebar }
+                    hl.WinSeparator = { fg = c.fg_gutter, bg = c.bg_sidebar }
+                    hl.BufferLineNvimTreeRootFolder = { fg = c.blue, bg = "#0e0e14", style = "bold" } -- like NvimTreeRootFolder
+
+                    -- Fuzzy matches:
+                    hl.TelescopeMatching = {fg=c.blue, style = "bold"}
+                    hl.CmpItemAbbrMatch = {fg=c.blue, style = "bold"}
+
                     hl.IlluminatedWordText = { sp = c.bg } -- would highlight lua function, end
                     hl.IlluminatedWordRead = { style = "underline", sp = c.comment }
                     hl.IlluminatedWordWrite = { style = "underline", sp = c.comment }

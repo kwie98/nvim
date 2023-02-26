@@ -10,27 +10,37 @@ return {
             local bufferline = require("bufferline")
             local groups = require("bufferline.groups")
 
-            vim.keymap.set("n", "<Leader>CC", function()
+            vim.keymap.set("n", "<Leader>ca", function()
                 bufferline.close_in_direction("left")
                 bufferline.close_in_direction("right")
-            end, { desc = "Close Other Buffers" })
-            vim.keymap.set("n", "<Leader>Ch", function()
+            end, { desc = "Close All Other Buffers" })
+            vim.keymap.set("n", "<Leader>ch", function()
                 bufferline.close_in_direction("left")
             end, { desc = "Close Left" })
-            vim.keymap.set("n", "<Leader>Cl", function()
+            vim.keymap.set("n", "<Leader>cl", function()
                 bufferline.close_in_direction("right")
             end, { desc = "Close Right" })
 
             bufferline.setup({
                 options = {
-                    custom_filter = function (bufnr, _)
+                    custom_filter = function(bufnr, _)
                         return vim.fn.bufname(bufnr) ~= ""
                     end,
                     modified_icon = vim.g.modified_icon,
                     debug = {
                         logging = true,
                     },
-                    offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
+                    -- offsets = { { filetype = "NvimTree", text = "", padding = 0 } },
+                    offsets = {
+                        {
+                            filetype = "NvimTree",
+                            -- text = function ()
+                            --     return " " .. vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+                            -- end,
+                            highlight = "BufferLineNvimTreeRootFolder",
+                            -- text_align = "left",
+                        },
+                    },
                     sort_by = "directory",
                     -- indicator = {
                     --     style = "underline",

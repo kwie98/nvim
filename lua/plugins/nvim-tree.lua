@@ -5,31 +5,45 @@ return {
             "kyazdani42/nvim-web-devicons",
         },
         keys = {
-            { "<Leader>e", mode = "n", desc = "Focus Explorer" },
-            { "<Leader>E", mode = "n", desc = "Toggle Explorer" },
+            { "<Leader>e", mode = "n", desc = "Toggle Explorer" },
+            { "<Leader>E", mode = "n", desc = "Focus Explorer" },
         },
 
         config = function()
             local nvim_tree = require("nvim-tree")
+            local api = require("nvim-tree.api")
 
-            vim.keymap.set("n", "<Leader>e", function()
+            -- Close nvim-tree when it is the last window:
+            vim.api.nvim_create_autocmd("BufEnter", {
+                nested = true,
+                callback = function()
+                    if #vim.api.nvim_list_wins() == 1 and require("nvim-tree.utils").is_nvim_tree_buf() then
+                        vim.cmd("quit")
+                    end
+                end,
+            })
+
+            vim.keymap.set("n", "<Leader>E", function()
                 if vim.bo.filetype == "NvimTree" then
-                    -- we are in the tree window
+                    -- We are in the tree window; go to previous window:
                     vim.cmd("wincmd p")
                 else
-                    -- we are not in the tree window
+                    -- We are not in the tree window; open or focus the tree:
                     nvim_tree.focus()
                     vim.cmd("setlocal winhighlight+=CursorLine:CursorLineCurrent")
                 end
             end, { desc = "Focus Explorer" })
-            vim.keymap.set("n", "<Leader>E", function()
-                nvim_tree.toggle({focus = false})
+
+            vim.keymap.set("n", "<Leader>e", function()
+                nvim_tree.toggle({ focus = false })
                 vim.cmd("setlocal winhighlight+=CursorLine:CursorLineCurrent")
             end, { desc = "Toggle Explorer" })
 
             nvim_tree.setup({
                 sync_root_with_cwd = true,
                 respect_buf_cwd = true,
+                hijack_cursor = true,
+                disable_netrw = true,
                 update_focused_file = {
                     enable = true,
                     update_root = true,
@@ -81,13 +95,25 @@ return {
                     },
                 },
                 view = {
-                    -- width = {
-                    --     min = 32,
-                    --     max = 64,
-                    -- },
-                    side = "left",
+                    -- preserve_window_proportions = true, -- not working
+                    -- width = 24,
+                    -- side = "right",
+                    float = {
+                        enable = true,
+                        quit_on_focus_loss = false,
+                        open_win_config = {
+                            -- relative = "win",
+                            border = "none",
+                            width = 32,
+                            height = 53, -- TODO less hacky solution
+                            row = 1,
+                            col = 1000, -- TODO less hacky solution
+                        },
+                    },
                     mappings = {
                         list = {
+                            { key = { "H" },              action = "dir_up" },
+                            { key = { "L" },              action = "cd" },
                             { key = { "l", "<CR>", "e" }, action = "edit" },
                             { key = "h",                  action = "close_node" },
                             { key = "<C-v>",              action = "vsplit" },
@@ -99,6 +125,27 @@ return {
                             { key = "<C-t>",              action = "" },
                             { key = "<C-k>",              action = "" },
                             { key = "K",                  action = "toggle_file_info" },
+                            {
+                                key = "<C-Space>",
+                                action = "toggle_mark",
+                                action_cb = function()
+                                    api.marks.toggle()
+                                    vim.cmd("norm! j")
+                                end,
+                            },
+                            {
+                                key = "p",
+                                action = "paste",
+                                action_cb = function()
+                                    local marks = api.marks.list()
+                                    if #marks == 0 then
+                                        api.fs.paste()
+                                    else
+                                        api.marks.bulk.move()
+                                        -- api.marks.clear()
+                                    end
+                                end,
+                            },
                         },
                     },
                 },

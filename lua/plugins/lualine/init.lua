@@ -52,7 +52,7 @@ return {
                     lualine_z = { "progress" },
                 },
                 tabline = {},
-                extensions = { "fugitive", "man", "nvim-dap-ui", "nvim-tree", "quickfix", "toggleterm" },
+                extensions = { "fugitive", "man", "nvim-dap-ui", "quickfix", "toggleterm" },
             })
             local red = "#e16d84"
             vim.cmd("hi lualine_a_terminal guibg=" .. red)
