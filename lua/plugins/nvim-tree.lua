@@ -96,20 +96,20 @@ return {
                 },
                 view = {
                     -- preserve_window_proportions = true, -- not working
-                    -- width = 24,
-                    -- side = "right",
-                    float = {
-                        enable = true,
-                        quit_on_focus_loss = false,
-                        open_win_config = {
-                            -- relative = "win",
-                            border = "none",
-                            width = 32,
-                            height = 53, -- TODO less hacky solution
-                            row = 1,
-                            col = 1000, -- TODO less hacky solution
-                        },
-                    },
+                    width = 24,
+                    side = "left",
+                    -- float = {
+                    --     enable = true,
+                    --     quit_on_focus_loss = false,
+                    --     open_win_config = {
+                    --         -- relative = "win",
+                    --         border = "none",
+                    --         width = 32,
+                    --         height = 53, -- TODO less hacky solution
+                    --         row = 1,
+                    --         col = 1000, -- TODO less hacky solution
+                    --     },
+                    -- },
                     mappings = {
                         list = {
                             { key = { "H" },              action = "dir_up" },

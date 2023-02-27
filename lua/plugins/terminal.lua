@@ -60,7 +60,7 @@ return {
                 -- persist_mode = false,
                 direction = "horizontal",
                 close_on_exit = true,
-                shell = "fish",
+                shell = "zsh",
                 auto_scroll = false,
                 float_opts = {
                     border = "curved",

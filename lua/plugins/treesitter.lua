@@ -28,6 +28,7 @@ return {
                     files = { "src/parser.c", "src/scanner.c" },
                 },
             }
+            vim.treesitter.language.register("bash", "zsh")
 
             configs.setup({
                 additional_vim_regex_highlighting = false,
@@ -35,7 +36,6 @@ return {
                     "bash",
                     "comment",
                     "diff",
-                    "fish",
                     "gitignore",
                     "haskell",
                     "help",
@@ -46,6 +46,9 @@ return {
                     "toml",
                     "vim",
                     "yaml",
+                },
+                ignore_install = {
+                    "ini",
                 },
                 playground = {
                     enable = true,
