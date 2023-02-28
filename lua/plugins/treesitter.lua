@@ -5,7 +5,7 @@ return {
             "nvim-treesitter/playground",
             "nvim-treesitter/nvim-treesitter-textobjects",
             { "nvim-treesitter/nvim-treesitter-context", commit = "cacee4828152dd3a83736169ae61bbcd29a3d213" },
-            "mfussenegger/nvim-treehopper", -- tsht
+            -- "mfussenegger/nvim-treehopper", -- tsht
         },
         build = ":TSUpdate",
         lazy = true,
@@ -16,10 +16,10 @@ return {
             local parsers = require("nvim-treesitter.parsers")
             local context = require("treesitter-context")
 
-            vim.cmd([[
-                omap     <silent> m :<C-U>lua require('tsht').nodes()<CR>
-                xnoremap <silent> m :lua require('tsht').nodes()<CR>
-            ]])
+            -- vim.cmd([[
+            --     omap     <silent> m :<C-U>lua require('tsht').nodes()<CR>
+            --     xnoremap <silent> m :lua require('tsht').nodes()<CR>
+            -- ]])
 
             local parser_configs = parsers.get_parser_configs()
             parser_configs.haskell = {
@@ -28,7 +28,9 @@ return {
                     files = { "src/parser.c", "src/scanner.c" },
                 },
             }
-            vim.treesitter.language.register("bash", "zsh")
+            if vim.fn.has("nvim-0.9") == 1 then
+                vim.treesitter.language.register("bash", "zsh")
+            end
 
             configs.setup({
                 additional_vim_regex_highlighting = false,

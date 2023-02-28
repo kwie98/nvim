@@ -19,7 +19,11 @@ return {
             local ui = require("harpoon.ui")
             local mark = require("harpoon.mark")
 
-            harpoon.setup()
+            harpoon.setup({
+                menu = {
+                    width = 128,
+                },
+            })
 
             vim.keymap.set("n", "<Leader>a", function()
                 mark.add_file()

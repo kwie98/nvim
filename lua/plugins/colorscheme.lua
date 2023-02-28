@@ -41,7 +41,7 @@ return {
 
             hlargs.setup({
                 -- highlight = { link = "@keyword" },
-                excluded_filetypes = { "TelescopePrompt", "TelescopeResults" },
+                excluded_filetypes = { "TelescopePrompt", "TelescopeResults", "harpoon" },
                 extras = {
                     named_parameters = true,
                     -- excluded_argnames = {
@@ -72,14 +72,15 @@ return {
                 end,
                 on_highlights = function(hl, c)
                     hl.codeBlockBackground = { bg = c.bg_medium }
+                    -- hl.TermNormal = {fg = "#a8a8a8", bg =  "#161616"}
 
                     hl.NvimTreeWinSeparator = { fg = c.fg_gutter, bg = c.bg_sidebar }
                     hl.WinSeparator = { fg = c.fg_gutter, bg = c.bg_sidebar }
                     hl.BufferLineNvimTreeRootFolder = { fg = c.blue, bg = "#0e0e14", style = "bold" } -- like NvimTreeRootFolder
 
                     -- Fuzzy matches:
-                    hl.TelescopeMatching = {fg=c.blue, style = "bold"}
-                    hl.CmpItemAbbrMatch = {fg=c.blue, style = "bold"}
+                    hl.TelescopeMatching = { fg = c.blue, style = "bold" }
+                    hl.CmpItemAbbrMatch = { fg = c.blue, style = "bold" }
 
                     hl.IlluminatedWordText = { sp = c.bg } -- would highlight lua function, end
                     hl.IlluminatedWordRead = { style = "underline", sp = c.comment }
@@ -100,12 +101,14 @@ return {
                     hl["@keyword.function"] = { link = "@keyword" } -- WAS magenta
                     hl["@include"] = { link = "@keyword" } -- from ... import, use. WAS cyan
                     hl["@type.qualifier"] = { link = "@keyword" } -- mut (before semantic hl kicks in)
+                    hl.Identifier = { link = "@keyword" }
 
                     -- if, for, while, return:
                     hl.Conditional = { fg = c.purple, style = "italic" } -- WAS magenta
                     hl["@controlFlow"] = { link = "Conditional" } -- rust LSP
                     hl["@keyword.return"] = { link = "Conditional" }
                     hl.Repeat = { link = "Conditional" }
+                    hl["@exception"] = { link = "Conditional" } -- try, catch?
 
                     hl["@variable"] = { fg = c.fg }
                     -- hl["@namespace"] = { link = "@variable" } -- python cannot differentiate these, so keep it consistent. WAS cyan
@@ -134,6 +137,14 @@ return {
                     hl["@formatSpecifier"] = { link = "@operator" } -- rust string formatting {} brackets
 
                     hl["@constructor"] = { link = "Type" } -- __init__, object constructors
+
+                    hl.DapUIType = { link = "Type" }
+                    hl.DapUIModifiedValue = { link = "@variable" }
+                    hl.DapUIValue = { link = "@HlargsNamedParams" }
+                    hl.DapUIDecoration = { fg = c.fg_gutter }
+                    hl.DapUIWatchesError = { fg = c.error }
+                    hl.DapUIWatchesEmpty = { link = "DapUIWatchesError" }
+                    hl.DapUIWatchesValue = { fg = c.fg_gutter }
                 end,
             })
             require("kwie.darkman")

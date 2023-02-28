@@ -57,7 +57,7 @@ vim.opt.foldlevel = 20
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.updatetime = 500
-vim.opt.equalalways = false -- don't automatically resize windows to have equal sizes after some changes
+-- vim.opt.equalalways = false -- don't automatically resize windows to have equal sizes after some changes
 
 vim.g.modified_icon = "" -- for bufferline, lualine
 vim.g.small_border = "single" -- smaller helper floats

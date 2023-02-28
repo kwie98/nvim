@@ -5,13 +5,13 @@ return {
 
         config = function()
             local mason = require("mason")
-            local m_index = require("mason-registry.index")
             local m_ui = require("mason.ui")
+            -- local m_index = require("mason-registry.index")
 
             vim.keymap.set("n", "<Leader>M", m_ui.open, { desc = "Mason" })
 
             -- Add custom pydocstyle package
-            m_index["pydocstyle[toml]"] = "plugins.lsp.packages.pydocstyle-toml"
+            -- m_index["pydocstyle[toml]"] = "plugins.lsp.packages.pydocstyle-toml"
 
             mason.setup({
                 ui = {

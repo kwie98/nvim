@@ -65,13 +65,14 @@ return {
 
             vim.keymap.set("n", "<Leader>dt", dap.toggle_breakpoint, { desc = "Breakpoint" })
             vim.keymap.set("n", "<Leader>dT", function()
-                dap.set_breakpoint({ condition = vim.fn.input({ "Breakpoint Condition: " }) })
+                dap.set_breakpoint( vim.fn.input("Breakpoint Condition: ") )
             end, { desc = "Conditional Breakpoint" })
-            vim.keymap.set("n", "<Leader>dl", function()
-                dap.set_breakpoint({ log_message = vim.fn.input({ "Logpoint Message: " }) })
-            end, { desc = "Logpoint" })
+            -- vim.keymap.set("n", "<Leader>dl", function()
+            --     dap.set_breakpoint({ log_message = vim.fn.input("Logpoint Message: ") })
+            -- end, { desc = "Logpoint" })
 
-            dap_python.setup(vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python")
+            -- dap_python.setup(vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python")
+            dap_python.setup(vim.fn.stdpath("data") .. "/debugpy/bin/python")
 
             telescope.load_extension("dap")
             dapui.setup({

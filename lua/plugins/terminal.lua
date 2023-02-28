@@ -2,7 +2,7 @@ return {
     {
         "akinsho/toggleterm.nvim",
         keys = {
-            { "<Leader><Enter>", mode = "n", desc = "Toggle Terminal" },
+            { "<Leader><Enter>",   mode = "n", desc = "Toggle Terminal" },
             { "<Leader><S-Enter>", mode = "n", desc = "Focus Terminal" },
         },
 
@@ -12,8 +12,8 @@ return {
 
             vim.g.toggleterm_prev_win = vim.api.nvim_get_current_win()
 
-            vim.keymap.set("n", "<Leader><S-Enter>", function ()
-                local count = vim.fn.max({vim.v.count, 1})
+            vim.keymap.set("n", "<Leader><S-Enter>", function()
+                local count = vim.fn.max({ vim.v.count, 1 })
                 local term = terminal.get(count)
                 if term == nil then
                     -- Requested terminal does not exist; make it:
@@ -31,10 +31,10 @@ return {
                     vim.g.toggleterm_prev_win = vim.api.nvim_get_current_win()
                     term:open()
                 end
-            end, {desc = "Focus Terminal"})
+            end, { desc = "Focus Terminal" })
 
-            vim.keymap.set("n", "<Leader><Enter>", function ()
-                local count = vim.fn.max({vim.v.count, 1})
+            vim.keymap.set("n", "<Leader><Enter>", function()
+                local count = vim.fn.max({ vim.v.count, 1 })
                 if vim.bo.filetype == "toggleterm" then
                     -- Was in terminal; go to previous window:
                     vim.cmd(count .. "ToggleTerm")
@@ -44,7 +44,7 @@ return {
                     vim.cmd(count .. "ToggleTerm")
                     vim.api.nvim_set_current_win(vim.g.toggleterm_prev_win)
                 end
-            end, {desc = "Toggle Terminal"})
+            end, { desc = "Toggle Terminal" })
 
             toggleterm.setup({
                 size = 20,
@@ -53,6 +53,9 @@ return {
                 -- shade_filetypes = {},
                 -- shade_terminals = true,
                 shading_factor = "0",
+                -- highlights = {
+                --     Normal = { link = "TermNormal" },
+                -- },
                 start_in_insert = false,
                 insert_mappings = false,
                 terminal_mappings = false,

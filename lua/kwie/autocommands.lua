@@ -2,6 +2,7 @@ vim.cmd([[
     augroup _general_settings
     autocmd!
     autocmd FileType toggleterm,fugitive,qf,man,help nnoremap <silent> <buffer> q :close<CR>
+    autocmd User FugitiveStageBlob setlocal readonly nomodifiable noswapfile
     autocmd FileType TelescopePrompt nnoremap <silent> <buffer> q :close!<CR>
     autocmd TextYankPost * silent!lua require('vim.highlight').on_yank({higroup = 'IncSearch', timeout = 100})
     autocmd BufWinEnter * :set formatoptions-=o
