@@ -2,7 +2,7 @@ return {
     {
         "akinsho/toggleterm.nvim",
         keys = {
-            { "<Leader><Enter>",   mode = "n", desc = "Toggle Terminal" },
+            { "<Leader><Enter>", mode = "n", desc = "Toggle Terminal" },
             { "<Leader><S-Enter>", mode = "n", desc = "Focus Terminal" },
         },
 

@@ -13,6 +13,7 @@ return {
             -- m_index["pydocstyle[toml]"] = "plugins.lsp.packages.pydocstyle-toml"
 
             mason.setup({
+                PATH = "skip",
                 ui = {
                     border = vim.g.big_border,
                     keymaps = {
@@ -33,7 +34,7 @@ return {
             "simrat39/rust-tools.nvim",
             -- { "mrcjkb/haskell-tools.nvim", branch = "1.x.x" },
             "barreiroleo/ltex_extra.nvim", -- in ltex config
-            "b0o/SchemaStore.nvim",        -- in jsonls config
+            "b0o/SchemaStore.nvim", -- in jsonls config
             {
                 "hrsh7th/cmp-nvim-lsp",
                 cond = function()
@@ -183,7 +184,7 @@ return {
                         runtime_condition = not_conda_or_fugitive,
                     }),
                     formatting.stylua.with({
-                        extra_args = { "--indent-type=Spaces" },
+                        -- extra_args = { "--indent-type=Spaces" },
                         runtime_condition = not_conda_or_fugitive,
                     }),
                     formatting.prettierd.with({

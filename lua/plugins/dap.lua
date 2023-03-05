@@ -11,7 +11,7 @@ return {
         lazy = true,
         module = false, -- don't load dap even if required (e.g., by rust-tools.nvim)
         keys = {
-            { "<F5>",       mode = "n" },
+            { "<F5>", mode = "n" },
             { "<Leader>dh", mode = "n", desc = "Toggle UI" },
             { "<Leader>dm", mode = "n", desc = "Debug Test" },
             { "<Leader>dt", mode = "n", desc = "Breakpoint" },
@@ -65,7 +65,7 @@ return {
 
             vim.keymap.set("n", "<Leader>dt", dap.toggle_breakpoint, { desc = "Breakpoint" })
             vim.keymap.set("n", "<Leader>dT", function()
-                dap.set_breakpoint( vim.fn.input("Breakpoint Condition: ") )
+                dap.set_breakpoint(vim.fn.input("Breakpoint Condition: "))
             end, { desc = "Conditional Breakpoint" })
             -- vim.keymap.set("n", "<Leader>dl", function()
             --     dap.set_breakpoint({ log_message = vim.fn.input("Logpoint Message: ") })
@@ -98,7 +98,7 @@ return {
                     },
                     {
                         elements = {
-                            { id = "scopes",  size = 0.5 },
+                            { id = "scopes", size = 0.5 },
                             { id = "watches", size = 0.5 },
                             -- { id = "frames", size = 0.25 },
                         },
