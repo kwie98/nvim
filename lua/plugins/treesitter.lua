@@ -39,6 +39,7 @@ return {
                     "comment",
                     "diff",
                     "gitignore",
+                    "gitcommit",
                     "haskell",
                     "help",
                     "json",
@@ -163,7 +164,7 @@ return {
             "nvim-treesitter/nvim-treesitter",
         },
         keys = {
-            { "<Enter>", mode = "n", desc = "Node Action" },
+            { "<C-Enter>", mode = "n", desc = "Node Action" },
         },
 
         config = function()
@@ -171,7 +172,7 @@ return {
 
             node_action.setup()
 
-            vim.keymap.set("n", "<Enter>", node_action.node_action, { desc = "Node Action" })
+            vim.keymap.set("n", "<C-Enter>", node_action.node_action, { desc = "Node Action" })
         end,
     },
 }

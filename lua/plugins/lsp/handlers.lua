@@ -1,6 +1,6 @@
 local M = {}
 
-M.on_attach = function(client, _) -- client, bufnr
+M.on_attach = function(_, _) -- client, bufnr
     -- print(vim.inspect(client.id))
     -- print(vim.inspect(client.name))
     -- print(vim.inspect(client.server_capabilities.semanticTokensProvider))

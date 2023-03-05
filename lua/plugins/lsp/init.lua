@@ -2,7 +2,6 @@ return {
     {
         "williamboman/mason.nvim",
         lazy = true,
-
         config = function()
             local mason = require("mason")
             local m_ui = require("mason.ui")
@@ -34,7 +33,7 @@ return {
             "simrat39/rust-tools.nvim",
             -- { "mrcjkb/haskell-tools.nvim", branch = "1.x.x" },
             "barreiroleo/ltex_extra.nvim", -- in ltex config
-            "b0o/SchemaStore.nvim", -- in jsonls config
+            "b0o/SchemaStore.nvim",        -- in jsonls config
             {
                 "hrsh7th/cmp-nvim-lsp",
                 cond = function()
@@ -43,7 +42,6 @@ return {
             },
         },
         event = { "BufReadPre", "BufNewFile" },
-
         config = function()
             local mason_lspconfig = require("mason-lspconfig")
             local lspconfig = require("lspconfig")
@@ -80,17 +78,6 @@ return {
             mason_lspconfig.setup_handlers({ setup_lsp })
 
             -- setup other LSPs:
-            -- ht.setup({
-            --     hls = {
-            --         on_attach = function(client, bufnr)
-            --             handlers.on_attach(client, bufnr)
-            --             vim.keymap.set("n", "<Leader>lg", ht.hoogle.hoogle_signature, { desc = "Hoogle Signature" })
-            --         end,
-            --     },
-            --     hover = {
-            --         border = nil, -- not working?
-            --     },
-            -- })
             setup_lsp("hls")
 
             rt.setup({
@@ -152,7 +139,6 @@ return {
         dependencies = {
             "williamboman/mason.nvim", -- load after mason so that used binaries are available on the path
         },
-
         config = function()
             local null_ls = require("null-ls")
             local null_ls_utils = require("null-ls.utils")
@@ -186,7 +172,8 @@ return {
                 on_attach = handlers.on_attach,
                 sources = {
                     formatting.black.with({
-                        extra_args = { "--fast", "--line-length", "120" },
+                        -- extra_args = { "--fast", "--line-length", "120" },
+                        extra_args = { "--fast" },
                         cwd = root_finder,
                         runtime_condition = not_conda_or_fugitive,
                     }),
@@ -199,24 +186,33 @@ return {
                         extra_args = { "--indent-type=Spaces" },
                         runtime_condition = not_conda_or_fugitive,
                     }),
-                    formatting.markdownlint.with({
-                        -- extra_args = { "--disable", "line_length"}, -- does not work :(
-                        cwd = root_finder,
-                        runtime_condition = not_conda_or_fugitive,
-                    }),
-                    formatting.isort.with({
-                        cwd = root_finder,
-                        runtime_condition = not_conda_or_fugitive,
-                    }),
                     formatting.prettierd.with({
                         filetypes = { "yaml" },
                         runtime_condition = not_conda_or_fugitive,
                     }),
-                    -- breaks code block bg highlighting?
-                    diagnostics.markdownlint.with({
+
+                    -- diagnostics.ruff.with({
+                    --     runtime_condition = not_conda_or_fugitive,
+                    -- }),
+                    diagnostics.gitlint,
+                    diagnostics.selene.with({
                         cwd = root_finder,
                         runtime_condition = not_conda_or_fugitive,
                     }),
+                    -- formatting.markdownlint.with({
+                    --     -- extra_args = { "--disable", "line_length"}, -- does not work :(
+                    --     cwd = root_finder,
+                    --     runtime_condition = not_conda_or_fugitive,
+                    -- }),
+                    -- formatting.isort.with({
+                    --     cwd = root_finder,
+                    --     runtime_condition = not_conda_or_fugitive,
+                    -- }),
+                    -- breaks code block bg highlighting?
+                    -- diagnostics.markdownlint.with({
+                    --     cwd = root_finder,
+                    --     runtime_condition = not_conda_or_fugitive,
+                    -- }),
                     -- diagnostics.flake8.with({
                     --     extra_args = { "--max-line-length", "120" },
                     --     cwd = root_finder,
@@ -225,11 +221,6 @@ return {
                     --     disabled_filetypes = { "markdown" },
                     --     runtime_condition = not_conda_or_fugitive,
                     -- }),
-                    diagnostics.gitlint,
-                    diagnostics.selene.with({
-                        cwd = root_finder,
-                        runtime_condition = not_conda_or_fugitive,
-                    }),
                     -- diagnostics.mypy.with({
                     --     extra_args = {
                     --         "--python-executable=python", -- use env python
@@ -239,10 +230,10 @@ return {
                     --     method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
                     --     runtime_condition = not_conda_or_fugitive,
                     -- }),
-                    diagnostics.pydocstyle.with({
-                        cwd = root_finder,
-                        runtime_condition = not_conda_or_fugitive,
-                    }),
+                    -- diagnostics.pydocstyle.with({
+                    --     cwd = root_finder,
+                    --     runtime_condition = not_conda_or_fugitive,
+                    -- }),
                 },
             })
         end,

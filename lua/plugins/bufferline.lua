@@ -10,10 +10,10 @@ return {
             local bufferline = require("bufferline")
             local groups = require("bufferline.groups")
 
-            vim.keymap.set("n", "<Leader>ca", function()
+            vim.keymap.set("n", "<Leader>co", function()
                 bufferline.close_in_direction("left")
                 bufferline.close_in_direction("right")
-            end, { desc = "Close All Other Buffers" })
+            end, { desc = "Close Other" })
             vim.keymap.set("n", "<Leader>ch", function()
                 bufferline.close_in_direction("left")
             end, { desc = "Close Left" })

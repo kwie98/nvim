@@ -121,7 +121,7 @@ return {
                 -- patterns = { ">Python", ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
                 patterns = { ".git" }, -- ">"-patterns break fugitive sadly
                 ignore_lsp = {},
-                show_hidden = false,
+                show_hidden = true,
                 silent_chdir = true,
                 datapath = vim.fn.stdpath("data"),
             })
