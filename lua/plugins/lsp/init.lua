@@ -86,6 +86,9 @@ return {
                     inlay_hints = {
                         show_parameter_hints = false,
                     },
+                    hover_actions = {
+                        border = vim.g.small_border,
+                    },
                 },
                 server = {
                     cmd = { "rustup", "run", "stable", "rust-analyzer" },
@@ -109,10 +112,23 @@ return {
                 },
             })
 
+            local signs = {
+                { name = "DiagnosticSignError", text = "" },
+                { name = "DiagnosticSignWarn", text = "" },
+                { name = "DiagnosticSignHint", text = "" },
+                { name = "DiagnosticSignInfo", text = "" },
+            }
+            for _, sign in ipairs(signs) do
+                vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+            end
+
             -- diagnostic settings:
             vim.diagnostic.config({
                 virtual_text = false,
-                signs = false,
+                signs = {
+                    active = signs,
+                    priority = 1,
+                },
                 update_in_insert = false,
                 underline = true,
                 severity_sort = true,
@@ -235,6 +251,22 @@ return {
                     --     cwd = root_finder,
                     --     runtime_condition = not_conda_or_fugitive,
                     -- }),
+                },
+            })
+        end,
+    },
+    {
+        "j-hui/fidget.nvim",
+        lazy = true,
+        event = "VeryLazy",
+        enabled = false,
+
+        config = function()
+            local fidget = require("fidget")
+
+            fidget.setup({
+                text = {
+                    spinner = "dots",
                 },
             })
         end,
