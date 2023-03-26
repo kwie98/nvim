@@ -35,7 +35,7 @@ return {
             end, { desc = "Focus Explorer" })
 
             vim.keymap.set("n", "<Leader>e", function()
-                nvim_tree.toggle({ focus = false })
+                api.tree.toggle({ focus = false })
                 vim.cmd("setlocal winhighlight+=CursorLine:CursorLineCurrent")
             end, { desc = "Toggle Explorer" })
 
