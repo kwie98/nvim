@@ -59,13 +59,20 @@ return {
                 auto_install = true,
                 highlight = {
                     enable = true, -- false will disable the whole extension
-                    disable = { "css", "latex" }, -- list of language that will be disabled
+                    -- disable = { "css", "latex" }, -- list of language that will be disabled
+                    disable = { "latex" }, -- list of language that will be disabled
                 },
                 autopairs = {
                     enable = true,
                 },
-                -- indent = { enable = true, disable = { "css", "python", "yaml" } },
-                indent = { enable = true, disable = { "css", "yaml" } },
+                indent = {
+                    enable = true,
+                    disable = {
+                        "css",
+                        "python",
+                        "yaml",
+                    },
+                },
                 incremental_selection = {
                     enable = true,
                     keymaps = {
