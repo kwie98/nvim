@@ -72,3 +72,12 @@ vim.cmd([[
         augroup END
     endfunction
 ]])
+
+-- No accidental changing of environment source code:
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+    group = vim.api.nvim_create_augroup("conda_nomodifiable", { clear = true }),
+    pattern = "/home/konrad/.local/share/conda/envs/**",
+    callback = function()
+        vim.bo.modifiable = false
+    end,
+})
