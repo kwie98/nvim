@@ -2,6 +2,8 @@ return {
     {
         "williamboman/mason.nvim",
         lazy = true,
+        enabled = vim.fn.has("win32") == 0,
+
         config = function()
             local mason = require("mason")
             local m_ui = require("mason.ui")
@@ -43,6 +45,8 @@ return {
             },
         },
         event = { "BufReadPre", "BufNewFile" },
+        enabled = vim.fn.has("win32") == 0,
+
         config = function()
             local mason_lspconfig = require("mason-lspconfig")
             local lspconfig = require("lspconfig")
@@ -156,6 +160,8 @@ return {
         dependencies = {
             "williamboman/mason.nvim", -- load after mason so that used binaries are available on the path
         },
+        enabled = vim.fn.has("win32") == 0,
+
         config = function()
             local null_ls = require("null-ls")
             local null_ls_utils = require("null-ls.utils")
@@ -251,22 +257,6 @@ return {
                     --     cwd = root_finder,
                     --     runtime_condition = not_conda_or_fugitive,
                     -- }),
-                },
-            })
-        end,
-    },
-    {
-        "j-hui/fidget.nvim",
-        lazy = true,
-        event = "VeryLazy",
-        enabled = false,
-
-        config = function()
-            local fidget = require("fidget")
-
-            fidget.setup({
-                text = {
-                    spinner = "dots",
                 },
             })
         end,

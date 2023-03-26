@@ -70,6 +70,7 @@ return {
         keys = {
             { "<Leader>lr", mode = "n", desc = "Rename Symbol" },
         },
+        enabled = vim.fn.has("win32") == 0,
 
         config = function()
             require("inc_rename").setup()

@@ -18,6 +18,7 @@ return {
             { "<Leader>dT", mode = "n", desc = "Conditional Breakpoint" },
             { "<Leader>dl", mode = "n", desc = "Logpoint" },
         },
+        enabled = vim.fn.has("win32") == 0,
 
         config = function()
             local dap = require("dap")

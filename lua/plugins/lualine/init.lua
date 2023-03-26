@@ -3,13 +3,11 @@ return {
         "nvim-lualine/lualine.nvim",
         dependencies = {
             "kyazdani42/nvim-web-devicons",
-            "folke/tokyonight.nvim",
         },
 
         config = function()
             local lualine = require("lualine")
             local components = require("plugins.lualine.components")
-            local tokyonight = require("tokyonight")
 
             lualine.setup({
                 options = {

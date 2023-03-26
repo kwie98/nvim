@@ -9,6 +9,7 @@ return {
             "MarkdownPreviewToggle",
         },
         ft = "markdown",
+        enabled = false,
 
         config = function()
             vim.g.mkdp_filetypes = { "markdown", "vimwiki" }
