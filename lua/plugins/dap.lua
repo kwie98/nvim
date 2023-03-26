@@ -67,11 +67,41 @@ return {
             vim.keymap.set("n", "<Leader>dT", function()
                 dap.set_breakpoint(vim.fn.input("Breakpoint Condition: "))
             end, { desc = "Conditional Breakpoint" })
-            -- vim.keymap.set("n", "<Leader>dl", function()
-            --     dap.set_breakpoint({ log_message = vim.fn.input("Logpoint Message: ") })
-            -- end, { desc = "Logpoint" })
 
-            -- dap_python.setup(vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python")
+            -- dap.listeners.after.event_initialized["kwie98"] = function()
+            --     vim.keymap.set("n", "C", dap.run_to_cursor, { desc = "Run To Cursor" })
+            --     vim.keymap.set("n", "H", dap.step_out, { desc = "Step Out" })
+            --     vim.keymap.set("n", "J", dap.step_over, { desc = "Step Over" })
+            --     vim.keymap.set("n", "L", dap.step_into, { desc = "Step Into" })
+            -- end
+            -- dap.listeners.before.event_terminated["kwie98"] = function()
+            --     print("before event terminated")
+            --     vim.cmd([[
+            --         nunmap C
+            --         nunmap H
+            --         nunmap J
+            --         nunmap L
+            --     ]])
+            -- end
+            -- dap.listeners.before.event_exited["kwie98"] = function()
+            --     print("before event exited")
+            --     vim.cmd([[
+            --         nunmap C
+            --         nunmap H
+            --         nunmap J
+            --         nunmap L
+            --     ]])
+            -- end
+            -- dap.listeners.before.disconnect["kwie98"] = function()
+            --     print("before event exited")
+            --     vim.cmd([[
+            --         nunmap C
+            --         nunmap H
+            --         nunmap J
+            --         nunmap L
+            --     ]])
+            -- end
+
             dap_python.setup(vim.fn.stdpath("data") .. "/debugpy/bin/python")
 
             telescope.load_extension("dap")
