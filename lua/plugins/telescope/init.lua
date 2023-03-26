@@ -12,6 +12,7 @@ return {
         cmd = "Telescope",
         keys = {
             { "<Leader>f", mode = "n", desc = "Find File" },
+            { "<Leader>b", mode = "n", desc = "Find Buffer" },
             { "<Leader>F", mode = "n", desc = "Find Text" },
             { "<Leader>gb", mode = "n", desc = "Checkout Branch" },
             { "<Leader>gc", mode = "n", desc = "Find Revision" },
@@ -31,6 +32,7 @@ return {
             local my_pickers = require("plugins.telescope.pickers")
 
             vim.keymap.set("n", "<Leader>f", builtin.find_files, { desc = "Find File" })
+            vim.keymap.set("n", "<Leader>b", builtin.buffers, { desc = "Find Buffer" })
             vim.keymap.set("n", "<Leader>F", builtin.live_grep, { desc = "Find Text" })
 
             vim.keymap.set("n", "<Leader>gb", builtin.git_branches, { desc = "Checkout Branch" })
