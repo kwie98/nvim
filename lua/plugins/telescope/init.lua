@@ -99,7 +99,7 @@ return {
                         case_mode = "smart_case", -- or "ignore_case" or "respect_case"
                     },
                     conda = {
-                        anaconda_path = "/data/conda",
+                        anaconda_path = "/home/konrad/.local/share/conda",
                     },
                 },
             })
