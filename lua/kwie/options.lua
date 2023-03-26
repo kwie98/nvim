@@ -48,14 +48,13 @@ vim.opt.sidescrolloff = 8
 vim.opt.guifont = "monospace:h17"
 vim.opt.gdefault = true
 vim.opt.spell = false
-vim.opt.shell = "/usr/bin/bash"
 vim.opt.textwidth = 120
 vim.opt.colorcolumn = "+1"
 vim.opt.wildmode = "longest:full,full"
 vim.opt.laststatus = 3 -- one lualine for everything
-vim.opt.foldlevel = 20
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+-- vim.opt.foldlevel = 20
+-- vim.opt.foldmethod = "expr"
+-- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.updatetime = 500
 -- vim.opt.equalalways = false -- don't automatically resize windows to have equal sizes after some changes
 
