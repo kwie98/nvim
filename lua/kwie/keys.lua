@@ -1,137 +1,73 @@
 local opts = { noremap = true, silent = true }
 
--- NORMAL --
--- Window navigation
--- vim.keymap.set("n", "<C-h>", "<C-w>h", opts)
--- vim.keymap.set("n", "<C-j>", "<C-w>j", opts)
--- vim.keymap.set("n", "<C-k>", "<C-w>k", opts)
--- vim.keymap.set("n", "<C-l>", "<C-w>l", opts)
+-- Navigation:
 vim.keymap.set("n", "<C-j>", "<C-w>w", opts)
 vim.keymap.set("n", "<C-k>", "<C-w>W", opts)
-
--- Buffer navigation
 vim.keymap.set("n", "<C-l>", "<CMD>BufferLineCycleNext<CR>", opts)
 vim.keymap.set("n", "<C-h>", "<CMD>BufferLineCyclePrev<CR>", opts)
-
--- Tab navigation
 vim.keymap.set("n", "<C-S-H>", "<CMD>tabprevious<CR>", opts)
 vim.keymap.set("n", "<C-S-L>", "<CMD>tabnext<CR>", opts)
 
--- Git Merging binds similar to go and gp
-vim.cmd([[
-    nnoremap dh :diffget //2/<c-r>=expand('%:t') <CR><CR>
-    nnoremap dl :diffget //3/<c-r>=expand('%:t') <CR><CR>
-]])
+-- Move text:
+vim.keymap.set("n", "<A-j>", "<Esc>:m .+1<CR>==", opts)
+vim.keymap.set("n", "<A-k>", "<Esc>:m .-2<CR>==", opts)
+vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", opts)
+vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", opts)
 
--- goto last pasted
-vim.keymap.set("n", "gp", "`[v`]", opts)
-
-vim.keymap.set("n", "[h", function()
-    if vim.wo.diff then
-        return "[c"
-    end
-    vim.schedule(function()
-        require("gitsigns").prev_hunk()
-    end)
-    return "<Ignore>"
-end, { expr = true })
-vim.keymap.set("n", "]h", function()
-    if vim.wo.diff then
-        return "]c"
-    end
-    vim.schedule(function()
-        require("gitsigns").next_hunk()
-    end)
-    return "<Ignore>"
-end, { expr = true })
-
--- Resize with arrows
+-- Resize:
 vim.keymap.set("n", "<C-Up>", ":resize -2<CR>", opts)
 vim.keymap.set("n", "<C-Down>", ":resize +2<CR>", opts)
 vim.keymap.set("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
--- Move text up and down
-vim.keymap.set("n", "<C-S-J>", "<Esc>:m .+1<CR>==", opts)
-vim.keymap.set("n", "<C-S-K>", "<Esc>:m .-2<CR>==", opts)
+-- Merging binds similar to do and dp:
+vim.cmd([[
+    nnoremap dh :diffget //2/<c-r>=expand('%:t') <CR><CR>
+    nnoremap dl :diffget //3/<c-r>=expand('%:t') <CR><CR>
+]])
 
--- keep the view (or cursor) centered
-vim.keymap.set("n", "n", "nzzzv", opts)
-vim.keymap.set("n", "N", "Nzzzv", opts)
-vim.keymap.set("n", "J", "mzJ`z", opts)
-
-vim.keymap.set("n", "{", "<CMD>execute 'keepjumps norm! ' . v:count1 . '{zzzv'<CR>", opts)
-vim.keymap.set("n", "}", "<CMD>execute 'keepjumps norm! ' . v:count1 . '}zzzv'<CR>", opts)
+-- Utility:
+vim.keymap.set("n", "gp", "`[v`]", opts)
+vim.keymap.set("n", "J", "mzJ`z", opts) -- keep cursor static
+vim.keymap.set("n", "<Leader>n", "<CMD>noh<CR>", opts)
 vim.keymap.set("n", "<C-u>", "<CMD>execute 'keepjumps norm! ' . '<C-u>'<CR>", opts)
 vim.keymap.set("n", "<C-d>", "<CMD>execute 'keepjumps norm! ' . '<C-d>'<CR>", opts)
+vim.keymap.set("v", "<", "<gv", opts)
+vim.keymap.set("v", ">", ">gv", opts)
+vim.keymap.set("v", "p", '"_dP', opts) -- keep paste buffer content when overwriting something in visual mode
 
-if vim.fn.has("nvim-0.9") == 1 then
-    vim.keymap.set("n", "<Leader>lH", vim.show_pos, { desc = "Inspect Highlight" })
-end
+-- One-handed copy paste:
+vim.keymap.set({ "i", "c" }, "<C-v>", "<C-r><C-o>+", opts)
+vim.keymap.set("s", "<C-c>", "<Esc>gvygv<C-g>", opts)
+vim.keymap.set("s", "<C-v>", "<C-r>_<Del>i<C-r>+<Esc>", opts)
 
--- LSP/diagnostics binds
+-- LSP/diagnostics binds:
 vim.keymap.set("n", "gl", vim.diagnostic.open_float, opts)
 vim.keymap.set("n", "]l", vim.diagnostic.goto_next, opts)
 vim.keymap.set("n", "[l", vim.diagnostic.goto_prev, opts)
 vim.keymap.set("n", "<Leader>lh", function()
     if vim.g.diagnostics_visible then
-        vim.diagnostic.disable()
+        vim.diagnostic.hide()
         vim.g.diagnostics_visible = false
     else
-        vim.diagnostic.enable()
+        vim.diagnostic.show()
         vim.g.diagnostics_visible = true
     end
 end, { desc = "Toggle Diagnostics" })
--- vim.keymap.set("n", "<Leader>lZ", function()
---     local bufnr = vim.api.nvim_get_current_buf()
---     local clients = vim.lsp.get_active_clients({ bufnr = bufnr })
---     for _, v in pairs(clients) do
---         vim.lsp.semantic_tokens.stop(bufnr, v.id)
---     end
--- end, { desc = "Turn Off Semantic Highlighting" })
 
--- Changing some movement keys around for neoqwertz and with illuminate
--- keymap("n", "*", "<cmd>lua require('illuminate').goto_next_reference()<cr>", opts)
--- keymap("n", "^", "<cmd>lua require('illuminate').goto_prev_reference()<cr>", opts)
+if vim.fn.has("nvim-0.9") == 1 then
+    vim.keymap.set("n", "<Leader>lH", vim.show_pos, { desc = "Inspect Highlight" })
+end
 
+-- Swaps for neoqwertz:
 vim.keymap.set({ "n", "x", "o" }, "^", "#", opts)
 vim.keymap.set({ "n", "x", "o" }, "$", "^", opts) -- first symbol in line
 vim.keymap.set({ "n", "x", "o" }, "|", "$", opts) -- last symbol in line
 vim.keymap.set({ "n", "x", "o" }, "#", "", opts) -- free command
 vim.keymap.set("n", "s", "ge", opts)
 
+-- Mnemonics for surround:
 vim.keymap.set({ "x", "o" }, "ir", "i[")
 vim.keymap.set({ "x", "o" }, "ar", "a[")
 vim.keymap.set({ "x", "o" }, "ia", "i<")
 vim.keymap.set({ "x", "o" }, "aa", "a<")
-
--- Insert --
-
--- typical one-handed copy paste stuff
-vim.keymap.set({ "i", "c" }, "<C-v>", "<C-r><C-o>+", opts)
--- vim.keymap.set("n", "<C-v>", "Pl", opts)
-vim.keymap.set("s", "<C-c>", "<Esc>gvygv<C-g>", opts)
-vim.keymap.set("s", "<C-v>", "<C-r>_<Del>i<C-r>+<Esc>", opts)
-
--- Visual --
--- Stay in indent mode
-vim.keymap.set("v", "<", "<gv", opts)
-vim.keymap.set("v", ">", ">gv", opts)
-
--- Move text up and down
-vim.keymap.set("v", "<C-S-J>", ":m '>+1<CR>gv=gv", opts)
-vim.keymap.set("v", "<C-S-K>", ":m '<-2<CR>gv=gv", opts)
-
--- vim.keymap.set("v", "p", '"_dP', opts)
-
--- in Visual, use "s" for surround just like in Normal
-vim.keymap.set("x", "s", "<Plug>VSurround", opts)
-
--- Wildmode (Command Menu) --
--- vim.cmd([[
--- set wildcharm=<C-Z>
--- cnoremap <expr> <up> wildmenumode() ? "\<left>" : "\<up>"
--- cnoremap <expr> <down> wildmenumode() ? "\<right>" : "\<down>"
--- cnoremap <expr> <left> wildmenumode() ? "\<up>" : "\<left>"
--- cnoremap <expr> <right> wildmenumode() ? " \<bs>\<C-Z>" : "\<right>"
--- ]])
