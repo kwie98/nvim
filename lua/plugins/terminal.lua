@@ -47,7 +47,7 @@ return {
             end, { desc = "Toggle Terminal" })
 
             toggleterm.setup({
-                size = 20,
+                size = 16,
                 open_mapping = nil,
                 hide_numbers = true,
                 -- shade_filetypes = {},
