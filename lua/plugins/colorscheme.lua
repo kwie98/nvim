@@ -141,6 +141,7 @@ return {
                     hl.DapUIType = { link = "Type" }
                     hl.DapUIModifiedValue = { link = "@variable" }
                     hl.DapUIValue = { link = "@HlargsNamedParams" }
+                    hl.DapUIScope = { fg = c.fg, style = "bold" }
                     hl.DapUIDecoration = { fg = c.fg_gutter }
                     hl.DapUIWatchesError = { fg = c.error }
                     hl.DapUIWatchesEmpty = { link = "DapUIWatchesError" }
