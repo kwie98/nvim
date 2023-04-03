@@ -118,7 +118,7 @@ return {
             local telescope = require("telescope")
 
             project.setup({
-                manual_mode = false,
+                manual_mode = true,
                 detection_methods = { "pattern" },
                 -- patterns = { ">Python", ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
                 patterns = { ".git" }, -- ">"-patterns break fugitive sadly
