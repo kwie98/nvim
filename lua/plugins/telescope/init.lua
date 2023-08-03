@@ -5,7 +5,7 @@ return {
             "nvim-lua/plenary.nvim",
             {
                 "nvim-telescope/telescope-fzf-native.nvim",
-                build = "make",
+                build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
             },
             "kwie98/telescope-conda.nvim",
         },
@@ -118,7 +118,7 @@ return {
             local telescope = require("telescope")
 
             project.setup({
-                manual_mode = false,
+                manual_mode = true,
                 detection_methods = { "pattern" },
                 -- patterns = { ">Python", ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
                 patterns = { ".git" }, -- ">"-patterns break fugitive sadly
@@ -129,6 +129,7 @@ return {
             })
 
             vim.keymap.set("n", "<Leader>j", telescope.extensions.projects.projects, { desc = "Projects" })
+            vim.keymap.set("n", "<Leader>J", "<CMD>ProjectRoot<CR>", {desc = "Project CWD"})
         end,
     },
 }
