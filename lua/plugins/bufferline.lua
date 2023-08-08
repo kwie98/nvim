@@ -83,19 +83,19 @@ return {
                                     style = groups.separator.tab,
                                 },
                             },
-                            {
-                                name = "Wiki",
-                                -- highlight = { gui = "underline", guisp = "blue" }, -- Optional
-                                -- priority = 2, -- determines where it will appear relative to other groups (Optional)
-                                -- icon = "", -- Optional
-                                auto_close = false,
-                                matcher = function(buf) -- Mandatory
-                                    return buf.filename:match("%.md")
-                                end,
-                                separator = {
-                                    style = groups.separator.tab,
-                                },
-                            },
+                            -- {
+                            --     name = "Wiki",
+                            --     -- highlight = { gui = "underline", guisp = "blue" }, -- Optional
+                            --     -- priority = 2, -- determines where it will appear relative to other groups (Optional)
+                            --     -- icon = "", -- Optional
+                            --     auto_close = false,
+                            --     matcher = function(buf) -- Mandatory
+                            --         return buf.filename:match("%.md")
+                            --     end,
+                            --     separator = {
+                            --         style = groups.separator.tab,
+                            --     },
+                            -- },
                             {
                                 name = "Help",
                                 -- highlight = { gui = "underline", guisp = "blue" }, -- Optional

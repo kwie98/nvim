@@ -39,9 +39,9 @@ return {
             "b0o/SchemaStore.nvim", -- in jsonls config
             {
                 "hrsh7th/cmp-nvim-lsp",
-                cond = function()
-                    return require("lazy.core.config").plugins["nvim-cmp"] ~= nil
-                end,
+                -- cond = function()
+                --     return require("lazy.core.config").plugins["nvim-cmp"] ~= nil
+                -- end,
             },
         },
         event = { "BufReadPre", "BufNewFile" },
