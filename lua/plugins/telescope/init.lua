@@ -5,7 +5,7 @@ return {
             "nvim-lua/plenary.nvim",
             {
                 "nvim-telescope/telescope-fzf-native.nvim",
-                build = "make",
+                build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
             },
             "kwie98/telescope-conda.nvim",
         },
@@ -129,6 +129,7 @@ return {
             })
 
             vim.keymap.set("n", "<Leader>j", telescope.extensions.projects.projects, { desc = "Projects" })
+            vim.keymap.set("n", "<Leader>J", "<CMD>ProjectRoot<CR>", {desc = "Project CWD"})
         end,
     },
 }

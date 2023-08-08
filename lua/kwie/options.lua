@@ -63,3 +63,21 @@ vim.g.small_border = "single" -- smaller helper floats
 vim.g.big_border = "shadow" -- ui window floats
 vim.g.diagnostics_visible = true
 vim.g.semantic_highlighting = true
+
+
+if vim.g.neovide then
+    vim.g.neovide_refresh_rate = 144
+    vim.g.neovide_cursor_animation_length = 0
+end
+
+if vim.fn.has("win32") == 1 then
+    vim.cmd([[
+        let &shell = 'powershell'
+        let &shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;'
+        let &shellredir = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
+        let &shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
+        set shellquote= shellxquote=
+    ]])
+else
+    vim.opt.shell = "zsh"
+end
