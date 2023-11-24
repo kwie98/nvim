@@ -146,10 +146,6 @@ return {
                     hl.DapUIWatchesError = { fg = c.error }
                     hl.DapUIWatchesEmpty = { link = "DapUIWatchesError" }
                     hl.DapUIWatchesValue = { fg = c.fg_gutter }
-
-                    -- Luasnip:
-                    hl.ChoiceNode = { style = "underline", sp = c.yellow }
-                    hl.InsertNode = { style = "underline", sp = c.blue }
                 end,
             })
             require("kwie.darkman")

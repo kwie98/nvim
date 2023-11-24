@@ -13,7 +13,6 @@ return {
             "hrsh7th/cmp-nvim-lsp-signature-help",
             -- Snippets:
             "L3MON4D3/LuaSnip",
-            "rafamadriz/friendly-snippets",
         },
         lazy = false,
 
@@ -21,11 +20,6 @@ return {
             local cmp = require("cmp")
             local autopairs = require("nvim-autopairs")
             local ls = require("luasnip")
-            local ls_loader_lua = require("luasnip.loaders.from_lua")
-            local types = require("luasnip.util.types")
-
-            -- Snippet sources:
-            ls_loader_lua.lazy_load({ paths = vim.fn.stdpath("config") .. "/lua/plugins/completion/snippets/" })
 
             -- Snippet keys:
             vim.keymap.set({ "i", "s" }, "<Tab>", function()
@@ -44,23 +38,6 @@ return {
                 end
             end)
 
-            ls.config.setup({
-                ext_opts = {
-                    [types.choiceNode] = {
-                        passive = {
-                            hl_group = "ChoiceNode",
-                            hl_mode = "combine",
-                        },
-                    },
-                    [types.insertNode] = {
-                        passive = {
-                            hl_group = "InsertNode",
-                            hl_mode = "combine",
-                        },
-                    },
-                },
-            })
-
             local function is_dap_buffer(bufnr)
                 local filetype = vim.api.nvim_buf_get_option(bufnr or 0, "filetype")
                 if vim.startswith(filetype, "dapui_") then
@@ -75,7 +52,7 @@ return {
 
             ---@diagnostic disable-next-line: missing-fields
             cmp.setup({
-                -- for cmp-dap:
+                -- For cmp-dap:
                 enabled = function()
                     return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or is_dap_buffer()
                 end,
@@ -119,13 +96,13 @@ return {
                     ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
                 },
                 sources = cmp.config.sources({
-                    -- order matters, sets sorting preference
+                    -- Order matters, sets sorting preference:
                     { name = "nvim_lsp_signature_help" },
                     { name = "nvim_lsp" },
                     { name = "luasnip" },
                     { name = "path" },
                 }, {
-                    -- these get shown if the above sources return no results
+                    -- These get shown if the above sources return no results:
                     { name = "buffer", max_item_count = 5 },
                 }),
             })
