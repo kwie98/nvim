@@ -50,18 +50,18 @@ return {
 
             vim.keymap.set("n", "<Leader>L", "<CMD>LspInfo<CR>", { desc = "LSP Info" })
 
-            -- IMPORTANT: make sure to setup neodev BEFORE lspconfig
+            -- IMPORTANT: make sure to set up neodev BEFORE lspconfig
             neodev.setup({
                 setup_jsonls = false,
             })
 
             local function setup_lsp(server)
-                -- default config:
+                -- Default config:
                 local lsp_conf = {
                     on_attach = handlers.on_attach,
                     capabilities = cmp_nvim_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities()),
                 }
-                -- use per-server custom configs from the configs folder:
+                -- Use per-server custom configs from the configs folder:
                 local has_custom_conf, custom_conf = pcall(require, "plugins.lsp.configs." .. server)
                 if has_custom_conf then
                     lsp_conf = vim.tbl_deep_extend("force", lsp_conf, custom_conf)
@@ -69,11 +69,11 @@ return {
                 lspconfig[server].setup(lsp_conf)
             end
 
-            -- auto setup Mason's LSPs:
+            -- Auto set up Mason's LSPs:
             mason_lspconfig.setup()
             mason_lspconfig.setup_handlers({ setup_lsp })
 
-            -- setup other LSPs:
+            -- Set up other LSPs:
             setup_lsp("hls")
             setup_lsp("clangd")
 
@@ -118,7 +118,7 @@ return {
                 vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
             end
 
-            -- diagnostic settings:
+            -- Diagnostic settings:
             vim.diagnostic.config({
                 virtual_text = false,
                 signs = {
@@ -167,7 +167,7 @@ return {
             end
 
             local function not_conda_or_fugitive()
-                -- needed because mypy does not like code from packages and this stuff is not needed in fugitive (except
+                -- Needed because mypy does not like code from packages and this stuff is not needed in fugitive (except
                 -- for gitlint).
                 local cur_path = vim.fn.expand("%:p")
                 return cur_path:find("/data/conda/") == nil and cur_path:find("fugitive:") == nil
@@ -215,20 +215,6 @@ return {
                     diagnostics.clang_check.with({
                         runtime_condition = not_conda_or_fugitive,
                     }),
-                    -- formatting.markdownlint.with({
-                    --     -- extra_args = { "--disable", "line_length"}, -- does not work :(
-                    --     cwd = root_finder,
-                    --     runtime_condition = not_conda_or_fugitive,
-                    -- }),
-                    -- breaks code block bg highlighting?
-                    -- diagnostics.markdownlint.with({
-                    --     cwd = root_finder,
-                    --     runtime_condition = not_conda_or_fugitive,
-                    -- }),
-                    -- diagnostics.codespell.with({
-                    --     disabled_filetypes = { "markdown" },
-                    --     runtime_condition = not_conda_or_fugitive,
-                    -- }),
                 },
             })
         end,

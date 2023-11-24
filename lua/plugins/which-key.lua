@@ -72,7 +72,7 @@ return {
                     "<Cmd> require",
                 }, -- hide mapping boilerplate
                 show_help = true, -- show help message on the command line when the popup is visible
-                triggers = "auto", -- automatically setup triggers TODO test
+                triggers = "auto", -- automatically set up triggers TODO test
                 -- triggers = { "<leader>", "g" }, -- or specify a list manually TODO include register triggers
                 triggers_blacklist = {
                     -- list of mode / prefixes that should never be hooked by WhichKey
