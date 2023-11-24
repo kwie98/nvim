@@ -2,11 +2,8 @@ return {
     {
         "nvim-treesitter/nvim-treesitter",
         dependencies = {
-            "nvim-treesitter/playground",
             "nvim-treesitter/nvim-treesitter-textobjects",
             "nvim-treesitter/nvim-treesitter-context",
-            -- { "nvim-treesitter/nvim-treesitter-context", commit = "cacee4828152dd3a83736169ae61bbcd29a3d213" },
-            -- "mfussenegger/nvim-treehopper", -- tsht
         },
         build = ":TSUpdate",
         lazy = true,
@@ -16,11 +13,6 @@ return {
             local configs = require("nvim-treesitter.configs")
             local parsers = require("nvim-treesitter.parsers")
             local context = require("treesitter-context")
-
-            -- vim.cmd([[
-            --     omap     <silent> m :<C-U>lua require('tsht').nodes()<CR>
-            --     xnoremap <silent> m :lua require('tsht').nodes()<CR>
-            -- ]])
 
             local parser_configs = parsers.get_parser_configs()
             parser_configs.haskell = {
@@ -33,34 +25,20 @@ return {
                 vim.treesitter.language.register("bash", "zsh")
             end
 
+            ---@diagnostic disable-next-line: missing-fields
             configs.setup({
                 additional_vim_regex_highlighting = false,
-                -- ensure_installed = {
-                --     "bash",
-                --     "comment",
-                --     "diff",
-                --     "gitignore",
-                --     "gitcommit",
-                --     "haskell",
-                --     "help",
-                --     "json",
-                --     "lua",
-                --     "markdown",
-                --     "python",
-                --     "toml",
-                --     "vim",
-                --     "yaml",
-                -- },
-                ignore_install = {
-                    "ini",
+                ensure_installed = {
+                    -- Overwrite parsers included in vanilla nvim 0.10:
+                    "c",
+                    "lua",
+                    "query",
+                    "vim",
+                    "vimdoc",
                 },
-                playground = {
-                    enable = true,
-                },
-                auto_install = true,
+                auto_install = false,
                 highlight = {
                     enable = true, -- false will disable the whole extension
-                    -- disable = { "css", "latex" }, -- list of language that will be disabled
                     disable = { "latex" }, -- list of language that will be disabled
                 },
                 autopairs = {
@@ -72,6 +50,8 @@ return {
                         "css",
                         "python",
                         "yaml",
+                        "cpp",
+                        "html",
                     },
                 },
                 incremental_selection = {
@@ -79,8 +59,6 @@ return {
                     keymaps = {
                         init_selection = "<C-space>",
                         node_incremental = "<C-space>",
-                        -- idk where I got this from but it's wrong, makes < lag in VISUAL mode:
-                        -- scope_incremental = "<nop>",
                         node_decremental = "<bs>",
                     },
                 },
@@ -93,22 +71,14 @@ return {
                         enable = true,
                         lookahead = true,
                         keymaps = {
-                            -- ["ab"] = "@block.outer", -- meh
-                            -- ["ib"] = "@block.inner",
                             ["af"] = "@call.outer",
                             ["if"] = "@call.inner",
                             ["ac"] = "@comment.outer", -- only does one line
                             ["ic"] = "@comment.outer",
-                            -- ["ai"] = "@conditional.outer", -- eh
-                            -- ["ii"] = "@conditional.inner",
                             ["am"] = "@function.outer", -- actually goated
                             ["im"] = "@function.inner",
-                            -- ["al"] = "@loop.outer", -- meh
-                            -- ["il"] = "@loop.inner",
                             ["av"] = "@parameter.outer",
                             ["iv"] = "@parameter.inner",
-                            -- ["aS"] = "@statement.outer", -- meh
-                            -- ["iS"] = "@statement.outer",
                         },
                     },
                     move = {
@@ -172,7 +142,7 @@ return {
             "nvim-treesitter/nvim-treesitter",
         },
         keys = {
-            { "<C-Enter>", mode = "n", desc = "Node Action" },
+            { "<Enter>", mode = "n", desc = "Node Action" },
         },
 
         config = function()
@@ -180,7 +150,7 @@ return {
 
             node_action.setup()
 
-            vim.keymap.set("n", "<C-Enter>", node_action.node_action, { desc = "Node Action" })
+            vim.keymap.set("n", "<Enter>", node_action.node_action, { desc = "Node Action" })
         end,
     },
 }

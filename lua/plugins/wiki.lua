@@ -5,10 +5,7 @@ return {
             "nvim-telescope/telescope.nvim",
         },
         keys = {
-            { "<Leader>wt", mode = "n", desc = "Todo" },
-            { "<Leader>wi", mode = "n", desc = "Wiki Index" },
-            { "<Leader>ww", mode = "n", desc = "This Week" },
-            { "<Leader>wd", mode = "n", desc = "Today" },
+            { "<Leader>ww", mode = "n", desc = "Wiki" },
             { "<Leader>wn", mode = "n", desc = "New Note" },
             { "<Leader>wp", mode = "n", desc = "Wiki Panel" },
         },
@@ -20,14 +17,9 @@ return {
             local telekasten = require("telekasten")
 
             local wiki_folder = vim.fn.expand("~/Sync/wiki")
-            vim.keymap.set("n", "<Leader>wt", function()
-                vim.cmd.edit(wiki_folder .. "/todo.md")
-            end, { desc = "Todo" })
-            vim.keymap.set("n", "<Leader>wi", function()
+            vim.keymap.set("n", "<Leader>ww", function()
                 vim.cmd.edit(wiki_folder .. "/README.md")
-            end, { desc = "Wiki Index" })
-            vim.keymap.set("n", "<Leader>ww", telekasten.goto_thisweek, { desc = "This Week" })
-            vim.keymap.set("n", "<Leader>wd", telekasten.goto_today, { desc = "Today" })
+            end, { desc = "Wiki" })
             vim.keymap.set("n", "<Leader>wn", telekasten.new_note, { desc = "New Note" })
             vim.keymap.set("n", "<Leader>wp", telekasten.panel, { desc = "Wiki Panel" })
 
@@ -38,14 +30,11 @@ return {
                 -- auto-set telekasten filetype: if false, the telekasten filetype will not be used
                 --                               and thus the telekasten syntax will not be loaded either
                 auto_set_filetype = false,
-                -- dir names for special notes (absolute path or subdir name)
-                dailies = wiki_folder .. "/" .. "daily",
-                weeklies = wiki_folder .. "/" .. "weekly",
-                templates = wiki_folder .. "/" .. "templates",
-                -- image (sub)dir for pasting
-                -- dir name (absolute path or subdir name)
-                -- or nil if pasted images shouldn't go into a special subdir
-                image_subdir = "img",
+                -- Don't create unused folders:
+                dailies = nil,
+                weeklies = nil,
+                templates = nil,
+                image_subdir = nil,
                 -- markdown file extension
                 extension = ".md",
                 -- Generate note filenames. One of:
