@@ -48,12 +48,16 @@ M.my_bcommits = function(opts)
                 end
 
                 local get_buffer_of_orig = function(selection)
-                    local value = selection.value .. ":" .. transfrom_file()
+                    local current_file = transfrom_file()
+                    local value = selection.value .. ":" .. current_file
                     local content = utils.get_os_command_output({ "git", "--no-pager", "show", value }, opts.cwd)
 
                     local bufnr = vim.api.nvim_create_buf(false, true)
                     vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, content)
-                    vim.api.nvim_buf_set_name(bufnr, "Original")
+                    -- Set buffer name to file name, commit hash, and message:
+                    vim.print(transfrom_file())
+                    vim.api.nvim_buf_set_name(bufnr, current_file .. " (" .. selection.ordinal .. ")")
+                    vim.api.nvim_buf_set_option(bufnr, "modifiable", false)
                     return bufnr
                 end
 
