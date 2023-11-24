@@ -16,26 +16,23 @@ return {
     },
     {
         "stevearc/dressing.nvim",
-        lazy = true,
-        init = function()
-            ---@diagnostic disable-next-line: duplicate-set-field
-            vim.ui.select = function(...)
-                require("lazy").load({ plugins = { "dressing.nvim" } })
-                return vim.ui.select(...)
-            end
-            ---@diagnostic disable-next-line: duplicate-set-field
-            vim.ui.input = function(...)
-                require("lazy").load({ plugins = { "dressing.nvim" } })
-                return vim.ui.input(...)
-            end
-        end,
+        -- lazy = false,
+        -- init = function()
+        --     vim.ui.select = function(...)
+        --         require("lazy").load({ plugins = { "dressing.nvim" } })
+        --         return vim.ui.select(...)
+        --     end
+        --     vim.ui.input = function(...)
+        --         require("lazy").load({ plugins = { "dressing.nvim" } })
+        --         return vim.ui.input(...)
+        --     end
+        -- end,
 
         config = function()
             local dressing = require("dressing")
 
             dressing.setup({
                 input = {
-                    anchor = "NW",
                     border = vim.g.small_border,
                     override = function(conf)
                         conf.row = -3
@@ -46,26 +43,28 @@ return {
                         winblend = 0,
                     },
                 },
-            })
-        end,
-    },
-    {
-        "lukas-reineke/indent-blankline.nvim",
-        event = { "BufReadPost", "BufNewFile" },
+                select = {
+                    backend = { "telescope" },
+                    -- telescope = {
 
-        config = function()
-            local indent_blankline = require("indent_blankline")
-            vim.g.indent_blankline_filetype_exclude = { "haskell", "help" }
-            vim.g.indent_blankline_show_first_indent_level = false
-
-            indent_blankline.setup({
-                char = "▏",
-                show_trailing_blankline_indent = false,
+                    --     border = true,
+                    --     borderchars = {
+                    --         prompt = { "─", " ", " ", " ", "─", "─", " ", " " },
+                    --         results = { " " },
+                    --         preview = { " " },
+                    --     },
+                    --     -- dynamic_preview_title = true, -- trying this out
+                    --     prompt_prefix = " ",
+                    -- },
+                },
             })
         end,
     },
     {
         "smjonas/inc-rename.nvim",
+        dependencies = {
+            "stevearc/dressing.nvim",
+        },
         lazy = true,
         keys = {
             { "<Leader>lr", mode = "n", desc = "Rename Symbol" },
@@ -73,7 +72,9 @@ return {
         enabled = vim.fn.has("win32") == 0,
 
         config = function()
-            require("inc_rename").setup()
+            require("inc_rename").setup({
+                input_buffer_type = "dressing",
+            })
 
             vim.keymap.set("n", "<leader>lr", function()
                 return ":IncRename " .. vim.fn.expand("<cword>")
@@ -100,6 +101,7 @@ return {
                     "dapui_console",
                     "NvimTree",
                 },
+                signs_on_startup = {},
             })
         end,
     },

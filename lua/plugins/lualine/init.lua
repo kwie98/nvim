@@ -32,13 +32,14 @@ return {
                                 readonly = "[READONLY]",
                             },
                         },
+                    },
+                    lualine_c = {
                         {
                             "branch",
                             icon = "",
                         },
                         components.diff,
                     },
-                    lualine_c = {},
                     lualine_x = { components.treesitter, components.lsp },
                     lualine_y = {
                         {
