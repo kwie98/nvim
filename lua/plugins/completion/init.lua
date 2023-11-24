@@ -22,6 +22,7 @@ return {
             local autopairs = require("nvim-autopairs")
             local ls = require("luasnip")
             local ls_loader_lua = require("luasnip.loaders.from_lua")
+            local types = require("luasnip.util.types")
 
             -- Snippet sources:
             ls_loader_lua.lazy_load({ paths = vim.fn.stdpath("config") .. "/lua/plugins/completion/snippets/" })
@@ -43,6 +44,23 @@ return {
                 end
             end)
 
+            ls.config.setup({
+                ext_opts = {
+                    [types.choiceNode] = {
+                        passive = {
+                            hl_group = "ChoiceNode",
+                            hl_mode = "combine",
+                        },
+                    },
+                    [types.insertNode] = {
+                        passive = {
+                            hl_group = "InsertNode",
+                            hl_mode = "combine",
+                        },
+                    },
+                },
+            })
+
             local function is_dap_buffer(bufnr)
                 local filetype = vim.api.nvim_buf_get_option(bufnr or 0, "filetype")
                 if vim.startswith(filetype, "dapui_") then
@@ -55,6 +73,7 @@ return {
                 return false
             end
 
+            ---@diagnostic disable-next-line: missing-fields
             cmp.setup({
                 -- for cmp-dap:
                 enabled = function()
@@ -114,9 +133,8 @@ return {
                 sources = cmp.config.sources({
                     { name = "path" },
                 }, {
-                    { name = "cmdline", keyword_length = 3 },
-                }, {
-                    { name = "cmdline_history", keyword_length = 3 },
+                    { name = "cmdline", keyword_length = 2 },
+                    { name = "cmdline_history", keyword_length = 2 },
                 }),
             })
 

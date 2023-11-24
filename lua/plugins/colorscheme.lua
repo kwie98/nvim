@@ -57,7 +57,7 @@ return {
 
             tokyonight.setup({
                 terminal_colors = false,
-                sidebars = {}, -- don't make help pages darker
+                sidebars = nil, -- don't make help pages darker
                 day_brightness = 0.0, -- stronger constrasts in light mode?
                 on_colors = function(c)
                     c = darken_all(c)
@@ -146,6 +146,10 @@ return {
                     hl.DapUIWatchesError = { fg = c.error }
                     hl.DapUIWatchesEmpty = { link = "DapUIWatchesError" }
                     hl.DapUIWatchesValue = { fg = c.fg_gutter }
+
+                    -- Luasnip:
+                    hl.ChoiceNode = { style = "underline", sp = c.yellow }
+                    hl.InsertNode = { style = "underline", sp = c.blue }
                 end,
             })
             require("kwie.darkman")
