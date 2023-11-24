@@ -1,8 +1,3 @@
---Remap space as leader key
-vim.keymap.set("", "<Space>", "<Nop>")
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
 vim.opt.title = true
 vim.opt.formatoptions = "cqj" -- "a" is also nice but breaks markdown code blocks
 vim.opt.mousescroll = "ver:1,hor:1"
@@ -13,7 +8,6 @@ end
 vim.opt.backup = false -- creates a backup file
 vim.opt.clipboard = "unnamedplus" -- allows neovim to access the system clipboard
 vim.opt.cmdheight = 1 -- more space in the neovim command line for displaying messages
--- vim.opt.completeopt = { "menu,menuone,noselect" } -- mostly just for cmp
 vim.opt.conceallevel = 1 -- so that `` is visible in markdown files
 vim.opt.fileencoding = "utf-8" -- the encoding written to a file
 vim.opt.hlsearch = true -- highlight all matches on previous search pattern
@@ -52,14 +46,12 @@ vim.opt.textwidth = 120
 vim.opt.colorcolumn = "+1"
 vim.opt.wildmode = "longest:full,full"
 vim.opt.laststatus = 3 -- one lualine for everything
--- vim.opt.foldlevel = 20
--- vim.opt.foldmethod = "expr"
--- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.updatetime = 500
 vim.opt.list = true
 vim.opt.listchars = { tab = "⇥ ", leadmultispace = "▏   ", trail = "␣", nbsp = "⍽" }
--- vim.opt.equalalways = false -- don't automatically resize windows to have equal sizes after some changes
 
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 vim.g.modified_icon = "" -- for bufferline, lualine
 vim.g.small_border = "single" -- smaller helper floats
 vim.g.big_border = "shadow" -- ui window floats

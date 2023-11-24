@@ -5,7 +5,7 @@ if background == "dark" or background == "light" then
     vim.opt.background = background
     if background == "light" then
         colorscheme = "tokyonight-day"
-        -- moon is a bit darker and has some different hl groups and colors, night is quite dark and contrasty
+        -- Moon is a bit darker and has some different hl groups and colors, night is quite dark and contrasty
     end
 
     pcall(vim.cmd.colorscheme, colorscheme)

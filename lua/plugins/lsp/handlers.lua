@@ -6,7 +6,7 @@ M.on_attach = function(_, _) -- client, bufnr
     -- print(vim.inspect(client.server_capabilities.semanticTokensProvider))
     local telescope = require("telescope.builtin")
 
-    -- semantic tokens are laggier than treesitter only, and mess up my rust highlights. might be nice in lua tho?
+    -- Semantic tokens are laggier than treesitter only, and mess up my rust highlights. might be nice in lua tho?
     -- client.server_capabilities.semanticTokensProvider = nil
     vim.opt.formatexpr = ""
 
