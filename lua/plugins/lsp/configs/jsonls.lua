@@ -2,19 +2,13 @@ local schemastore = require("schemastore")
 return {
     settings = {
         json = {
+            format = {
+                enable = false,
+            },
             schemas = schemastore.json.schemas(),
             validate = {
                 enable = true,
             },
         },
     },
-    -- setup = {
-    --     commands = {
-    --         Format = {
-    --             function()
-    --                 vim.lsp.buf.range_formatting({}, { 0, 0 }, { vim.fn.line("$"), 0 })
-    --             end,
-    --         },
-    --     },
-    -- },
 }

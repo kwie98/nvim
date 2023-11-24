@@ -7,12 +7,8 @@ return {
         config = function()
             local mason = require("mason")
             local m_ui = require("mason.ui")
-            -- local m_index = require("mason-registry.index")
 
             vim.keymap.set("n", "<Leader>M", m_ui.open, { desc = "Mason" })
-
-            -- Add custom pydocstyle package
-            -- m_index["pydocstyle[toml]"] = "plugins.lsp.packages.pydocstyle-toml"
 
             mason.setup({
                 PATH = "skip",
@@ -34,14 +30,10 @@ return {
             "williamboman/mason-lspconfig.nvim",
             "folke/neodev.nvim",
             "simrat39/rust-tools.nvim",
-            -- { "mrcjkb/haskell-tools.nvim", branch = "1.x.x" },
             "barreiroleo/ltex_extra.nvim", -- in ltex config
             "b0o/SchemaStore.nvim", -- in jsonls config
             {
                 "hrsh7th/cmp-nvim-lsp",
-                -- cond = function()
-                --     return require("lazy.core.config").plugins["nvim-cmp"] ~= nil
-                -- end,
             },
         },
         event = { "BufReadPre", "BufNewFile" },
@@ -55,7 +47,6 @@ return {
 
             local neodev = require("neodev")
             local rt = require("rust-tools")
-            -- local ht = require("haskell-tools")
 
             vim.keymap.set("n", "<Leader>L", "<CMD>LspInfo<CR>", { desc = "LSP Info" })
 
@@ -84,6 +75,7 @@ return {
 
             -- setup other LSPs:
             setup_lsp("hls")
+            setup_lsp("clangd")
 
             rt.setup({
                 tools = {
@@ -154,8 +146,7 @@ return {
         end,
     },
     {
-        "jose-elias-alvarez/null-ls.nvim",
-        -- event = { "BufReadPre", "BufNewFile" },
+        "nvimtools/none-ls.nvim",
         event = "VeryLazy",
         dependencies = {
             "williamboman/mason.nvim", -- load after mason so that used binaries are available on the path
@@ -176,8 +167,8 @@ return {
             end
 
             local function not_conda_or_fugitive()
-                -- needed because mypy does not like code from packages and this stuff is not needed in fugitive (except for
-                -- gitlint).
+                -- needed because mypy does not like code from packages and this stuff is not needed in fugitive (except
+                -- for gitlint).
                 local cur_path = vim.fn.expand("%:p")
                 return cur_path:find("/data/conda/") == nil and cur_path:find("fugitive:") == nil
             end
@@ -195,7 +186,6 @@ return {
                 on_attach = handlers.on_attach,
                 sources = {
                     formatting.black.with({
-                        -- extra_args = { "--fast", "--line-length", "120" },
                         extra_args = { "--fast" },
                         cwd = root_finder,
                         runtime_condition = not_conda_or_fugitive,
@@ -206,28 +196,27 @@ return {
                         runtime_condition = not_conda_or_fugitive,
                     }),
                     formatting.stylua.with({
-                        -- extra_args = { "--indent-type=Spaces" },
                         runtime_condition = not_conda_or_fugitive,
                     }),
                     formatting.prettierd.with({
-                        filetypes = { "yaml" },
+                        -- Handled by biome:
+                        disabled_filetypes = { "javascript", "javascriptreact", "typescript", "json", "jsonc" },
                         runtime_condition = not_conda_or_fugitive,
                     }),
 
-                    -- diagnostics.ruff.with({
-                    --     runtime_condition = not_conda_or_fugitive,
-                    -- }),
                     diagnostics.gitlint,
                     diagnostics.selene.with({
                         cwd = root_finder,
                         runtime_condition = not_conda_or_fugitive,
                     }),
+                    diagnostics.cpplint.with({
+                        runtime_condition = not_conda_or_fugitive,
+                    }),
+                    diagnostics.clang_check.with({
+                        runtime_condition = not_conda_or_fugitive,
+                    }),
                     -- formatting.markdownlint.with({
                     --     -- extra_args = { "--disable", "line_length"}, -- does not work :(
-                    --     cwd = root_finder,
-                    --     runtime_condition = not_conda_or_fugitive,
-                    -- }),
-                    -- formatting.isort.with({
                     --     cwd = root_finder,
                     --     runtime_condition = not_conda_or_fugitive,
                     -- }),
@@ -236,25 +225,8 @@ return {
                     --     cwd = root_finder,
                     --     runtime_condition = not_conda_or_fugitive,
                     -- }),
-                    -- diagnostics.flake8.with({
-                    --     extra_args = { "--max-line-length", "120" },
-                    --     cwd = root_finder,
-                    -- }), TODO disabled for now because pyright finds all of this anyways?
                     -- diagnostics.codespell.with({
                     --     disabled_filetypes = { "markdown" },
-                    --     runtime_condition = not_conda_or_fugitive,
-                    -- }),
-                    -- diagnostics.mypy.with({
-                    --     extra_args = {
-                    --         "--python-executable=python", -- use env python
-                    --         "--namespace-packages", -- find stuff where __init__.py file is missing
-                    --     },
-                    --     cwd = root_finder,
-                    --     method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
-                    --     runtime_condition = not_conda_or_fugitive,
-                    -- }),
-                    -- diagnostics.pydocstyle.with({
-                    --     cwd = root_finder,
                     --     runtime_condition = not_conda_or_fugitive,
                     -- }),
                 },
