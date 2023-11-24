@@ -1,5 +1,6 @@
 ; extends
+; broken because idk
 ; links to other helptexts:
-(taglink) @link
+; (taglink) @custom_link_capture
 ; === headers:
-(h1) @header
+; (h1) @header

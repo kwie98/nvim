@@ -56,6 +56,8 @@ vim.opt.laststatus = 3 -- one lualine for everything
 -- vim.opt.foldmethod = "expr"
 -- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.updatetime = 500
+vim.opt.list = true
+vim.opt.listchars = { tab = "⇥ ", leadmultispace = "▏   ", trail = "␣", nbsp = "⍽" }
 -- vim.opt.equalalways = false -- don't automatically resize windows to have equal sizes after some changes
 
 vim.g.modified_icon = "" -- for bufferline, lualine
@@ -63,7 +65,6 @@ vim.g.small_border = "single" -- smaller helper floats
 vim.g.big_border = "shadow" -- ui window floats
 vim.g.diagnostics_visible = true
 vim.g.semantic_highlighting = true
-
 
 if vim.g.neovide then
     vim.g.neovide_refresh_rate = 144
