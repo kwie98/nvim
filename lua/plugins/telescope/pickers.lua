@@ -1,10 +1,10 @@
-local make_entry = require("telescope.make_entry")
 local action_state = require("telescope.actions.state")
-local utils = require("telescope.utils")
-local finders = require("telescope.finders")
-local previewers = require("telescope.previewers")
 local actions = require("telescope.actions")
+local finders = require("telescope.finders")
+local make_entry = require("telescope.make_entry")
 local pickers = require("telescope.pickers")
+local previewers = require("telescope.previewers")
+local utils = require("telescope.utils")
 local conf = require("telescope.config").values
 local Path = require("plenary.path")
 local M = {}
@@ -53,6 +53,7 @@ M.my_bcommits = function(opts)
                     local content = utils.get_os_command_output({ "git", "--no-pager", "show", value }, opts.cwd)
 
                     local bufnr = vim.api.nvim_create_buf(false, true)
+                    vim.api.nvim_buf_set_option(bufnr, "buftype", "nowrite")
                     vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, content)
                     -- Set buffer name to file name, commit hash, and message:
                     vim.print(transfrom_file())
@@ -74,9 +75,7 @@ M.my_bcommits = function(opts)
                         buffer = bufnr,
                         nested = true,
                         once = true,
-                        callback = function()
-                            vim.api.nvim_buf_delete(bufnr, { force = true })
-                        end,
+                        callback = function() vim.api.nvim_buf_delete(bufnr, { force = true }) end,
                     })
                 end
 
@@ -131,9 +130,7 @@ local set_opts_cwd = function(opts)
             opts.is_bare = true
         end
     else
-        if use_git_root then
-            opts.cwd = git_root[1]
-        end
+        if use_git_root then opts.cwd = git_root[1] end
     end
 end
 

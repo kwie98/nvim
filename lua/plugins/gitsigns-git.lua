@@ -1,26 +1,18 @@
 return {
     "lewis6991/gitsigns.nvim",
-    event = { "BufReadPre", "BufNewFile" },
+    event = "VeryLazy",
 
     config = function()
         local gitsigns = require("gitsigns")
 
         vim.keymap.set("n", "[h", function()
-            if vim.wo.diff then
-                return "[c"
-            end
-            vim.schedule(function()
-                gitsigns.prev_hunk()
-            end)
+            if vim.wo.diff then return "[c" end
+            vim.schedule(function() gitsigns.prev_hunk() end)
             return "<Ignore>"
         end, { expr = true })
         vim.keymap.set("n", "]h", function()
-            if vim.wo.diff then
-                return "]c"
-            end
-            vim.schedule(function()
-                gitsigns.next_hunk()
-            end)
+            if vim.wo.diff then return "]c" end
+            vim.schedule(function() gitsigns.next_hunk() end)
             return "<Ignore>"
         end, { expr = true })
 
@@ -43,10 +35,7 @@ return {
             numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
             linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
             word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
-            watch_gitdir = {
-                interval = 1000,
-                follow_files = true,
-            },
+            watch_gitdir = { interval = 1000, follow_files = true },
             attach_to_untracked = true,
             current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
             current_line_blame_opts = {
@@ -55,9 +44,7 @@ return {
                 delay = 0,
                 ignore_whitespace = false,
             },
-            current_line_blame_formatter_opts = {
-                relative_time = false,
-            },
+            current_line_blame_formatter_opts = { relative_time = false },
             sign_priority = 0,
             update_debounce = 100,
             status_formatter = nil, -- Use default
@@ -70,9 +57,7 @@ return {
                 row = 0,
                 col = 1,
             },
-            yadm = {
-                enable = false,
-            },
+            yadm = { enable = false },
         })
     end,
 }

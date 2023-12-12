@@ -1,24 +1,55 @@
-local opts = { noremap = true, silent = true }
+-- Redirect command output to buffer:
+vim.api.nvim_create_user_command("Redir", function(ctx)
+    local lines = vim.split(vim.api.nvim_exec(ctx.args, true), "\n", { plain = true })
+    vim.cmd("new")
+    vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+    vim.opt_local.modified = false
+end, { nargs = "+", complete = "command" })
+
+-- j/k move in wrapped lines, but not when jumping multiple lines:
+vim.keymap.set("n", "j", function()
+    if vim.v.count == 0 then return "gj" end
+    return "j"
+end, { expr = true })
+vim.keymap.set("n", "k", function()
+    if vim.v.count == 0 then return "gk" end
+    return "k"
+end, { expr = true })
+
+-- Fast file saving and quitting:
+vim.keymap.set("n", "<Leader>w", "<CMD>w<Enter>", { desc = "Save" })
+vim.keymap.set("n", "<Leader>q", "<CMD>q<Enter>", { desc = "Quit" })
+
+-- Wiki:
+local wiki_index = vim.fn.expand("~/Sync/wiki/README.md")
+vim.keymap.set("n", "<Leader>W", function() vim.cmd.edit(wiki_index) end, { desc = "Wiki" })
 
 -- Navigation:
-vim.keymap.set("n", "<C-j>", "<C-w>w", opts)
-vim.keymap.set("n", "<C-k>", "<C-w>W", opts)
-vim.keymap.set("n", "<C-l>", "<CMD>BufferLineCycleNext<CR>", opts)
-vim.keymap.set("n", "<C-h>", "<CMD>BufferLineCyclePrev<CR>", opts)
-vim.keymap.set("n", "<C-S-H>", "<CMD>tabprevious<CR>", opts)
-vim.keymap.set("n", "<C-S-L>", "<CMD>tabnext<CR>", opts)
+vim.keymap.set("n", "<C-j>", "<C-w>w")
+vim.keymap.set("n", "<C-k>", "<C-w>W")
+vim.keymap.set("n", "<C-h>", "<CMD>tabprevious<Enter>")
+vim.keymap.set("n", "<C-l>", "<CMD>tabnext<Enter>")
+vim.keymap.set("n", "<C-w>t", "<CMD>tabnew %<Enter>")
+
+-- Move windows:
+vim.keymap.set("n", "<C-A-h>", "<C-w>H")
+vim.keymap.set("n", "<C-A-j>", "<C-w>J")
+vim.keymap.set("n", "<C-A-k>", "<C-w>K")
+vim.keymap.set("n", "<C-A-l>", "<C-w>L")
 
 -- Move text:
-vim.keymap.set("n", "<A-j>", "<Esc>:m .+1<CR>==", opts)
-vim.keymap.set("n", "<A-k>", "<Esc>:m .-2<CR>==", opts)
-vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", opts)
-vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", opts)
+vim.keymap.set("n", "<A-j>", "<Esc>:m .+1<CR>==")
+vim.keymap.set("n", "<A-k>", "<Esc>:m .-2<CR>==")
+vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv")
+vim.keymap.set("n", "<A-S-j>", "o<Esc>k")
+vim.keymap.set("n", "<A-S-k>", "O<Esc>j")
 
 -- Resize:
-vim.keymap.set("n", "<C-Up>", ":resize -2<CR>", opts)
-vim.keymap.set("n", "<C-Down>", ":resize +2<CR>", opts)
-vim.keymap.set("n", "<C-Left>", ":vertical resize -2<CR>", opts)
-vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>", opts)
+vim.keymap.set("n", "<C-Up>", ":resize -2<Enter>")
+vim.keymap.set("n", "<C-Down>", ":resize +2<Enter>")
+vim.keymap.set("n", "<C-Left>", ":vertical resize -2<Enter>")
+vim.keymap.set("n", "<C-Right>", ":vertical resize +2<Enter>")
 
 -- Merging binds similar to do and dp:
 vim.cmd([[
@@ -27,47 +58,38 @@ vim.cmd([[
 ]])
 
 -- Utility:
-vim.keymap.set("n", "gp", "`[v`]", opts)
-vim.keymap.set("n", "J", "mzJ`z", opts) -- keep cursor static
-vim.keymap.set("n", "<Leader>n", "<CMD>noh<CR>", opts)
-vim.keymap.set("n", "<C-u>", "<CMD>execute 'keepjumps norm! ' . '<C-u>'<CR>", opts)
-vim.keymap.set("n", "<C-d>", "<CMD>execute 'keepjumps norm! ' . '<C-d>'<CR>", opts)
-vim.keymap.set("v", "<", "<gv", opts)
-vim.keymap.set("v", ">", ">gv", opts)
-vim.keymap.set("v", "p", '"_dP', opts) -- keep paste buffer content when overwriting something in visual mode
+vim.keymap.set("n", "gp", "`[v`]")
+vim.keymap.set("n", "J", "mzJ`z")
+vim.keymap.set("n", "<Leader>n", vim.cmd.noh, { desc = "Toggle Search Highlight" })
+-- vim.keymap.set("n", "<C-u>", "<CMD>execute 'keepjumps norm! ' . '<C-u>'<Enter>")
+-- vim.keymap.set("n", "<C-d>", "<CMD>execute 'keepjumps norm! ' . '<C-d>'<Enter>")
+vim.keymap.set("v", "<", "<gv")
+vim.keymap.set("v", ">", ">gv")
+vim.keymap.set("n", "<", "<<")
+vim.keymap.set("n", ">", ">>")
+vim.keymap.set("v", "p", '"_dP') -- keep paste buffer content when overwriting something in visual mode
 
 -- One-handed copy paste:
-vim.keymap.set({ "i", "c" }, "<C-v>", "<C-r><C-o>+", opts)
-vim.keymap.set("s", "<C-c>", "<Esc>gvygv<C-g>", opts)
-vim.keymap.set("s", "<C-v>", "<C-r>_<Del>i<C-r>+<Esc>", opts)
+vim.keymap.set({ "i", "c" }, "<C-v>", "<C-r><C-o>+")
+vim.keymap.set("s", "<C-c>", "<Esc>gvygv<C-g>")
+vim.keymap.set("s", "<C-v>", "<C-r>_<Del>i<C-r>+<Esc>")
+vim.keymap.set("c", "<Tab>", "<End>")
 
--- LSP/diagnostics binds:
-vim.keymap.set("n", "gl", vim.diagnostic.open_float, opts)
-vim.keymap.set("n", "]l", vim.diagnostic.goto_next, opts)
-vim.keymap.set("n", "[l", vim.diagnostic.goto_prev, opts)
+-- Diagnostics binds:
+vim.keymap.set("n", "gl", vim.diagnostic.open_float)
+vim.keymap.set("n", "]l", vim.diagnostic.goto_next)
+vim.keymap.set("n", "[l", vim.diagnostic.goto_prev)
+
+-- Toggle diagnostic highlighting:
+vim.g.diagnostic_visible = false
 vim.keymap.set("n", "<Leader>lh", function()
-    if vim.g.diagnostics_visible then
-        vim.diagnostic.hide()
-        vim.g.diagnostics_visible = false
+    if vim.g.diagnostic_visible then
+        vim.diagnostic.config({ virtual_text = false, underline = false })
+        vim.g.diagnostic_visible = false
     else
-        vim.diagnostic.show()
-        vim.g.diagnostics_visible = true
+        vim.diagnostic.config({ virtual_text = true, underline = true })
+        vim.g.diagnostic_visible = true
     end
 end, { desc = "Toggle Diagnostics" })
 
-if vim.fn.has("nvim-0.9") == 1 then
-    vim.keymap.set("n", "<Leader>lH", vim.show_pos, { desc = "Inspect Highlight" })
-end
-
--- Swaps for neoqwertz:
-vim.keymap.set({ "n", "x", "o" }, "^", "#", opts)
-vim.keymap.set({ "n", "x", "o" }, "$", "^", opts) -- first symbol in line
-vim.keymap.set({ "n", "x", "o" }, "|", "$", opts) -- last symbol in line
-vim.keymap.set({ "n", "x", "o" }, "#", "", opts) -- free command
-vim.keymap.set("n", "s", "ge", opts)
-
--- Mnemonics for surround:
-vim.keymap.set({ "x", "o" }, "ir", "i[")
-vim.keymap.set({ "x", "o" }, "ar", "a[")
-vim.keymap.set({ "x", "o" }, "ia", "i<")
-vim.keymap.set({ "x", "o" }, "aa", "a<")
+if vim.fn.has("nvim-0.9") == 1 then vim.keymap.set("n", "<Leader>lc", vim.show_pos, { desc = "Inspect Highlight" }) end

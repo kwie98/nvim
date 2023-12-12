@@ -5,7 +5,7 @@ vim.cmd([[
     autocmd User FugitiveStageBlob setlocal readonly nomodifiable noswapfile
     autocmd FileType TelescopePrompt nnoremap <silent> <buffer> q :close!<CR>
     autocmd TextYankPost * silent!lua require('vim.highlight').on_yank({higroup = 'IncSearch', timeout = 100})
-    autocmd BufWinEnter * :set formatoptions-=o
+    autocmd BufWinEnter * :set formatoptions-=ro
     augroup end
 
     augroup _cursor_line
@@ -26,9 +26,20 @@ vim.cmd([[
     autocmd User FugitiveIndex nnoremap <buffer> S <CMD>Git add .<CR>
     augroup end
 
+    function! AutoResizeAllTabs()
+        let current_tab = tabpagenr()
+        tabdo wincmd =
+        execute 'tabnext' current_tab
+    endfunction
+
     augroup _auto_resize
     autocmd!
-    autocmd VimResized * tabdo wincmd =
+    autocmd VimResized * :call AutoResizeAllTabs()
+    augroup end
+
+    augroup _telescope_number
+    autocmd!
+    autocmd User TelescopePreviewerLoaded setlocal number
     augroup end
 
     " Markdown darker code blocks
@@ -46,7 +57,7 @@ vim.cmd([[
     endfunction
 
     function! ColorCodeBlocks() abort
-        sign define codeblock linehl=codeBlockBackground
+        sign define codeblock linehl=CodeBlockBackground
         augroup code_block_background
             autocmd! * <buffer>
             autocmd InsertLeave <buffer> call s:place_signs()
@@ -56,11 +67,37 @@ vim.cmd([[
     endfunction
 ]])
 
+-- Confirm oil.nvim actions with <Enter>:
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "oil_preview",
+    callback = function(params)
+        vim.keymap.set("n", "<Enter>", "o", { buffer = params.buf, remap = true, nowait = true })
+    end,
+})
+
 -- No accidental changing of environment source code:
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     group = vim.api.nvim_create_augroup("conda_nomodifiable", { clear = true }),
     pattern = "/home/konrad/.local/share/conda/envs/**",
-    callback = function()
-        vim.bo.modifiable = false
-    end,
+    callback = function() vim.bo.modifiable = false end,
 })
+
+-- Set indent guides based on settings:
+local function set_leadmultispace()
+    local spaces = "▏       "
+    if vim.bo.tabstop <= spaces:len() and not (vim.bo.filetype == "markdown") then
+        -- + 2 because the vertical line is unicode and has length 3
+        vim.opt_local.listchars:append({ leadmultispace = spaces:sub(1, vim.bo.tabstop + 2) })
+    end
+end
+vim.api.nvim_create_autocmd(
+    "OptionSet",
+    { pattern = { "listchars", "tabstop", "filetype" }, callback = set_leadmultispace }
+)
+vim.api.nvim_create_autocmd({ "BufRead" }, { callback = set_leadmultispace })
+
+-- Update heirline:
+vim.api.nvim_create_autocmd({ "BufEnter", "LspAttach", "LspDetach" }, { command = "redrawstatus" })
+vim.cmd([[
+    autocmd User GitSignsUpdate redrawstatus
+]])

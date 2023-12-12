@@ -2,7 +2,7 @@ return {
     "mfussenegger/nvim-dap",
     dependencies = {
         "rcarriga/nvim-dap-ui",
-        "nvim-telescope/telescope-dap.nvim",
+        -- "nvim-telescope/telescope-dap.nvim",
         "nvim-telescope/telescope.nvim",
         "rcarriga/cmp-dap",
         "mfussenegger/nvim-dap-python",
@@ -15,12 +15,12 @@ return {
         { "<F7>", mode = "n" },
         { "<F8>", mode = "n" },
         { "<Leader>dh", mode = "n", desc = "Toggle UI" },
-        { "<Leader>dm", mode = "n", desc = "Debug Test" },
+        -- { "<Leader>dm", mode = "n", desc = "Debug Test" },
         { "<Leader>dt", mode = "n", desc = "Breakpoint" },
         { "<Leader>dT", mode = "n", desc = "Conditional Breakpoint" },
-        { "<Leader>ds", mode = "n", desc = "Variables" },
-        { "<Leader>db", mode = "n", desc = "Breakpoints" },
-        { "<Leader>df", mode = "n", desc = "Frames" },
+        -- { "<Leader>ds", mode = "n", desc = "Variables" },
+        -- { "<Leader>db", mode = "n", desc = "Breakpoints" },
+        -- { "<Leader>df", mode = "n", desc = "Frames" },
     },
     enabled = vim.fn.has("win32") == 0,
 
@@ -28,7 +28,7 @@ return {
         local dap = require("dap")
         local dap_launchjson = require("dap.ext.vscode")
         local dapui = require("dapui")
-        local telescope = require("telescope")
+        -- local telescope = require("telescope")
         local cmp = require("cmp")
         local dap_py = require("dap-python")
 
@@ -43,10 +43,11 @@ return {
             { override = { "n", "<M-l>", dap.step_into } },
             { override = { "n", "<M-g>", dap.run_to_cursor } },
         }
-        local function after_stop_debugging()
+        ---@param close boolean
+        local function after_stop_debugging(close)
             -- WARNING: Is sometimes called twice
             print("stop debugging")
-            dapui.close()
+            if close then dapui.close() end
             for _, binds in pairs(override_binds) do
                 local original_rhs = vim.fn.maparg(binds.override[2], binds.override[1])
                 if binds.original_rhs ~= nil then
@@ -61,21 +62,13 @@ return {
             dapui.open()
             for _, binds in pairs(override_binds) do
                 local original_rhs = vim.fn.maparg(binds.override[2], binds.override[1])
-                if original_rhs ~= "" then
-                    binds.original_rhs = original_rhs
-                end
+                if original_rhs ~= "" then binds.original_rhs = original_rhs end
                 vim.keymap.set(unpack(binds.override))
             end
         end
-        dap.listeners.after.event_initialized["dapui_config"] = function()
-            after_start_debugging()
-        end
-        dap.listeners.before.event_terminated["dapui_config"] = function()
-            after_stop_debugging()
-        end
-        dap.listeners.before.event_exited["dapui_config"] = function()
-            after_stop_debugging()
-        end
+        dap.listeners.after.event_initialized["dapui_config"] = function() after_start_debugging() end
+        dap.listeners.before.event_terminated["dapui_config"] = function() after_stop_debugging(false) end
+        dap.listeners.before.event_exited["dapui_config"] = function() after_stop_debugging(false) end
 
         -- Set up keys that are always available:
         vim.keymap.set("n", "<F5>", function()
@@ -84,19 +77,22 @@ return {
         end)
         vim.keymap.set("n", "<F6>", function()
             dap.close()
-            after_stop_debugging()
+            after_stop_debugging(true)
         end)
         vim.keymap.set("n", "<F7>", dap.run_last)
         vim.keymap.set("n", "<F8>", dap.step_over)
         vim.keymap.set("n", "<Leader>dh", dapui.toggle, { desc = "Toggle UI" })
-        vim.keymap.set("n", "<Leader>dm", dap_py.test_method, { desc = "Debug Test" })
+        -- vim.keymap.set("n", "<Leader>dm", dap_py.test_method, { desc = "Debug Test" })
         vim.keymap.set("n", "<Leader>dt", dap.toggle_breakpoint, { desc = "Breakpoint" })
-        vim.keymap.set("n", "<Leader>dT", function()
-            dap.set_breakpoint(vim.fn.input("Breakpoint Condition: "))
-        end, { desc = "Conditional Breakpoint" })
-        vim.keymap.set("n", "<Leader>ds", telescope.extensions.dap.variables, { desc = "Variables" })
-        vim.keymap.set("n", "<Leader>db", telescope.extensions.dap.list_breakpoints, { desc = "Breakpoints" })
-        vim.keymap.set("n", "<Leader>df", telescope.extensions.dap.frames, { desc = "Frames" })
+        vim.keymap.set(
+            "n",
+            "<Leader>dT",
+            function() dap.set_breakpoint(vim.fn.input("Breakpoint Condition: ")) end,
+            { desc = "Conditional Breakpoint" }
+        )
+        -- vim.keymap.set("n", "<Leader>ds", telescope.extensions.dap.variables, { desc = "Variables" })
+        -- vim.keymap.set("n", "<Leader>db", telescope.extensions.dap.list_breakpoints, { desc = "Breakpoints" })
+        -- vim.keymap.set("n", "<Leader>df", telescope.extensions.dap.frames, { desc = "Frames" })
 
         cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
             sources = {
@@ -150,12 +146,11 @@ return {
         end
 
         -- Set up UI:
-        telescope.load_extension("dap")
+        -- telescope.load_extension("dap")
         dapui.setup({
             icons = { expanded = "▾", collapsed = "▸", current_frame = "▸" },
             mappings = {
-                -- Use a table to apply multiple mappings
-                expand = { "<CR>", "<2-LeftMouse>" },
+                expand = { "<Enter>", "<2-LeftMouse>" },
                 open = "o",
                 remove = "dd",
                 edit = "cc",
@@ -165,26 +160,17 @@ return {
             expand_lines = true,
             layouts = {
                 {
-                    elements = {
-                        "repl",
-                        "console",
-                    },
+                    elements = { "repl", "console" },
                     size = 0.25,
                     position = "bottom",
                 },
                 {
-                    elements = {
-                        { id = "scopes", size = 0.5 },
-                        { id = "watches", size = 0.5 },
-                        -- { id = "frames", size = 0.25 },
-                    },
+                    elements = { { id = "scopes", size = 0.5 }, { id = "watches", size = 0.5 } },
                     size = 0.25,
                     position = "left",
                 },
             },
-            controls = {
-                enabled = false,
-            },
+            controls = { enabled = false },
             floating = {
                 max_height = 0.85, -- These can be integers or a float between 0 and 1.
                 max_width = 0.85, -- Floats will be treated as percentage of your screen.
@@ -194,10 +180,7 @@ return {
                 },
             },
             windows = { indent = 2 },
-            render = {
-                max_type_length = nil, -- Can be integer or nil.
-                max_value_lines = 20, -- Can be integer or nil.
-            },
+            render = { max_type_length = nil, max_value_lines = 20 },
         })
     end,
 }

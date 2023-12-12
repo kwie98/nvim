@@ -11,8 +11,16 @@ return {
 
         surround.setup({
             keymaps = {
-                visual = "s",
-                visual_line = "gs",
+                normal = "gs",
+                normal_cur = "gss",
+                visual = "gs",
+            },
+            aliases = {
+                a = false,
+                b = false,
+                B = false,
+                r = false,
+                s = { "}", "]", ")", ">" },
             },
         })
     end,

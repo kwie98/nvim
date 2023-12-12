@@ -1,3 +1,0 @@
--- vim.wo.wrap = true
--- vim.bo.spell = true
--- vim.bo.colorcolumn = "73"

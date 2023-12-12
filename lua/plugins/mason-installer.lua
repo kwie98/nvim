@@ -1,6 +1,6 @@
 return {
     "williamboman/mason.nvim",
-    lazy = true,
+    lazy = true, -- loaded by none-ls
     enabled = vim.fn.has("win32") == 0,
 
     config = function()
@@ -13,9 +13,7 @@ return {
             PATH = "skip",
             ui = {
                 border = vim.g.big_border,
-                keymaps = {
-                    apply_language_filter = "f",
-                },
+                keymaps = { apply_language_filter = "f" },
             },
         })
     end,

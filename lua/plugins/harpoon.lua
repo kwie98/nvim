@@ -1,47 +1,32 @@
 return {
     "ThePrimeagen/harpoon",
-    dependencies = {
-        "nvim-lua/plenary.nvim",
-    },
-    lazy = true,
+    branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim" },
     keys = {
         { "<Leader>a", mode = "n", desc = "Add to Harpoon" },
         { "<Leader>h", mode = "n", desc = "Harpoon" },
-        { "<Leader>u", mode = "n" },
-        { "<Leader>i", mode = "n" },
-        { "<Leader>o", mode = "n" },
-        { "<Leader>p", mode = "n" },
+        { "<Leader>u", mode = "n", desc = "Harpoon First" },
+        { "<Leader>i", mode = "n", desc = "Harpoon Second" },
+        { "<Leader>o", mode = "n", desc = "Harpoon Third" },
+        { "<Leader>p", mode = "n", desc = "Harpoon Fourth" },
     },
 
     config = function()
         local harpoon = require("harpoon")
-        local ui = require("harpoon.ui")
-        local mark = require("harpoon.mark")
 
-        harpoon.setup({
-            menu = {
-                width = 128,
+        harpoon:setup({
+            settings = {
+                border_chars = { " " },
+                save_on_toggle = true,
+                sync_on_ui_close = true,
             },
         })
 
-        vim.keymap.set("n", "<Leader>a", function()
-            mark.add_file()
-        end, { desc = "Add to Harpoon" })
-        vim.keymap.set("n", "<Leader>h", function()
-            ui.toggle_quick_menu()
-        end, { desc = "Harpoon" })
-
-        vim.keymap.set("n", "<Leader>u", function()
-            ui.nav_file(1)
-        end)
-        vim.keymap.set("n", "<Leader>i", function()
-            ui.nav_file(2)
-        end)
-        vim.keymap.set("n", "<Leader>o", function()
-            ui.nav_file(3)
-        end)
-        vim.keymap.set("n", "<Leader>p", function()
-            ui.nav_file(4)
-        end)
+        vim.keymap.set("n", "<Leader>a", function() harpoon:list():append() end)
+        vim.keymap.set("n", "<Leader>h", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+        vim.keymap.set("n", "<Leader>u", function() harpoon:list():select(1) end)
+        vim.keymap.set("n", "<Leader>i", function() harpoon:list():select(2) end)
+        vim.keymap.set("n", "<Leader>o", function() harpoon:list():select(3) end)
+        vim.keymap.set("n", "<Leader>p", function() harpoon:list():select(4) end)
     end,
 }

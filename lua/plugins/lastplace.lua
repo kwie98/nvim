@@ -1,6 +1,6 @@
 return {
     "ethanholz/nvim-lastplace",
-    lazy = false,
+    event = "VeryLazy",
 
     config = function()
         local lastplace = require("nvim-lastplace")

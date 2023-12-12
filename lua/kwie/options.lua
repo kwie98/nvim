@@ -1,7 +1,6 @@
 vim.opt.title = true
 vim.opt.formatoptions = "cqj" -- "a" is also nice but breaks markdown code blocks
 vim.opt.mousescroll = "ver:1,hor:1"
-vim.opt.diffopt = vim.opt.diffopt + "vertical,context:100" -- always do vertical diff, don't fold away so much code
 if vim.fn.has("nvim-0.9") == 1 then
     vim.opt.diffopt = vim.opt.diffopt + "linematch:50" -- better diff matches
 end
@@ -14,10 +13,9 @@ vim.opt.hlsearch = true -- highlight all matches on previous search pattern
 vim.opt.ignorecase = true -- ignore case in search patterns
 vim.opt.smartcase = true -- smart case
 vim.opt.mouse = "a" -- allow the mouse to be used in neovim
-vim.opt.selectmode = "mouse" -- dragging mouse starts SELECT instead of VISUAL
 vim.opt.pumheight = 10 -- pop up menu height
-vim.opt.showmode = false -- we don't need to see things like -- INSERT -- anymore
-vim.opt.showtabline = 0 -- never show tabs
+vim.opt.showmode = false
+vim.opt.showtabline = 0
 vim.opt.smartindent = true -- make indenting smarter again
 vim.opt.splitbelow = true -- force all horizontal splits to go below current window
 vim.opt.splitright = true -- force all vertical splits to go to the right of current window
@@ -26,10 +24,6 @@ vim.opt.termguicolors = true -- set term gui colors (most terminals support this
 vim.opt.timeoutlen = 400 -- time to wait for a mapped sequence to complete (in milliseconds)
 vim.opt.undofile = true -- enable persistent undo
 vim.opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
-vim.opt.tabstop = 4 -- insert 2 spaces for a tab
-vim.opt.softtabstop = 4 -- unknown
-vim.opt.shiftwidth = 4 -- the number of spaces inserted for each indentation
-vim.opt.expandtab = true -- convert tabs to spaces
 vim.opt.cursorline = true -- highlight the current line
 vim.opt.number = true -- set numbered lines
 vim.opt.relativenumber = true -- set relative numbered lines
@@ -42,21 +36,32 @@ vim.opt.sidescrolloff = 8
 vim.opt.guifont = "monospace:h17"
 vim.opt.gdefault = true
 vim.opt.spell = false
-vim.opt.textwidth = 120
 vim.opt.colorcolumn = "+1"
 vim.opt.wildmode = "longest:full,full"
-vim.opt.laststatus = 3 -- one lualine for everything
+vim.opt.laststatus = 3 -- one status line for everything
 vim.opt.updatetime = 500
+
+-- Always do vertical diff, don't fold away so much code:
+vim.opt.diffopt = vim.opt.diffopt + "vertical,context:64"
+
+-- Default indentation settings (overwritten by .editorconfig):
+vim.opt.expandtab = true -- don't convert tabs to spaces (to catch formatters doing this automatically!)
+vim.opt.tabstop = 4 -- number of spaces a <Tab> in the text stands for
+vim.opt.softtabstop = 4 -- unknown
+vim.opt.shiftwidth = 4 -- the number of spaces inserted for each indentation
 vim.opt.list = true
-vim.opt.listchars = { tab = "⇥ ", leadmultispace = "▏   ", trail = "␣", nbsp = "⍽" }
+vim.opt.listchars = { tab = "⇥ ", trail = "␣", nbsp = "⍽" }
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-vim.g.modified_icon = "" -- for bufferline, lualine
-vim.g.small_border = "single" -- smaller helper floats
-vim.g.big_border = "shadow" -- ui window floats
-vim.g.diagnostics_visible = true
+-- vim.g.modified_icon = "" -- for bufferline, lualine
+vim.g.small_border = "none" -- smaller helper floats
+-- vim.g.big_border = "shadow" -- ui window floats
+vim.g.blend = 10
+vim.opt.pumblend = vim.g.blend
 vim.g.semantic_highlighting = true
+
+vim.lsp.set_log_level("OFF")
 
 if vim.g.neovide then
     vim.g.neovide_refresh_rate = 144

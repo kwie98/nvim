@@ -1,8 +1,5 @@
 return {
     "ahmedkhalf/project.nvim",
-    dependencies = {
-        "nvim-telescope/telescope.nvim",
-    },
     event = "VeryLazy",
 
     config = function()
@@ -21,6 +18,6 @@ return {
         })
 
         vim.keymap.set("n", "<Leader>j", telescope.extensions.projects.projects, { desc = "Projects" })
-        -- vim.keymap.set("n", "<Leader>J", "<CMD>ProjectRoot<CR>", { desc = "Project CWD" })
+        vim.keymap.set("n", "<Leader>J", "<CMD>ProjectRoot<Enter>", { desc = "Project CWD" })
     end,
 }

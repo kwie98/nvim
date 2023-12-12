@@ -1,3 +1,3 @@
-# Personal Neovim configuration
+# Personal Neovim Configuration
 
 Enjoy :)
