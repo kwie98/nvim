@@ -77,22 +77,18 @@ return {
                     goto_next_start = {
                         ["]p"] = "@parameter.inner",
                         ["]m"] = "@function.outer",
-                        ["]c"] = "@comment.outer",
                     },
                     goto_next_end = {
                         ["]P"] = "@parameter.inner",
                         ["]M"] = "@function.outer",
-                        ["]C"] = "@comment.outer",
                     },
                     goto_previous_start = {
                         ["[p"] = "@parameter.inner",
                         ["[m"] = "@function.outer",
-                        ["[c"] = "@comment.outer",
                     },
                     goto_previous_end = {
                         ["[P"] = "@parameter.inner",
                         ["[M"] = "@function.outer",
-                        ["[C"] = "@comment.outer",
                     },
                 },
             },

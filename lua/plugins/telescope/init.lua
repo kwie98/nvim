@@ -63,12 +63,12 @@ return {
                         flip_columns = 190,
                     },
                     horizontal = {
-                        width = 0.9,
+                        width = 0.85,
                         preview_width = 0.618,
                         prompt_position = "top",
                     },
                     vertical = {
-                        width = 0.9,
+                        width = 0.85,
                         preview_height = 0.618,
                         prompt_position = "top",
                         mirror = true,
@@ -98,6 +98,8 @@ return {
                         ["<C-i>"] = actions.cycle_history_next,
                         ["<C-o>"] = actions.cycle_history_prev,
                         ["<Esc>"] = actions.close,
+                        ["<C-c>"] = actions.send_to_qflist + actions.open_qflist,
+                        ["<C-q>"] = actions.nop,
                     },
                 },
             },

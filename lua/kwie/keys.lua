@@ -24,6 +24,10 @@ vim.keymap.set("n", "<Leader>q", "<CMD>q<Enter>", { desc = "Quit" })
 local wiki_index = vim.fn.expand("~/Sync/wiki/README.md")
 vim.keymap.set("n", "<Leader>W", function() vim.cmd.edit(wiki_index) end, { desc = "Wiki" })
 
+vim.keymap.set("n", "<Leader>C", "<CMD>copen<Enter>", { desc = "Quickfix" })
+vim.keymap.set("n", "]c", "<CMD>cnext<Enter>")
+vim.keymap.set("n", "[c", "<CMD>cprev<Enter>")
+
 -- Navigation:
 vim.keymap.set("n", "<C-j>", "<C-w>w")
 vim.keymap.set("n", "<C-k>", "<C-w>W")
