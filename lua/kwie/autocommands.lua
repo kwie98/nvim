@@ -24,6 +24,7 @@ vim.cmd([[
     augroup _fugitive
     autocmd!
     autocmd User FugitiveIndex nnoremap <buffer> S <CMD>Git add .<CR>
+    autocmd User FugitiveIndex nmap <buffer> <Tab> dd<C-w>b
     augroup end
 
     function! AutoResizeAllTabs()
