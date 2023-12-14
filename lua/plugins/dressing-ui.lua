@@ -25,7 +25,7 @@ return {
             opts = opts or {}
             local theme_opts = {
                 layout_strategy = "horizontal",
-                layout_config = { height = 0.382, width = 0.382 },
+                layout_config = { height = 0.382, width = 0.618 },
             }
             return vim.tbl_deep_extend("force", theme_opts, opts)
         end

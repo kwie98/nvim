@@ -5,21 +5,23 @@ return {
     config = function()
         local gitsigns = require("gitsigns")
 
-        vim.keymap.set("n", "[h", function()
-            if vim.wo.diff then return "[c" end
-            vim.schedule(function() gitsigns.prev_hunk() end)
-            return "<Ignore>"
-        end, { expr = true })
         vim.keymap.set("n", "]h", function()
             if vim.wo.diff then return "]c" end
-            vim.schedule(function() gitsigns.next_hunk() end)
+            gitsigns.next_hunk()
+            return "<Ignore>"
+        end, { expr = true })
+        vim.keymap.set("n", "[h", function()
+            if vim.wo.diff then return "[c" end
+            gitsigns.prev_hunk()
             return "<Ignore>"
         end, { expr = true })
 
-        vim.keymap.set("n", "<Leader>gh", function()
+        vim.keymap.set("n", "<Leader>gH", function()
             gitsigns.toggle_linehl()
             gitsigns.toggle_deleted()
+            gitsigns.toggle_word_diff()
         end, { desc = "Toggle Hunks" })
+        vim.keymap.set("n", "<Leader>gh", gitsigns.preview_hunk_inline, { desc = "Show Hunk" })
         vim.keymap.set("n", "<Leader>gB", gitsigns.toggle_current_line_blame, { desc = "Blame" })
         vim.keymap.set("n", "<Leader>gr", gitsigns.reset_hunk, { desc = "Reset Hunk" })
         vim.keymap.set("n", "<Leader>gR", gitsigns.reset_buffer, { desc = "Reset Buffer" })
@@ -49,15 +51,6 @@ return {
             update_debounce = 100,
             status_formatter = nil, -- Use default
             max_file_length = 40000,
-            preview_config = {
-                -- Options passed to nvim_open_win
-                border = vim.g.small_border,
-                style = "minimal",
-                relative = "cursor",
-                row = 0,
-                col = 1,
-            },
-            yadm = { enable = false },
         })
     end,
 }

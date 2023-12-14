@@ -1,6 +1,6 @@
 return {
     "m-demare/hlargs.nvim",
-    event = "VeryLazy",
+    dependencies = { "folke/tokyonight.nvim" },
 
     config = function()
         require("hlargs").setup({

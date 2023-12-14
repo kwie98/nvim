@@ -61,12 +61,14 @@ vim.cmd([[
     nnoremap dl :diffget //3/<c-r>=expand('%:t') <CR><CR>
 ]])
 
+-- Remember positions in jumplist:
+vim.keymap.set("n", "<C-u>", "m'<C-u>")
+vim.keymap.set("n", "<C-d>", "m'<C-d>")
+
 -- Utility:
 vim.keymap.set("n", "gp", "`[v`]")
 vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "<Leader>n", vim.cmd.noh, { desc = "Toggle Search Highlight" })
--- vim.keymap.set("n", "<C-u>", "<CMD>execute 'keepjumps norm! ' . '<C-u>'<Enter>")
--- vim.keymap.set("n", "<C-d>", "<CMD>execute 'keepjumps norm! ' . '<C-d>'<Enter>")
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 vim.keymap.set("n", "<", "<<")

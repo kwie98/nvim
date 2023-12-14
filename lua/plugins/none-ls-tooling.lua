@@ -45,7 +45,7 @@ return {
                 diagnostics.selene.with({ runtime_condition = not_conda_or_fugitive, cwd = root_finder }),
 
                 -- Javascript, Typescript, HTML, JSON, etc.:
-                formatting.biome.with({ runtime_condition = not_conda_or_fugitive, cwd = root_finder }),
+                formatting.biome.with({ runtime_condition = not_conda_or_fugitive, cwd = root_finder }), -- TODO not needed in 0.10?
                 formatting.prettierd.with({
                     runtime_condition = not_conda_or_fugitive,
                     -- Handled by biome:
