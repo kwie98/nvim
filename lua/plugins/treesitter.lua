@@ -3,7 +3,6 @@ return {
     dependencies = {
         "nvim-treesitter/nvim-treesitter-textobjects",
         "nvim-treesitter/nvim-treesitter-context",
-        "RRethy/nvim-treesitter-endwise",
     },
     build = ":TSUpdate",
     event = "VeryLazy",
@@ -22,7 +21,6 @@ return {
         if vim.fn.has("nvim-0.9") == 1 then vim.treesitter.language.register("bash", "zsh") end
 
         configs.setup({
-            endwise = { enable = true },
             textobjects = {
                 move = {
                     enable = true,
