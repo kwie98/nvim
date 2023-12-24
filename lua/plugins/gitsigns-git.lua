@@ -22,15 +22,13 @@ return {
             gitsigns.toggle_word_diff()
         end, { desc = "Toggle Hunks" })
         vim.keymap.set("n", "<Leader>gh", gitsigns.preview_hunk_inline, { desc = "Show Hunk" })
-        vim.keymap.set("n", "<Leader>gB", gitsigns.toggle_current_line_blame, { desc = "Blame" })
+        vim.keymap.set("n", "<Leader>gl", gitsigns.toggle_current_line_blame, { desc = "Blame" })
         vim.keymap.set("n", "<Leader>gr", gitsigns.reset_hunk, { desc = "Reset Hunk" })
-        vim.keymap.set("n", "<Leader>gR", gitsigns.reset_buffer, { desc = "Reset Buffer" })
         vim.keymap.set("n", "<Leader>gs", gitsigns.stage_hunk, { desc = "Stage Hunk" })
-        vim.keymap.set("n", "<Leader>gS", gitsigns.stage_buffer, { desc = "Stage Buffer" })
-        vim.keymap.set("n", "<Leader>gu", gitsigns.undo_stage_hunk, { desc = "Undo Stage Hunk" })
+        vim.keymap.set("n", "<Leader>gS", gitsigns.undo_stage_hunk, { desc = "Undo Stage Hunk" })
 
-        vim.keymap.set("v", "<Leader>gs", gitsigns.stage_hunk, { desc = "Stage Hunk" })
-        vim.keymap.set("v", "<Leader>gr", gitsigns.reset_hunk, { desc = "Reset Hunk" })
+        vim.keymap.set("v", "<Leader>gr", function() gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") }) end)
+        vim.keymap.set("v", "<Leader>gs", function() gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") }) end)
 
         gitsigns.setup({
             signcolumn = false, -- Toggle with `:Gitsigns toggle_signs`
