@@ -13,12 +13,23 @@ return {
             hl = "HeirlineCwd",
         }
         local relative_path = {
-            provider = function()
-                local path = vim.fn.fnamemodify(vim.fn.expand("%"), ":.:h")
-                if path == "." then return " " end
-                return " " .. path .. "/"
-            end,
-            hl = "HeirlineSeparator",
+            flexible = 2,
+            {
+                provider = function()
+                    local path = vim.fn.fnamemodify(vim.fn.expand("%"), ":.:h")
+                    if path == "." then return " " end
+                    return " " .. path .. "/"
+                end,
+                hl = "HeirlineSeparator",
+            },
+            {
+                provider = function()
+                    local path = vim.fn.fnamemodify(vim.fn.pathshorten(vim.fn.expand("%")), ":.:h")
+                    if path == "." then return " " end
+                    return " " .. path .. "/"
+                end,
+                hl = "HeirlineSeparator",
+            },
         }
         local file_name = {
             provider = function()
@@ -87,8 +98,15 @@ return {
                     hl = "HeirlineLspClients",
                 },
                 {
-                    provider = function(self) return table.concat(self.sources, " ") .. " " end,
-                    hl = "HeirlineSeparator",
+                    flexible = 1,
+                    {
+                        provider = function(self) return table.concat(self.sources, " ") .. " " end,
+                        hl = "HeirlineSeparator",
+                    },
+                    {
+                        provider = "… ",
+                        hl = "HeirlineSeparator",
+                    },
                 },
                 { provider = "", hl = "HeirlineToolsError" },
             },
