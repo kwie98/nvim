@@ -5,9 +5,6 @@ vim.g.loaded_matchit = 1
 vim.opt.title = true
 vim.opt.formatoptions = "cqj" -- "a" is also nice but breaks markdown code blocks
 vim.opt.mousescroll = "ver:1,hor:1"
-if vim.fn.has("nvim-0.9") == 1 then
-    vim.opt.diffopt = vim.opt.diffopt + "linematch:50" -- better diff matches
-end
 vim.opt.backup = false -- creates a backup file
 vim.opt.clipboard = "unnamedplus" -- allows neovim to access the system clipboard
 vim.opt.cmdheight = 1 -- more space in the neovim command line for displaying messages
@@ -35,7 +32,7 @@ vim.opt.numberwidth = 4 -- set number column width to 2 {default 4}
 vim.opt.signcolumn = "yes" -- always show the sign column, otherwise it would shift the text each time
 vim.opt.wrap = false -- display lines as one long line
 vim.opt.linebreak = true
-vim.opt.scrolloff = 8
+vim.opt.scrolloff = 4
 vim.opt.sidescrolloff = 8
 vim.opt.guifont = "monospace:h17"
 vim.opt.gdefault = true
@@ -46,6 +43,9 @@ vim.opt.laststatus = 3 -- one status line for everything
 vim.opt.updatetime = 500
 
 -- Always do vertical diff, don't fold away so much code:
+if vim.fn.has("nvim-0.9") == 1 then
+    vim.opt.diffopt = vim.opt.diffopt + "linematch:50" -- better diff matches
+end
 vim.opt.diffopt = vim.opt.diffopt + "vertical,context:64"
 
 -- Default indentation settings (overwritten by .editorconfig):
@@ -54,7 +54,9 @@ vim.opt.tabstop = 4 -- number of spaces a <Tab> in the text stands for
 vim.opt.softtabstop = 4 -- unknown
 vim.opt.shiftwidth = 4 -- the number of spaces inserted for each indentation
 vim.opt.list = true
-vim.opt.listchars = { tab = "⇥ ", trail = "␣", nbsp = "⍽" }
+vim.opt.listchars = { tab = "⇥ ", nbsp = "·" }
+
+vim.opt.splitkeep = "screen"
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
