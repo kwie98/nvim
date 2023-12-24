@@ -1,3 +1,7 @@
+-- Disable builtin plugins:
+vim.g.loaded_matchparen = 1
+vim.g.loaded_matchit = 1
+
 vim.opt.title = true
 vim.opt.formatoptions = "cqj" -- "a" is also nice but breaks markdown code blocks
 vim.opt.mousescroll = "ver:1,hor:1"
