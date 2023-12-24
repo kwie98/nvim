@@ -3,8 +3,9 @@ return {
     dependencies = {
         "nvim-treesitter/nvim-treesitter",
         "nvim-lua/plenary.nvim",
-        "nvim-neotest/neotest-python",
         "mfussenegger/nvim-dap",
+        "nvim-neotest/neotest-python",
+        "marilari88/neotest-vitest",
     },
     keys = {
         { "<Leader>rt", mode = "n", desc = "Test" },
@@ -19,16 +20,29 @@ return {
 
     config = function()
         local neotest = require("neotest")
-        local neotest_py = require("neotest-python")
+        local neotest_python = require("neotest-python")
+        local neotest_vitest = require("neotest-vitest")
+
+        local function match_file_extension(extension)
+            local matcher = function(path) return path:match(".*%." .. extension .. "$") end
+            return matcher
+        end
 
         neotest.setup({
+            diagnostic = { enabled = false },
+            status = { signs = false },
             adapters = {
-                neotest_py({
+                neotest_python({
                     dap = { justMyCode = false },
-                    is_test_file = function(path)
-                        return path:match(".*%.py$") -- look at all python files
-                    end,
+                    is_test_file = match_file_extension("py"),
+                    -- is_test_file = function(path)
+                    --     return path:match(".*%.py$") -- look at all python files
+                    -- end,
                 }),
+                -- neotest_vitest({
+                --     is_test_file = match_file_extension("ts")
+                -- }),
+                neotest_vitest,
             },
             summary = {
                 mappings = {
@@ -37,7 +51,7 @@ return {
                     short = "O",
                     jumpto = "gd",
                     stop = "s",
-                    mark = "<C-Space>",
+                    mark = "m",
                     clear_marked = "<BS>",
                     run = { "t", "<Enter>" },
                     run_marked = { "T", "<S-Enter>" },
