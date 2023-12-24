@@ -4,27 +4,26 @@ return {
 
     config = function()
         local illuminate = require("illuminate")
+        local ref = require("illuminate.reference")
+        local min_count = 2
 
         illuminate.configure({
             providers = { "lsp", "treesitter" },
-            delay = 400,
-            -- filetype_overrides = {},
+            delay = 100,
             filetypes_denylist = { "fugitive", "lazy", "toggleterm", "DressingSelect", "TelescopePrompt" },
             under_cursor = true,
-            min_count_to_highlight = 2,
+            min_count_to_highlight = min_count,
         })
 
-        local next = function() illuminate.goto_next_reference(false) end
-        local prev = function() illuminate.goto_prev_reference(false) end
-
-        vim.keymap.set("n", "]]", next, { desc = "Goto next reference" })
-        vim.keymap.set("n", "[[", prev, { desc = "Goto previous reference" })
-
-        vim.api.nvim_create_autocmd("FileType", {
-            callback = function()
-                vim.keymap.set("n", "]]", next, { buffer = true, desc = "Goto next reference" })
-                vim.keymap.set("n", "[[", prev, { buffer = true, desc = "Goto previous reference" })
-            end,
-        })
+        vim.keymap.set("n", "*", function()
+            local refs = ref.buf_get_references(vim.api.nvim_get_current_buf())
+            if not refs or #refs < min_count then return "*" end
+            return '<CMD>lua require"illuminate".goto_next_reference()<Enter>'
+        end, { expr = true, desc = "Goto next reference or occurence" })
+        vim.keymap.set("n", "#", function()
+            local refs = ref.buf_get_references(vim.api.nvim_get_current_buf())
+            if not refs or #refs < min_count then return "#" end
+            return '<CMD>lua require"illuminate".goto_prev_reference()<Enter>'
+        end, { expr = true, desc = "Goto prev reference or occurence" })
     end,
 }
