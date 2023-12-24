@@ -6,6 +6,7 @@ vim.cmd([[
     autocmd FileType TelescopePrompt nnoremap <silent> <buffer> q :close!<CR>
     autocmd TextYankPost * silent!lua require('vim.highlight').on_yank({higroup = 'IncSearch', timeout = 100})
     autocmd BufWinEnter * :set formatoptions-=ro
+    autocmd BufEnter * if &ft ==# 'help' | :vertical resize 79 | endif
     augroup end
 
     augroup _cursor_line
