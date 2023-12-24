@@ -34,11 +34,8 @@ return {
                 diagnostics.clang_check.with({ runtime_condition = not_conda_or_fugitive }),
                 diagnostics.cpplint.with({ runtime_condition = not_conda_or_fugitive }),
 
-                -- Sh, Bash, Zsh:
-                code_actions.shellcheck.with({ runtime_condition = not_conda_or_fugitive, extra_filetypes = { "zsh" } }),
-                diagnostics.shellcheck.with({ runtime_condition = not_conda_or_fugitive, extra_filetypes = { "zsh" } }),
-                formatting.shellharden.with({ runtime_condition = not_conda_or_fugitive, extra_filetypes = { "zsh" } }),
-                formatting.shfmt.with({ runtime_condition = not_conda_or_fugitive, extra_filetypes = { "zsh" } }),
+                -- Docker:
+                diagnostics.hadolint,
 
                 -- Git:
                 diagnostics.gitlint,
@@ -68,6 +65,15 @@ return {
                     extra_args = { "--fast" },
                     cwd = root_finder,
                 }),
+
+                -- Sh, Bash, Zsh:
+                code_actions.shellcheck.with({ runtime_condition = not_conda_or_fugitive, extra_filetypes = { "zsh" } }),
+                diagnostics.shellcheck.with({ runtime_condition = not_conda_or_fugitive, extra_filetypes = { "zsh" } }),
+                formatting.shellharden.with({ runtime_condition = not_conda_or_fugitive, extra_filetypes = { "zsh" } }),
+                formatting.shfmt.with({ runtime_condition = not_conda_or_fugitive, extra_filetypes = { "zsh" } }),
+
+                -- YAML:
+                diagnostics.actionlint,
             },
         })
     end,
