@@ -1,6 +1,8 @@
 return {
     "hrsh7th/nvim-cmp",
     dependencies = {
+        -- Bracket completion:
+        "windwp/nvim-autopairs",
         -- Completion sources:
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
@@ -67,18 +69,25 @@ return {
                 ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
                 ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
             },
-            sources = cmp.config.sources(
-                { { name = "nvim_lsp" }, { name = "luasnip" }, { name = "path" } },
-                { { name = "buffer", max_item_count = 5 } }
-            ),
+            sources = cmp.config.sources({
+                { name = "nvim_lsp" },
+                { name = "luasnip" },
+                { name = "path" },
+            }, {
+                { name = "buffer", max_item_count = 5 },
+            }),
         })
         cmp.setup.cmdline(":", {
             sources = cmp.config.sources({
                 { name = "path" },
             }, {
-                { name = "cmdline" },
-                { name = "cmdline_history" },
+                { name = "cmdline", priority = 100000 }, -- first
+                { name = "cmdline_history", priority = 1 }, -- second
             }),
         })
+        cmp.event:on(
+            "confirm_done",
+            require("nvim-autopairs.completion.cmp").on_confirm_done(--[[ { map_char = { tex = "" } } ]])
+        )
     end,
 }
