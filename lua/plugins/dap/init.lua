@@ -5,7 +5,12 @@ return {
         -- "nvim-telescope/telescope-dap.nvim",
         "nvim-telescope/telescope.nvim",
         "rcarriga/cmp-dap",
-        "mfussenegger/nvim-dap-python",
+        -- "mxsdev/nvim-dap-vscode-js",
+        -- {
+        --     "microsoft/vscode-js-debug",
+        --     version = "1.x",
+        --     build = "npm i && npm run compile vsDebugServerBundle && mv dist out",
+        -- },
     },
     lazy = true,
     module = false, -- don't load dap even if required (e.g., by rust-tools.nvim)
@@ -15,12 +20,8 @@ return {
         { "<F7>", mode = "n" },
         { "<F8>", mode = "n" },
         { "<Leader>dh", mode = "n", desc = "Toggle UI" },
-        -- { "<Leader>dm", mode = "n", desc = "Debug Test" },
         { "<Leader>dt", mode = "n", desc = "Breakpoint" },
         { "<Leader>dT", mode = "n", desc = "Conditional Breakpoint" },
-        -- { "<Leader>ds", mode = "n", desc = "Variables" },
-        -- { "<Leader>db", mode = "n", desc = "Breakpoints" },
-        -- { "<Leader>df", mode = "n", desc = "Frames" },
     },
     enabled = vim.fn.has("win32") == 0,
 
@@ -28,9 +29,7 @@ return {
         local dap = require("dap")
         local dap_launchjson = require("dap.ext.vscode")
         local dapui = require("dapui")
-        -- local telescope = require("telescope")
         local cmp = require("cmp")
-        local dap_py = require("dap-python")
 
         -- Set up bindings that are only active while debugging, and whose original binds can be restored:
         -- WARNING: This probably only works with original binds with non-function rhs?
@@ -102,48 +101,13 @@ return {
 
         vim.fn.sign_define("DapBreakpoint", {
             text = "⏺",
-            texthl = "Error",
+            texthl = "DiagnosticSignError",
             linehl = "",
             numhl = "",
         })
 
-        -- Set up debuggers:
-        dap_py.setup(vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python")
-        if not dap.adapters["pwa-node"] then
-            require("dap").adapters["pwa-node"] = {
-                type = "server",
-                host = "localhost",
-                port = "${port}",
-                executable = {
-                    command = "node",
-                    args = {
-                        require("mason-registry").get_package("js-debug-adapter"):get_install_path()
-                            .. "/js-debug/src/dapDebugServer.js",
-                        "${port}",
-                    },
-                },
-            }
-        end
-        for _, language in ipairs({ "typescript", "javascript", "typescriptreact", "javascriptreact" }) do
-            if not dap.configurations[language] then
-                dap.configurations[language] = {
-                    {
-                        type = "pwa-node",
-                        request = "launch",
-                        name = "Launch file",
-                        program = "${file}",
-                        cwd = "${workspaceFolder}",
-                    },
-                    {
-                        type = "pwa-node",
-                        request = "attach",
-                        name = "Attach",
-                        processId = require("dap.utils").pick_process,
-                        cwd = "${workspaceFolder}",
-                    },
-                }
-            end
-        end
+        require("plugins.dap.configs.python")(dap)
+        -- require("plugins.dap.configs.typescript")(dap)
 
         -- Set up UI:
         -- telescope.load_extension("dap")
