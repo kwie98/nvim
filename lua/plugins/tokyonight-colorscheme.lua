@@ -2,6 +2,7 @@
 return {
     "folke/tokyonight.nvim",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
+    lazy = true, -- loaded by hlargs
 
     config = function()
         local util = require("tokyonight.util")
@@ -228,8 +229,9 @@ return {
                 hl["@label"] = { link = "@field" } -- json keys. WAS blue
                 hl["@property"] = { link = "@field" }
 
-                hl["@string"] = { fg = c.teal } -- WAS green
+                hl.String = { fg = c.teal } -- WAS green
                 -- hl.Comment = { fg = c.comment }
+                hl["@string.regex"] = { link = "Constant" }
                 hl["@string.documentation"] = { fg = c.light_comment }
                 hl["@comment.documentation"] = { fg = c.light_comment } -- doesn't work yet
 
@@ -238,11 +240,13 @@ return {
 
                 local type_color = c.green2
                 hl.Type = { fg = type_color } -- WAS blue1
+                hl["@lsp.type.interface.typescript"] = { link = "Type" } -- typescript interfaces are weird
                 hl["@type.builtin"] = { fg = type_color }
                 -- hl["@type.builtin"] = { fg = util.darken(type_color, 0.8) }
-                hl["@enumMember"] = { fg = type_color, style = "italic" }
+                -- hl["@enumMember"] = { fg = type_color, style = "italic" }
 
                 hl["@punctuation.bracket"] = { fg = c.light_comment }
+                hl["@tag.delimiter"] = { link = "@punctuation.bracket" } -- html <div> </div> brackets
                 -- hl.luaParenError = { link = "@punctuation.bracket" } -- fix for LSP hover windows in lua having red parens
                 hl["@punctuation.delimiter"] = { fg = c.lighter_comment } -- , ;
                 hl["@operator"] = { fg = c.fg } -- + &
