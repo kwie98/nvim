@@ -10,7 +10,7 @@ return {
             lsp = {
                 documentation = {
                     opts = {
-                        win_options = { concealcursor = "", conceallevel = 0 },
+                        win_options = { concealcursor = "n", conceallevel = 1 },
                     },
                 },
                 progress = { enabled = false },
