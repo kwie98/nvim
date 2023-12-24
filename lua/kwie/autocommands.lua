@@ -83,18 +83,18 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 })
 
 -- Set indent guides based on settings:
-local function set_leadmultispace()
-    local spaces = "▏       "
-    if vim.bo.tabstop <= spaces:len() and not (vim.bo.filetype == "markdown") then
-        -- + 2 because the vertical line is unicode and has length 3
-        vim.opt_local.listchars:append({ leadmultispace = spaces:sub(1, vim.bo.tabstop + 2) })
-    end
-end
-vim.api.nvim_create_autocmd(
-    "OptionSet",
-    { pattern = { "listchars", "tabstop", "filetype" }, callback = set_leadmultispace }
-)
-vim.api.nvim_create_autocmd({ "BufRead" }, { callback = set_leadmultispace })
+-- local function set_leadmultispace()
+--     local spaces = "▏       "
+--     if vim.bo.tabstop <= spaces:len() and not (vim.bo.filetype == "markdown") then
+--         -- + 2 because the vertical line is unicode and has length 3
+--         vim.opt_local.listchars:append({ leadmultispace = spaces:sub(1, vim.bo.tabstop + 2) })
+--     end
+-- end
+-- vim.api.nvim_create_autocmd(
+--     "OptionSet",
+--     { pattern = { "listchars", "tabstop", "filetype" }, callback = set_leadmultispace }
+-- )
+-- vim.api.nvim_create_autocmd({ "BufRead" }, { callback = set_leadmultispace })
 
 -- Update heirline:
 vim.api.nvim_create_autocmd({ "BufEnter", "LspAttach", "LspDetach" }, { command = "redrawstatus" })
