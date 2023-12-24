@@ -1,31 +1,18 @@
 return {
+    -- LazyVim: Lazy-load custom schemastore:
+    on_new_config = function(new_config)
+        new_config.settings.yaml.schemas =
+            vim.tbl_deep_extend("force", new_config.settings.yaml.schemas or {}, require("schemastore").yaml.schemas())
+    end,
     settings = {
+        redhat = { telemetry = { enabled = false } },
         yaml = {
-            format = {
-                enable = true,
-            },
+            format = { enable = false },
             hover = true,
             completion = true,
             validate = true,
-            schemaStore = {
-                enable = true,
-                url = "https://www.schemastore.org/api/json/catalog.json",
-            },
-            schemas = {
-                kubernetes = {
-                    "daemon.{yml,yaml}",
-                    "manager.{yml,yaml}",
-                    "restapi.{yml,yaml}",
-                    "role.{yml,yaml}",
-                    "role_binding.{yml,yaml}",
-                    "*onfigma*.{yml,yaml}",
-                    "*ngres*.{yml,yaml}",
-                    "*ecre*.{yml,yaml}",
-                    "*eployment*.{yml,yaml}",
-                    "*ervic*.{yml,yaml}",
-                    "kubectl-edit*.yaml",
-                },
-            },
+            -- LazyVim: Must disable built-in schemaStore support to use schemas from plugin:
+            schemaStore = { enable = false, url = "" },
         },
     },
 }
