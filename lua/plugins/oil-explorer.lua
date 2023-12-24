@@ -11,6 +11,7 @@ return {
                 "icon",
             },
             delete_to_trash = true,
+            cleanup_delay_ms = 0,
             keymaps = {
                 ["g?"] = "actions.show_help",
                 ["<Enter>"] = "actions.select",
@@ -19,7 +20,6 @@ return {
                 ["<C-t>"] = "actions.select_tab",
                 ["<Tab>"] = "actions.preview",
                 ["<Leader>e"] = "actions.close", -- TODO also close preview?
-                ["q"] = "actions.close",
                 -- ["<C-l>"] = "actions.refresh",
                 ["-"] = "actions.parent",
                 ["<Leader>j"] = "actions.open_cwd",
