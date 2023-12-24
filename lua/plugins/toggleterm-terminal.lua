@@ -1,9 +1,22 @@
+-- local keys = {}
+-- local keymap_descs = {}
+-- for i = 1, num_terms do
+--     keys[i] = { "<C-Space>" .. i, mode = "n", desc = "Toggle Terminal" }
+-- end
+-- for index, value in ipairs(t) do
+--
+-- end
+-- for _, key in ipairs({ "u", "i", "o", "p" }) do
+--     -- keys[key] = { "<C-Space>" .. key, mode = {"n", "t"}, desc = "Toggle Terminal" }
+--     keys[#keys + 1] = key
+--     keymap_descs[#keymap_descs + 1] = { "<C-Space>" .. key, mode = { "n", "t" }, desc = "Toggle Terminal" }
+--     keymap_descs[#keymap_descs + 1] = { "<C-Space><C-" .. key .. ">", mode = { "n", "t" }, desc = "Toggle Terminal" }
+-- end
+
 return {
     "akinsho/toggleterm.nvim",
-    keys = {
-        { "<Leader><Enter>", mode = "n", desc = "Toggle Terminal" },
-        { "<Leader><S-Enter>", mode = "n", desc = "Focus Terminal" },
-    },
+    -- keys = keymap_descs,
+    event = "VeryLazy",
 
     config = function()
         local toggleterm = require("toggleterm")
@@ -11,91 +24,87 @@ return {
 
         vim.g.toggleterm_prev_win = vim.api.nvim_get_current_win()
 
-        vim.keymap.set("n", "<Leader><S-Enter>", function()
-            local count = vim.fn.max({ vim.v.count, 1 })
-            local term = terminal.get(count)
-            if term == nil then
-                -- Requested terminal does not exist; make it:
-                vim.g.toggleterm_prev_win = vim.api.nvim_get_current_win()
-                vim.cmd(count .. "ToggleTerm")
-            elseif term:is_focused() then
-                -- Was in terminal; go to previous window:
-                vim.api.nvim_set_current_win(vim.g.toggleterm_prev_win)
-            elseif term:is_open() then
-                -- Focus open terminal:
-                vim.g.toggleterm_prev_win = vim.api.nvim_get_current_win()
-                term:focus()
-            else
-                -- Open closed terminal:
-                vim.g.toggleterm_prev_win = vim.api.nvim_get_current_win()
-                term:open()
-            end
-        end, { desc = "Focus Terminal" })
-
-        vim.keymap.set("n", "<Leader><Enter>", function()
-            local count = vim.fn.max({ vim.v.count, 1 })
-            if vim.bo.filetype == "toggleterm" then
-                -- Was in terminal; go to previous window:
-                vim.cmd(count .. "ToggleTerm")
-            else
-                -- Open closed terminal without switching: TODO
-                vim.g.toggleterm_prev_win = vim.api.nvim_get_current_win()
-                vim.cmd(count .. "ToggleTerm")
-                vim.api.nvim_set_current_win(vim.g.toggleterm_prev_win)
-            end
-        end, { desc = "Toggle Terminal" })
-
         toggleterm.setup({
             size = 16,
             open_mapping = nil,
             hide_numbers = true,
-            -- shade_filetypes = {},
-            -- shade_terminals = true,
             shading_factor = "0",
-            -- highlights = {
-            --     Normal = { link = "TermNormal" },
-            -- },
-            start_in_insert = false,
+            start_in_insert = true,
             insert_mappings = false,
             terminal_mappings = false,
             persist_size = true,
-            -- persist_mode = false,
             direction = "horizontal",
             close_on_exit = true,
             auto_scroll = false,
-            float_opts = {
-                border = "curved",
-                winblend = 0,
-                highlights = {
-                    border = "Normal",
-                    background = "Normal",
-                },
-            },
+            persist_mode = false,
         })
 
-        -- local function go_to_file(norm_cmd)
-        --     local cursor = vim.api.nvim_win_get_cursor(0)
-        --     local bufnr = vim.api.nvim_get_current_buf()
-        --     toggleterm.toggle(0)
-        --     vim.api.nvim_win_set_buf(0, bufnr)
-        --     vim.api.nvim_win_set_cursor(0, cursor)
-        --     vim.cmd("norm! " .. norm_cmd)
-        -- end
+        local terms = {
+            u = terminal.Terminal:new({
+                cmd = vim.opt.shell:get(),
+                direction = "horizontal",
+                count = 1,
+            }),
+            i = terminal.Terminal:new({
+                cmd = "lazygit",
+                direction = "tab",
+                count = 2,
+            }),
+            o = terminal.Terminal:new({
+                cmd = vim.opt.shell:get(),
+                direction = "tab",
+                count = 3,
+            }),
+            p = terminal.Terminal:new({
+                cmd = vim.opt.shell:get(),
+                direction = "tab",
+                count = 3,
+            }),
+        }
 
+        --- @param this_term Terminal
+        local function open_just(this_term)
+            -- Close this terminal if focused:
+            if this_term:is_focused() then
+                this_term:close()
+                return
+            end
+            -- Focus this terminal if open:
+            if this_term:is_open() then
+                this_term:focus()
+                return
+            end
+            -- Close the other terminals, then open this:
+            for _, other_term in pairs(terms) do
+                if other_term:is_focused() then -- don't "close the last tab"
+                    other_term:close()
+                end
+            end
+            this_term:open()
+        end
+
+        for key, term in pairs(terms) do
+            vim.keymap.set(
+                { "n", "t" },
+                "<C-Space>" .. key,
+                function() open_just(term) end,
+                { desc = "Toggle Terminal" }
+            )
+            vim.keymap.set(
+                { "n", "t" },
+                "<C-Space><C-" .. key .. ">",
+                function() open_just(term) end,
+                { desc = "Toggle Terminal" }
+            )
+        end
+
+        -- <Esc> only in the first terminal:
         vim.api.nvim_create_augroup("ToggleTerm", {})
         vim.api.nvim_create_autocmd("TermOpen", {
-            pattern = "term://*toggleterm#*",
+            pattern = "term://*toggleterm#1",
             callback = function()
                 local opts = { buffer = true }
-                vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
-                -- vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd w<CR>]], opts)
-                -- vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd W<CR>]], opts)
-                -- vim.keymap.set("n", "gf", function()
-                --     go_to_file("gf")
-                -- end, opts)
-                -- vim.keymap.set("n", "gF", function()
-                --     go_to_file("gF")
-                -- end, opts)
+                vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], opts)
             end,
             group = "ToggleTerm",
         })
