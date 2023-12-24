@@ -1,3 +1,4 @@
+vim.loader.enable()
 require("kwie.options")
 require("kwie.lazy")
 require("kwie.keys")
