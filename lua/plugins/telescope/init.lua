@@ -6,47 +6,39 @@ return {
             "nvim-telescope/telescope-fzf-native.nvim",
             build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
         },
+        "aaronhallaert/advanced-git-search.nvim",
+        "tpope/vim-fugitive",
+        -- "sindrets/diffview.nvim",
     },
-    lazy = true, -- gets loaded by project.nvim
-    -- cmd = "Telescope",
-    -- keys = {
-    --     { "<Leader>F", mode = "n", desc = "Find in Home" },
-    --     { "<Leader>b", mode = "n", desc = "Find Buffer" },
-    --     { "<Leader>f", mode = "n", desc = "Find File" },
-    --     { "<Leader>gb", mode = "n", desc = "Checkout Branch" },
-    --     { "<Leader>gd", mode = "n", desc = "Diff File" },
-    --     { "<Leader>sc", mode = "n", desc = "Find Highlight" },
-    --     { "<Leader>sh", mode = "n", desc = "Find Help" },
-    --     { "<Leader>sk", mode = "n", desc = "Keymaps" },
-    --     { "<Leader>sm", mode = "n", desc = "Man Pages" },
-    --     { "<Leader>sr", mode = "n", desc = "Open Recent File" },
-    --     { "<Leader>st", mode = "n", desc = "Find Text" },
-    --     { "<Leader>t", mode = "n", desc = "Resume Search" },
-    -- },
+    -- lazy = true, -- gets loaded by project.nvim
+    event = "VeryLazy",
 
     config = function()
         local telescope = require("telescope")
         local builtin = require("telescope.builtin")
         local actions = require("telescope.actions")
-        local my_pickers = require("plugins.telescope.pickers")
+        -- local my_pickers = require("plugins.telescope.pickers")
+        local advanced_git_search = require("advanced_git_search.telescope.pickers")
 
         vim.keymap.set(
             "n",
-            "<Leader>F",
+            "<Leader>s~",
             function() builtin.find_files({ cwd = "~", hidden = true }) end,
-            { desc = "Find in Home" }
+            { desc = "~/**" }
         )
-        vim.keymap.set("n", "<Leader>b", builtin.buffers, { desc = "Find Buffer" })
-        vim.keymap.set("n", "<Leader>f", builtin.find_files, { desc = "Find File" })
-        vim.keymap.set("n", "<Leader>gb", builtin.git_branches, { desc = "Checkout Branch" })
-        vim.keymap.set("n", "<Leader>gd", my_pickers.my_bcommits, { desc = "Diff File" })
-        vim.keymap.set("n", "<Leader>sc", builtin.highlights, { desc = "Find Highlight" })
-        vim.keymap.set("n", "<Leader>sh", builtin.help_tags, { desc = "Find Help" })
-        vim.keymap.set("n", "<Leader>sk", builtin.keymaps, { desc = "Keymaps" })
-        vim.keymap.set("n", "<Leader>sm", builtin.man_pages, { desc = "Man Pages" })
-        vim.keymap.set("n", "<Leader>sr", builtin.oldfiles, { desc = "Open Recent File" })
-        vim.keymap.set("n", "<Leader>st", builtin.live_grep, { desc = "Find Text" })
-        vim.keymap.set("n", "<Leader>t", builtin.resume, { desc = "Resume Search" })
+        vim.keymap.set("n", "<Leader>b", builtin.buffers, { desc = "Buffers" })
+        vim.keymap.set("n", "<Leader>t", builtin.live_grep, { desc = "Grep" })
+        vim.keymap.set("n", "<Leader>f", builtin.find_files, { desc = "Files" })
+
+        -- vim.keymap.set("n", "<Leader>sd", my_pickers.my_bcommits, { desc = "Git Commits" })
+        vim.keymap.set("n", "<Leader>sd", advanced_git_search.search_log_content_file, { desc = "File Diffs" })
+        vim.keymap.set("n", "<Leader>sg", advanced_git_search.search_log_content, { desc = "Git" })
+        vim.keymap.set("n", "<Leader>sc", builtin.highlights, { desc = "Highlights" })
+        vim.keymap.set("n", "<Leader>sh", builtin.help_tags, { desc = "Help" })
+        vim.keymap.set("n", "<Leader>sk", builtin.keymaps, { desc = "Keys" })
+        vim.keymap.set("n", "<Leader>sm", builtin.man_pages, { desc = "Manual" })
+        vim.keymap.set("n", "<Leader>sr", builtin.oldfiles, { desc = "Recent Files" })
+        vim.keymap.set("n", "<Leader>st", builtin.resume, { desc = "Resume Search" })
 
         telescope.setup({
             defaults = {
@@ -100,6 +92,7 @@ return {
                         ["<Esc>"] = actions.close,
                         ["<C-c>"] = actions.send_to_qflist + actions.open_qflist,
                         ["<C-q>"] = actions.nop,
+                        ["<C-Space>"] = actions.cycle_previewers_next,
                     },
                 },
             },
@@ -119,14 +112,20 @@ return {
                             ["<Esc>"] = false,
                         },
                         n = {
-                            ["<C-Space>"] = actions.toggle_selection + actions.move_selection_worse,
+                            ["<C-v>"] = actions.select_vertical,
+                            ["<C-s>"] = actions.select_horizontal,
                             ["dd"] = actions.delete_buffer,
                         },
                     },
                 },
             },
-            extensions = {},
+            extensions = {
+                advanced_git_search = {
+                    entry_default_author_or_date = "date",
+                },
+            },
         })
         telescope.load_extension("fzf")
+        telescope.load_extension("advanced_git_search")
     end,
 }
