@@ -16,12 +16,11 @@ return {
             return "<Ignore>"
         end, { expr = true })
 
-        vim.keymap.set("n", "<Leader>gH", function()
+        vim.keymap.set("n", "<Leader>gh", function()
             gitsigns.toggle_linehl()
             gitsigns.toggle_deleted()
             gitsigns.toggle_word_diff()
         end, { desc = "Toggle Hunks" })
-        vim.keymap.set("n", "<Leader>gh", gitsigns.preview_hunk_inline, { desc = "Show Hunk" })
         vim.keymap.set("n", "<Leader>gl", gitsigns.toggle_current_line_blame, { desc = "Blame" })
         vim.keymap.set("n", "<Leader>gr", gitsigns.reset_hunk, { desc = "Reset Hunk" })
         vim.keymap.set("n", "<Leader>gs", gitsigns.stage_hunk, { desc = "Stage Hunk" })
