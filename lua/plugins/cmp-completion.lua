@@ -1,7 +1,6 @@
 return {
     "hrsh7th/nvim-cmp",
     dependencies = {
-        "jmbuhr/otter.nvim",
         "windwp/nvim-autopairs",
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
@@ -66,7 +65,6 @@ return {
                 ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
             },
             sources = cmp.config.sources({
-                { name = "otter" },
                 { name = "nvim_lsp" },
                 { name = "luasnip" },
                 { name = "path" },
