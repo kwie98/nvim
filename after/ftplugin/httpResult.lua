@@ -1,4 +1,0 @@
--- for rest-nvim (not working :/)
--- vim.opt_local.conceallevel = 0
--- vim.bo.tabstop = 2
--- vim.opt_local.listchars:append({ leadmultispace = "▏ " })
