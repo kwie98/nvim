@@ -1,17 +1,13 @@
 return {
     "hrsh7th/nvim-cmp",
     dependencies = {
-        -- Bracket completion:
         "windwp/nvim-autopairs",
-        -- Completion sources:
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
         "saadparwaiz1/cmp_luasnip",
         "hrsh7th/cmp-cmdline",
-        -- Snippets:
         "L3MON4D3/LuaSnip",
     },
-    -- lazy = false,
     event = "VeryLazy",
 
     config = function()
@@ -83,9 +79,7 @@ return {
                 { name = "cmdline" },
             }),
         })
-        cmp.event:on(
-            "confirm_done",
-            require("nvim-autopairs.completion.cmp").on_confirm_done(--[[ { map_char = { tex = "" } } ]])
-        )
+
+        cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
     end,
 }
