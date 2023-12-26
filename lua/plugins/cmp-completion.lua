@@ -8,7 +8,6 @@ return {
         "hrsh7th/cmp-path",
         "saadparwaiz1/cmp_luasnip",
         "hrsh7th/cmp-cmdline",
-        "dmitmel/cmp-cmdline-history",
         -- Snippets:
         "L3MON4D3/LuaSnip",
     },
@@ -81,8 +80,7 @@ return {
             sources = cmp.config.sources({
                 { name = "path" },
             }, {
-                { name = "cmdline", priority = 100000 }, -- first
-                { name = "cmdline_history", priority = 1 }, -- second
+                { name = "cmdline" },
             }),
         })
         cmp.event:on(

@@ -34,6 +34,7 @@ return {
         vim.keymap.set("n", "<Leader>sm", builtin.man_pages, { desc = "Manual" })
         vim.keymap.set("n", "<Leader>sr", builtin.oldfiles, { desc = "Recent Files" })
         vim.keymap.set("n", "<Leader>st", builtin.resume, { desc = "Resume Search" })
+        vim.keymap.set("n", "<Leader>s:", builtin.command_history, { desc = "Command History" })
 
         telescope.setup({
             defaults = {
