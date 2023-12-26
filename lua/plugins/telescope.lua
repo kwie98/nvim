@@ -7,16 +7,13 @@ return {
             build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
         },
         "aaronhallaert/advanced-git-search.nvim",
-        -- "sindrets/diffview.nvim",
     },
-    -- lazy = true, -- gets loaded by project.nvim
     event = "VeryLazy",
 
     config = function()
         local telescope = require("telescope")
         local builtin = require("telescope.builtin")
         local actions = require("telescope.actions")
-        -- local my_pickers = require("plugins.telescope.pickers")
         local advanced_git_search = require("advanced_git_search.telescope.pickers")
 
         vim.keymap.set(
@@ -29,7 +26,6 @@ return {
         vim.keymap.set("n", "<Leader>t", builtin.live_grep, { desc = "Grep" })
         vim.keymap.set("n", "<Leader>f", builtin.find_files, { desc = "Files" })
 
-        -- vim.keymap.set("n", "<Leader>sd", my_pickers.my_bcommits, { desc = "Git Commits" })
         vim.keymap.set("n", "<Leader>sd", advanced_git_search.search_log_content_file, { desc = "File Diffs" })
         vim.keymap.set("n", "<Leader>sg", advanced_git_search.search_log_content, { desc = "Git" })
         vim.keymap.set("n", "<Leader>sc", builtin.highlights, { desc = "Highlights" })
