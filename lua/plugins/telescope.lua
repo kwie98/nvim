@@ -32,7 +32,12 @@ return {
         vim.keymap.set("n", "<Leader>sh", builtin.help_tags, { desc = "Help" })
         vim.keymap.set("n", "<Leader>sk", builtin.keymaps, { desc = "Keys" })
         vim.keymap.set("n", "<Leader>sm", builtin.man_pages, { desc = "Manual" })
-        vim.keymap.set("n", "<Leader>sr", builtin.oldfiles, { desc = "Recent Files" })
+        vim.keymap.set(
+            "n",
+            "<Leader>sr",
+            function() builtin.oldfiles({ only_cwd = true }) end,
+            { desc = "Recent Files" }
+        )
         vim.keymap.set("n", "<Leader>st", builtin.resume, { desc = "Resume Search" })
         vim.keymap.set("n", "<Leader>s:", builtin.command_history, { desc = "Command History" })
 

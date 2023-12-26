@@ -1,6 +1,6 @@
 return {
     "monkoose/matchparen.nvim",
-    lazy = false, -- load before builtin plugin
+    event = "VeryLazy",
 
     config = function()
         require("matchparen").setup({

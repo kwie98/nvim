@@ -146,6 +146,7 @@ return {
                 hl.HeirlineFileType = { bg = c.bg_highlight }
                 hl.HeirlineWinBarEnd = { fg = c.bg_highlight }
 
+                hl.IblIndent = { fg = c.bg_highlight_strong }
                 -- hl.black = {fg = c.terminal_black}
                 -- hl.red = {fg = c.red}
                 -- hl.green = {fg = c.green1}

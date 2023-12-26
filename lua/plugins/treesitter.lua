@@ -88,7 +88,6 @@ return {
                 enable = true,
                 disable = {
                     "css",
-                    -- "python",
                     "yaml",
                     "cpp",
                     "html",

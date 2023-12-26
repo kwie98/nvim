@@ -82,7 +82,7 @@ vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 vim.keymap.set("n", "<", "<<")
 vim.keymap.set("n", ">", ">>")
--- vim.cmd('xnoremap <expr> <C-Enter> mode() ==# "v" ? "V" : "v"')  -- toggle visual/visual-line
+vim.keymap.set("n", "gf", "gF")
 
 -- One-handed copy paste:
 vim.keymap.set({ "i", "c" }, "<C-v>", "<C-r><C-o>+")
