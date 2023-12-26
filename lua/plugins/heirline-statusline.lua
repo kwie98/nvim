@@ -144,6 +144,14 @@ return {
             provider = function() return " " .. vim.bo.filetype .. " " end,
             hl = "HeirlineFileType",
         }
+        local tab_count = {
+            { provider = " ", hl = "HeirlineSeparator" },
+            {
+                provider = function() return vim.fn.tabpagenr() .. "/" .. #vim.api.nvim_list_tabpages() end,
+            },
+            condition = function() return #vim.api.nvim_list_tabpages() >= 2 end,
+            hl = "HeirlineFileType",
+        }
 
         -- Needed for correct color updates on colorscheme change:
         local function get_colors() return {} end
@@ -169,6 +177,7 @@ return {
                 tools,
                 ribbon,
                 file_type,
+                tab_count,
             },
             winbar = {
                 relative_path,
