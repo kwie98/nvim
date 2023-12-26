@@ -165,7 +165,7 @@ return {
                 file_name,
                 file_status,
                 { provider = "", hl = "HeirlineEnd" },
-                { provider = "%=" }, -- aligns following to right
+                { provider = "%=", hl = "Heirline" }, -- aligns following to right
                 tools,
                 ribbon,
                 file_type,

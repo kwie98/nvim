@@ -123,7 +123,7 @@ return {
             -- }
 
             on_highlights = function(hl, c)
-                hl.StatusLine = { bg = c.bg_medium }
+                hl.Heirline = { bg = c.bg_medium }
                 hl.HeirlineSeparator = { fg = c.light_comment, bg = c.bg_highlight }
                 hl.HeirlineEnd = { fg = c.bg_highlight, bg = c.bg_medium }
                 hl.HeirlineCwd = { fg = c.blue, bg = c.bg_highlight, style = "bold" }
