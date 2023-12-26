@@ -59,7 +59,7 @@ return {
                     provider = function()
                         ---@diagnostic disable-next-line: undefined-field
                         local branch = vim.b.gitsigns_head
-                        if branch ~= nil then return "  " .. branch .. " " end
+                        if branch ~= nil then return " " .. branch .. " " end
                         return ""
                     end,
                     hl = "HeirlineGitBranch",
@@ -94,7 +94,7 @@ return {
                 end,
                 { provider = "", hl = "HeirlineEnd" },
                 {
-                    provider = function(self) return "  " .. table.concat(self.clients, " ") .. " " end,
+                    provider = function(self) return " " .. table.concat(self.clients, " ") .. " " end,
                     hl = "HeirlineLspClients",
                 },
                 {
