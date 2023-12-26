@@ -175,6 +175,7 @@ return {
                 -- Fuzzy matches:
                 hl.TelescopeMatching = { fg = c.blue, style = "bold" }
                 hl.CmpItemAbbrMatch = { fg = c.blue, style = "bold" }
+                hl.CmpItemAbbrMatchFuzzy = { link = "CmpItemAbbrMatch" }
 
                 -- Highlight word/references under cursor:
                 hl.IlluminatedWordText = { style = "underline", sp = c.comment } -- would highlight lua function, end
@@ -198,7 +199,7 @@ return {
                 -- Cursor line of current window:
                 hl.CursorLineCurrent = { bg = c.bg_highlight_strong }
 
-                hl.TreesitterContext = { bg = c.bg_highlight_strong }
+                hl.TreesitterContext = { bg = c.bg_highlight }
 
                 hl["@keyword"] = { fg = c.purple } -- def, struct, pub, let. WAS purple
                 hl["@keyword.function"] = { link = "@keyword" } -- WAS magenta
