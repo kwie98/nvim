@@ -7,6 +7,10 @@ vim.cmd([[
     autocmd BufEnter * if &ft ==# 'help' | :vertical resize 79 | endif
     augroup end
 
+    augroup _read_file_after_git_hook
+    autocmd!
+    autocmd WinEnter * checktime
+
     augroup _cursor_line
     autocmd!
     autocmd VimEnter * setlocal winhighlight+=CursorLine:CursorLineCurrent
