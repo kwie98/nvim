@@ -7,7 +7,6 @@ return {
             build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
         },
         "aaronhallaert/advanced-git-search.nvim",
-        "tpope/vim-fugitive",
         -- "sindrets/diffview.nvim",
     },
     -- lazy = true, -- gets loaded by project.nvim
