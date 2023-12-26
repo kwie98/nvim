@@ -46,7 +46,7 @@ return {
             ensure_installed = {
                 "bash",
                 "c",
-                "comment",
+                -- "comment", -- performance issues?
                 "cpp",
                 "css",
                 "diff",
