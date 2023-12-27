@@ -10,19 +10,7 @@ M.on_attach = function(_, _) -- client, bufnr
     -- client.server_capabilities.semanticTokensProvider = nil
     -- vim.opt.formatexpr = ""
 
-    local function format_and_organize_imports()
-        vim.lsp.buf.format()
-        -- vim.lsp.buf.code_action({
-        --     apply = true,
-        --     context = {
-        --         only = { "source.organizeImports" },
-        --         diagnostics = {},
-        --     },
-        -- })
-    end
-
     vim.keymap.set("n", "<Leader>la", vim.lsp.buf.code_action, { buffer = true, desc = "Code Action" })
-    vim.keymap.set("n", "<Leader>lf", format_and_organize_imports, { buffer = true, desc = "Format" })
     vim.keymap.set("n", "<Leader>ll", vim.lsp.codelens.run, { buffer = true, desc = "CodeLens Action" })
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = true, desc = "Goto Declaration" })
     vim.keymap.set("n", "gd", telescope.lsp_definitions, { buffer = true, desc = "Goto Definition" })

@@ -9,7 +9,6 @@ return {
         local null_ls_utils = require("null-ls.utils")
         local code_actions = null_ls.builtins.code_actions
         local diagnostics = null_ls.builtins.diagnostics
-        local formatting = null_ls.builtins.formatting
         local handlers = require("plugins.lsp.handlers")
 
         vim.keymap.set("n", "<Leader>N", "<CMD>NullLsInfo<Enter>", { desc = "Null LS" })
@@ -41,36 +40,9 @@ return {
                 diagnostics.gitlint,
                 diagnostics.selene.with({ runtime_condition = not_conda_or_fugitive, cwd = root_finder }),
 
-                -- Javascript, Typescript, HTML, JSON, etc.:
-                formatting.biome.with({ runtime_condition = not_conda_or_fugitive, cwd = root_finder }), -- TODO not needed in 0.10?
-                formatting.prettierd.with({
-                    runtime_condition = not_conda_or_fugitive,
-                    -- Handled by biome:
-                    disabled_filetypes = { "javascript", "javascriptreact", "typescript", "json", "jsonc" },
-                }),
-
-                -- Latex:
-                formatting.latexindent.with({
-                    runtime_condition = not_conda_or_fugitive,
-                    extra_args = { "-l", "indentconfig.yaml" },
-                    cwd = root_finder,
-                }),
-
-                -- Lua:
-                formatting.stylua.with({ runtime_condition = not_conda_or_fugitive }),
-
-                -- Python:
-                formatting.black.with({
-                    runtime_condition = not_conda_or_fugitive,
-                    extra_args = { "--fast" },
-                    cwd = root_finder,
-                }),
-
                 -- Sh, Bash, Zsh:
                 code_actions.shellcheck.with({ runtime_condition = not_conda_or_fugitive, extra_filetypes = { "zsh" } }),
                 diagnostics.shellcheck.with({ runtime_condition = not_conda_or_fugitive, extra_filetypes = { "zsh" } }),
-                formatting.shellharden.with({ runtime_condition = not_conda_or_fugitive, extra_filetypes = { "zsh" } }),
-                formatting.shfmt.with({ runtime_condition = not_conda_or_fugitive, extra_filetypes = { "zsh" } }),
 
                 -- YAML:
                 diagnostics.actionlint,
