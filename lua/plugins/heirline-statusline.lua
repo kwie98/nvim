@@ -1,6 +1,9 @@
 return {
     "rebelot/heirline.nvim",
-    event = "VeryLazy",
+    dependencies = {
+        "mfussenegger/nvim-lint",
+    },
+    lazy = false, -- Needed for winbar at start
 
     config = function()
         local heirline = require("heirline")
@@ -79,17 +82,11 @@ return {
                 condition = function(self)
                     self.clients = {}
                     for _, client in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
-                        if client.name ~= "null-ls" then self.clients[#self.clients + 1] = client.name end
+                        self.clients[#self.clients + 1] = client.name
                     end
+                    self.linters = require("lint").linters_by_ft[vim.bo.filetype] or {}
 
-                    self.sources = {}
-                    local bufnr = vim.api.nvim_get_current_buf()
-                    local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
-                    for _, source in ipairs(require("null-ls.sources").get_available(filetype)) do
-                        self.sources[#self.sources + 1] = source.name
-                    end
-
-                    if #self.clients > 0 or #self.sources > 0 then return true end
+                    if #self.clients > 0 or #self.linters > 0 then return true end
                     return false
                 end,
                 { provider = "", hl = "HeirlineEnd" },
@@ -100,11 +97,23 @@ return {
                 {
                     flexible = 1,
                     {
-                        provider = function(self) return table.concat(self.sources, " ") .. " " end,
+                        provider = function(self)
+                            if #self.linters > 0 then
+                                return table.concat(self.linters, " ") .. " "
+                            else
+                                return ""
+                            end
+                        end,
                         hl = "HeirlineSeparator",
                     },
                     {
-                        provider = "… ",
+                        provider = function(self)
+                            if #self.linters > 0 then
+                                return "… "
+                            else
+                                return ""
+                            end
+                        end,
                         hl = "HeirlineSeparator",
                     },
                 },
