@@ -1,7 +1,6 @@
 vim.cmd([[
     augroup _general_settings
     autocmd!
-    autocmd User FugitiveStageBlob setlocal readonly nomodifiable noswapfile
     autocmd TextYankPost * silent!lua require('vim.highlight').on_yank({higroup = 'IncSearch', timeout = 100})
     autocmd BufWinEnter * :set formatoptions-=ro
     autocmd BufEnter * if &ft ==# 'help' | :vertical resize 79 | endif
@@ -17,12 +16,6 @@ vim.cmd([[
     autocmd WinEnter * setlocal winhighlight+=CursorLine:CursorLineCurrent
     autocmd BufWinEnter * setlocal winhighlight+=CursorLine:CursorLineCurrent
     autocmd WinLeave * setlocal winhighlight-=CursorLine:CursorLineCurrent
-    augroup end
-
-    augroup _fugitive
-    autocmd!
-    autocmd User FugitiveIndex nnoremap <buffer> S <CMD>Git add .<CR>
-    autocmd User FugitiveIndex nmap <buffer> <Tab> dd<C-w>b
     augroup end
 
     function! AutoResizeAllTabs()
@@ -80,20 +73,6 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     pattern = "/home/konrad/.local/share/conda/envs/**",
     callback = function() vim.bo.modifiable = false end,
 })
-
--- Set indent guides based on settings:
--- local function set_leadmultispace()
---     local spaces = "▏       "
---     if vim.bo.tabstop <= spaces:len() and not (vim.bo.filetype == "markdown") then
---         -- + 2 because the vertical line is unicode and has length 3
---         vim.opt_local.listchars:append({ leadmultispace = spaces:sub(1, vim.bo.tabstop + 2) })
---     end
--- end
--- vim.api.nvim_create_autocmd(
---     "OptionSet",
---     { pattern = { "listchars", "tabstop", "filetype" }, callback = set_leadmultispace }
--- )
--- vim.api.nvim_create_autocmd({ "BufRead" }, { callback = set_leadmultispace })
 
 -- Update heirline:
 vim.api.nvim_create_autocmd({ "BufEnter", "LspAttach", "LspDetach" }, { command = "redrawstatus" })
