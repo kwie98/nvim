@@ -1,7 +1,3 @@
--- Disable builtin plugins:
-vim.g.loaded_matchparen = 1
-vim.g.loaded_matchit = 1
-
 vim.opt.formatoptions = "cqj" -- "a" is also nice but breaks markdown code blocks
 vim.opt.clipboard = "unnamedplus" -- allows neovim to access the system clipboard
 vim.opt.fileencoding = "utf-8" -- the encoding written to a file
@@ -9,7 +5,6 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.mouse = "a" -- allow the mouse to be used in neovim
 vim.opt.pumheight = 10
-vim.opt.showmode = false
 vim.opt.showtabline = 0
 vim.opt.splitbelow = true
 vim.opt.splitright = true
@@ -29,6 +24,7 @@ vim.opt.sidescrolloff = 8
 vim.opt.gdefault = true
 vim.opt.colorcolumn = "+1"
 vim.opt.laststatus = 3 -- one status line for everything
+vim.opt.splitkeep = "screen"
 
 -- Always do vertical diff, don't fold away so much code:
 if vim.fn.has("nvim-0.9") == 1 then
@@ -44,13 +40,12 @@ vim.opt.shiftwidth = 4 -- the number of spaces inserted for each indentation
 vim.opt.list = true
 vim.opt.listchars = { tab = "⇥ ", nbsp = "·" }
 
-vim.opt.splitkeep = "screen"
+-- Disable builtin plugins:
+vim.g.loaded_matchparen = 1
+vim.g.loaded_matchit = 1
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-vim.g.small_border = "none" -- smaller helper floats
-vim.g.blend = 10
-vim.opt.pumblend = vim.g.blend
 
 vim.lsp.set_log_level("OFF")
 
@@ -65,3 +60,8 @@ if vim.fn.has("win32") == 1 then
 else
     vim.opt.shell = "zsh"
 end
+
+-- Rice:
+vim.g.small_border = "none" -- smaller helper floats
+vim.g.blend = 10
+vim.opt.pumblend = vim.g.blend

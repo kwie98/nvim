@@ -1,6 +1,9 @@
 return {
     "folke/flash.nvim",
-    keys = { "s", mode = "n", desc = "Flash Jump" },
+    keys = {
+        { "s", mode = "n" },
+        { "s", mode = "x" },
+    },
 
     config = function()
         local flash = require("flash")
@@ -13,6 +16,7 @@ return {
             prompt = { enabled = false },
         })
 
-        vim.keymap.set("n", "s", flash.jump, { desc = "Flash Jump" })
+        vim.keymap.set("n", "s", flash.jump)
+        vim.keymap.set("x", "s", flash.treesitter_search)
     end,
 }
