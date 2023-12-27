@@ -5,8 +5,6 @@ return {
 
     config = function()
         require("inc_rename").setup()
-        local a = 0
-        a = a + 1
 
         vim.keymap.set(
             "n",
