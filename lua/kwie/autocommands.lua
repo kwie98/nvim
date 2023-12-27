@@ -79,3 +79,11 @@ vim.api.nvim_create_autocmd({ "BufEnter", "LspAttach", "LspDetach" }, { command 
 vim.cmd([[
     autocmd User GitSignsUpdate redrawstatus
 ]])
+
+-- Hide diagnostics when editing, show again after saving:
+vim.api.nvim_create_autocmd({ "TextChanged", "InsertEnter" }, {
+    callback = function(args) vim.diagnostic.disable(args.bug) end,
+})
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+    callback = function(args) vim.diagnostic.enable(args.bug) end,
+})
