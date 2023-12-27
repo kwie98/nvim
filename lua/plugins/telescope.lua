@@ -92,7 +92,7 @@ return {
                         ["<C-i>"] = actions.cycle_history_next,
                         ["<C-o>"] = actions.cycle_history_prev,
                         ["<Esc>"] = actions.close,
-                        ["<C-c>"] = actions.send_to_qflist + actions.open_qflist,
+                        ["<C-l>"] = actions.send_to_qflist,
                         ["<C-q>"] = actions.nop,
                         ["<C-Space>"] = actions.cycle_previewers_next,
                     },

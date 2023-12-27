@@ -44,20 +44,20 @@ M.on_attach = function(_, _) -- client, bufnr
     --     telescope.lsp_dynamic_workspace_symbols(filter_c_symbols)
     -- end, { buffer = true, desc = "Workspace Constants" })
 
-    vim.keymap.set("n", "<Leader>ls", telescope.lsp_document_symbols, { buffer = true, desc = "Document Symbols" })
+    vim.keymap.set("n", "<Leader>ss", telescope.lsp_document_symbols, { buffer = true, desc = "Document Symbols" })
     vim.keymap.set(
         "n",
-        "<Leader>lw",
+        "<Leader>sS",
         telescope.lsp_dynamic_workspace_symbols,
         { buffer = true, desc = "Workspace Symbols" }
     )
     vim.keymap.set(
         "n",
-        "<Leader>ld",
+        "<Leader>sd",
         function() telescope.diagnostics({ bufnr = 0 }) end,
         { buffer = true, desc = "Document Diagnostics" }
     )
-    vim.keymap.set("n", "<Leader>lD", telescope.diagnostics, { buffer = true, desc = "Workspace Diagnostics" })
+    vim.keymap.set("n", "<Leader>sD", telescope.diagnostics, { buffer = true, desc = "Workspace Diagnostics" })
 end
 
 return M

@@ -22,7 +22,7 @@ return {
         local neodev = require("neodev")
         local rt = require("rust-tools")
 
-        vim.keymap.set("n", "<Leader>L", "<CMD>LspInfo<Enter>", { desc = "LSP Info" })
+        vim.keymap.set("n", "<Leader>I", "<CMD>LspInfo<Enter>", { desc = "LSP Info" })
 
         -- IMPORTANT: make sure to set up neodev BEFORE lspconfig
         neodev.setup({

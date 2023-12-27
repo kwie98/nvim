@@ -15,7 +15,7 @@ return {
         parser_configs.haskell = {
             install_info = {
                 url = "https://github.com/tree-sitter/tree-sitter-haskell",
-                files = { "src/parser.c", "src/scanner.c" },
+                files = { "src/parser.c", "src/scanner.c", "src/unicode.h" },
             },
         }
         if vim.fn.has("nvim-0.9") == 1 then vim.treesitter.language.register("bash", "zsh") end

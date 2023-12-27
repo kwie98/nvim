@@ -21,9 +21,13 @@ local wiki_index = vim.fn.expand("~/Sync/wiki/README.md")
 vim.keymap.set("n", "<Leader>W", function() vim.cmd.edit(wiki_index) end, { desc = "Wiki" })
 
 -- Quickfix:
-vim.keymap.set("n", "<Leader>C", "<CMD>copen<Enter>", { desc = "Quickfix" })
-vim.keymap.set("n", "]c", "<CMD>cnext<Enter>")
-vim.keymap.set("n", "[c", "<CMD>cprev<Enter>")
+vim.keymap.set("n", "<Leader>L", "<CMD>copen<Enter>", { desc = "Quickfix" })
+vim.keymap.set("n", "]l", "<CMD>cnext<Enter>")
+vim.keymap.set("n", "[l", "<CMD>cprev<Enter>")
+
+-- Easier matching paren:
+vim.keymap.set({ "n", "x", "o" }, "m", "%")
+vim.keymap.set({ "n", "x", "o" }, "%", "m")
 
 -- Windows:
 vim.keymap.set("n", "<C-j>", "<C-w>w")
@@ -91,9 +95,9 @@ vim.keymap.set("s", "<C-v>", "<C-r>_<Del>i<C-r>+<Esc>")
 vim.keymap.set("c", "<Tab>", "<End>")
 
 -- Diagnostics binds:
-vim.keymap.set("n", "gl", vim.diagnostic.open_float)
-vim.keymap.set("n", "]l", vim.diagnostic.goto_next)
-vim.keymap.set("n", "[l", vim.diagnostic.goto_prev)
+vim.keymap.set("n", "<Leader>ld", vim.diagnostic.open_float, { desc = "Show Diagnostic" })
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
 
 -- Toggle diagnostic highlighting:
 vim.g.diagnostic_visible = true
