@@ -81,7 +81,9 @@ vim.keymap.set("n", "<C-d>", "m'<C-d>")
 -- Utility:
 vim.keymap.set("n", "gp", "`[v`]")
 vim.keymap.set("n", "J", "mzJ`z")
-vim.keymap.set("n", "<Leader>n", vim.cmd.noh, { desc = "Toggle Search Highlight" })
+vim.keymap.set("n", "<Leader>n", function()
+    vim.cmd(':let @/ = ""') -- clear the search register
+end, { desc = "Toggle Search Highlight" })
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 vim.keymap.set("n", "<", "<<")

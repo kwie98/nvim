@@ -15,14 +15,16 @@ return {
             min_count_to_highlight = min_count,
         })
 
+        local function on_search() return vim.fn.getreg("/") == "\\<" .. vim.fn.expand("<cword>") .. "\\>" end
+
         vim.keymap.set("n", "*", function()
             local refs = ref.buf_get_references(vim.api.nvim_get_current_buf())
-            if not refs or #refs < min_count then return "*" end
+            if not refs or #refs < min_count or on_search() then return "*" end
             return '<CMD>lua require"illuminate".goto_next_reference()<Enter>'
         end, { expr = true, desc = "Goto next reference or occurence" })
         vim.keymap.set("n", "#", function()
             local refs = ref.buf_get_references(vim.api.nvim_get_current_buf())
-            if not refs or #refs < min_count then return "#" end
+            if not refs or #refs < min_count or on_search() then return "#" end
             return '<CMD>lua require"illuminate".goto_prev_reference()<Enter>'
         end, { expr = true, desc = "Goto prev reference or occurence" })
     end,
