@@ -1,39 +1,54 @@
+---@param name string
+local function augroup(name) return vim.api.nvim_create_augroup("kwie_" .. name, { clear = true }) end
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+    group = augroup("highlight_yank"),
+    callback = function() vim.highlight.on_yank({ timeout = 50 }) end,
+})
+
+vim.api.nvim_create_autocmd("BufWinEnter", {
+    group = augroup("formatoptions"),
+    command = "set formatoptions-=ro",
+})
+
+vim.api.nvim_create_autocmd("BufEnter", {
+    group = augroup("help_vsplit"),
+    callback = function()
+        if vim.bo.ft == "help" then vim.cmd("vertical resize 80") end
+    end,
+})
+
+vim.api.nvim_create_autocmd("WinEnter", {
+    group = augroup("checktime"),
+    callback = function() vim.cmd.checktime() end,
+})
+
+vim.api.nvim_create_autocmd("VimResized", {
+    group = augroup("resize_splits"),
+    callback = function()
+        local current_tab = vim.fn.tabpagenr()
+        vim.cmd("tabdo wincmd =")
+        vim.cmd("tabnext " .. current_tab)
+    end,
+})
+
+vim.api.nvim_create_autocmd("User", {
+    group = augroup("telescope_number"),
+    pattern = "TelescopePreviewerLoaded",
+    callback = function() vim.wo.number = true end,
+})
+
+local cursorline_group = augroup("cursorline")
+vim.api.nvim_create_autocmd({ "VimEnter", "WinEnter", "BufWinEnter" }, {
+    group = cursorline_group,
+    command = "setlocal winhighlight+=CursorLine:CursorLineCurrent",
+})
+vim.api.nvim_create_autocmd("WinLeave", {
+    group = cursorline_group,
+    command = "setlocal winhighlight-=CursorLine:CursorLineCurrent",
+})
+
 vim.cmd([[
-    augroup _general_settings
-    autocmd!
-    autocmd TextYankPost * silent!lua require('vim.highlight').on_yank({higroup = 'IncSearch', timeout = 100})
-    autocmd BufWinEnter * :set formatoptions-=ro
-    autocmd BufEnter * if &ft ==# 'help' | :vertical resize 79 | endif
-    augroup end
-
-    augroup _read_file_after_git_hook
-    autocmd!
-    autocmd WinEnter * checktime
-
-    augroup _cursor_line
-    autocmd!
-    autocmd VimEnter * setlocal winhighlight+=CursorLine:CursorLineCurrent
-    autocmd WinEnter * setlocal winhighlight+=CursorLine:CursorLineCurrent
-    autocmd BufWinEnter * setlocal winhighlight+=CursorLine:CursorLineCurrent
-    autocmd WinLeave * setlocal winhighlight-=CursorLine:CursorLineCurrent
-    augroup end
-
-    function! AutoResizeAllTabs()
-        let current_tab = tabpagenr()
-        tabdo wincmd =
-        execute 'tabnext' current_tab
-    endfunction
-
-    augroup _auto_resize
-    autocmd!
-    autocmd VimResized * :call AutoResizeAllTabs()
-    augroup end
-
-    augroup _telescope_number
-    autocmd!
-    autocmd User TelescopePreviewerLoaded setlocal number
-    augroup end
-
     " Markdown darker code blocks
     function! s:place_signs()
         let l:continue = 0
@@ -61,29 +76,42 @@ vim.cmd([[
 
 -- Confirm oil.nvim actions with <Enter>:
 vim.api.nvim_create_autocmd("FileType", {
+    group = augroup("oil"),
     pattern = "oil_preview",
     callback = function(params)
         vim.keymap.set("n", "<Enter>", "o", { buffer = params.buf, remap = true, nowait = true })
     end,
 })
 
--- No accidental changing of environment source code:
+-- No accidental changing of imported source code:
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-    group = vim.api.nvim_create_augroup("conda_nomodifiable", { clear = true }),
-    pattern = "/home/konrad/.local/share/conda/envs/**",
-    callback = function() vim.bo.modifiable = false end,
+    group = augroup("venv_readonly"),
+    pattern = "*/venv/*",
+    callback = function()
+        vim.bo.readonly = true
+        vim.bo.modifiable = false
+    end,
 })
 
 -- Update heirline:
-vim.api.nvim_create_autocmd({ "BufEnter", "LspAttach", "LspDetach" }, { command = "redrawstatus" })
-vim.cmd([[
-    autocmd User GitSignsUpdate redrawstatus
-]])
+local heirline_group = augroup("heirline")
+vim.api.nvim_create_autocmd({ "BufEnter", "LspAttach", "LspDetach" }, {
+    group = heirline_group,
+    command = "redrawstatus",
+})
+vim.api.nvim_create_autocmd("User", {
+    group = heirline_group,
+    pattern = "GitSignsUpdate",
+    command = "redrawstatus",
+})
 
 -- Hide diagnostics when editing, show again after saving:
+local diagnostics_group = augroup("diagnostics")
 vim.api.nvim_create_autocmd({ "TextChanged", "InsertEnter" }, {
+    group = diagnostics_group,
     callback = function(args) vim.diagnostic.disable(args.bug) end,
 })
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+    group = diagnostics_group,
     callback = function(args) vim.diagnostic.enable(args.bug) end,
 })
