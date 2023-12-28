@@ -158,7 +158,7 @@ return {
                 hl.FlashLabel = { fg = c.bg, bg = c.magenta2 }
 
                 -- Markdown Code Blocks (via autocmd):
-                hl.CodeBlockBackground = { bg = c.bg_medium }
+                hl["@customCodeBlock"] = { bg = c.bg_highlight }
 
                 -- hl.WinSeparator = { fg = c.bg_dark, bg = c.bg }
                 hl.WinSeparator = { fg = c.bg_dark }
