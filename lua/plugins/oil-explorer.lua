@@ -30,7 +30,10 @@ return {
                 ["g."] = "actions.toggle_hidden",
                 ["g\\"] = "actions.toggle_trash",
             },
-            view_options = { show_hidden = true },
+            view_options = {
+                show_hidden = true,
+                is_always_hidden = function(name, _) return name == ".." end,
+            },
         })
     end,
 }
