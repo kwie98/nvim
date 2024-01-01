@@ -62,6 +62,10 @@ vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv")
 vim.keymap.set("n", "<A-S-j>", "o<Esc>k")
 vim.keymap.set("n", "<A-S-k>", "O<Esc>j")
 
+-- Easy macros:
+vim.keymap.set("n", "Q", "@qj")
+vim.keymap.set("x", "Q", ":norm @q<Enter>")
+
 -- Resize:
 vim.keymap.set("n", "<C-Up>", ":resize -2<Enter>")
 vim.keymap.set("n", "<C-Down>", ":resize +2<Enter>")
