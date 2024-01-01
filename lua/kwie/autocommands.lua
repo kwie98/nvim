@@ -1,5 +1,4 @@
----@param name string
-local function augroup(name) return vim.api.nvim_create_augroup("kwie_" .. name, { clear = true }) end
+local augroup = require("kwie.util").augroup
 
 vim.api.nvim_create_autocmd("TextYankPost", {
     group = augroup("highlight_yank"),
@@ -77,15 +76,4 @@ vim.api.nvim_create_autocmd("User", {
     group = heirline_group,
     pattern = "GitSignsUpdate",
     command = "redrawstatus",
-})
-
--- Hide diagnostics when editing, show again after saving:
-local diagnostics_group = augroup("diagnostics")
-vim.api.nvim_create_autocmd({ "TextChanged", "InsertEnter" }, {
-    group = diagnostics_group,
-    callback = function(args) vim.diagnostic.disable(args.bug) end,
-})
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-    group = diagnostics_group,
-    callback = function(args) vim.diagnostic.enable(args.bug) end,
 })

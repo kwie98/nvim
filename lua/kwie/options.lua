@@ -65,3 +65,46 @@ end
 vim.g.small_border = "none" -- smaller helper floats
 vim.g.blend = 10
 vim.opt.pumblend = vim.g.blend
+
+-- Diagnostic stuff:
+local signs = {
+    { name = "DiagnosticSignError", text = "" },
+    { name = "DiagnosticSignWarn", text = "" },
+    { name = "DiagnosticSignHint", text = "" },
+    { name = "DiagnosticSignInfo", text = "" },
+}
+for _, sign in ipairs(signs) do
+    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+end
+
+-- Diagnostic settings:
+vim.diagnostic.config({
+    virtual_text = true,
+    signs = {
+        active = signs,
+        priority = 1,
+    },
+    update_in_insert = false,
+    underline = true,
+    severity_sort = true,
+    float = {
+        focusable = false,
+        style = "minimal",
+        border = vim.g.small_border,
+        source = "always",
+        header = "",
+        prefix = "",
+    },
+})
+
+-- Hide diagnostics when editing, show again after saving:
+local augroup = require("kwie.util").augroup
+local diagnostics_group = augroup("diagnostics")
+vim.api.nvim_create_autocmd({ "TextChanged", "InsertEnter" }, {
+    group = diagnostics_group,
+    callback = function(args) vim.diagnostic.disable(args.buf) end,
+})
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+    group = diagnostics_group,
+    callback = function(args) vim.diagnostic.enable(args.buf) end,
+})

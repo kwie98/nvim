@@ -75,43 +75,5 @@ return {
                 on_attach = function(client, bufnr) handlers.on_attach(client, bufnr) end,
             },
         })
-
-        local signs = {
-            { name = "DiagnosticSignError", text = "" },
-            { name = "DiagnosticSignWarn", text = "" },
-            { name = "DiagnosticSignHint", text = "" },
-            { name = "DiagnosticSignInfo", text = "" },
-        }
-        for _, sign in ipairs(signs) do
-            vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-        end
-
-        -- Diagnostic settings:
-        vim.diagnostic.config({
-            virtual_text = true,
-            signs = {
-                active = signs,
-                priority = 1,
-            },
-            update_in_insert = false,
-            underline = true,
-            severity_sort = true,
-            float = {
-                focusable = false,
-                style = "minimal",
-                border = vim.g.small_border,
-                source = "always",
-                header = "",
-                prefix = "",
-            },
-        })
-        -- Now done by noice.nvim:
-        -- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-        --     border = vim.g.small_border,
-        -- })
-        -- vim.lsp.handlers["textDocument/signatureHelp"] =
-        --     vim.lsp.with(vim.lsp.handlers.signature_help, {
-        --         border = vim.g.small_border,
-        --     })
     end,
 }
