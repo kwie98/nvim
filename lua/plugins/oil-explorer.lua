@@ -1,10 +1,10 @@
 return {
     "stevearc/oil.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    keys = { "<Leader>e", mode = "n", desc = "Open Explorer" },
+    keys = { "-", mode = "n", desc = "Open Explorer" },
 
     config = function()
-        vim.keymap.set("n", "<Leader>e", require("oil").open, { desc = "Open Explorer" })
+        vim.keymap.set("n", "-", require("oil").open, { desc = "Open Explorer" })
 
         require("oil").setup({
             columns = {
@@ -19,12 +19,8 @@ return {
                 ["<C-s>"] = "actions.select_split",
                 ["<C-t>"] = "actions.select_tab",
                 ["<Tab>"] = "actions.preview",
-                ["<Leader>e"] = "actions.close", -- TODO also close preview?
-                -- ["<C-l>"] = "actions.refresh",
                 ["-"] = "actions.parent",
                 ["<Leader>j"] = "actions.open_cwd",
-                -- ["`"] = "actions.cd",
-                -- ["~"] = "actions.tcd",
                 ["gs"] = "actions.change_sort",
                 ["gx"] = "actions.open_external",
                 ["g."] = "actions.toggle_hidden",
