@@ -18,6 +18,7 @@ return {
                 markdown = { "prettierd" },
                 css = { "prettierd" },
                 html = { "prettierd" },
+                htmldjango = { "djlint" },
                 yaml = { "prettierd" },
                 bash = { "shellharden", "shfmt" },
                 zsh = { "shellharden", "shfmt" },

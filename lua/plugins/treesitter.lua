@@ -90,7 +90,6 @@ return {
                     "css",
                     "yaml",
                     "cpp",
-                    "html",
                 },
             },
             incremental_selection = {

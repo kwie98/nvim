@@ -9,6 +9,7 @@ return {
             dockerfile = { "hadolint" },
             lua = { "selene" },
             bash = { "shellcheck" },
+            htmldjango = { "djlint" },
             zsh = { "zsh" },
         }
 
