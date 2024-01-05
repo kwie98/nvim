@@ -1,11 +1,5 @@
 local augroup = require("kwie.util").augroup
 
-vim.api.nvim_create_autocmd({ "BufNew", "BufNewFile", "BufRead" }, {
-    group = augroup("ft_detect"),
-    pattern = "*.html.django",
-    callback = function() vim.bo.ft = "htmldjango" end,
-})
-
 vim.api.nvim_create_autocmd("TextYankPost", {
     group = augroup("highlight_yank"),
     callback = function() vim.highlight.on_yank({ timeout = 50 }) end,
