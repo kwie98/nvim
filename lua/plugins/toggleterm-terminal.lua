@@ -1,21 +1,5 @@
--- local keys = {}
--- local keymap_descs = {}
--- for i = 1, num_terms do
---     keys[i] = { "<C-Space>" .. i, mode = "n", desc = "Toggle Terminal" }
--- end
--- for index, value in ipairs(t) do
---
--- end
--- for _, key in ipairs({ "u", "i", "o", "p" }) do
---     -- keys[key] = { "<C-Space>" .. key, mode = {"n", "t"}, desc = "Toggle Terminal" }
---     keys[#keys + 1] = key
---     keymap_descs[#keymap_descs + 1] = { "<C-Space>" .. key, mode = { "n", "t" }, desc = "Toggle Terminal" }
---     keymap_descs[#keymap_descs + 1] = { "<C-Space><C-" .. key .. ">", mode = { "n", "t" }, desc = "Toggle Terminal" }
--- end
-
 return {
     "akinsho/toggleterm.nvim",
-    -- keys = keymap_descs,
     event = "VeryLazy",
 
     config = function()
@@ -72,6 +56,7 @@ return {
             -- Focus this terminal if open:
             if this_term:is_open() then
                 this_term:focus()
+                vim.fn.timer_start(1, function() vim.cmd("startinsert!") end)
                 return
             end
             -- Close the other terminals, then open this:
@@ -81,6 +66,7 @@ return {
                 end
             end
             this_term:open()
+            vim.fn.timer_start(1, function() vim.cmd("startinsert!") end)
         end
 
         for key, term in pairs(terms) do
@@ -98,15 +84,6 @@ return {
             )
         end
 
-        -- <Esc> only in the first terminal:
-        vim.api.nvim_create_augroup("ToggleTerm", {})
-        vim.api.nvim_create_autocmd("TermOpen", {
-            pattern = "term://*toggleterm#1",
-            callback = function()
-                local opts = { buffer = true }
-                vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], opts)
-            end,
-            group = "ToggleTerm",
-        })
+        vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
     end,
 }
