@@ -204,7 +204,7 @@ return {
 
                 hl["@keyword"] = { fg = c.purple } -- def, struct, pub, let. WAS purple
                 hl["@keyword.function"] = { link = "@keyword" } -- WAS magenta
-                hl["@include"] = { link = "@keyword" } -- from ... import, use. WAS cyan
+                hl["@keyword.import"] = { link = "@keyword" } -- from ... import, use. WAS cyan
                 hl["@type.qualifier"] = { link = "@keyword" } -- mut (before semantic hl kicks in)
                 hl.Identifier = { link = "@keyword" }
 
@@ -215,10 +215,10 @@ return {
                 hl.Repeat = { link = "Conditional" }
                 hl["@exception"] = { link = "Conditional" } -- try, catch?
 
-                -- hl["@namespace"] = { link = "@variable" } -- python cannot differentiate these, so keep it consistent. WAS cyan
-                hl["@parameter"] = { style = "italic" }
+                -- hl["@module"] = { link = "@variable" } -- python cannot differentiate these, so keep it consistent. WAS cyan
+                hl["@variable.parameter"] = { style = "italic" }
                 -- hl["@parameter.python"] = {}
-                hl.Hlargs = { link = "@parameter" }
+                hl.Hlargs = { link = "@variable.parameter" }
                 -- hl["@HlargsNamedParams"] = {fg = c.comment, style = "reverse"}
                 hl["@HlargsNamedParams.python"] = { fg = c.comment }
                 hl["@variable.builtin"] = { fg = c.red, style = "italic" } -- python/rust self. WAS red
@@ -227,18 +227,17 @@ return {
                 hl.Function = { fg = function_color, style = "bold" } -- WAS blue
                 hl["@function.builtin"] = { fg = util.lighten(function_color, 0.85), style = "bold" } -- builtin functions. doesn't work in rust, lua because it gets overwritten by semantic tokens from the LSP. WAS blue1
 
-                hl["@field"] = { fg = c.blue2 } -- table/dict keys. WAS green1
-                hl["@label"] = { link = "@field" } -- json keys. WAS blue
-                hl["@property"] = { link = "@field" }
+                hl["@variable.member"] = { fg = c.blue2 } -- table/dict keys. WAS green1
+                hl["@label"] = { link = "@variable.member" } -- json keys. WAS blue
+                hl["@property"] = { link = "@variable.member" }
 
                 hl.String = { fg = c.teal } -- WAS green
                 -- hl.Comment = { fg = c.comment }
-                hl["@string.regex"] = { link = "Constant" }
+                hl["@string.regexp"] = { link = "Constant" }
                 hl["@string.documentation"] = { fg = c.light_comment }
                 hl["@comment.documentation"] = { fg = c.light_comment } -- doesn't work yet
 
                 hl.PreProc = { fg = c.green1 } -- rust macros
-                hl.Include = { fg = c.fg } -- rust namespaces (crates)
 
                 local type_color = c.green2
                 hl.Type = { fg = type_color } -- WAS blue1
@@ -268,9 +267,11 @@ return {
                 hl.DapUIWatchesEmpty = { link = "DapUIWatchesError" }
                 hl.DapUIWatchesValue = { fg = c.fg_gutter }
 
-                hl["@text.literal.block.markdown"] = {} -- removes highlighting for this group
+                hl["@markup.raw.block.markdown"] = {} -- removes highlighting for this group
+                hl["@markup.list.markdown"] = { link = "@punctuation.bracket" }
             end,
         })
+        -- Set colorscheme to current system mode:
         require("kwie.darkman")
     end,
 }
