@@ -1,4 +1,4 @@
--- This file is run after configuring tokyonight or by a darkman hook.
+-- This file should be sourced after configuring tokyonight or by a darkman hook.
 
 -- Query system color scheme (~8ms):
 local background = vim.trim(vim.fn.system("darkman get"))

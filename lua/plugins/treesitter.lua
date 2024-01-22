@@ -90,6 +90,7 @@ return {
                     "css",
                     "yaml",
                     "cpp",
+                    "htmldjango",
                 },
             },
             incremental_selection = {
