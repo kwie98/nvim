@@ -7,12 +7,14 @@ return {
         "saadparwaiz1/cmp_luasnip",
         "hrsh7th/cmp-cmdline",
         "L3MON4D3/LuaSnip",
+        "js-everts/cmp-tailwind-colors",
     },
     event = "VeryLazy",
 
     config = function()
         local cmp = require("cmp")
         local luasnip = require("luasnip")
+        local tailwind_colors = require("cmp-tailwind-colors")
 
         -- Snippet keys:
         vim.keymap.set({ "i", "s" }, "<Tab>", function()
@@ -34,11 +36,22 @@ return {
             return false
         end
 
+        tailwind_colors.setup({
+            format = function(color)
+                return {
+                    fg = color,
+                    bg = nil,
+                    text = "■",
+                }
+            end,
+        })
+
         cmp.setup({
             -- For cmp-dap:
             enabled = function() return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or is_dap_buffer() end,
             formatting = {
                 format = function(entry, vim_item)
+                    if vim_item.kind == "Color" then vim_item = tailwind_colors.format(entry, vim_item) end
                     if entry.source.name ~= "nvim_lsp" then
                         if vim_item.kind ~= "Text" then
                             vim_item.kind = string.format("%s %s", vim_item.kind, entry.source.name)

@@ -63,7 +63,7 @@ end
 
 -- Rice:
 vim.g.small_border = "none" -- smaller helper floats
-vim.g.blend = 10
+vim.g.blend = 0
 vim.opt.pumblend = vim.g.blend
 
 -- Diagnostic stuff:
