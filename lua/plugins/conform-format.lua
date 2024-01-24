@@ -15,13 +15,14 @@ return {
                 typescriptreact = { "biome" },
                 json = { "biome" },
                 jsonc = { "biome" },
-                markdown = { "prettierd" },
+                markdown = { "prettierd", "injected" },
                 css = { "prettierd" },
                 html = { "prettierd", "rustywind" },
                 htmldjango = { "djlint", "rustywind" },
                 yaml = { "prettierd" },
                 bash = { "shellharden", "shfmt" },
                 zsh = { "shellharden", "shfmt" },
+                python = { "ruff_format" },
             },
         })
 
