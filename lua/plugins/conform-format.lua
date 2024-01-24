@@ -26,7 +26,14 @@ return {
             },
         })
 
-        vim.keymap.set("n", "=", function() conform.format({ lsp_fallback = true }) end, { desc = "Format" })
+        vim.keymap.set("n", "=", function()
+            local success = conform.format({ lsp_fallback = true })
+            if not success then vim.fn.feedkeys("=", "n") end
+        end, { desc = "Format" })
+        vim.keymap.set("x", "=", function()
+            local success = conform.format({ lsp_fallback = true })
+            if not success then vim.fn.feedkeys("=", "n") end
+        end, { desc = "Format Range" })
         vim.keymap.set("n", "<Leader>F", "<CMD>ConformInfo<Enter>", { desc = "Formatter Info" })
     end,
 }
