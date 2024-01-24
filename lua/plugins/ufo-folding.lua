@@ -11,8 +11,8 @@ return {
         vim.opt.foldlevel = 20
         -- vim.opt.foldenable = true
 
-        vim.keymap.set("n", "g-", vim.cmd.foldclose)
-        vim.keymap.set("n", "g+", vim.cmd.foldopen)
+        vim.keymap.set("n", "g-", vim.cmd.foldclose, { desc = "Close Fold" })
+        vim.keymap.set("n", "g+", vim.cmd.foldopen, { desc = "Open Fold" })
         vim.keymap.set("n", "<Leader>+", ufo.openAllFolds, { desc = "Open All Folds" })
         vim.keymap.set("n", "<Leader>-", ufo.closeAllFolds, { desc = "Close All Folds" })
         vim.keymap.set("n", "]z", ufo.goNextClosedFold, { desc = "Next Closed Fold" })
