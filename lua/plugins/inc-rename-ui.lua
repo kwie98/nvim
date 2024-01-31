@@ -1,6 +1,6 @@
 return {
     "smjonas/inc-rename.nvim",
-    keys = { "<Leader>lr", mode = "n", desc = "Rename Symbol" },
+    keys = { { "<Leader>lr", mode = "n", desc = "Rename Symbol" } },
     enabled = vim.fn.has("win32") == 0,
 
     config = function()

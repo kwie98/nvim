@@ -1,7 +1,7 @@
 return {
     "stevearc/oil.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    keys = { "-", mode = "n", desc = "Open Explorer" },
+    keys = { { "-", mode = "n", desc = "Open Explorer" } },
 
     config = function()
         vim.keymap.set("n", "-", require("oil").open, { desc = "Open Explorer" })

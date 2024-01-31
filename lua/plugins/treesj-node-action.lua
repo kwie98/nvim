@@ -1,7 +1,7 @@
 return {
     "Wansmer/treesj",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
-    keys = { "<Enter>", mode = "n", desc = "Node Action" },
+    keys = { { "<Enter>", mode = "n", desc = "Node Action" } },
 
     config = function()
         local treesj = require("treesj")
