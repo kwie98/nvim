@@ -5,6 +5,12 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     callback = function() vim.highlight.on_yank({ timeout = 50 }) end,
 })
 
+vim.api.nvim_create_autocmd({ "BufRead", "BufNew", "BufNewFile" }, {
+    group = augroup("ft_detect"),
+    pattern = ".envrc",
+    callback = function() vim.bo.ft = "sh" end,
+})
+
 vim.api.nvim_create_autocmd("BufWinEnter", {
     group = augroup("formatoptions"),
     command = "set formatoptions-=ro",
