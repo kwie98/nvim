@@ -34,6 +34,6 @@ return {
             local success = conform.format({ lsp_fallback = true })
             if not success then vim.fn.feedkeys("=", "n") end
         end, { desc = "Format Range" })
-        vim.keymap.set("n", "<Leader>F", "<CMD>ConformInfo<Enter>", { desc = "Formatter Info" })
+        vim.keymap.set("n", "<Leader>mf", "<CMD>ConformInfo<Enter>", { desc = "Formatter Info" })
     end,
 }

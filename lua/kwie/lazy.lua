@@ -13,7 +13,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local lazy = require("lazy")
-vim.keymap.set("n", "<Leader>P", lazy.show, { desc = "Plugins" })
+vim.keymap.set("n", "<Leader>mp", lazy.show, { desc = "Plugins" })
 lazy.setup("plugins", {
     change_detection = {
         notify = false,
