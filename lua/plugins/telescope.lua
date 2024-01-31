@@ -27,7 +27,7 @@ return {
         vim.keymap.set("n", "<Leader>t", builtin.live_grep, { desc = "Grep" })
         vim.keymap.set("n", "<Leader>f", builtin.find_files, { desc = "Files" })
 
-        vim.keymap.set("n", "<Leader>sd", advanced_git_search.search_log_content_file, { desc = "File Diffs" })
+        vim.keymap.set("n", "<Leader>sgg", advanced_git_search.search_log_content, { desc = "All Commits" })
         vim.keymap.set("n", "<Leader>sg", advanced_git_search.search_log_content, { desc = "Git" })
         vim.keymap.set("n", "<Leader>sc", builtin.highlights, { desc = "Highlights" })
         vim.keymap.set("n", "<Leader>sh", builtin.help_tags, { desc = "Help" })
