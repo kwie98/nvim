@@ -10,6 +10,7 @@ return {
             lua = { "selene" },
             bash = { "shellcheck" },
             htmldjango = { "djlint" },
+            markdown = { "markdownlint" },
             zsh = { "zsh" },
         }
 
