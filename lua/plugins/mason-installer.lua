@@ -1,6 +1,5 @@
 return {
     "williamboman/mason.nvim",
-    lazy = true, -- loaded by none-ls
     enabled = vim.fn.has("win32") == 0,
     keys = { { "<Leader>mm", mode = "n", desc = "Mason" } },
 

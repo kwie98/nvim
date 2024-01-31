@@ -53,7 +53,7 @@ return {
                 return { "lsp" }
             end,
             fold_virt_text_handler = make_fold_text,
-            open_fold_hl_timeout = 100,
+            open_fold_hl_timeout = 50,
         })
     end,
 }

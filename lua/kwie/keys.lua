@@ -44,21 +44,14 @@ vim.keymap.set("n", "<C-A-j>", "<C-w>J")
 vim.keymap.set("n", "<C-A-k>", "<C-w>K")
 vim.keymap.set("n", "<C-A-l>", "<C-w>L")
 
--- vim.keymap.set("n", "<Leader>x", "<C-w>s")
--- vim.keymap.set("n", "<Leader>v", "<C-w>v")
-vim.keymap.set("n", "<Leader>q", "<CMD>q<Enter>", { desc = "Quit" })
-
 -- Fast file saving and quitting:
-vim.keymap.set("n", "<Leader>w", "<CMD>w<Enter>", { desc = "Save" })
+vim.keymap.set("n", "<Leader>w", "<CMD>w<Enter>", { desc = "Write" })
+vim.keymap.set("n", "<Leader>q", "<CMD>q<Enter>", { desc = "Quit" })
 
 -- Tabs:
 vim.keymap.set("n", "<C-h>", "<CMD>tabprevious<Enter>")
 vim.keymap.set("n", "<C-l>", "<CMD>tabnext<Enter>")
 vim.keymap.set("n", "<C-w>t", "<CMD>tabnew %<Enter>")
--- vim.keymap.set("n", "<C-h>", "<C-w>h")
--- vim.keymap.set("n", "<C-j>", "<C-w>j")
--- vim.keymap.set("n", "<C-k>", "<C-w>k")
--- vim.keymap.set("n", "<C-l>", "<C-w>l")
 
 -- Move text:
 vim.keymap.set("n", "<A-j>", "<Esc>:m .+1<CR>==")

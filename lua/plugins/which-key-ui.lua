@@ -10,7 +10,7 @@ return {
                 spelling = { enabled = false },
                 presets = { operators = false, motions = false, text_objects = false },
             },
-            icons = { separator = ":" },
+            icons = { separator = "" },
             window = {
                 padding = { 1, 1, 1, 1 },
             },
@@ -18,7 +18,6 @@ return {
             triggers = "auto",
         })
 
-        local opts = { mode = "n", prefix = "<Leader>" }
         local mappings = {
             g = { name = "Git" },
             r = { name = "Run/Test" },
@@ -32,12 +31,11 @@ return {
             p = "which_key_ignore",
         }
 
-        local v_opts = { mode = "v", prefix = "<Leader>" }
         local v_mappings = {
             g = { name = "Git" },
         }
 
-        which_key.register(mappings, opts)
-        which_key.register(v_mappings, v_opts)
+        which_key.register(mappings, { mode = "n", prefix = "<Leader>" })
+        which_key.register(v_mappings, { mode = "v", prefix = "<Leader>" })
     end,
 }

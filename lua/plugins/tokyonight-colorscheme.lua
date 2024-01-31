@@ -157,9 +157,6 @@ return {
 
                 hl.FlashLabel = { fg = c.bg, bg = c.magenta2 }
 
-                -- Markdown Code Blocks (via autocmd):
-                hl["@customCodeBlock"] = { bg = c.bg_highlight }
-
                 -- hl.WinSeparator = { fg = c.bg_dark, bg = c.bg }
                 hl.WinSeparator = { fg = c.bg_dark }
 
@@ -266,6 +263,9 @@ return {
                 hl.DapUIWatchesError = { fg = c.error }
                 hl.DapUIWatchesEmpty = { link = "DapUIWatchesError" }
                 hl.DapUIWatchesValue = { fg = c.fg_gutter }
+
+                -- Markdown Code Blocks (via autocmd):
+                hl["@customCodeBlock"] = { bg = c.bg_highlight }
 
                 hl["@markup.raw.block.markdown"] = {} -- removes highlighting for this group
                 hl["@markup.list.markdown"] = { link = "@punctuation.bracket" }
