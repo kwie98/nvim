@@ -28,7 +28,18 @@ return {
         vim.keymap.set("n", "<Leader>f", builtin.find_files, { desc = "Files" })
 
         vim.keymap.set("n", "<Leader>sgg", advanced_git_search.search_log_content, { desc = "All Commits" })
-        vim.keymap.set("n", "<Leader>sg", advanced_git_search.search_log_content, { desc = "Git" })
+        vim.keymap.set(
+            "n",
+            "<Leader>sgf",
+            advanced_git_search.search_log_content_file,
+            { desc = "Commits of This File" }
+        )
+        vim.keymap.set(
+            "n",
+            "<Leader>sgb",
+            advanced_git_search.diff_branch_file,
+            { desc = "This File on Other Branches" }
+        )
         vim.keymap.set("n", "<Leader>sc", builtin.highlights, { desc = "Highlights" })
         vim.keymap.set("n", "<Leader>sh", builtin.help_tags, { desc = "Help" })
         vim.keymap.set("n", "<Leader>sk", builtin.keymaps, { desc = "Keys" })
