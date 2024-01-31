@@ -270,6 +270,7 @@ return {
                 hl["@markup.raw.block.markdown"] = {} -- removes highlighting for this group
                 hl["@markup.list.markdown"] = { link = "@punctuation.bracket" }
                 hl["@markup.link.label"] = { link = "@markup.link.url" }
+                hl["@markup.italic"] = { style = "italic" }
             end,
         })
         -- Set colorscheme to current system mode:
