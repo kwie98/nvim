@@ -7,7 +7,6 @@ return {
 
         conform.setup({
             formatters_by_ft = {
-                lua = { "stylua" },
                 -- TODO remove biome since it should be registered as a LSP with formatting?
                 javascript = { "biome" },
                 javascriptreact = { "biome" },
@@ -15,14 +14,16 @@ return {
                 typescriptreact = { "biome" },
                 json = { "biome" },
                 jsonc = { "biome" },
-                markdown = { "prettierd", "injected" },
-                css = { "prettierd" },
+
+                bash = { "shellharden", "shfmt" },
+                css = { "prettierd", "rustywind" },
                 html = { "prettierd", "rustywind" },
                 htmldjango = { "djlint", "rustywind" },
-                yaml = { "prettierd" },
-                bash = { "shellharden", "shfmt" },
-                zsh = { "shellharden", "shfmt" },
+                lua = { "stylua" },
+                markdown = { "prettierd", "injected" },
                 python = { "ruff_format" },
+                yaml = { "prettierd" },
+                zsh = { "shellharden", "shfmt" },
             },
         })
 
@@ -35,5 +36,7 @@ return {
             if not success then vim.fn.feedkeys("=", "n") end
         end, { desc = "Format Range" })
         vim.keymap.set("n", "<Leader>mf", "<CMD>ConformInfo<Enter>", { desc = "Formatter Info" })
+
+        vim.api.nvim_create_user_command("Format", function() conform.format({ lsp_fallback = true }) end, {})
     end,
 }

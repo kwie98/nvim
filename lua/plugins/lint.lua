@@ -6,10 +6,10 @@ return {
         local lint = require("lint")
 
         lint.linters_by_ft = {
-            dockerfile = { "hadolint" },
-            lua = { "selene" },
             bash = { "shellcheck" },
+            dockerfile = { "hadolint" },
             htmldjango = { "djlint" },
+            lua = { "selene" },
             markdown = { "markdownlint" },
             zsh = { "zsh" },
         }
