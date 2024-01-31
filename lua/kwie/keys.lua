@@ -21,7 +21,13 @@ local wiki_index = vim.fn.expand("~/Sync/wiki/README.md")
 vim.keymap.set("n", "<Leader>W", function() vim.cmd.edit(wiki_index) end, { desc = "Wiki" })
 
 -- Quickfix:
-vim.keymap.set("n", "<Leader>L", "<CMD>copen<Enter>", { desc = "Quickfix" })
+vim.keymap.set("n", "+", function()
+    if vim.bo.buftype == "quickfix" then
+        vim.cmd("cclose")
+        return
+    end
+    vim.cmd("copen")
+end, { desc = "Quickfix" })
 vim.keymap.set("n", "]l", "<CMD>cnext<Enter>")
 vim.keymap.set("n", "[l", "<CMD>cprev<Enter>")
 
