@@ -91,6 +91,7 @@ return {
                 enable = true,
                 disable = {
                     "css",
+                    "html",
                     "yaml",
                     "cpp",
                 },
