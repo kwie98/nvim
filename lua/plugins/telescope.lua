@@ -9,6 +9,7 @@ return {
             "nvim-telescope/telescope-fzf-native.nvim",
             build = "make",
         },
+        "sindrets/diffview.nvim",
     },
     event = "VeryLazy",
 
@@ -142,6 +143,7 @@ return {
             },
             extensions = {
                 advanced_git_search = {
+                    diff_plugin = "diffview",
                     entry_default_author_or_date = "date",
                 },
             },
