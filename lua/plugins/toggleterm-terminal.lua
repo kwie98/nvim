@@ -5,6 +5,7 @@ return {
     config = function()
         local toggleterm = require("toggleterm")
         local terminal = require("toggleterm.terminal")
+        local augroup = require("kwie.util").augroup
 
         vim.g.toggleterm_prev_win = vim.api.nvim_get_current_win()
 
@@ -84,6 +85,15 @@ return {
             )
         end
 
-        vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
+        -- <Esc> only in non-lazygit terminals:
+        vim.api.nvim_create_autocmd("TermOpen", {
+            group = augroup("toggleterm_esc"),
+            callback = function()
+                local name = vim.api.nvim_buf_get_name(0)
+                if not string.find(name, "lazygit") then
+                    vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { buffer = true })
+                end
+            end,
+        })
     end,
 }
