@@ -16,6 +16,11 @@ return {
         local builtin = require("telescope.builtin")
         local actions = require("telescope.actions")
         local advanced_git_search = require("advanced_git_search.telescope.pickers")
+        local transform_mod = require("telescope.actions.mt").transform_mod
+
+        local custom_actions = {}
+        custom_actions.goto_first_qf = function(_) vim.cmd.cfirst() end
+        custom_actions = transform_mod(custom_actions)
 
         vim.keymap.set(
             "n",
@@ -42,6 +47,7 @@ return {
         )
         vim.keymap.set("n", "<Leader>sc", builtin.highlights, { desc = "Highlights" })
         vim.keymap.set("n", "<Leader>sh", builtin.help_tags, { desc = "Help" })
+        vim.keymap.set("n", "<Leader>sl", builtin.quickfix, { desc = "Quickfix" })
         vim.keymap.set("n", "<Leader>sk", builtin.keymaps, { desc = "Keys" })
         vim.keymap.set("n", "<Leader>sm", builtin.man_pages, { desc = "Manual" })
         vim.keymap.set(
@@ -103,7 +109,7 @@ return {
                         ["<C-i>"] = actions.cycle_history_next,
                         ["<C-o>"] = actions.cycle_history_prev,
                         ["<Esc>"] = actions.close,
-                        ["<C-l>"] = actions.send_to_qflist,
+                        ["<C-l>"] = actions.send_to_qflist + custom_actions.goto_first_qf,
                         ["<C-q>"] = actions.nop,
                         ["<C-Space>"] = actions.cycle_previewers_next,
                     },
