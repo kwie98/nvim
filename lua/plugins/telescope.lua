@@ -4,6 +4,7 @@ return {
         "nvim-lua/plenary.nvim",
         "nvim-tree/nvim-web-devicons",
         "aaronhallaert/advanced-git-search.nvim",
+        "nvim-telescope/telescope-live-grep-args.nvim",
         {
             "nvim-telescope/telescope-fzf-native.nvim",
             build = "make",
@@ -16,6 +17,7 @@ return {
         local builtin = require("telescope.builtin")
         local actions = require("telescope.actions")
         local advanced_git_search = require("advanced_git_search.telescope.pickers")
+        local live_grep_args = require("telescope").extensions.live_grep_args
         local transform_mod = require("telescope.actions.mt").transform_mod
 
         local custom_actions = {}
@@ -29,7 +31,7 @@ return {
             { desc = "~/**" }
         )
         vim.keymap.set("n", "<Leader>b", builtin.buffers, { desc = "Buffers" })
-        vim.keymap.set("n", "<Leader>t", builtin.live_grep, { desc = "Grep" })
+        vim.keymap.set("n", "<Leader>t", live_grep_args.live_grep_args, { desc = "Grep" })
         vim.keymap.set("n", "<Leader>f", builtin.find_files, { desc = "Files" })
 
         vim.keymap.set("n", "<Leader>sgg", advanced_git_search.search_log_content, { desc = "All Commits" })
@@ -146,5 +148,6 @@ return {
         })
         telescope.load_extension("fzf")
         telescope.load_extension("advanced_git_search")
+        telescope.load_extension("live_grep_args")
     end,
 }
