@@ -4,6 +4,10 @@ return {
 
     config = function()
         local conform = require("conform")
+        conform.formatters.rustywind_css = {
+            command = "rustywind",
+            args = { "--custom-regex", [[@apply ([_a-zA\.-Z0-9\-:\[\] ]+);]], "--stdin" },
+        }
 
         conform.setup({
             formatters_by_ft = {
@@ -16,7 +20,7 @@ return {
                 jsonc = { "biome" },
 
                 bash = { "shellharden", "shfmt" },
-                css = { "prettierd", "rustywind" },
+                css = { "prettierd", "rustywind_css" },
                 html = { "prettierd", "rustywind" },
                 htmldjango = { "djlint", "rustywind" },
                 lua = { "stylua" },
