@@ -24,7 +24,10 @@ return {
             d = { name = "Debug" },
             l = { name = "LSP" },
             m = { name = "Module Info" },
-            s = { name = "Search" },
+            s = {
+                name = "Search",
+                g = { name = "Git" },
+            },
             u = "which_key_ignore",
             i = "which_key_ignore",
             o = "which_key_ignore",
