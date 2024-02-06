@@ -99,7 +99,7 @@ return {
             incremental_selection = {
                 enable = true,
                 keymaps = {
-                    init_selection = nil,
+                    init_selection = "<Leader>v",
                     node_incremental = "v",
                     node_decremental = "<BS>",
                 },
