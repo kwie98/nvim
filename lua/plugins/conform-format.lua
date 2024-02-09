@@ -8,6 +8,14 @@ return {
             command = "rustywind",
             args = { "--custom-regex", [[@apply ([_a-zA\.-Z0-9\-:\[\] ]+);]], "--stdin" },
         }
+        conform.formatters.rustywind_htmldjango = {
+            command = "rustywind",
+            args = {
+                "--custom-regex",
+                "\\b(?:class(?:Name)*\\s*=\\s*[\"'])([{}_a-zA-Z0-9\\.\\s\\-:\\[\\]/]+)[\"']",
+                "--stdin",
+            },
+        }
 
         conform.setup({
             formatters_by_ft = {
@@ -22,7 +30,7 @@ return {
                 bash = { "shellharden", "shfmt" },
                 css = { "prettierd", "rustywind_css" },
                 html = { "prettierd", "rustywind" },
-                htmldjango = { "djlint", "rustywind" },
+                htmldjango = { "djlint", "rustywind_htmldjango" },
                 lua = { "stylua" },
                 markdown = { "prettierd", "injected" },
                 python = { "ruff_format" },
