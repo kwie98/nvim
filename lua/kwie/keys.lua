@@ -5,6 +5,9 @@ vim.api.nvim_create_user_command("Redir", function(ctx)
     vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
     vim.opt_local.modified = false
 end, { nargs = "+", complete = "command" })
+vim.cmd([[
+    command! WipeRegs for i in range(34,122) | silent! call setreg(nr2char(i), []) | endfor
+]])
 
 -- j/k move in wrapped lines, but not when jumping multiple lines:
 vim.keymap.set("n", "j", function()
