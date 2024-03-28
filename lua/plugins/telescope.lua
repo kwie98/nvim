@@ -36,6 +36,7 @@ return {
         vim.keymap.set("n", "<Leader>f", builtin.find_files, { desc = "Files" })
 
         vim.keymap.set("n", "<Leader>sgg", advanced_git_search.search_log_content, { desc = "All Commits" })
+        vim.keymap.set("n", "<Leader>sgs", builtin.git_status, { desc = "Status" })
         vim.keymap.set(
             "n",
             "<Leader>sgf",
