@@ -11,7 +11,7 @@ return {
             check_ts = true,
         })
 
-        local brackets = { { "(", ")" }, { "[", "]" }, { "{", "}" } }
+        local brackets = { { "(", ")" }, { "{", "}" } }
         autopairs.add_rules({
             -- Rule for a pair with left-side ' ' and right side ' '
             Rule(" ", " ")
@@ -23,7 +23,6 @@ return {
                         return vim.tbl_contains({
                             brackets[1][1] .. brackets[1][2],
                             brackets[2][1] .. brackets[2][2],
-                            brackets[3][1] .. brackets[3][2],
                         }, pair)
                     end
                 )
@@ -37,7 +36,6 @@ return {
                         return vim.tbl_contains({
                             brackets[1][1] .. "  " .. brackets[1][2],
                             brackets[2][1] .. "  " .. brackets[2][2],
-                            brackets[3][1] .. "  " .. brackets[3][2],
                         }, context)
                     end
                 ),
