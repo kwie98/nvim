@@ -113,3 +113,6 @@ vim.keymap.set("n", "<Leader>lh", function()
 end, { desc = "Toggle Diagnostics" })
 
 if vim.fn.has("nvim-0.9") == 1 then vim.keymap.set("n", "<Leader>lc", vim.show_pos, { desc = "Inspect Highlight" }) end
+
+-- Fix <S-Space> sending escape sequence on vesemir:
+vim.keymap.set("t", "<S-Space>", "<Space>")
