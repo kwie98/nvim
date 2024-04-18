@@ -40,71 +40,73 @@ vim.opt.shiftwidth = 4 -- the number of spaces inserted for each indentation
 vim.opt.list = true
 vim.opt.listchars = { tab = "⇥ ", nbsp = "·" }
 
--- Disable builtin plugins:
-vim.g.loaded_matchparen = 1
-vim.g.loaded_matchit = 1
+if not vim.g.vscode then
+    -- Disable builtin plugins:
+    vim.g.loaded_matchparen = 1
+    vim.g.loaded_matchit = 1
 
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+    vim.g.mapleader = " "
+    vim.g.maplocalleader = " "
 
-vim.lsp.set_log_level("OFF")
+    vim.lsp.set_log_level("OFF")
 
-if vim.fn.has("win32") == 1 then
-    vim.cmd([[
-        let &shell = 'powershell'
-        let &shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;'
-        let &shellredir = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
-        let &shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
-        set shellquote= shellxquote=
-    ]])
-else
-    vim.opt.shell = "zsh"
+    if vim.fn.has("win32") == 1 then
+        vim.cmd([[
+            let &shell = 'powershell'
+            let &shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;'
+            let &shellredir = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
+            let &shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
+            set shellquote= shellxquote=
+        ]])
+    else
+        vim.opt.shell = "zsh"
+    end
+
+    -- Rice:
+    vim.g.small_border = "none" -- smaller helper floats
+    vim.g.blend = 0
+    vim.opt.pumblend = vim.g.blend
+
+    -- Diagnostic stuff:
+    local signs = {
+        { name = "DiagnosticSignError", text = "" },
+        { name = "DiagnosticSignWarn", text = "" },
+        { name = "DiagnosticSignHint", text = "" },
+        { name = "DiagnosticSignInfo", text = "" },
+    }
+    for _, sign in ipairs(signs) do
+        vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+    end
+
+    -- Diagnostic settings:
+    vim.diagnostic.config({
+        virtual_text = true,
+        signs = {
+            active = signs,
+            priority = 1,
+        },
+        update_in_insert = false,
+        underline = true,
+        severity_sort = true,
+        float = {
+            focusable = false,
+            style = "minimal",
+            border = vim.g.small_border,
+            source = "always",
+            header = "",
+            prefix = "",
+        },
+    })
+
+    -- Hide diagnostics when editing, show again after saving:
+    local augroup = require("kwie.util").augroup
+    local diagnostics_group = augroup("diagnostics")
+    vim.api.nvim_create_autocmd({ "TextChanged", "InsertEnter" }, {
+        group = diagnostics_group,
+        callback = function(args) vim.diagnostic.disable(args.buf) end,
+    })
+    vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+        group = diagnostics_group,
+        callback = function(args) vim.diagnostic.enable(args.buf) end,
+    })
 end
-
--- Rice:
-vim.g.small_border = "none" -- smaller helper floats
-vim.g.blend = 0
-vim.opt.pumblend = vim.g.blend
-
--- Diagnostic stuff:
-local signs = {
-    { name = "DiagnosticSignError", text = "" },
-    { name = "DiagnosticSignWarn", text = "" },
-    { name = "DiagnosticSignHint", text = "" },
-    { name = "DiagnosticSignInfo", text = "" },
-}
-for _, sign in ipairs(signs) do
-    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-end
-
--- Diagnostic settings:
-vim.diagnostic.config({
-    virtual_text = true,
-    signs = {
-        active = signs,
-        priority = 1,
-    },
-    update_in_insert = false,
-    underline = true,
-    severity_sort = true,
-    float = {
-        focusable = false,
-        style = "minimal",
-        border = vim.g.small_border,
-        source = "always",
-        header = "",
-        prefix = "",
-    },
-})
-
--- Hide diagnostics when editing, show again after saving:
-local augroup = require("kwie.util").augroup
-local diagnostics_group = augroup("diagnostics")
-vim.api.nvim_create_autocmd({ "TextChanged", "InsertEnter" }, {
-    group = diagnostics_group,
-    callback = function(args) vim.diagnostic.disable(args.buf) end,
-})
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-    group = diagnostics_group,
-    callback = function(args) vim.diagnostic.enable(args.buf) end,
-})
