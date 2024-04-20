@@ -100,6 +100,7 @@ return {
                     "--column",
                     "--smart-case",
                     "--trim",
+                    "--hidden",
                 },
                 path_display = { "truncate" },
                 file_ignore_patterns = { "^.git/" },
@@ -109,22 +110,16 @@ return {
                         ["<C-s>"] = actions.select_horizontal,
                         ["<C-b>"] = actions.results_scrolling_up,
                         ["<C-f>"] = actions.results_scrolling_down,
-                        ["<C-i>"] = actions.cycle_history_next,
-                        ["<C-o>"] = actions.cycle_history_prev,
                         ["<Esc>"] = actions.close,
                         ["<C-l>"] = actions.send_to_qflist + custom_actions.goto_first_qf,
                         ["<C-q>"] = actions.nop,
-                        ["<C-Space>"] = actions.cycle_previewers_next,
+                        ["<Tab>"] = actions.cycle_previewers_next,
                     },
                 },
             },
             pickers = {
                 find_files = {
                     hidden = true,
-                },
-                live_grep = {
-                    additional_args = { "--hidden" },
-                    disable_coordinates = true,
                 },
                 buffers = {
                     ignore_current_buffer = true,
@@ -142,6 +137,16 @@ return {
                 },
             },
             extensions = {
+                live_grep_args = {
+                    disable_coordinates = true,
+                    mappings = {
+                        i = {
+                            ["<Right>"] = require("telescope-live-grep-args.actions").quote_prompt({
+                                postfix = " --iglob ",
+                            }),
+                        },
+                    },
+                },
                 advanced_git_search = {
                     diff_plugin = "diffview",
                     entry_default_author_or_date = "date",
