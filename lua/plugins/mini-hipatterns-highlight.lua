@@ -1,6 +1,7 @@
 return {
     "echasnovski/mini.hipatterns",
     event = "VeryLazy",
+    enabled = false,
 
     config = function()
         local hipatterns = require("mini.hipatterns")
@@ -13,4 +14,6 @@ return {
             },
         })
     end,
+
+    -- TODO disable in big files
 }

@@ -2,6 +2,7 @@ return {
     "rest-nvim/rest.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
     lazy = true, -- loaded by after/ftplugin/http
+    enabled = false,
 
     config = function()
         require("rest-nvim").setup({

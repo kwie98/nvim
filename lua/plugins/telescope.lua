@@ -34,8 +34,10 @@ return {
         vim.keymap.set("n", "<Leader>b", builtin.buffers, { desc = "Buffers" })
         vim.keymap.set("n", "<Leader>t", live_grep_args.live_grep_args, { desc = "Grep" })
         vim.keymap.set("n", "<Leader>f", builtin.find_files, { desc = "Files" })
+        vim.keymap.set("n", "<Leader>F", function() builtin.find_files({ no_ignore = true }) end, { desc = "Files" })
 
         vim.keymap.set("n", "<Leader>sgg", advanced_git_search.search_log_content, { desc = "All Commits" })
+        vim.keymap.set("n", "<Leader>sgs", builtin.git_status, { desc = "Status" })
         vim.keymap.set(
             "n",
             "<Leader>sgf",

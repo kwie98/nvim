@@ -30,7 +30,7 @@ return {
         end
 
         require("tokyonight").setup({
-            transparent = true,
+            transparent = false,
             terminal_colors = false,
             styles = {
                 comments = { italic = false },
