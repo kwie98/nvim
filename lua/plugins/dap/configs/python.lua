@@ -12,11 +12,13 @@ return function(dap)
             program = "${file}",
             console = "integratedTerminal",
             pythonPath = function()
-                local cwd = vim.fn.getcwd()
-                if vim.fn.executable(cwd .. "/venv/bin/python") == 1 then
-                    return cwd .. "/venv/bin/python"
-                elseif vim.fn.executable(cwd .. "/.venv/bin/python") == 1 then
-                    return cwd .. "/.venv/bin/python"
+                local venv = os.getenv("VIRTUAL_ENV")
+                if venv == nil then
+                    return "/usr/bin/python"
+                end
+                local python_path = venv .. "/bin/python"
+                if vim.fn.executable(python_path) == 1 then
+                    return python_path
                 else
                     return "/usr/bin/python"
                 end
