@@ -37,10 +37,10 @@ return {
                 cmp_nvim_lsp.default_capabilities()
             )
             -- Enable folding for nvim-ufo:
-            capabilities.textDocument.foldingRange = {
-                dynamicRegistration = false,
-                lineFoldingOnly = true,
-            }
+            -- capabilities.textDocument.foldingRange = {
+            --     dynamicRegistration = false,
+            --     lineFoldingOnly = true,
+            -- }
             local lsp_conf = {
                 on_attach = handlers.on_attach,
                 capabilities = capabilities,

@@ -6,11 +6,6 @@ return {
     config = function()
         local ufo = require("ufo")
 
-        -- Folding:
-        -- vim.opt.foldcolumn = "1"
-        vim.opt.foldlevel = 20
-        -- vim.opt.foldenable = true
-
         vim.keymap.set("n", "<Leader>>", ufo.openAllFolds, { desc = "Open All Folds" })
         vim.keymap.set("n", "<Leader><", ufo.closeAllFolds, { desc = "Close All Folds" })
         vim.keymap.set("n", "]z", ufo.goNextClosedFold, { desc = "Next Closed Fold" })
@@ -54,9 +49,9 @@ return {
 
         ufo.setup({
             provider_selector = function(_, ft, _)
-                local lsp_without_folding = { "markdown", "python", "sh" }
-                if vim.tbl_contains(lsp_without_folding, ft) then return { "treesitter", "indent" } end
-                return { "lsp" }
+                local use_treesitter = { "markdown", "python" }
+                if vim.tbl_contains(use_treesitter, ft) then return { "treesitter" } end
+                return { "indent" }
             end,
             fold_virt_text_handler = make_fold_text,
             open_fold_hl_timeout = 50,

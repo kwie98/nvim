@@ -25,6 +25,7 @@ vim.opt.gdefault = true
 vim.opt.colorcolumn = "+1"
 vim.opt.laststatus = 3 -- one status line for everything
 vim.opt.splitkeep = "screen"
+vim.opt.foldlevel = 99
 
 -- Always do vertical diff, don't fold away so much code:
 if vim.fn.has("nvim-0.9") == 1 then
