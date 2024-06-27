@@ -59,7 +59,7 @@ return {
         end
         local function after_start_debugging()
             print("start debugging")
-            dapui.open()
+            dapui.open({ reset = true })
             for _, binds in pairs(override_binds) do
                 local original_rhs = vim.fn.maparg(binds.override[2], binds.override[1])
                 if original_rhs ~= "" then binds.original_rhs = original_rhs end
@@ -81,7 +81,7 @@ return {
         end)
         vim.keymap.set("n", "<F7>", dap.run_last)
         vim.keymap.set("n", "<F8>", dap.step_over)
-        vim.keymap.set("n", "<Leader>dh", dapui.toggle, { desc = "Toggle UI" })
+        vim.keymap.set("n", "<Leader>dh", function() dapui.toggle({ reset = true }) end, { desc = "Toggle UI" })
         -- vim.keymap.set("n", "<Leader>dm", dap_py.test_method, { desc = "Debug Test" })
         vim.keymap.set("n", "<Leader>dt", dap.toggle_breakpoint, { desc = "Breakpoint" })
         vim.keymap.set(
@@ -121,18 +121,41 @@ return {
                 edit = "cc",
                 repl = "r",
                 toggle = "t",
+                -- add = { "a", "i", "o", "O" },
             },
             expand_lines = true,
             layouts = {
                 {
-                    elements = { "repl", "console" },
-                    size = 0.25,
-                    position = "bottom",
+                    elements = {
+                        {
+                            id = "scopes",
+                            size = 2 / 5,
+                        },
+                        {
+                            id = "watches",
+                            size = 2 / 5,
+                        },
+                        {
+                            id = "stacks",
+                            size = 1 / 5,
+                        },
+                    },
+                    size = 1 - 0.618,
+                    position = "left",
                 },
                 {
-                    elements = { { id = "scopes", size = 0.5 }, { id = "watches", size = 0.5 } },
-                    size = 0.25,
-                    position = "left",
+                    elements = {
+                        {
+                            id = "repl",
+                            size = 2 / 3,
+                        },
+                        {
+                            id = "console",
+                            size = 1 / 3,
+                        },
+                    },
+                    size = 1 - 0.618,
+                    position = "bottom",
                 },
             },
             controls = { enabled = false },
