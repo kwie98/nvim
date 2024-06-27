@@ -68,6 +68,15 @@ if not vim.g.vscode then
     vim.g.blend = 0
     vim.opt.pumblend = vim.g.blend
 
+    -- Fix cursor changing to block in alacritty after closing nvim:
+    local augroup = require("kwie.util").augroup
+    local fix_cursor_group = augroup("fix_cursor")
+    vim.api.nvim_create_autocmd("ExitPre", {
+        group = fix_cursor_group,
+        command = "set guicursor=a:ver90",
+        desc = "Set cursor back to beam when leaving Neovim."
+    })
+
     -- Diagnostic stuff:
     local signs = {
         { name = "DiagnosticSignError", text = "" },
@@ -100,7 +109,6 @@ if not vim.g.vscode then
     })
 
     -- Hide diagnostics when editing, show again after saving:
-    local augroup = require("kwie.util").augroup
     local diagnostics_group = augroup("diagnostics")
     vim.api.nvim_create_autocmd({ "TextChanged", "InsertEnter" }, {
         group = diagnostics_group,
