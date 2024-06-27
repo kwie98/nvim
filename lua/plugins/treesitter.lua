@@ -2,7 +2,6 @@ return {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
         "nvim-treesitter/nvim-treesitter-textobjects",
-        "nvim-treesitter/nvim-treesitter-context",
     },
     build = ":TSUpdate",
     event = "VeryLazy",
@@ -11,7 +10,6 @@ return {
     config = function()
         local configs = require("nvim-treesitter.configs")
         local parsers = require("nvim-treesitter.parsers")
-        local context = require("treesitter-context")
 
         local parser_configs = parsers.get_parser_configs()
         parser_configs.haskell = {
@@ -24,15 +22,6 @@ return {
             vim.treesitter.language.register("bash", "zsh")
             vim.treesitter.language.register("html", "htmldjango")
         end
-
-        context.setup({
-            on_attach = function(buf)
-                local max_filesize = 100 * 1024 -- 100 KB
-                local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-                if ok and stats and stats.size > max_filesize then return false end
-                return true
-            end,
-        })
 
         configs.setup({
             textobjects = {
