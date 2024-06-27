@@ -89,8 +89,10 @@ return {
                 "typescript",
                 "vim",
                 "vimdoc",
-                "xml",
                 "yaml",
+            },
+            ignore_install = {
+                "xml",
             },
             auto_install = true,
             highlight = {
@@ -98,12 +100,6 @@ return {
             },
             indent = {
                 enable = false, -- slow in huge files
-                disable = {
-                    "css",
-                    "html",
-                    "yaml",
-                    "cpp",
-                },
             },
             incremental_selection = {
                 enable = true,
