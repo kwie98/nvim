@@ -20,14 +20,14 @@ return {
         conform.setup({
             formatters_by_ft = {
                 -- TODO remove biome since it should be registered as a LSP with formatting?
-                javascript = { "biome" },
-                javascriptreact = { "biome" },
-                typescript = { "biome" },
-                typescriptreact = { "biome" },
-                json = { "biome" },
-                jsonc = { "biome" },
+                -- javascript = { "biome" },
+                -- javascriptreact = { "biome" },
+                -- typescript = { "biome" },
+                -- typescriptreact = { "biome" },
+                -- json = { "biome" },
+                -- jsonc = { "biome" },
 
-                bash = { "shellharden", "shfmt" },
+                sh = { "shellharden", "shfmt" },
                 css = { "prettierd", "rustywind_css" },
                 html = { "prettierd", "rustywind" },
                 htmldjango = { "djlint", "rustywind_htmldjango" },
