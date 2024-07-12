@@ -182,7 +182,7 @@ return {
                 file_name,
                 file_status,
                 { provider = "", hl = "HeirlineEnd" },
-                { provider = "%=", hl = "Heirline" }, -- aligns following to right
+                { provider = "%=", hl = "StatusLine" }, -- aligns following to right
                 tools,
                 ribbon,
                 file_type,
@@ -192,7 +192,7 @@ return {
                 relative_path,
                 file_name,
                 file_status,
-                { provider = "", hl = "HeirlineWinBarEnd" },
+                { provider = "", hl = "HeirlineEnd" },
             },
         })
 

@@ -30,7 +30,7 @@ return {
         end
 
         require("tokyonight").setup({
-            transparent = false,
+            transparent = true,
             terminal_colors = false,
             styles = {
                 comments = { italic = false },
@@ -123,7 +123,6 @@ return {
             -- }
 
             on_highlights = function(hl, c)
-                hl.Heirline = { bg = c.bg_medium }
                 hl.HeirlineSeparator = { fg = c.light_comment, bg = c.bg_highlight }
                 hl.HeirlineEnd = { fg = c.bg_highlight, bg = c.bg_medium }
                 hl.HeirlineCwd = { fg = c.blue, bg = c.bg_highlight, style = "bold" }
@@ -144,7 +143,7 @@ return {
                 hl.HeirlineHintCount = { fg = c.bg_medium, bg = c.hint }
                 hl.HeirlineHintFiletype = { fg = c.bg_highlight, bg = c.hint }
                 hl.HeirlineFileType = { bg = c.bg_highlight }
-                hl.HeirlineWinBarEnd = { fg = c.bg_highlight }
+                hl.StatusLine = { bg = c.bg_medium }
 
                 hl.IblIndent = { fg = c.bg_highlight_strong }
                 -- hl.black = {fg = c.terminal_black}
@@ -192,6 +191,8 @@ return {
                 hl.GitSignsChangeNr = { bg = c.bg_medium, fg = c.gitSigns.change, style = "bold" }
                 hl.GitSignsDeleteNr = { bg = c.bg_medium, fg = c.gitSigns.delete, style = "bold" }
                 hl.LineNr = { fg = c.fg_gutter, bg = c.bg_medium }
+                hl.LineNrAbove = { fg = c.fg_gutter, bg = c.bg_medium }
+                hl.LineNrBelow = { fg = c.fg_gutter, bg = c.bg_medium }
                 hl.CursorLineNr = { fg = c.dark5, bg = c.bg_medium }
 
                 -- Cursor line of current window:
