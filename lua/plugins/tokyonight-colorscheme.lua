@@ -8,6 +8,7 @@ return {
         local util = require("tokyonight.util")
 
         local function is_bright(key) -- match colors that I find too bright
+            if type(key) ~= "string" then return false end
             if vim.startswith(key, "bg_") then
                 return false
             elseif key == "diff" or key == "none" or key == "gitSigns" then
@@ -43,10 +44,10 @@ return {
                 c = darken_all(c)
 
                 c.bg_highlight_strong = c.bg_highlight
-                c.bg_highlight = util.blend(c.bg, c.bg_highlight_strong, 0.5)
+                c.bg_highlight = util.blend(c.bg, 0.5, c.bg_highlight_strong)
                 c.light_comment = util.lighten(c.comment, 0.9)
                 c.lighter_comment = util.lighten(c.comment, 0.8)
-                c.bg_medium = util.blend(c.bg, c.bg_statusline, 0.5)
+                c.bg_medium = util.blend(c.bg, 0.5, c.bg_statusline)
             end,
 
             -- c = {
@@ -125,13 +126,13 @@ return {
             on_highlights = function(hl, c)
                 hl.HeirlineSeparator = { fg = c.light_comment, bg = c.bg_highlight }
                 hl.HeirlineEnd = { fg = c.bg_highlight, bg = c.bg_medium }
-                hl.HeirlineCwd = { fg = c.blue, bg = c.bg_highlight, style = "bold" }
-                hl.HeirlineFileName = { bg = c.bg_highlight, style = "bold,italic" }
+                hl.HeirlineCwd = { fg = c.blue, bg = c.bg_highlight, bold = true }
+                hl.HeirlineFileName = { bg = c.bg_highlight, bold = true, italic = true }
                 hl.HeirlineFileStatus = { bg = c.bg_highlight }
                 hl.HeirlineGitLeft = { fg = c.bg_highlight, bg = c.purple }
                 hl.HeirlineGitBranch = { fg = c.bg_medium, bg = c.purple }
                 hl.HeirlineGitRight = { fg = c.purple, bg = c.bg_highlight }
-                hl.HeirlineLspClients = { bg = c.bg_highlight, style = "bold,italic" }
+                hl.HeirlineLspClients = { bg = c.bg_highlight, bold = true, italic = true }
                 hl.HeirlineNoneError = { fg = c.error, bg = c.bg_medium }
                 hl.HeirlineToolsError = { fg = c.error, bg = c.bg_highlight }
                 hl.HeirlineErrorCount = { fg = c.bg_medium, bg = c.error }
@@ -170,14 +171,14 @@ return {
                 hl.HarpoonTitle = { link = "TelescopePromptTitle" }
 
                 -- Fuzzy matches:
-                hl.TelescopeMatching = { fg = c.blue, style = "bold" }
-                hl.CmpItemAbbrMatch = { fg = c.blue, style = "bold" }
+                hl.TelescopeMatching = { fg = c.blue, bold = true }
+                hl.CmpItemAbbrMatch = { fg = c.blue, bold = true }
                 hl.CmpItemAbbrMatchFuzzy = { link = "CmpItemAbbrMatch" }
 
                 -- Highlight word/references under cursor:
-                hl.IlluminatedWordText = { style = "underline", sp = c.comment } -- would highlight lua function, end
-                hl.IlluminatedWordRead = { style = "underline", sp = c.comment }
-                hl.IlluminatedWordWrite = { style = "underline", sp = c.comment }
+                hl.IlluminatedWordText = { underline = true, sp = c.comment } -- would highlight lua function, end
+                hl.IlluminatedWordRead = { underline = true, sp = c.comment }
+                hl.IlluminatedWordWrite = { underline = true, sp = c.comment }
 
                 -- Signs:
                 hl.SignColumn = { bg = c.bg_medium }
@@ -187,13 +188,15 @@ return {
                 hl.DiagnosticSignInfo = { fg = c.info, bg = c.bg_medium }
 
                 -- Numbers:
-                hl.GitSignsAddNr = { bg = c.bg_medium, fg = c.gitSigns.add, style = "bold" }
-                hl.GitSignsChangeNr = { bg = c.bg_medium, fg = c.gitSigns.change, style = "bold" }
-                hl.GitSignsDeleteNr = { bg = c.bg_medium, fg = c.gitSigns.delete, style = "bold" }
+                hl.GitSignsAddNr = { bg = c.bg_medium, fg = c.git.add, bold = true}
+                hl.GitSignsChangeNr = { bg = c.bg_medium, fg = c.git.change, bold = true }
+                hl.GitSignsDeleteNr = { bg = c.bg_medium, fg = c.git.delete, bold = true }
                 hl.LineNr = { fg = c.fg_gutter, bg = c.bg_medium }
                 hl.LineNrAbove = { fg = c.fg_gutter, bg = c.bg_medium }
                 hl.LineNrBelow = { fg = c.fg_gutter, bg = c.bg_medium }
                 hl.CursorLineNr = { fg = c.dark5, bg = c.bg_medium }
+
+                hl.ColorColumn = { bg = c.bg_medium }
 
                 -- Cursor line of current window:
                 hl.CursorLineCurrent = { bg = c.bg_highlight_strong }
@@ -207,23 +210,23 @@ return {
                 hl.Identifier = { link = "@keyword" }
 
                 -- if, for, while, return:
-                hl.Conditional = { fg = c.purple, style = "italic" } -- WAS magenta
+                hl.Conditional = { fg = c.purple, italic = true } -- WAS magenta
                 hl["@controlFlow"] = { link = "Conditional" } -- rust LSP
                 hl["@keyword.return"] = { link = "Conditional" }
                 hl.Repeat = { link = "Conditional" }
                 hl["@exception"] = { link = "Conditional" } -- try, catch?
 
                 -- hl["@module"] = { link = "@variable" } -- python cannot differentiate these, so keep it consistent. WAS cyan
-                hl["@variable.parameter"] = { style = "italic" }
+                hl["@variable.parameter"] = { italic = true }
                 -- hl["@parameter.python"] = {}
                 hl.Hlargs = { link = "@variable.parameter" }
                 -- hl["@HlargsNamedParams"] = {fg = c.comment, style = "reverse"}
                 hl["@HlargsNamedParams.python"] = { fg = c.comment }
-                hl["@variable.builtin"] = { fg = c.red, style = "italic" } -- python/rust self. WAS red
+                hl["@variable.builtin"] = { fg = c.red, italic = true } -- python/rust self. WAS red
 
                 local function_color = c.blue
-                hl.Function = { fg = function_color, style = "bold" } -- WAS blue
-                hl["@function.builtin"] = { fg = util.lighten(function_color, 0.85), style = "bold" } -- builtin functions. doesn't work in rust, lua because it gets overwritten by semantic tokens from the LSP. WAS blue1
+                hl.Function = { fg = function_color, bold = true } -- WAS blue
+                hl["@function.builtin"] = { fg = util.lighten(function_color, 0.85), bold = true } -- builtin functions. doesn't work in rust, lua because it gets overwritten by semantic tokens from the LSP. WAS blue1
 
                 hl["@variable.member"] = { fg = c.blue2 } -- table/dict keys. WAS green1
                 hl["@label"] = { link = "@variable.member" } -- json keys. WAS blue
@@ -259,7 +262,7 @@ return {
                 hl.DapUIType = { link = "Type" }
                 hl.DapUIModifiedValue = { link = "@variable" }
                 hl.DapUIValue = { link = "@HlargsNamedParams" }
-                hl.DapUIScope = { fg = c.fg, style = "bold" }
+                hl.DapUIScope = { fg = c.fg, bold = true }
                 hl.DapUIDecoration = { fg = c.fg_gutter }
                 hl.DapUIWatchesError = { fg = c.error }
                 hl.DapUIWatchesEmpty = { link = "DapUIWatchesError" }
@@ -271,7 +274,7 @@ return {
                 hl["@markup.raw.block.markdown"] = {} -- removes highlighting for this group
                 hl["@markup.list.markdown"] = { link = "@punctuation.bracket" }
                 hl["@markup.link.label"] = { link = "@markup.link.url" }
-                hl["@markup.italic"] = { style = "italic" }
+                hl["@markup.italic"] = { italic = true }
             end,
         })
         -- Set colorscheme to current system mode:
