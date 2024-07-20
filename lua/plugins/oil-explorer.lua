@@ -7,9 +7,7 @@ return {
         vim.keymap.set("n", "-", require("oil").open, { desc = "Open Explorer" })
 
         require("oil").setup({
-            columns = {
-                "icon",
-            },
+            columns = { "permissions", "mtime", "icon" },
             delete_to_trash = true,
             cleanup_delay_ms = 0,
             keymaps = {
