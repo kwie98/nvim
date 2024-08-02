@@ -6,18 +6,19 @@ return {
     config = function()
         local ufo = require("ufo")
 
-        vim.keymap.set("n", "<Leader>>", ufo.openAllFolds, { desc = "Open All Folds" })
-        vim.keymap.set("n", "<Leader><", ufo.closeAllFolds, { desc = "Close All Folds" })
+        -- vim.keymap.set("n", "<Leader>>", ufo.openAllFolds, { desc = "Open All Folds" })
+        -- vim.keymap.set("n", "<Leader><", ufo.closeAllFolds, { desc = "Close All Folds" })
         vim.keymap.set("n", "]z", ufo.goNextClosedFold, { desc = "Next Closed Fold" })
         vim.keymap.set("n", "[z", ufo.goPreviousClosedFold, { desc = "Previous Closed Fold" })
-        vim.keymap.set("n", "h", function()
-            local col = vim.api.nvim_win_get_cursor(0)[2]
-            if col == 0 then
-                vim.cmd.foldclose()
-                return ""
-            end
-            return "h"
-        end, { expr = true })
+        vim.keymap.set("n", "+", "za")
+        -- vim.keymap.set("n", "h", function()
+        --     local col = vim.api.nvim_win_get_cursor(0)[2]
+        --     if col == 0 then
+        --         vim.cmd.foldclose()
+        --         return ""
+        --     end
+        --     return "h"
+        -- end, { expr = true })
 
         local function make_fold_text(virtText, lnum, endLnum, width, truncate)
             local newVirtText = {}
