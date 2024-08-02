@@ -153,6 +153,9 @@ return {
                 advanced_git_search = {
                     diff_plugin = "diffview",
                     entry_default_author_or_date = "date",
+                    keymaps = {
+                        show_entire_commit = "<CR>",
+                    },
                 },
             },
         })
