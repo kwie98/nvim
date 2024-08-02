@@ -5,8 +5,7 @@ return {
         local iron = require("iron.core")
         iron.setup({
             config = {
-                -- Highlights the last sent block with bold
-                highlight_last = "IronLastSent",
+                highlight_last = "IronLastSent", -- Highlights the last sent block with bold
 
                 -- Toggling behavior is on by default.
                 -- Other options are: `single` and `focus`
@@ -17,19 +16,14 @@ return {
                 -- Other options are `tab_based` and `singleton`
                 scope = require("iron.scope").path_based,
 
-                -- Whether the repl buffer is a "throwaway" buffer or not
-                scratch_repl = false,
+                scratch_repl = false, -- Whether the repl buffer is a "throwaway" buffer or not
 
-                -- Automatically closes the repl window on process end
-                close_window_on_exit = true,
+                close_window_on_exit = true, -- Automatically closes the repl window on process end
                 repl_definition = {
-                    -- forcing a default
-                    python = require("iron.fts.python").ipython,
-
-                    -- new, custom repl
-                    lua = {
-                        -- Can be a table or a function that returns a table (see below)
-                        command = { "my-lua-repl", "-arg" },
+                    -- python = require("iron.fts.python").ipython,
+                    python = {
+                        format = require("iron.fts.common").bracketed_paste,
+                        command = { "ipython", "--no-autoindent" },
                     },
                 },
                 -- repl_open_cmd = require("iron.view").bottom(40),
@@ -37,11 +31,11 @@ return {
                 buflisted = false,
             },
             keymaps = {
-                send_motion = "<Leader>rc",
-                visual_send = "<Leader>rc",
-                -- send_file = "<Leader>rl",
+                send_motion = "<Leader>rv",
+                visual_send = "<Leader>r",
+                send_file = "<Leader>rr",
                 send_line = "<Leader>rl",
-                send_until_cursor = "<Leader>ra",
+                send_until_cursor = "<Leader>rc",
                 -- send_mark = "<Leader>sm",
                 -- mark_motion = "<Leader>mc",
                 -- mark_visual = "<Leader>mc",
