@@ -19,7 +19,7 @@ return {
             dockerfile = { "hadolint" },
             htmldjango = { "djlint_django" },
             lua = { "selene" },
-            markdown = { "markdownlint" },
+            -- markdown = { "markdownlint" },
             zsh = { "zsh" },
         }
 
