@@ -1,7 +1,6 @@
 return {
     "folke/which-key.nvim",
     event = "VeryLazy",
-    enabled = false,
 
     config = function()
         local which_key = require("which-key")
@@ -11,35 +10,34 @@ return {
                 spelling = { enabled = false },
                 presets = { operators = false, motions = false, text_objects = false },
             },
-            icons = { separator = "" },
-            window = {
-                padding = { 1, 1, 1, 1 },
+            icons = {
+                separator = "",
+                mappings = false,
+            },
+            win = {
+                padding = { 1, 1 },
             },
             show_help = false,
-            triggers = "auto",
+            -- show_keys = false,
+            -- triggers = "auto",
         })
 
-        local mappings = {
-            g = { name = "Git" },
-            r = { name = "Run/Test" },
-            d = { name = "Debug" },
-            l = { name = "LSP" },
-            m = { name = "Module Info" },
-            s = {
-                name = "Search",
-                g = { name = "Git" },
-            },
-            u = "which_key_ignore",
-            i = "which_key_ignore",
-            o = "which_key_ignore",
-            p = "which_key_ignore",
-        }
+        which_key.add({
+            { "<Leader>d", group = "Debug" },
+            { "<Leader>g", group = "Git" },
+            { "<Leader>l", group = "LSP" },
+            { "<Leader>m", group = "Module Info" },
+            { "<Leader>r", group = "Run/Test" },
+            { "<Leader>s", group = "Search" },
+            { "<Leader>sg", group = "Git" },
+            { "<Leader>u", hidden = true },
+            { "<Leader>i", hidden = true },
+            { "<Leader>o", hidden = true },
+            { "<Leader>p", hidden = true },
+            { "<Leader>g", group = "Git", mode = "v" },
+        })
 
-        local v_mappings = {
-            g = { name = "Git" },
-        }
-
-        which_key.register(mappings, { mode = "n", prefix = "<Leader>" })
-        which_key.register(v_mappings, { mode = "v", prefix = "<Leader>" })
+        -- which_key.register(mappings, { mode = "n", prefix = "<Leader>" })
+        -- which_key.register(v_mappings, { mode = "v", prefix = "<Leader>" })
     end,
 }
