@@ -6,6 +6,7 @@ return {
         local which_key = require("which-key")
 
         which_key.setup({
+            delay = 200,
             plugins = {
                 spelling = { enabled = false },
                 presets = { operators = false, motions = false, text_objects = false },
