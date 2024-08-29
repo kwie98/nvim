@@ -4,20 +4,11 @@ return {
 
     config = function()
         local lint = require("lint")
-        local djlint_django = lint.linters.djlint
-        djlint_django.args = {
-            "--profile",
-            "django",
-            "--linter-output-format",
-            "{line}:{code}: {message}",
-            "-",
-        }
-        lint.linters.djlint_django = djlint_django
 
         lint.linters_by_ft = {
             bash = { "shellcheck" },
             dockerfile = { "hadolint" },
-            htmldjango = { "djlint_django" },
+            htmldjango = { "djlint" },
             lua = { "selene" },
             -- markdown = { "markdownlint" },
             zsh = { "zsh" },
