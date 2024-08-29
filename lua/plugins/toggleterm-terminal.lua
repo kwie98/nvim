@@ -14,7 +14,7 @@ return {
             open_mapping = nil,
             hide_numbers = true,
             shading_factor = "0",
-            start_in_insert = true,
+            start_in_insert = false,
             insert_mappings = false,
             terminal_mappings = false,
             persist_size = true,
@@ -31,19 +31,19 @@ return {
                 count = 1,
             }),
             i = terminal.Terminal:new({
-                cmd = "lazygit",
-                direction = "tab",
+                cmd = vim.opt.shell:get(),
+                direction = "horizontal",
                 count = 2,
             }),
             o = terminal.Terminal:new({
-                cmd = vim.opt.shell:get(),
+                cmd = "lazygit",
                 direction = "tab",
                 count = 3,
             }),
             p = terminal.Terminal:new({
                 cmd = vim.opt.shell:get(),
                 direction = "tab",
-                count = 3,
+                count = 4,
             }),
         }
 
@@ -57,17 +57,15 @@ return {
             -- Focus this terminal if open:
             if this_term:is_open() then
                 this_term:focus()
-                vim.fn.timer_start(1, function() vim.cmd("startinsert!") end)
                 return
             end
             -- Close the other terminals, then open this:
             for _, other_term in pairs(terms) do
-                if other_term:is_focused() then -- don't "close the last tab"
+                if other_term:is_open() then
                     other_term:close()
                 end
             end
             this_term:open()
-            vim.fn.timer_start(1, function() vim.cmd("startinsert!") end)
         end
 
         for key, term in pairs(terms) do
@@ -92,6 +90,8 @@ return {
                 local name = vim.api.nvim_buf_get_name(0)
                 if not string.find(name, "lazygit") then
                     vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { buffer = true })
+                else
+                    vim.cmd.startinsert()
                 end
             end,
         })
