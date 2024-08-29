@@ -22,12 +22,6 @@ return {
             gitsigns.toggle_word_diff()
         end, { desc = "Toggle Hunks" })
         vim.keymap.set("n", "<Leader>gb", gitsigns.toggle_current_line_blame, { desc = "Blame" })
-        vim.keymap.set("n", "<Leader>gr", gitsigns.reset_hunk, { desc = "Reset Hunk" })
-        vim.keymap.set("n", "<Leader>gs", gitsigns.stage_hunk, { desc = "Stage Hunk" })
-        vim.keymap.set("n", "<Leader>gS", gitsigns.undo_stage_hunk, { desc = "Undo Stage Hunk" })
-
-        vim.keymap.set("v", "<Leader>gr", function() gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") }) end)
-        vim.keymap.set("v", "<Leader>gs", function() gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") }) end)
 
         gitsigns.setup({
             signcolumn = false, -- Toggle with `:Gitsigns toggle_signs`
