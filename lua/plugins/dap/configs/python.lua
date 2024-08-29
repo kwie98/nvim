@@ -1,15 +1,4 @@
 return function(dap)
-    local function get_python_path()
-        local venv = os.getenv("VIRTUAL_ENV")
-        if venv == nil then return "/usr/bin/python" end
-        local python_path = venv .. "/bin/python"
-        if vim.fn.executable(python_path) == 1 then
-            return python_path
-        else
-            return "/usr/bin/python"
-        end
-    end
-
     dap.adapters.python = {
         type = "executable",
         command = vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python",
@@ -17,23 +6,32 @@ return function(dap)
     }
     dap.configurations.python = {
         {
-            name = "debug this file",
+            name = "file",
             type = "python",
             request = "launch",
             program = "${file}",
             console = "integratedTerminal",
-            pythonPath = get_python_path,
+            python = "python", -- works with rye
+            justMyCode = false,
         },
         {
-            name = "debug these tests",
+            name = "pytest",
             type = "python",
             request = "launch",
             module = "pytest",
-            args = {
-                "${file}",
-            },
+            args = { "${file}" },
             console = "integratedTerminal",
-            pythonPath = get_python_path,
+            python = "${env:VIRTUAL_ENV}/bin/python", -- TODO?
+            justMyCode = false,
+        },
+        {
+            name = "fastapi",
+            type = "python",
+            request = "launch",
+            cwd = "${workspaceFolder}",
+            python = "${env:VIRTUAL_ENV}/bin/python",
+            program = "${env:VIRTUAL_ENV}/bin/fastapi",
+            args = { "run", "backend/main.py" },
         },
     }
 end
