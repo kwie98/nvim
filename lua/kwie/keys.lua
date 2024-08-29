@@ -89,13 +89,13 @@ vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
 
 -- Toggle diagnostic highlighting:
-vim.g.diagnostic_visible = true
+vim.g.diagnostic_visible = false
 vim.keymap.set("n", "<Leader>lh", function()
     if vim.g.diagnostic_visible then
-        vim.diagnostic.config({ virtual_text = false, underline = false })
+        vim.diagnostic.config({ virtual_text = false })
         vim.g.diagnostic_visible = false
     else
-        vim.diagnostic.config({ virtual_text = true, underline = true })
+        vim.diagnostic.config({ virtual_text = true })
         vim.g.diagnostic_visible = true
     end
 end, { desc = "Toggle Diagnostics" })

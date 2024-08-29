@@ -91,7 +91,7 @@ if not vim.g.vscode then
 
     -- Diagnostic settings:
     vim.diagnostic.config({
-        virtual_text = true,
+        virtual_text = false,
         signs = {
             active = signs,
             priority = 1,
