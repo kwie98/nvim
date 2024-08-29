@@ -14,11 +14,10 @@ M.on_attach = function(_, _) -- client, bufnr
     vim.keymap.set("n", "<Leader>ll", vim.lsp.codelens.run, { buffer = true, desc = "CodeLens Action" })
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = true, desc = "Goto Declaration" })
     vim.keymap.set("n", "gd", telescope.lsp_definitions, { buffer = true, desc = "Goto Definition" })
-    vim.keymap.set("n", "gI", vim.lsp.buf.implementation, { buffer = true, desc = "Goto Implementation" })
+    vim.keymap.set("n", "gI", telescope.lsp_implementations, { buffer = true, desc = "Goto Implementation" })
     vim.keymap.set("n", "gr", telescope.lsp_references, { buffer = true, desc = "Goto References" })
     vim.keymap.set("n", "gK", vim.lsp.buf.signature_help, { buffer = true, desc = "Signature Help" })
     vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, { buffer = true, desc = "Signature Help" })
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = true, desc = "LSP Hover" })
 
     local filter_f_symbols = { symbols = { "function", "method", "class" } }
     vim.keymap.set(
