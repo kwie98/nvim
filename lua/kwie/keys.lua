@@ -39,7 +39,7 @@ vim.keymap.set("n", "<Leader>q", "<CMD>q<Enter>", { desc = "Quit" })
 -- Tabs:
 vim.keymap.set("n", "<C-h>", "<CMD>tabprevious<Enter>")
 vim.keymap.set("n", "<C-l>", "<CMD>tabnext<Enter>")
-vim.keymap.set("n", "<C-w>t", "<CMD>tabnew %<Enter>")
+vim.keymap.set("n", "<C-w>t", "<CMD>tab split<Enter>")
 
 -- Move text:
 vim.keymap.set("n", "<A-j>", "<Esc>:m .+1<CR>==")
