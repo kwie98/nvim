@@ -268,9 +268,6 @@ return {
                 hl.DapUIWatchesEmpty = { link = "DapUIWatchesError" }
                 hl.DapUIWatchesValue = { fg = c.fg_gutter }
 
-                -- Markdown Code Blocks (via autocmd):
-                hl["@customCodeBlock"] = { bg = c.bg_highlight }
-
                 hl["@markup.raw.block.markdown"] = {} -- removes highlighting for this group
                 hl["@markup.list.markdown"] = { link = "@punctuation.bracket" }
                 hl["@markup.link.label"] = { link = "@markup.link.url" }
