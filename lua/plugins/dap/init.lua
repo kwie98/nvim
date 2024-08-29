@@ -28,7 +28,6 @@ return {
 
     config = function()
         local dap = require("dap")
-        local dap_launchjson = require("dap.ext.vscode")
         local dapui = require("dapui")
         local cmp = require("cmp")
 
@@ -71,10 +70,7 @@ return {
         dap.listeners.before.event_exited["dapui_config"] = function() after_stop_debugging(false) end
 
         -- Set up keys that are always available:
-        vim.keymap.set("n", "<F5>", function()
-            dap_launchjson.load_launchjs()
-            dap.continue({})
-        end)
+        vim.keymap.set("n", "<F5>", dap.continue)
         vim.keymap.set("n", "<F6>", function()
             dap.close()
             after_stop_debugging(true)
