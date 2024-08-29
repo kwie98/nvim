@@ -188,7 +188,7 @@ return {
                 hl.DiagnosticSignInfo = { fg = c.info, bg = c.bg_medium }
 
                 -- Numbers:
-                hl.GitSignsAddNr = { bg = c.bg_medium, fg = c.git.add, bold = true}
+                hl.GitSignsAddNr = { bg = c.bg_medium, fg = c.git.add, bold = true }
                 hl.GitSignsChangeNr = { bg = c.bg_medium, fg = c.git.change, bold = true }
                 hl.GitSignsDeleteNr = { bg = c.bg_medium, fg = c.git.delete, bold = true }
                 hl.LineNr = { fg = c.fg_gutter, bg = c.bg_medium }

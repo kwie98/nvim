@@ -61,9 +61,7 @@ return {
             end
             -- Close the other terminals, then open this:
             for _, other_term in pairs(terms) do
-                if other_term:is_open() then
-                    other_term:close()
-                end
+                if other_term:is_open() then other_term:close() end
             end
             this_term:open()
         end

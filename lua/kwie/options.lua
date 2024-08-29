@@ -75,7 +75,7 @@ if not vim.g.vscode then
     vim.api.nvim_create_autocmd("ExitPre", {
         group = fix_cursor_group,
         command = "set guicursor=a:ver90",
-        desc = "Set cursor back to beam when leaving Neovim."
+        desc = "Set cursor back to beam when leaving Neovim.",
     })
 
     -- Diagnostic stuff:

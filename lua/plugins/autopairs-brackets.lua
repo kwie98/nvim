@@ -2,7 +2,6 @@ return {
     "windwp/nvim-autopairs",
     lazy = true, -- loaded by cmp
 
-
     config = function()
         local autopairs = require("nvim-autopairs")
         local Rule = require("nvim-autopairs.rule")
