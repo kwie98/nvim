@@ -19,17 +19,9 @@ vim.keymap.set("n", "k", function()
     return "k"
 end, { expr = true })
 
--- Wiki:
-local wiki_index = vim.fn.expand("~/Sync/wiki/README.md")
-vim.keymap.set("n", "<Leader>W", function() vim.cmd.edit(wiki_index) end, { desc = "Wiki" })
-
 -- Quickfix:
 vim.keymap.set("n", "]l", "<CMD>cnext<Enter>")
 vim.keymap.set("n", "[l", "<CMD>cprev<Enter>")
-
--- Easier matching paren:
-vim.keymap.set({ "n", "x", "o" }, "m", "%")
-vim.keymap.set({ "n", "x", "o" }, "%", "m")
 
 -- Windows:
 vim.keymap.set("n", "<C-j>", "<C-w>w")
@@ -56,10 +48,6 @@ vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv")
 vim.keymap.set("n", "<A-S-j>", "o<Esc>k")
 vim.keymap.set("n", "<A-S-k>", "O<Esc>j")
-
--- Easy macros:
-vim.keymap.set("n", "Q", "@qj")
-vim.keymap.set("x", "Q", ":norm @q<Enter>")
 
 -- Resize:
 vim.keymap.set("n", "<C-Up>", ":resize -2<Enter>")
