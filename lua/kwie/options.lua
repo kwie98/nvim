@@ -19,6 +19,7 @@ vim.opt.relativenumber = true
 vim.opt.signcolumn = "yes" -- always show the sign column
 vim.opt.wrap = false -- display lines as one long line
 vim.opt.linebreak = true -- when using wrap, split between words
+vim.opt.breakindent = true
 vim.opt.scrolloff = 4
 vim.opt.sidescrolloff = 8
 vim.opt.gdefault = true
