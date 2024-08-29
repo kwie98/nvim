@@ -84,7 +84,7 @@ vim.keymap.set("s", "<C-v>", "<C-r>_<Del>i<C-r>+<Esc>")
 vim.keymap.set("c", "<Tab>", "<End>")
 
 -- Diagnostics binds:
-vim.keymap.set("n", "<Leader>ld", vim.diagnostic.open_float, { desc = "Show Diagnostic" })
+vim.keymap.set("n", "<Leader>k", vim.diagnostic.open_float, { desc = "Show Diagnostic" })
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
 
