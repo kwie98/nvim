@@ -10,7 +10,6 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.swapfile = false
 vim.opt.termguicolors = true
-vim.opt.timeoutlen = 400 -- time to wait for a mapped sequence to complete (in milliseconds)
 vim.opt.undofile = true -- enable persistent undo
 vim.opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 vim.opt.cursorline = true
@@ -33,6 +32,7 @@ if vim.fn.has("nvim-0.9") == 1 then
     vim.opt.diffopt = vim.opt.diffopt + "linematch:50" -- better diff matches
 end
 vim.opt.diffopt = vim.opt.diffopt + "vertical,context:64"
+vim.opt.fillchars:append({ diff = "—" })
 
 -- Default indentation settings (overwritten by .editorconfig):
 vim.opt.expandtab = true -- don't convert tabs to spaces (to catch formatters doing this automatically!)
