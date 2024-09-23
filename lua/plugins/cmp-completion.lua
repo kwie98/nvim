@@ -80,14 +80,14 @@ return {
             sources = cmp.config.sources({
                 { name = "nvim_lsp" },
                 { name = "luasnip" },
-                { name = "path" },
+                { name = "path", option = { get_cwd = function() return vim.fn.getcwd() end } },
             }, {
                 { name = "buffer", max_item_count = 5 },
             }),
         })
         cmp.setup.cmdline(":", {
             sources = cmp.config.sources({
-                { name = "path" },
+                { name = "path", option = { get_cwd = function() return vim.fn.getcwd() end } },
             }, {
                 { name = "cmdline" },
             }),
