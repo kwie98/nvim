@@ -25,7 +25,7 @@ return {
                 ["gx"] = "actions.open_external",
                 ["g."] = "actions.toggle_hidden",
                 ["g\\"] = "actions.toggle_trash",
-                ["yp"] = "actions.copy_entry_path",
+                ["<Leader>y"] = "actions.copy_entry_path",
             },
             view_options = {
                 show_hidden = true,
