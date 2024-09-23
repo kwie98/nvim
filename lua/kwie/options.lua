@@ -16,7 +16,6 @@ vim.opt.cursorline = true
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.signcolumn = "yes" -- always show the sign column
-vim.opt.wrap = false -- display lines as one long line
 vim.opt.linebreak = true -- when using wrap, split between words
 vim.opt.breakindent = true
 vim.opt.scrolloff = 4
@@ -28,10 +27,7 @@ vim.opt.splitkeep = "screen"
 vim.opt.foldlevel = 99
 
 -- Always do vertical diff, don't fold away so much code:
-if vim.fn.has("nvim-0.9") == 1 then
-    vim.opt.diffopt = vim.opt.diffopt + "linematch:50" -- better diff matches
-end
-vim.opt.diffopt = vim.opt.diffopt + "vertical,context:64"
+vim.opt.diffopt = vim.opt.diffopt + "vertical,context:50,linematch:50"
 vim.opt.fillchars:append({ diff = "—" })
 
 -- Default indentation settings (overwritten by .editorconfig):
@@ -66,8 +62,8 @@ if not vim.g.vscode then
 
     -- Rice:
     vim.g.small_border = "none" -- smaller helper floats
-    vim.g.blend = 0
-    vim.opt.pumblend = vim.g.blend
+    -- vim.g.blend = 0
+    -- vim.opt.pumblend = vim.g.blend
 
     -- Fix cursor changing to block in alacritty after closing nvim:
     local augroup = require("kwie.util").augroup
@@ -99,14 +95,14 @@ if not vim.g.vscode then
         update_in_insert = false,
         underline = true,
         severity_sort = true,
-        float = {
-            focusable = false,
-            style = "minimal",
-            border = vim.g.small_border,
-            source = "always",
-            header = "",
-            prefix = "",
-        },
+        -- float = {
+        --     focusable = false,
+        --     style = "minimal",
+        --     border = vim.g.small_border,
+        --     source = true,
+        --     header = "",
+        --     prefix = "",
+        -- },
     })
 
     -- Hide diagnostics when editing, show again after saving:
