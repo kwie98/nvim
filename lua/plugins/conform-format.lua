@@ -19,17 +19,18 @@ return {
 
         conform.setup({
             formatters_by_ft = {
-                javascript = { "prettierd" },
-                typescript = { "prettierd" },
+                javascript = { "prettier" },
+                typescript = { "prettier" },
 
                 sh = { "shellharden", "shfmt" },
-                css = { "prettierd", "rustywind_css" },
-                html = { "prettierd", "rustywind" },
+                css = { "prettier", "rustywind_css" },
+                html = { "prettier", "rustywind" },
                 htmldjango = { "djlint", "rustywind_htmldjango" },
                 lua = { "stylua" },
-                markdown = { "prettierd", "injected" },
+                markdown = { "prettier", "injected" },
+                nix = { "nixfmt" },
                 python = { "ruff_format" },
-                yaml = { "prettierd" },
+                yaml = { "prettier" },
                 zsh = { "shellharden", "shfmt" },
             },
         })
