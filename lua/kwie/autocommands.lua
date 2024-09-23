@@ -63,16 +63,6 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
--- No accidental changing of imported source code:
-vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-    group = augroup("venv_readonly"),
-    pattern = "*/venv/*",
-    callback = function()
-        vim.bo.readonly = true
-        vim.bo.modifiable = false
-    end,
-})
-
 -- Update heirline:
 local heirline_group = augroup("heirline")
 vim.api.nvim_create_autocmd({ "BufEnter", "LspAttach", "LspDetach" }, {
