@@ -2,6 +2,7 @@ return {
     "kevinhwang91/nvim-ufo",
     dependencies = "kevinhwang91/promise-async",
     event = "VeryLazy",
+    enabled = false,
 
     config = function()
         local ufo = require("ufo")
