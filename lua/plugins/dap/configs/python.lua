@@ -9,19 +9,21 @@ return function(dap)
             name = "file",
             type = "python",
             request = "launch",
+            cwd = "${workspaceFolder}",
             program = "${file}",
             console = "integratedTerminal",
-            python = "python", -- works with rye
+            python = "python",
             justMyCode = false,
         },
         {
             name = "pytest",
             type = "python",
             request = "launch",
+            cwd = "${workspaceFolder}",
             module = "pytest",
             args = { "${file}" },
             console = "integratedTerminal",
-            python = "${env:VIRTUAL_ENV}/bin/python", -- TODO?
+            python = "python",
             justMyCode = false,
         },
         {
@@ -29,7 +31,7 @@ return function(dap)
             type = "python",
             request = "launch",
             cwd = "${workspaceFolder}",
-            python = "${env:VIRTUAL_ENV}/bin/python",
+            python = "python",
             program = "${env:VIRTUAL_ENV}/bin/fastapi",
             args = { "run", "backend/main.py" },
         },
