@@ -18,6 +18,7 @@ M.on_attach = function(_, _) -- client, bufnr
     vim.keymap.set("n", "gr", telescope.lsp_references, { buffer = true, desc = "Goto References" })
     vim.keymap.set("n", "gK", vim.lsp.buf.signature_help, { buffer = true, desc = "Signature Help" })
     vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, { buffer = true, desc = "Signature Help" })
+    vim.keymap.set("n", "gt", telescope.lsp_type_definitions, { buffer = true, desc = "Goto Type Definition" })
 
     local filter_f_symbols = { symbols = { "function", "method", "class" } }
     vim.keymap.set(
@@ -33,13 +34,13 @@ M.on_attach = function(_, _) -- client, bufnr
 
     vim.keymap.set(
         "n",
-        "<Leader>ss",
+        "<Leader>ls",
         telescope.lsp_dynamic_workspace_symbols,
         { buffer = true, desc = "Workspace Symbols" }
     )
     vim.keymap.set(
         "n",
-        "<Leader>sd",
+        "<Leader>ld",
         function() telescope.diagnostics({ bufnr = 0 }) end,
         { buffer = true, desc = "Document Diagnostics" }
     )
