@@ -1,9 +1,13 @@
 vim.loader.enable()
 
--- Line numbers and sign column:
+vim.o.title = true
+-- vim.o.titlestring = "%{getcwd()}"
+vim.cmd([[set titlestring=%{substitute(getcwd(),\ $HOME,\ '~',\ '')}]])
+-- Line numbers and other columns:
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.signcolumn = "yes"
+vim.o.colorcolumn = "+1"
 -- Searching:
 vim.o.smartcase = true
 vim.o.ignorecase = true
@@ -21,6 +25,9 @@ vim.o.foldlevel = 99
 -- Indenting:
 vim.o.shiftwidth = 4
 vim.o.expandtab = true
+-- Displaying invisible characters:
+vim.o.list = true
+vim.opt.listchars = { tab = "⇥ ", nbsp = "·" }
 -- Misc:
 vim.o.cursorline = true
 vim.o.splitbelow = true
@@ -31,6 +38,7 @@ vim.o.laststatus = 3
 vim.o.swapfile = false
 vim.o.undofile = true
 vim.o.clipboard = "unnamedplus"
+-- vim.o.bg = "dark"
 
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>w", vim.cmd.w, { desc = "Write" })
@@ -43,9 +51,26 @@ vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 vim.keymap.set("n", "<", "<<")
 vim.keymap.set("n", ">", ">>")
+-- Diagnostics:
 vim.keymap.set("n", "<Leader>k", vim.diagnostic.open_float)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
+-- Move text:
+vim.keymap.set("n", "<A-j>", "<Esc>:m .+1<CR>==")
+vim.keymap.set("n", "<A-k>", "<Esc>:m .-2<CR>==")
+vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv")
+-- Paste:
+vim.keymap.set({ "i", "c" }, "<C-v>", "<C-r><C-o>+")
+-- j/k move in wrapped lines, but not when jumping multiple lines:
+vim.keymap.set("n", "j", function()
+    if vim.v.count == 0 then return "gj" end
+    return "j"
+end, { expr = true })
+vim.keymap.set("n", "k", function()
+    if vim.v.count == 0 then return "gk" end
+    return "k"
+end, { expr = true })
 
 -- Plugins:
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -55,7 +80,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
     if vim.v.shell_error ~= 0 then
         vim.api.nvim_echo({
             { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-            { out,                            "WarningMsg" },
+            { out, "WarningMsg" },
             { "\nPress any key to exit..." },
         }, true, {})
         vim.fn.getchar()
