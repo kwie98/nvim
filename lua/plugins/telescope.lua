@@ -25,12 +25,12 @@ return {
         custom_actions.goto_first_qf = function(_) vim.cmd.cfirst() end
         custom_actions = transform_mod(custom_actions)
 
-        vim.keymap.set(
-            "n",
-            "<Leader>s~",
-            function() builtin.find_files({ cwd = "~", hidden = true }) end,
-            { desc = "~/**" }
-        )
+        -- vim.keymap.set(
+        --     "n",
+        --     "<Leader>s~",
+        --     function() builtin.find_files({ cwd = "~", hidden = true }) end,
+        --     { desc = "~/**" }
+        -- )
         vim.keymap.set("n", "<Leader>b", builtin.buffers, { desc = "Buffers" })
         vim.keymap.set("n", "<Leader>t", live_grep_args.live_grep_args, { desc = "Grep" })
         vim.keymap.set(
@@ -61,10 +61,10 @@ return {
             advanced_git_search.diff_branch_file,
             { desc = "This File on Other Branches" }
         )
-        vim.keymap.set("n", "<Leader>sc", builtin.highlights, { desc = "Highlights" })
+        -- vim.keymap.set("n", "<Leader>sc", builtin.highlights, { desc = "Highlights" })
         vim.keymap.set("n", "<Leader>sh", builtin.help_tags, { desc = "Help" })
-        vim.keymap.set("n", "<Leader>sl", builtin.quickfix, { desc = "Quickfix" })
-        vim.keymap.set("n", "<Leader>sk", builtin.keymaps, { desc = "Keys" })
+        -- vim.keymap.set("n", "<Leader>sl", builtin.quickfix, { desc = "Quickfix" })
+        -- vim.keymap.set("n", "<Leader>sk", builtin.keymaps, { desc = "Keys" })
         vim.keymap.set("n", "<Leader>sm", builtin.man_pages, { desc = "Manual" })
         vim.keymap.set(
             "n",
@@ -73,8 +73,8 @@ return {
             { desc = "Recent Files" }
         )
         vim.keymap.set("n", "<Leader>sR", builtin.oldfiles, { desc = "All Recent Files" })
-        vim.keymap.set("n", "<Leader>st", builtin.resume, { desc = "Resume Search" })
-        vim.keymap.set("n", "<Leader>s:", builtin.command_history, { desc = "Command History" })
+        -- vim.keymap.set("n", "<Leader>st", builtin.resume, { desc = "Resume Search" })
+        -- vim.keymap.set("n", "<Leader>s:", builtin.command_history, { desc = "Command History" })
 
         telescope.setup({
             defaults = {
