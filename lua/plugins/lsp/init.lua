@@ -1,10 +1,46 @@
+-- return {
+--     "neovim/nvim-lspconfig",
+--     dependencies = {
+--         "hrsh7th/nvim-cmp",
+--     },
+--     config = function()
+--         local lspconfig = require("lspconfig")
+--         local capabilities = require("cmp_nvim_lsp").default_capabilities()
+--         lspconfig.pylyzer.setup({ capabilities = capabilities })
+--         lspconfig.ruff.setup({ capabilities = capabilities })
+--         lspconfig.lua_ls.setup({
+--             capabilities = capabilities,
+--             on_init = function(client)
+--                 if client.workspace_folders then
+--                     local path = client.workspace_folders[1].name
+--                     if vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc") then
+--                         return
+--                     end
+--                 end
+--
+--                 client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
+--                     runtime = {
+--                         version = "LuaJIT",
+--                     },
+--                     workspace = {
+--                         checkThirdParty = false,
+--                         library = vim.api.nvim_get_runtime_file("", true),
+--                     },
+--                 })
+--             end,
+--             settings = {
+--                 Lua = {},
+--             },
+--         })
+--     end,
+-- }
 return {
     "neovim/nvim-lspconfig",
     dependencies = {
         "nvim-lua/plenary.nvim",
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
-        "folke/neodev.nvim",
+        -- "folke/neodev.nvim",
         "simrat39/rust-tools.nvim",
         -- "barreiroleo/ltex_extra.nvim", -- in ltex config
         "b0o/SchemaStore.nvim", -- in jsonls config
@@ -19,15 +55,15 @@ return {
         local handlers = require("plugins.lsp.handlers")
         local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-        local neodev = require("neodev")
-        local rt = require("rust-tools")
+        -- local neodev = require("neodev")
+        -- local rt = require("rust-tools")
 
         vim.keymap.set("n", "<Leader>ml", "<CMD>LspInfo<Enter>", { desc = "LSP Info" })
 
-        -- IMPORTANT: make sure to set up neodev BEFORE lspconfig
-        neodev.setup({
-            setup_jsonls = false,
-        })
+        -- -- IMPORTANT: make sure to set up neodev BEFORE lspconfig
+        -- neodev.setup({
+        --     setup_jsonls = false,
+        -- })
 
         local function setup_lsp(server)
             local capabilities = vim.tbl_deep_extend(
@@ -66,17 +102,18 @@ return {
         setup_lsp("nil_ls")
         setup_lsp("lua_ls")
         setup_lsp("gopls")
+        setup_lsp("biome")
 
-        rt.setup({
-            tools = {
-                inlay_hints = {
-                    show_parameter_hints = false,
-                },
-            },
-            server = {
-                cmd = { "rustup", "run", "stable", "rust-analyzer" },
-                on_attach = function(client, bufnr) handlers.on_attach(client, bufnr) end,
-            },
-        })
+        -- rt.setup({
+        --     tools = {
+        --         inlay_hints = {
+        --             show_parameter_hints = false,
+        --         },
+        --     },
+        --     server = {
+        --         cmd = { "rustup", "run", "stable", "rust-analyzer" },
+        --         on_attach = function(client, bufnr) handlers.on_attach(client, bufnr) end,
+        --     },
+        -- })
     end,
 }
