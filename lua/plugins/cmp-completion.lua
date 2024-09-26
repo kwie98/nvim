@@ -1,32 +1,31 @@
 return {
     "hrsh7th/nvim-cmp",
     dependencies = {
-        "windwp/nvim-autopairs",
         "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path",
-        "saadparwaiz1/cmp_luasnip",
         "hrsh7th/cmp-cmdline",
-        "L3MON4D3/LuaSnip",
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-path",
         "js-everts/cmp-tailwind-colors",
+        "windwp/nvim-autopairs",
     },
     event = "VeryLazy",
 
     config = function()
         local cmp = require("cmp")
-        local luasnip = require("luasnip")
+        -- local luasnip = require("luasnip")
         local tailwind_colors = require("cmp-tailwind-colors")
 
-        -- Snippet keys:
-        vim.keymap.set({ "i", "s" }, "<Tab>", function()
-            if luasnip.expand_or_jumpable() then return '<CMD>lua require"luasnip".expand_or_jump()<Enter>' end
-            return "<End>"
-        end, { expr = true })
-        vim.keymap.set({ "i", "s" }, "<S-Tab>", function()
-            if luasnip.jumpable(-1) then luasnip.jump(-1) end
-        end, { silent = true })
-        vim.keymap.set("i", "<C-l>", function()
-            if luasnip.choice_active() then luasnip.change_choice(1) end
-        end)
+        -- -- Snippet keys:
+        -- vim.keymap.set({ "i", "s" }, "<Tab>", function()
+        --     if luasnip.expand_or_jumpable() then return '<CMD>lua require"luasnip".expand_or_jump()<Enter>' end
+        --     return "<End>"
+        -- end, { expr = true })
+        -- vim.keymap.set({ "i", "s" }, "<S-Tab>", function()
+        --     if luasnip.jumpable(-1) then luasnip.jump(-1) end
+        -- end, { silent = true })
+        -- vim.keymap.set("i", "<C-l>", function()
+        --     if luasnip.choice_active() then luasnip.change_choice(1) end
+        -- end)
 
         local function is_dap_buffer(bufnr)
             local filetype = vim.api.nvim_buf_get_option(bufnr or 0, "filetype")
@@ -63,7 +62,8 @@ return {
                 end,
             },
             snippet = {
-                expand = function(args) luasnip.lsp_expand(args.body) end,
+                -- expand = function(args) luasnip.lsp_expand(args.body) end,
+                expand = function(args) vim.snippet.expand(args.body) end,
             },
             mapping = {
                 ["<C-Space>"] = cmp.mapping(cmp.mapping.complete({}), { "i", "c" }), -- open the completion menu
