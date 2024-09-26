@@ -30,15 +30,11 @@ return {
             { "<Leader>m", group = "Module Info" },
             { "<Leader>r", group = "Run/Test" },
             { "<Leader>s", group = "Search" },
-            { "<Leader>sg", group = "Git" },
+
             { "<Leader>u", hidden = true },
             { "<Leader>i", hidden = true },
             { "<Leader>o", hidden = true },
             { "<Leader>p", hidden = true },
-            { "<Leader>g", group = "Git", mode = "v" },
         })
-
-        -- which_key.register(mappings, { mode = "n", prefix = "<Leader>" })
-        -- which_key.register(v_mappings, { mode = "v", prefix = "<Leader>" })
     end,
 }

@@ -47,13 +47,13 @@ return {
             { desc = "Files (no ignore)" }
         )
 
-        vim.keymap.set("n", "<Leader>sgg", advanced_git_search.search_log_content, { desc = "All Commits" })
+        vim.keymap.set("n", "<Leader>sgh", advanced_git_search.search_log_content, { desc = "History" })
         vim.keymap.set("n", "<Leader>sgs", builtin.git_status, { desc = "Status" })
         vim.keymap.set(
             "n",
             "<Leader>sgf",
             advanced_git_search.search_log_content_file,
-            { desc = "Commits of This File" }
+            { desc = "History of This File" }
         )
         vim.keymap.set(
             "n",
@@ -61,6 +61,7 @@ return {
             advanced_git_search.diff_branch_file,
             { desc = "This File on Other Branches" }
         )
+
         -- vim.keymap.set("n", "<Leader>sc", builtin.highlights, { desc = "Highlights" })
         vim.keymap.set("n", "<Leader>sh", builtin.help_tags, { desc = "Help" })
         -- vim.keymap.set("n", "<Leader>sl", builtin.quickfix, { desc = "Quickfix" })
