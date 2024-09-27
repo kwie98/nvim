@@ -3,11 +3,13 @@ vim.loader.enable()
 vim.o.title = true
 -- vim.o.titlestring = "%{getcwd()}"
 vim.cmd([[set titlestring=%{substitute(getcwd(),\ $HOME,\ '~',\ '')}]])
--- Line numbers and other columns:
+-- Status columns and bars around the window:
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.signcolumn = "yes"
 vim.o.colorcolumn = "+1"
+vim.o.laststatus = 3
+vim.o.showtabline = 0
 -- Searching:
 vim.o.smartcase = true
 vim.o.ignorecase = true
@@ -48,7 +50,6 @@ vim.o.splitbelow = true
 vim.o.splitright = true
 vim.o.scrolloff = 4
 vim.o.sidescrolloff = 8
-vim.o.laststatus = 3
 vim.o.swapfile = false
 vim.o.undofile = true
 vim.o.clipboard = "unnamedplus"
