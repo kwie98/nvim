@@ -28,6 +28,20 @@ vim.o.expandtab = true
 -- Displaying invisible characters:
 vim.o.list = true
 vim.opt.listchars = { tab = "⇥ ", nbsp = "·" }
+-- Diagnostics:
+local signs = {
+    { name = "DiagnosticSignError", text = "" },
+    { name = "DiagnosticSignWarn", text = "" },
+    { name = "DiagnosticSignHint", text = "" },
+    { name = "DiagnosticSignInfo", text = "" },
+}
+for _, sign in ipairs(signs) do
+    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+end
+vim.diagnostic.config({
+    virtual_text = false,
+    signs = signs,
+})
 -- Misc:
 vim.o.cursorline = true
 vim.o.splitbelow = true
@@ -55,6 +69,12 @@ vim.keymap.set("n", ">", ">>")
 vim.keymap.set("n", "<Leader>k", vim.diagnostic.open_float)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
+vim.keymap.set(
+    "n",
+    "<Leader>lh",
+    function() vim.diagnostic.config({ virtual_text = not vim.diagnostic.config()["virtual_text"] }) end,
+    { desc = "Toggle Diagnostics" }
+)
 -- Move text:
 vim.keymap.set("n", "<A-j>", "<Esc>:m .+1<CR>==")
 vim.keymap.set("n", "<A-k>", "<Esc>:m .-2<CR>==")
