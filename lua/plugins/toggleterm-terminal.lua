@@ -49,14 +49,9 @@ return {
 
         --- @param this_term Terminal
         local function open_just(this_term)
-            -- Close this terminal if focused:
-            if this_term:is_focused() then
-                this_term:close()
-                return
-            end
-            -- Focus this terminal if open:
+            -- Close this terminal if open:
             if this_term:is_open() then
-                this_term:focus()
+                this_term:close()
                 return
             end
             -- Close the other terminals, then open this:
