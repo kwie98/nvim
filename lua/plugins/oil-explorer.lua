@@ -15,7 +15,7 @@ return {
             keymaps = {
                 ["g?"] = "actions.show_help",
                 ["<Enter>"] = "actions.select",
-                ["<C-v>"] = "actions.select_vsplit",
+                ["<C-v>"] = { "actions.select_vsplit", mode = "n" },
                 ["<C-s>"] = "actions.select_split",
                 ["<C-t>"] = "actions.select_tab",
                 ["<Tab>"] = "actions.preview",
@@ -26,6 +26,7 @@ return {
                 ["g."] = "actions.toggle_hidden",
                 ["g\\"] = "actions.toggle_trash",
                 ["<Leader>y"] = "actions.copy_entry_path",
+                ["_"] = false,
             },
             view_options = {
                 show_hidden = true,
