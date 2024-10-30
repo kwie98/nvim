@@ -2,6 +2,7 @@ vim.loader.enable()
 
 -- OPTIONS --
 vim.o.title = true
+vim.o.concealcursor = "n"
 -- vim.o.titlestring = "%{getcwd()}"
 vim.cmd([[set titlestring=%{substitute(getcwd(),\ $HOME,\ '~',\ '')}]])
 -- Status columns and bars around the window:
@@ -58,16 +59,6 @@ vim.o.clipboard = "unnamedplus"
 
 -- KEYMAPS --
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>w", vim.cmd.w, { desc = "Write" })
-vim.keymap.set("n", "<leader>q", vim.cmd.q, { desc = "Quit" })
-vim.keymap.set("n", "<Leader>n", function() vim.cmd(':let @/ = ""') end, { desc = "Toggle Search Highlight" })
-vim.keymap.set("n", "<C-j>", "<C-w>w")
-vim.keymap.set("n", "<C-k>", "<C-w>W")
-vim.keymap.set("n", "gp", "`[v`]")
-vim.keymap.set("v", "<", "<gv")
-vim.keymap.set("v", ">", ">gv")
-vim.keymap.set("n", "<", "<<")
-vim.keymap.set("n", ">", ">>")
 -- Diagnostics:
 vim.keymap.set("n", "<Leader>k", vim.diagnostic.open_float)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
@@ -94,6 +85,20 @@ vim.keymap.set("n", "k", function()
     if vim.v.count == 0 then return "gk" end
     return "k"
 end, { expr = true })
+-- Quickfix:
+vim.keymap.set("n", "]l", "<CMD>cnext<Enter>")
+vim.keymap.set("n", "[l", "<CMD>cprev<Enter>")
+-- Misc:
+vim.keymap.set("n", "<leader>w", vim.cmd.w, { desc = "Write" })
+vim.keymap.set("n", "<leader>q", vim.cmd.q, { desc = "Quit" })
+vim.keymap.set("n", "<Leader>n", function() vim.cmd(':let @/ = ""') end, { desc = "Toggle Search Highlight" })
+vim.keymap.set("n", "<C-j>", "<C-w>w")
+vim.keymap.set("n", "<C-k>", "<C-w>W")
+vim.keymap.set("n", "gp", "`[v`]")
+vim.keymap.set("v", "<", "<gv")
+vim.keymap.set("v", ">", ">gv")
+vim.keymap.set("n", "<", "<<")
+vim.keymap.set("n", ">", ">>")
 
 -- PLUGINS --
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
