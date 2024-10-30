@@ -2,6 +2,7 @@
 return {
     "folke/tokyonight.nvim",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
+    enabled = false,
 
     config = function()
         local util = require("tokyonight.util")
