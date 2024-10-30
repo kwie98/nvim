@@ -99,10 +99,10 @@ return {
         -- Set up other LSPs:
         setup_lsp("hls")
         setup_lsp("clangd")
-        setup_lsp("nil_ls")
         setup_lsp("lua_ls")
         setup_lsp("gopls")
         setup_lsp("biome")
+        setup_lsp("ts_ls")
 
         -- rt.setup({
         --     tools = {
