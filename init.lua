@@ -1,5 +1,6 @@
 vim.loader.enable()
 
+-- OPTIONS --
 vim.o.title = true
 -- vim.o.titlestring = "%{getcwd()}"
 vim.cmd([[set titlestring=%{substitute(getcwd(),\ $HOME,\ '~',\ '')}]])
@@ -55,6 +56,7 @@ vim.o.undofile = true
 vim.o.clipboard = "unnamedplus"
 -- vim.o.bg = "dark"
 
+-- KEYMAPS --
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>w", vim.cmd.w, { desc = "Write" })
 vim.keymap.set("n", "<leader>q", vim.cmd.q, { desc = "Quit" })
@@ -93,7 +95,7 @@ vim.keymap.set("n", "k", function()
     return "k"
 end, { expr = true })
 
--- Plugins:
+-- PLUGINS --
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
     local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -120,4 +122,5 @@ lazy.setup("plugins", {
 })
 vim.keymap.set("n", "<Leader>mp", lazy.show, { desc = "Plugins" })
 
+-- AUTOCOMMANDS --
 require("kwie.autocommands")
