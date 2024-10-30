@@ -2,6 +2,7 @@ vim.loader.enable()
 
 -- OPTIONS --
 vim.o.title = true
+vim.o.background = "light"
 vim.o.concealcursor = "n"
 -- vim.o.titlestring = "%{getcwd()}"
 vim.cmd([[set titlestring=%{substitute(getcwd(),\ $HOME,\ '~',\ '')}]])

@@ -30,7 +30,7 @@ return {
         end
 
         require("tokyonight").setup({
-            transparent = true,
+            -- transparent = true,
             terminal_colors = false,
             styles = {
                 comments = { italic = false },
@@ -273,6 +273,6 @@ return {
                 hl["@markup.italic"] = { italic = true }
             end,
         })
-        vim.cmd.colorscheme("tokyonight-day")
+        vim.cmd.colorscheme("tokyonight-night")
     end,
 }
