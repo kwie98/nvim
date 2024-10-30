@@ -1,3 +1,4 @@
+local words = require("kwie.util").words
 return function(dap)
     dap.adapters.python = {
         type = "executable",
@@ -14,6 +15,12 @@ return function(dap)
             console = "integratedTerminal",
             python = "python",
             justMyCode = false,
+            args = function()
+                local args = vim.fn.input({
+                    prompt = "Args: ",
+                })
+                return words(args)
+            end,
         },
         {
             name = "pytest",
