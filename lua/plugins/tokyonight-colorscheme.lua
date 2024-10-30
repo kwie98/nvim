@@ -2,7 +2,6 @@
 return {
     "folke/tokyonight.nvim",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
-    lazy = true, -- loaded by hlargs
 
     config = function()
         local util = require("tokyonight.util")
@@ -37,7 +36,7 @@ return {
                 comments = { italic = false },
                 keywords = { italic = false },
             },
-            sidebars = { "no please :)" }, -- disable darkening of any sidebars
+            sidebars = { "no please :p" }, -- disable darkening of any sidebars
             day_brightness = 0.05, -- lower = higher contrast
             -- day_brightness = 0.0,
             on_colors = function(c)
@@ -274,7 +273,6 @@ return {
                 hl["@markup.italic"] = { italic = true }
             end,
         })
-        -- Set colorscheme to current system mode:
-        require("kwie.darkman")
+        vim.cmd.colorscheme("tokyonight-day")
     end,
 }
