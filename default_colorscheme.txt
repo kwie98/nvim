@@ -1,33 +1,23 @@
 SpecialKey     xxx guifg=NvimLightGrey4
-EndOfBuffer    xxx links to NonText
 TermCursor     xxx cterm=reverse gui=reverse
 TermCursorNC   xxx cleared
 NonText        xxx guifg=NvimLightGrey4
 Directory      xxx ctermfg=6 guifg=NvimDarkCyan
 ErrorMsg       xxx ctermfg=1 guifg=NvimDarkRed
-IncSearch      xxx links to CurSearch
 Search         xxx ctermfg=15 ctermbg=3 guifg=NvimDarkGrey1 guibg=NvimLightYellow
 CurSearch      xxx ctermfg=15 ctermbg=3 guifg=NvimLightGrey1 guibg=NvimDarkYellow
 MoreMsg        xxx ctermfg=6 guifg=NvimDarkCyan
 ModeMsg        xxx ctermfg=2 guifg=NvimDarkGreen
 LineNr         xxx guifg=NvimLightGrey4
-LineNrAbove    xxx links to LineNr
-LineNrBelow    xxx links to LineNr
 CursorLineNr   xxx cterm=bold gui=bold
-CursorLineSign xxx links to SignColumn
-CursorLineFold xxx links to FoldColumn
 Question       xxx ctermfg=6 guifg=NvimDarkCyan
 StatusLine     xxx cterm=reverse guifg=NvimLightGrey3 guibg=NvimDarkGrey3
 StatusLineNC   xxx cterm=bold,underline guifg=NvimDarkGrey3 guibg=NvimLightGrey3
-WinSeparator   xxx links to Normal
-VertSplit      xxx links to WinSeparator
 Title          xxx cterm=bold gui=bold guifg=NvimDarkGrey2
 Visual         xxx ctermfg=15 ctermbg=0 guibg=NvimLightGrey4
 VisualNC       xxx cleared
 WarningMsg     xxx ctermfg=3 guifg=NvimDarkYellow
-WildMenu       xxx links to PmenuSel
 Folded         xxx guifg=NvimDarkGrey4 guibg=NvimLightGrey3
-FoldColumn     xxx links to SignColumn
 DiffAdd        xxx ctermfg=15 ctermbg=2 guifg=NvimDarkGrey1 guibg=NvimLightGreen
 DiffChange     xxx guifg=NvimDarkGrey1 guibg=NvimLightGrey4
 DiffDelete     xxx cterm=bold ctermfg=1 gui=bold guifg=NvimDarkRed
@@ -40,59 +30,108 @@ SpellRare      xxx cterm=undercurl gui=undercurl guisp=NvimDarkCyan
 SpellLocal     xxx cterm=undercurl gui=undercurl guisp=NvimDarkGreen
 Pmenu          xxx cterm=reverse guibg=NvimLightGrey3
 PmenuSel       xxx cterm=underline,reverse guifg=NvimLightGrey3 guibg=NvimDarkGrey2 blend=0
+PmenuThumb     xxx guibg=NvimLightGrey4
+TabLineSel     xxx cterm=bold gui=bold
+CursorColumn   xxx guibg=NvimLightGrey3
+CursorLine     xxx guibg=NvimLightGrey3
+ColorColumn    xxx cterm=reverse guibg=NvimLightGrey4
+QuickFixLine   xxx ctermfg=6 guifg=NvimDarkCyan
+NormalNC       xxx cleared
+NormalFloat    xxx guibg=NvimLightGrey1
+MsgArea        xxx cleared
+WinBar         xxx cterm=bold gui=bold guifg=NvimDarkGrey4 guibg=NvimLightGrey1
+WinBarNC       xxx cterm=bold guifg=NvimDarkGrey4 guibg=NvimLightGrey1
+Cursor         xxx guifg=bg guibg=fg
+RedrawDebugNormal xxx cterm=reverse gui=reverse
+Underlined     xxx cterm=underline gui=underline
+lCursor        xxx guifg=bg guibg=fg
+Normal         xxx guifg=NvimDarkGrey2 guibg=NvimLightGrey2
+Constant       xxx guifg=NvimDarkGrey2
+Statement      xxx cterm=bold gui=bold guifg=NvimDarkGrey2
+PreProc        xxx guifg=NvimDarkGrey2
+Type           xxx guifg=NvimDarkGrey2
+Special        xxx ctermfg=6 guifg=NvimDarkCyan
+DiagnosticError xxx ctermfg=1 guifg=NvimDarkRed
+DiagnosticWarn xxx ctermfg=3 guifg=NvimDarkYellow
+DiagnosticInfo xxx ctermfg=6 guifg=NvimDarkCyan
+DiagnosticHint xxx ctermfg=4 guifg=NvimDarkBlue
+DiagnosticOk   xxx ctermfg=2 guifg=NvimDarkGreen
+Comment        xxx guifg=NvimDarkGrey4
+@variable      xxx guifg=NvimDarkGrey2
+String         xxx ctermfg=2 guifg=NvimDarkGreen
+Identifier     xxx ctermfg=4 guifg=NvimDarkBlue
+Function       xxx ctermfg=6 guifg=NvimDarkCyan
+Operator       xxx guifg=NvimDarkGrey2
+Delimiter      xxx guifg=NvimDarkGrey2
+Todo           xxx cterm=bold gui=bold guifg=NvimDarkGrey2
+@markup.strong xxx cterm=bold gui=bold
+@markup.italic xxx cterm=italic gui=italic
+@markup.strikethrough xxx cterm=strikethrough gui=strikethrough
+@markup.underline xxx cterm=underline gui=underline
+@diff          xxx cleared
+Added          xxx ctermfg=2 guifg=NvimDarkGreen
+Removed        xxx ctermfg=1 guifg=NvimDarkRed
+Changed        xxx ctermfg=6 guifg=NvimDarkCyan
+@lsp           xxx cleared
+DiagnosticDeprecated xxx cterm=strikethrough gui=strikethrough guisp=NvimDarkRed
+FloatShadow    xxx ctermbg=0 guibg=NvimLightGrey4 blend=80
+FloatShadowThrough xxx ctermbg=0 guibg=NvimLightGrey4 blend=100
+MatchParen     xxx cterm=bold,underline gui=bold guibg=NvimLightGrey4
+RedrawDebugClear xxx ctermfg=15 ctermbg=3 guibg=NvimLightYellow
+RedrawDebugComposed xxx ctermfg=15 ctermbg=2 guibg=NvimLightGreen
+RedrawDebugRecompose xxx ctermfg=15 ctermbg=1 guibg=NvimLightRed
+Error          xxx ctermfg=15 ctermbg=1 guifg=NvimDarkGrey1 guibg=NvimLightRed
+DiagnosticUnderlineError xxx cterm=underline gui=underline guisp=NvimDarkRed
+DiagnosticUnderlineWarn xxx cterm=underline gui=underline guisp=NvimDarkYellow
+DiagnosticUnderlineInfo xxx cterm=underline gui=underline guisp=NvimDarkCyan
+DiagnosticUnderlineHint xxx cterm=underline gui=underline guisp=NvimDarkBlue
+DiagnosticUnderlineOk xxx cterm=underline gui=underline guisp=NvimDarkGreen
+NvimInternalError xxx ctermfg=9 ctermbg=9 guifg=Red guibg=Red
+
+
+
+EndOfBuffer    xxx links to NonText
+IncSearch      xxx links to CurSearch
+LineNrAbove    xxx links to LineNr
+LineNrBelow    xxx links to LineNr
+CursorLineSign xxx links to SignColumn
+CursorLineFold xxx links to FoldColumn
+WinSeparator   xxx links to Normal
+VertSplit      xxx links to WinSeparator
+WildMenu       xxx links to PmenuSel
+FoldColumn     xxx links to SignColumn
 PmenuKind      xxx links to Pmenu
 PmenuKindSel   xxx links to PmenuSel
 PmenuExtra     xxx links to Pmenu
 PmenuExtraSel  xxx links to PmenuSel
 PmenuSbar      xxx links to Pmenu
-PmenuThumb     xxx guibg=NvimLightGrey4
 TabLine        xxx links to StatusLineNC
-TabLineSel     xxx cterm=bold gui=bold
 TabLineFill    xxx links to TabLine
-CursorColumn   xxx guibg=NvimLightGrey3
-CursorLine     xxx guibg=NvimLightGrey3
-ColorColumn    xxx cterm=reverse guibg=NvimLightGrey4
-QuickFixLine   xxx ctermfg=6 guifg=NvimDarkCyan
 Whitespace     xxx links to NonText
-NormalNC       xxx cleared
 MsgSeparator   xxx links to StatusLine
-NormalFloat    xxx guibg=NvimLightGrey1
-MsgArea        xxx cleared
 FloatBorder    xxx links to NormalFloat
-WinBar         xxx cterm=bold gui=bold guifg=NvimDarkGrey4 guibg=NvimLightGrey1
-WinBarNC       xxx cterm=bold guifg=NvimDarkGrey4 guibg=NvimLightGrey1
-Cursor         xxx guifg=bg guibg=fg
 FloatTitle     xxx links to Title
 FloatFooter    xxx links to FloatTitle
-RedrawDebugNormal xxx cterm=reverse gui=reverse
-Underlined     xxx cterm=underline gui=underline
-lCursor        xxx guifg=bg guibg=fg
 CursorIM       xxx links to Cursor
 Substitute     xxx links to Search
 VisualNOS      xxx links to Visual
-Normal         xxx guifg=NvimDarkGrey2 guibg=NvimLightGrey2
 Character      xxx links to Constant
-Constant       xxx guifg=NvimDarkGrey2
 Number         xxx links to Constant
 Boolean        xxx links to Constant
 Float          xxx links to Number
 Conditional    xxx links to Statement
-Statement      xxx cterm=bold gui=bold guifg=NvimDarkGrey2
 Repeat         xxx links to Statement
 Label          xxx links to Statement
 Keyword        xxx links to Statement
 Exception      xxx links to Statement
 Include        xxx links to PreProc
-PreProc        xxx guifg=NvimDarkGrey2
 Define         xxx links to PreProc
 Macro          xxx links to PreProc
 PreCondit      xxx links to PreProc
 StorageClass   xxx links to Type
-Type           xxx guifg=NvimDarkGrey2
 Structure      xxx links to Type
 Typedef        xxx links to Type
 Tag            xxx links to Special
-Special        xxx ctermfg=6 guifg=NvimDarkCyan
 SpecialChar    xxx links to Special
 SpecialComment xxx links to Special
 Debug          xxx links to Special
@@ -106,15 +145,10 @@ LspReferenceWrite xxx links to LspReferenceText
 LspSignatureActiveParameter xxx links to Visual
 SnippetTabstop xxx links to Visual
 DiagnosticFloatingError xxx links to DiagnosticError
-DiagnosticError xxx ctermfg=1 guifg=NvimDarkRed
 DiagnosticFloatingWarn xxx links to DiagnosticWarn
-DiagnosticWarn xxx ctermfg=3 guifg=NvimDarkYellow
 DiagnosticFloatingInfo xxx links to DiagnosticInfo
-DiagnosticInfo xxx ctermfg=6 guifg=NvimDarkCyan
 DiagnosticFloatingHint xxx links to DiagnosticHint
-DiagnosticHint xxx ctermfg=4 guifg=NvimDarkBlue
 DiagnosticFloatingOk xxx links to DiagnosticOk
-DiagnosticOk   xxx ctermfg=2 guifg=NvimDarkGreen
 DiagnosticVirtualTextError xxx links to DiagnosticError
 DiagnosticVirtualTextWarn xxx links to DiagnosticWarn
 DiagnosticVirtualTextInfo xxx links to DiagnosticInfo
@@ -126,8 +160,6 @@ DiagnosticSignInfo xxx links to DiagnosticInfo
 DiagnosticSignHint xxx links to DiagnosticHint
 DiagnosticSignOk xxx links to DiagnosticOk
 DiagnosticUnnecessary xxx links to Comment
-Comment        xxx guifg=NvimDarkGrey4
-@variable      xxx guifg=NvimDarkGrey2
 @variable.builtin xxx links to Special
 @variable.parameter.builtin xxx links to Special
 @constant      xxx links to Constant
@@ -136,7 +168,6 @@ Comment        xxx guifg=NvimDarkGrey4
 @module.builtin xxx links to Special
 @label         xxx links to Label
 @string        xxx links to String
-String         xxx ctermfg=2 guifg=NvimDarkGreen
 @string.regexp xxx links to @string.special
 @string.special xxx links to SpecialChar
 @string.escape xxx links to @string.special
@@ -151,40 +182,26 @@ String         xxx ctermfg=2 guifg=NvimDarkGreen
 @attribute     xxx links to Macro
 @attribute.builtin xxx links to Special
 @property      xxx links to Identifier
-Identifier     xxx ctermfg=4 guifg=NvimDarkBlue
 @function      xxx links to Function
-Function       xxx ctermfg=6 guifg=NvimDarkCyan
 @function.builtin xxx links to Special
 @constructor   xxx links to Special
 @operator      xxx links to Operator
-Operator       xxx guifg=NvimDarkGrey2
 @keyword       xxx links to Keyword
 @punctuation   xxx links to Delimiter
-Delimiter      xxx guifg=NvimDarkGrey2
 @punctuation.special xxx links to Special
 @comment       xxx links to Comment
 @comment.error xxx links to DiagnosticError
 @comment.warning xxx links to DiagnosticWarn
 @comment.note  xxx links to DiagnosticInfo
 @comment.todo  xxx links to Todo
-Todo           xxx cterm=bold gui=bold guifg=NvimDarkGrey2
 @markup        xxx links to Special
-@markup.strong xxx cterm=bold gui=bold
-@markup.italic xxx cterm=italic gui=italic
-@markup.strikethrough xxx cterm=strikethrough gui=strikethrough
-@markup.underline xxx cterm=underline gui=underline
 @markup.heading xxx links to Title
 @markup.link   xxx links to Underlined
-@diff          xxx cleared
 @diff.plus     xxx links to Added
-Added          xxx ctermfg=2 guifg=NvimDarkGreen
 @diff.minus    xxx links to Removed
-Removed        xxx ctermfg=1 guifg=NvimDarkRed
 @diff.delta    xxx links to Changed
-Changed        xxx ctermfg=6 guifg=NvimDarkCyan
 @tag           xxx links to Tag
 @tag.builtin   xxx links to Special
-@lsp           xxx cleared
 @lsp.type.class xxx links to @type
 @lsp.type.comment xxx links to @comment
 @lsp.type.decorator xxx links to @attribute
@@ -209,20 +226,6 @@ Changed        xxx ctermfg=6 guifg=NvimDarkCyan
 @lsp.type.typeParameter xxx links to @type.definition
 @lsp.type.variable xxx links to @variable
 @lsp.mod.deprecated xxx links to DiagnosticDeprecated
-DiagnosticDeprecated xxx cterm=strikethrough gui=strikethrough guisp=NvimDarkRed
-FloatShadow    xxx ctermbg=0 guibg=NvimLightGrey4 blend=80
-FloatShadowThrough xxx ctermbg=0 guibg=NvimLightGrey4 blend=100
-MatchParen     xxx cterm=bold,underline gui=bold guibg=NvimLightGrey4
-RedrawDebugClear xxx ctermfg=15 ctermbg=3 guibg=NvimLightYellow
-RedrawDebugComposed xxx ctermfg=15 ctermbg=2 guibg=NvimLightGreen
-RedrawDebugRecompose xxx ctermfg=15 ctermbg=1 guibg=NvimLightRed
-Error          xxx ctermfg=15 ctermbg=1 guifg=NvimDarkGrey1 guibg=NvimLightRed
-DiagnosticUnderlineError xxx cterm=underline gui=underline guisp=NvimDarkRed
-DiagnosticUnderlineWarn xxx cterm=underline gui=underline guisp=NvimDarkYellow
-DiagnosticUnderlineInfo xxx cterm=underline gui=underline guisp=NvimDarkCyan
-DiagnosticUnderlineHint xxx cterm=underline gui=underline guisp=NvimDarkBlue
-DiagnosticUnderlineOk xxx cterm=underline gui=underline guisp=NvimDarkGreen
-NvimInternalError xxx ctermfg=9 ctermbg=9 guifg=Red guibg=Red
 NvimAssignment xxx links to Operator
 NvimPlainAssignment xxx links to NvimAssignment
 NvimAugmentedAssignment xxx links to NvimAssignment
