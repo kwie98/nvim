@@ -2,6 +2,7 @@ return {
     "mfussenegger/nvim-dap",
     dependencies = {
         "rcarriga/nvim-dap-ui",
+        "mfussenegger/nvim-dap-python",
         "nvim-neotest/nvim-nio",
         -- "nvim-telescope/telescope-dap.nvim",
         "nvim-telescope/telescope.nvim",
@@ -21,8 +22,9 @@ return {
         { "<F7>", mode = "n" },
         { "<F8>", mode = "n" },
         { "<Leader>dh", mode = "n", desc = "Toggle UI" },
-        { "<Leader>dt", mode = "n", desc = "Breakpoint" },
-        { "<Leader>dT", mode = "n", desc = "Conditional Breakpoint" },
+        { "<Leader>db", mode = "n", desc = "Breakpoint" },
+        { "<Leader>dc", mode = "n", desc = "Conditional Breakpoint" },
+        { "<Leader>dt", mode = "n", desc = "Debug Test" },
     },
     enabled = vim.fn.has("win32") == 0,
 
@@ -30,6 +32,8 @@ return {
         local dap = require("dap")
         local dapui = require("dapui")
         local cmp = require("cmp")
+
+        local dap_python = require("dap-python")
 
         -- Set up bindings that are only active while debugging, and whose original binds can be restored:
         -- WARNING: This probably only works with original binds with non-function rhs?
@@ -78,11 +82,10 @@ return {
         vim.keymap.set("n", "<F7>", dap.run_last)
         vim.keymap.set("n", "<F8>", dap.step_over)
         vim.keymap.set("n", "<Leader>dh", function() dapui.toggle({ reset = true }) end, { desc = "Toggle UI" })
-        -- vim.keymap.set("n", "<Leader>dm", dap_py.test_method, { desc = "Debug Test" })
-        vim.keymap.set("n", "<Leader>dt", dap.toggle_breakpoint, { desc = "Breakpoint" })
+        vim.keymap.set("n", "<Leader>db", dap.toggle_breakpoint, { desc = "Breakpoint" })
         vim.keymap.set(
             "n",
-            "<Leader>dT",
+            "<Leader>dc",
             function() dap.set_breakpoint(vim.fn.input("Breakpoint Condition: ")) end,
             { desc = "Conditional Breakpoint" }
         )
@@ -97,14 +100,26 @@ return {
         })
 
         vim.fn.sign_define("DapBreakpoint", {
-            text = "⏺",
+            text = "",
             texthl = "DiagnosticSignError",
             linehl = "",
             numhl = "",
         })
 
-        require("plugins.dap.configs.python")(dap)
-        -- require("plugins.dap.configs.typescript")(dap)
+        -- require("plugins.dap.configs.python")(dap)
+
+        dap_python.setup(vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python")
+        dap_python.test_runner = "pytest"
+        -- vim.keymap.set("n", "<Leader>dt", dap_python.test_method, { desc = "Debug Test" })
+        vim.keymap.set("n", "<Leader>dt", function ()
+            local output = vim.fn.system("pytest --collect-only -q")
+            local lines = {}
+            for line in output:gmatch("[^\r\n]+") do
+                table.insert(lines, line)
+            end
+            print(vim.inspect(lines))
+        end, { desc = "Debug Test" })
+
 
         -- Set up UI:
         -- telescope.load_extension("dap")
@@ -125,32 +140,32 @@ return {
                     elements = {
                         {
                             id = "scopes",
-                            size = 2 / 5,
+                            size = 2 / 6,
                         },
                         {
                             id = "watches",
-                            size = 2 / 5,
+                            size = 2 / 6,
                         },
                         {
                             id = "stacks",
-                            size = 1 / 5,
+                            size = 1 / 6,
+                        },
+                        {
+                            id = "console",
+                            size = 1 / 6,
                         },
                     },
-                    size = 1 - 0.618,
+                    size = 0.5,
                     position = "left",
                 },
                 {
                     elements = {
                         {
                             id = "repl",
-                            size = 2 / 3,
-                        },
-                        {
-                            id = "console",
-                            size = 1 / 3,
+                            size = 1,
                         },
                     },
-                    size = 1 - 0.618,
+                    size = 10,
                     position = "bottom",
                 },
             },
