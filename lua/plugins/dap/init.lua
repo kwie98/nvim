@@ -46,11 +46,17 @@ return {
             { override = { "n", "<M-l>", dap.step_into } },
             { override = { "n", "<M-g>", dap.run_to_cursor } },
         }
+        local dapui_tabpage = nil
         ---@param close boolean
         local function after_stop_debugging(close)
             -- WARNING: Is sometimes called twice
             print("stop debugging")
-            if close then dapui.close() end
+            if close then
+                dapui.close()
+                if dapui_tabpage ~= nil then
+                    vim.cmd("tabclose " .. dapui_tabpage)
+                end
+            end
             for _, binds in pairs(override_binds) do
                 local original_rhs = vim.fn.maparg(binds.override[2], binds.override[1])
                 if binds.original_rhs ~= nil then
@@ -62,6 +68,9 @@ return {
         end
         local function after_start_debugging()
             print("start debugging")
+            vim.cmd("tab split")
+            dapui_tabpage = vim.fn.tabpagenr()
+            print(dapui_tabpage)
             dapui.open({ reset = true })
             for _, binds in pairs(override_binds) do
                 local original_rhs = vim.fn.maparg(binds.override[2], binds.override[1])
