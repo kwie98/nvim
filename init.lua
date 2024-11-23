@@ -5,8 +5,7 @@ vim.o.termguicolors = true -- otherwise xcode colorscheme is bwoken
 vim.o.title = true
 vim.o.background = "light"
 vim.o.concealcursor = "n"
--- vim.o.titlestring = "%{getcwd()}"
-vim.cmd([[set titlestring=%{substitute(getcwd(),\ $HOME,\ '~',\ '')}]])
+vim.o.titlestring = "%{substitute(getcwd(), $HOME, '~', '')}"
 -- Status columns and bars around the window:
 vim.o.number = true
 vim.o.relativenumber = true
