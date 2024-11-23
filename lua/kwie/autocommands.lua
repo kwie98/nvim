@@ -5,11 +5,41 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     callback = function() vim.highlight.on_yank({ timeout = 50 }) end,
 })
 
-vim.api.nvim_create_autocmd({ "BufRead", "BufNew", "BufNewFile" }, {
-    group = augroup("ft_detect"),
-    pattern = ".envrc",
-    callback = function() vim.bo.ft = "sh" end,
+-- vim.api.nvim_create_autocmd({ "BufRead", "BufNew", "BufNewFile" }, {
+--     group = augroup("ft_detect"),
+--     pattern = ".envrc",
+--     callback = function() vim.bo.ft = "sh" end,
+-- })
+
+-- vim.api.nvim_create_autocmd({ "BufRead", "BufNew", "BufNewFile" }, {
+--     group = augroup("dcmdump"),
+--     pattern = ".dcm",
+--     callback = function() vim.bo.ft = "dcm" end,
+-- })
+
+vim.filetype.add({
+    extension = { dcm = "dcm" },
 })
+
+vim.cmd([[
+    "augroup dcm_dcmdump
+    "au!
+    "au BufReadPre  *.dcm let &dcm=1
+    "au BufReadPre *.dcm if &dcm | %!dcmdump %
+    "au BufReadPost *.dcm set ft=xxd | endif
+    "augroup END
+
+    augroup bin_xxd
+    au!
+    au BufReadPre  *.bin let &bin=1
+    au BufReadPost *.bin if &bin | %!xxd
+    au BufReadPost *.bin set ft=xxd | endif
+    au BufWritePre *.bin if &bin | %!xxd -r
+    au BufWritePre *.bin endif
+    au BufWritePost *.bin if &bin | %!xxd
+    au BufWritePost *.bin set nomod | endif
+    augroup END
+]])
 
 vim.api.nvim_create_autocmd("BufWinEnter", {
     group = augroup("formatoptions"),

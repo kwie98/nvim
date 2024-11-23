@@ -33,6 +33,9 @@ return {
                 is_always_hidden = function(name, _) return name == ".." end,
             },
             watch_for_changes = true,
+            preview_win = {
+                preview_method = "load" -- for dcmdump (ftplugin)
+            }
         })
     end,
 }
