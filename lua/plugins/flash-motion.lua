@@ -2,7 +2,7 @@ return {
     "folke/flash.nvim",
     keys = {
         { "s", mode = "n" },
-        { "s", mode = "x" },
+        { ",", mode = "n" },
     },
 
     config = function()
