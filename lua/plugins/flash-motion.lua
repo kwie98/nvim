@@ -17,6 +17,7 @@ return {
         })
 
         vim.keymap.set("n", "s", flash.jump)
-        vim.keymap.set("x", "s", flash.treesitter_search)
+        vim.keymap.set("n", ",", flash.jump)
+        -- vim.keymap.set("x", "s", flash.treesitter_search)
     end,
 }

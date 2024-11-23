@@ -95,6 +95,7 @@ vim.keymap.set("n", "[l", "<CMD>cprev<Enter>")
 vim.keymap.set("n", "<leader>w", vim.cmd.w, { desc = "Write" })
 vim.keymap.set("n", "<leader>q", vim.cmd.q, { desc = "Quit" })
 vim.keymap.set("n", "<Leader>n", function() vim.cmd(':let @/ = ""') end, { desc = "Toggle Search Highlight" })
+vim.keymap.set("n", "<Leader>j", "<CMD>Inspect<Enter>", { desc = "Inspect" })
 vim.keymap.set("n", "<C-j>", "<C-w>w")
 vim.keymap.set("n", "<C-k>", "<C-w>W")
 vim.keymap.set("n", "gp", "`[v`]")
@@ -102,10 +103,23 @@ vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 vim.keymap.set("n", "<", "<<")
 vim.keymap.set("n", ">", ">>")
+vim.keymap.set("n", "H", "zH")
+vim.keymap.set("n", "L", "zL")
+
 vim.cmd.colorscheme("tokyonight-day")
 
 -- vim.keymap.set("n", "<Leader><Enter>", "<CMD>colorscheme smol<Enter>")
 -- vim.cmd.colorscheme("smol")
+
+-- USER COMMANDS --
+-- Redirect command output to buffer:
+vim.api.nvim_create_user_command("Redir", function(ctx)
+    local lines = vim.split(vim.api.nvim_exec(ctx.args, true), "\n", { plain = true })
+    vim.cmd("new")
+    vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+    vim.opt_local.modified = false
+end, { nargs = "+", complete = "command" })
+
 -- PLUGINS --
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
