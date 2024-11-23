@@ -10,7 +10,13 @@ return {
         vim.g.toggleterm_prev_win = vim.api.nvim_get_current_win()
 
         toggleterm.setup({
-            size = 16,
+            size = function(term)
+                if term.direction == "horizontal" then
+                    return 10
+                elseif term.direction == "vertical" then
+                    return vim.o.columns * 0.5
+                end
+            end,
             open_mapping = nil,
             hide_numbers = true,
             shading_factor = "0",
@@ -27,12 +33,12 @@ return {
         local terms = {
             u = terminal.Terminal:new({
                 cmd = vim.opt.shell:get(),
-                direction = "horizontal",
+                direction = "vertical",
                 count = 1,
             }),
             i = terminal.Terminal:new({
                 cmd = vim.opt.shell:get(),
-                direction = "horizontal",
+                direction = "vertical",
                 count = 2,
             }),
             o = terminal.Terminal:new({
