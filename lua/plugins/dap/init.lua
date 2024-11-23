@@ -2,7 +2,7 @@ return {
     "mfussenegger/nvim-dap",
     dependencies = {
         "rcarriga/nvim-dap-ui",
-        "mfussenegger/nvim-dap-python",
+        -- "mfussenegger/nvim-dap-python",
         "nvim-neotest/nvim-nio",
         -- "nvim-telescope/telescope-dap.nvim",
         "nvim-telescope/telescope.nvim",
@@ -15,7 +15,7 @@ return {
         -- },
     },
     lazy = true,
-    module = false, -- don't load dap even if required (e.g., by rust-tools.nvim)
+    -- module = false, -- don't load dap even if required (e.g., by rust-tools.nvim)
     keys = {
         { "<F5>", mode = "n" },
         { "<F6>", mode = "n" },
@@ -33,7 +33,7 @@ return {
         local dapui = require("dapui")
         local cmp = require("cmp")
 
-        local dap_python = require("dap-python")
+        -- local dap_python = require("dap-python")
 
         -- Set up bindings that are only active while debugging, and whose original binds can be restored:
         -- WARNING: This probably only works with original binds with non-function rhs?
@@ -53,9 +53,7 @@ return {
             print("stop debugging")
             if close then
                 dapui.close()
-                if dapui_tabpage ~= nil then
-                    vim.cmd("tabclose " .. dapui_tabpage)
-                end
+                if dapui_tabpage ~= nil then vim.cmd("tabclose " .. dapui_tabpage) end
             end
             for _, binds in pairs(override_binds) do
                 local original_rhs = vim.fn.maparg(binds.override[2], binds.override[1])
@@ -68,9 +66,9 @@ return {
         end
         local function after_start_debugging()
             print("start debugging")
+            if vim.bo.ft == "neotest-summary" then vim.cmd.q() end
             vim.cmd("tab split")
             dapui_tabpage = vim.fn.tabpagenr()
-            print(dapui_tabpage)
             dapui.open({ reset = true })
             for _, binds in pairs(override_binds) do
                 local original_rhs = vim.fn.maparg(binds.override[2], binds.override[1])
@@ -115,23 +113,36 @@ return {
             numhl = "",
         })
 
-        -- require("plugins.dap.configs.python")(dap)
-
-        dap_python.setup(vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python")
-        dap_python.test_runner = "pytest"
-        -- vim.keymap.set("n", "<Leader>dt", dap_python.test_method, { desc = "Debug Test" })
-        vim.keymap.set("n", "<Leader>dt", function ()
-            local output = vim.fn.system("pytest --collect-only -q")
-            local lines = {}
-            for line in output:gmatch("[^\r\n]+") do
-                table.insert(lines, line)
-            end
-            print(vim.inspect(lines))
-        end, { desc = "Debug Test" })
-
+        local function args_input() return vim.split(vim.fn.input("Arguments: "), " +") end
+        local function python_config(name, program, args)
+            return {
+                name = name,
+                program = program,
+                args = args,
+                type = "python",
+                request = "launch",
+                cwd = "${workspaceFolder}",
+                console = "integratedTerminal",
+                justMyCode = false,
+                python = "python",
+            }
+        end
+        dap.adapters.python = {
+            type = "executable",
+            command = vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python",
+            args = { "-m", "debugpy.adapter" },
+        }
+        dap.configurations.python = {}
+        table.insert(dap.configurations.python, python_config("%", "${file}", nil))
+        table.insert(dap.configurations.python, python_config("% [args ...]", "${file}", args_input))
+        for file in vim.fn.system([[rg -l '^if __name__ == "__main__":$']]):gmatch("[^\r\n]+") do
+            table.insert(dap.configurations.python, python_config(file, file, nil))
+            table.insert(dap.configurations.python, python_config(file .. " [args ...]", file, args_input))
+        end
 
         -- Set up UI:
         -- telescope.load_extension("dap")
+        ---@diagnostic disable-next-line: missing-fields
         dapui.setup({
             icons = { expanded = "▾", collapsed = "▸", current_frame = "▸" },
             mappings = {
