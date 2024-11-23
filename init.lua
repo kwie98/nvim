@@ -1,6 +1,7 @@
 vim.loader.enable()
 
 -- OPTIONS --
+vim.o.termguicolors = true -- otherwise xcode colorscheme is bwoken
 vim.o.title = true
 vim.o.background = "light"
 vim.o.concealcursor = "n"
@@ -100,7 +101,10 @@ vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 vim.keymap.set("n", "<", "<<")
 vim.keymap.set("n", ">", ">>")
+vim.cmd.colorscheme("tokyonight-day")
 
+-- vim.keymap.set("n", "<Leader><Enter>", "<CMD>colorscheme smol<Enter>")
+-- vim.cmd.colorscheme("smol")
 -- PLUGINS --
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then

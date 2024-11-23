@@ -391,7 +391,7 @@ hi(0, "ModeMsg", { bold = true, fg = "#4d577c" })
 hi(0, "MoreMsg", { fg = "#3062a7" })
 hi(0, "MsgArea", { fg = "#4d577c" })
 hi(0, "NonText", { fg = "#9298b8" })
-hi(0, "Normal", { fg = "#2e4477" })
+hi(0, "Normal", { bg = "#e1e2e7", fg = "#2e4477" })
 hi(0, "NormalFloat", { bg = "#cdd0db", fg = "#2e4477" })
 hi(0, "NormalNC", { fg = "#2e4477" })
 hi(0, "NormalSB", { bg = "#cdd0db", fg = "#4d577c" })
@@ -489,23 +489,3 @@ hi(0, "illuminatedWord", { bg = "#aeb3ce" })
 hi(0, "lCursor", { bg = "#2e4477", fg = "#e1e2e7" })
 hi(0, "qfFileName", { fg = "#3062a7" })
 hi(0, "qfLineNr", { fg = "#747ba2" })
-
--- Terminal colors
-local g = vim.g
-
-g.terminal_color_0 = "#24292f"
-g.terminal_color_1 = "#b35900"
-g.terminal_color_2 = "#0550ae"
-g.terminal_color_3 = "#4d2d00"
-g.terminal_color_4 = "#0969da"
-g.terminal_color_5 = "#8250df"
-g.terminal_color_6 = "#1b7c83"
-g.terminal_color_7 = "#6e7781"
-g.terminal_color_8 = "#57606a"
-g.terminal_color_9 = "#8a4600"
-g.terminal_color_10 = "#0969da"
-g.terminal_color_11 = "#633c01"
-g.terminal_color_12 = "#218bff"
-g.terminal_color_13 = "#a475f9"
-g.terminal_color_14 = "#3192aa"
-g.terminal_color_15 = "#8c959f"
