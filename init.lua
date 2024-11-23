@@ -91,6 +91,11 @@ end, { expr = true })
 -- Quickfix:
 vim.keymap.set("n", "]l", "<CMD>cnext<Enter>")
 vim.keymap.set("n", "[l", "<CMD>cprev<Enter>")
+-- Tabs:
+vim.keymap.set("n", "<C-h>", "<CMD>tabprevious<Enter>")
+vim.keymap.set("n", "<C-l>", "<CMD>tabnext<Enter>")
+vim.keymap.set("n", "<C-w>t", "<CMD>tab split<Enter>")
+vim.keymap.set("n", "<C-w><C-t>", "<CMD>tab split<Enter>")
 -- Misc:
 vim.keymap.set("n", "<leader>w", vim.cmd.w, { desc = "Write" })
 vim.keymap.set("n", "<leader>q", vim.cmd.q, { desc = "Quit" })
