@@ -11,7 +11,7 @@ vim.cmd([[set titlestring=%{substitute(getcwd(),\ $HOME,\ '~',\ '')}]])
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.signcolumn = "yes"
-vim.o.colorcolumn = "+1"
+-- vim.o.colorcolumn = "+1"
 vim.o.laststatus = 3
 vim.o.showtabline = 0
 -- Searching:
@@ -22,6 +22,7 @@ vim.o.completeopt = "menuone,noinsert,noselect"
 vim.opt.shortmess:append("c")
 vim.opt.shortmess:append("C")
 -- Text wrapping:
+vim.o.wrap = false
 vim.o.linebreak = true
 vim.o.breakindent = true
 -- Folding:
@@ -53,7 +54,7 @@ vim.o.cursorline = true
 vim.o.splitbelow = true
 vim.o.splitright = true
 vim.o.scrolloff = 4
-vim.o.sidescrolloff = 8
+-- vim.o.sidescrolloff = 8
 vim.o.swapfile = false
 vim.o.undofile = true
 vim.o.clipboard = "unnamedplus"

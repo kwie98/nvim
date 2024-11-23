@@ -9,7 +9,7 @@ return {
         vim.keymap.set("n", "—", function() oil.open(vim.fn.getcwd()) end, { desc = "Open Explorer (cwd)" })
 
         oil.setup({
-            columns = { "permissions", "mtime", "icon" },
+            columns = { "permissions", "mtime", "size", "icon" },
             delete_to_trash = true,
             cleanup_delay_ms = 0,
             keymaps = {
