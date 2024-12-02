@@ -7,5 +7,6 @@ return {
         bufremove.setup()
 
         vim.keymap.set("n", "<Leader>c", bufremove.delete, { desc = "Close Buffer" })
+        -- TODO Leader C close others?
     end,
 }
