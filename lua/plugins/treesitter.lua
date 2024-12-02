@@ -53,7 +53,7 @@ return {
                 "cpp",
                 "css",
                 "diff",
-                "dockerfile",
+                -- "dockerfile",
                 "gitcommit",
                 "gitignore",
                 "haskell",
@@ -81,6 +81,7 @@ return {
                 "yaml",
             },
             ignore_install = {
+                "dockerfile",
                 "xml",
             },
             auto_install = true,
