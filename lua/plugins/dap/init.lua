@@ -7,7 +7,7 @@ return {
         "rcarriga/cmp-dap",
     },
     lazy = true,
-    -- module = false, -- don't load dap even if required (e.g., by rust-tools.nvim)
+    module = false, -- don't load dap even if required (e.g., by rust-tools.nvim)
     keys = {
         { "<F5>", mode = "n" },
         { "<F6>", mode = "n" },
