@@ -1,7 +1,7 @@
 return {
     "stevearc/oil.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    keys = { { "-", mode = "n", desc = "Open Explorer" } },
+    -- keys = { { "-", mode = "n", desc = "Open Explorer" } },
 
     config = function()
         local oil = require("oil")
@@ -9,6 +9,7 @@ return {
         vim.keymap.set("n", "—", function() oil.open(vim.fn.getcwd()) end, { desc = "Open Explorer (cwd)" })
 
         oil.setup({
+            default_file_explorer = true,
             columns = { "permissions", "mtime", "size", "icon" },
             delete_to_trash = true,
             cleanup_delay_ms = 0,
@@ -37,5 +38,7 @@ return {
                 preview_method = "load", -- for dcmdump (ftplugin)
             },
         })
+
+        if vim.fn.argc(-1) == 0 then require("oil").open() end
     end,
 }
