@@ -2,17 +2,9 @@ return {
     "mfussenegger/nvim-dap",
     dependencies = {
         "rcarriga/nvim-dap-ui",
-        -- "mfussenegger/nvim-dap-python",
         "nvim-neotest/nvim-nio",
-        -- "nvim-telescope/telescope-dap.nvim",
         "nvim-telescope/telescope.nvim",
         "rcarriga/cmp-dap",
-        -- "mxsdev/nvim-dap-vscode-js",
-        -- {
-        --     "microsoft/vscode-js-debug",
-        --     version = "1.x",
-        --     build = "npm i && npm run compile vsDebugServerBundle && mv dist out",
-        -- },
     },
     lazy = true,
     -- module = false, -- don't load dap even if required (e.g., by rust-tools.nvim)
@@ -32,8 +24,6 @@ return {
         local dap = require("dap")
         local dapui = require("dapui")
         local cmp = require("cmp")
-
-        -- local dap_python = require("dap-python")
 
         -- Set up bindings that are only active while debugging, and whose original binds can be restored:
         -- WARNING: This probably only works with original binds with non-function rhs?
