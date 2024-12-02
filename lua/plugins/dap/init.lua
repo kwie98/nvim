@@ -142,7 +142,6 @@ return {
 
         -- Set up UI:
         -- telescope.load_extension("dap")
-        ---@diagnostic disable-next-line: missing-fields
         dapui.setup({
             icons = { expanded = "▾", collapsed = "▸", current_frame = "▸" },
             mappings = {

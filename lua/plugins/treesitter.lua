@@ -12,6 +12,7 @@ return {
         local parsers = require("nvim-treesitter.parsers")
 
         local parser_configs = parsers.get_parser_configs()
+        ---@diagnostic disable-next-line: inject-field
         parser_configs.haskell = {
             install_info = {
                 url = "https://github.com/tree-sitter/tree-sitter-haskell",
