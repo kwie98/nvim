@@ -19,10 +19,10 @@ return {
                 files = { "src/parser.c", "src/scanner.c", "src/unicode.h" },
             },
         }
-        if vim.fn.has("nvim-0.9") == 1 then
-            vim.treesitter.language.register("bash", "zsh")
-            vim.treesitter.language.register("html", "htmldjango")
-        end
+        -- if vim.fn.has("nvim-0.9") == 1 then
+        --     vim.treesitter.language.register("bash", "zsh")
+        --     vim.treesitter.language.register("html", "htmldjango")
+        -- end
 
         configs.setup({
             textobjects = {
