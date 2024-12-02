@@ -74,15 +74,15 @@ vim.api.nvim_create_autocmd("User", {
     callback = function() vim.wo.number = true end,
 })
 
-local cursorline_group = augroup("cursorline")
-vim.api.nvim_create_autocmd({ "VimEnter", "WinEnter", "BufWinEnter" }, {
-    group = cursorline_group,
-    command = "setlocal winhighlight+=CursorLine:CursorLineCurrent",
-})
-vim.api.nvim_create_autocmd("WinLeave", {
-    group = cursorline_group,
-    command = "setlocal winhighlight-=CursorLine:CursorLineCurrent",
-})
+-- local cursorline_group = augroup("cursorline")
+-- vim.api.nvim_create_autocmd({ "VimEnter", "WinEnter", "BufWinEnter" }, {
+--     group = cursorline_group,
+--     command = "setlocal winhighlight+=CursorLine:CursorLineCurrent",
+-- })
+-- vim.api.nvim_create_autocmd("WinLeave", {
+--     group = cursorline_group,
+--     command = "setlocal winhighlight-=CursorLine:CursorLineCurrent",
+-- })
 
 -- Confirm oil.nvim actions with <Enter>:
 vim.api.nvim_create_autocmd("FileType", {
