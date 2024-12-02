@@ -47,6 +47,9 @@ end
 vim.diagnostic.config({
     virtual_text = false,
     signs = signs,
+    float = {
+        source = true,
+    },
 })
 -- Misc:
 vim.o.cursorline = true
