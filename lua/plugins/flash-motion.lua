@@ -1,7 +1,6 @@
 return {
     "folke/flash.nvim",
     keys = {
-        { "s", mode = "n" },
         { ",", mode = "n" },
     },
 
@@ -16,7 +15,6 @@ return {
             prompt = { enabled = false },
         })
 
-        vim.keymap.set("n", "s", flash.jump)
         vim.keymap.set("n", ",", flash.jump)
         -- vim.keymap.set("x", "s", flash.treesitter_search)
     end,
