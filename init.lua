@@ -112,8 +112,8 @@ vim.keymap.set("n", "L", "zL")
 
 vim.cmd.colorscheme("tokyonight-day")
 
--- vim.keymap.set("n", "<Leader><Enter>", "<CMD>colorscheme smol<Enter>")
--- vim.cmd.colorscheme("smol")
+-- vim.keymap.set("n", "<Leader><Enter>", "<CMD>colorscheme github_smol<Enter>")
+-- vim.cmd.colorscheme("github_smol")
 
 -- USER COMMANDS --
 -- Redirect command output to buffer:
