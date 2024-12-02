@@ -9,7 +9,7 @@ return {
     },
     lazy = true,
     keys = {
-        { "<Leader>rr", mode = "n", desc = "Neotest" }
+        { "<Leader>rr", mode = "n", desc = "Neotest" },
     },
 
     config = function()

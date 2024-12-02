@@ -34,8 +34,8 @@ return {
             },
             watch_for_changes = true,
             preview_win = {
-                preview_method = "load" -- for dcmdump (ftplugin)
-            }
+                preview_method = "load", -- for dcmdump (ftplugin)
+            },
         })
     end,
 }
