@@ -6,15 +6,20 @@ return {
         local gitsigns = require("gitsigns")
 
         vim.keymap.set("n", "]h", function()
-            if vim.wo.diff then return "]c" end
-            gitsigns.next_hunk()
-            return "<Ignore>"
-        end, { expr = true })
+            if vim.wo.diff then
+                vim.cmd.normal({ "]c", bang = true })
+            else
+                gitsigns.nav_hunk("next")
+            end
+        end)
+
         vim.keymap.set("n", "[h", function()
-            if vim.wo.diff then return "[c" end
-            gitsigns.prev_hunk()
-            return "<Ignore>"
-        end, { expr = true })
+            if vim.wo.diff then
+                vim.cmd.normal({ "[c", bang = true })
+            else
+                gitsigns.nav_hunk("prev")
+            end
+        end)
 
         -- vim.keymap.set("n", "<Leader>gh", function()
         --     gitsigns.toggle_linehl()
