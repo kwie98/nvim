@@ -22,13 +22,13 @@ return {
                     pytest_discover_instances = true,
                 }),
             },
-            -- running = {
-            --     concurrent = false,
-            -- },
             summary = {
                 mappings = {
                     watch = "W",
                 },
+            },
+            diagnostic = {
+                enabled = false,
             },
         })
         vim.keymap.set("n", "<Leader>rr", neotest.summary.open, { desc = "Neotest" })
