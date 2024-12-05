@@ -29,11 +29,13 @@ vim.o.foldmethod = "expr"
 vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.o.foldlevel = 99
 -- Indenting:
+vim.o.tabstop = 4 -- for telescope previewer
 vim.o.shiftwidth = 4
 vim.o.expandtab = true
 -- Displaying invisible characters:
 vim.o.list = true
-vim.opt.listchars = { tab = "⇥ ", nbsp = "·" }
+-- vim.opt.listchars = { tab = "⇥ ", nbsp = "·" }
+vim.opt.listchars = { tab = "  ", nbsp = "·" }
 -- Diagnostics:
 local signs = {
     { name = "DiagnosticSignError", text = "" },
