@@ -102,6 +102,35 @@ vim.keymap.set("n", "<C-h>", "<CMD>tabprevious<Enter>")
 vim.keymap.set("n", "<C-l>", "<CMD>tabnext<Enter>")
 vim.keymap.set("n", "<C-w>t", "<CMD>tab split<Enter>")
 vim.keymap.set("n", "<C-w><C-t>", "<CMD>tab split<Enter>")
+-- Snippets:
+vim.keymap.set("i", "<Tab>", function ()
+    if vim.snippet.active({ direction = 1 }) then
+        vim.snippet.jump(1)
+    else
+        vim.snippet.stop()
+    end
+end)
+vim.keymap.set("i", "<S-Tab>", function ()
+    if vim.snippet.active({ direction = -1 }) then
+        vim.snippet.jump(-1)
+    else
+        vim.snippet.stop()
+    end
+end)
+-- vim.keymap.set({ "i", "s" }, "<Tab>", function()
+--     if vim.snippet.active({ direction = 1 }) then
+--         return "<CMD>lua vim.snippet.jump(1)<Enter>"
+--     else
+--         return "<Tab>"
+--     end
+-- end, { expr = true })
+-- vim.keymap.set({ "i", "s" }, "<Tab>", function()
+--     if vim.snippet.active({ direction = -1 }) then
+--         return "<CMD>lua vim.snippet.jump(-1)<Enter>"
+--     else
+--         return "<Tab>"
+--     end
+-- end, { expr = true })
 -- Misc:
 vim.keymap.set("n", "<leader>w", vim.cmd.w, { desc = "Write" })
 vim.keymap.set("n", "<leader>q", vim.cmd.q, { desc = "Close Window" })
