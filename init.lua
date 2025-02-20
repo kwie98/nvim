@@ -61,6 +61,7 @@ vim.o.cursorline = true
 vim.o.splitbelow = true
 vim.o.splitright = true
 vim.o.scrolloff = 4
+vim.o.sidescrolloff = 4 -- useful because of clipping scroll bar
 -- vim.o.spell = true
 vim.o.spellfile = vim.fn.stdpath("data") .. "/spell.en.utf-8.add"
 -- vim.o.sidescrolloff = 8
