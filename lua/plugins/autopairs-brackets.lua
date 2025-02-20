@@ -15,9 +15,17 @@ return {
 
         autopairs.add_rule(Rule("%", "%"):with_pair(cond.before_text("{")))
         autopairs.add_rule(Rule(" ", " ")
-            :with_pair(function(opts)
+            -- :with_pair(function(opts)
+            --     local pair = opts.line:sub(opts.col - 1, opts.col)
+            --     return vim.tbl_contains({ "()", "{}", "%%" }, pair)
+            -- end)
+            :with_pair(cond.done())
+            :replace_endpair(function(opts)
                 local pair = opts.line:sub(opts.col - 1, opts.col)
-                return vim.tbl_contains({ "()", "{}", "%%" }, pair)
+                if vim.tbl_contains({ "()", "{}", "%%" }, pair) then
+                    return " " -- it return space here
+                end
+                return "" -- return empty
             end)
             :with_move(cond.none())
             :with_cr(cond.none())
