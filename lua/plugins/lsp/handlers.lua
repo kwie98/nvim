@@ -19,6 +19,9 @@ M.on_attach = function(_, _) -- client, bufnr
     vim.keymap.set("n", "gK", vim.lsp.buf.signature_help, { buffer = true, desc = "Signature Help" })
     vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, { buffer = true, desc = "Signature Help" })
     vim.keymap.set("n", "gt", telescope.lsp_type_definitions, { buffer = true, desc = "Goto Type Definition" })
+    -- Meta:
+    vim.keymap.set("n", "<Leader>ml", "<CMD>LspInfo<Enter>", { buffer = true, desc = "LSP Info" })
+    vim.keymap.set("n", "<Leader>lR", vim.cmd.LspRestart, { buffer = true, desc = "Restart LSP" })
 
     local filter_f_symbols = { symbols = { "function", "method", "class" } }
     vim.keymap.set(
