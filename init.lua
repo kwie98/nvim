@@ -79,7 +79,7 @@ vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
 vim.keymap.set(
     "n",
     "<Leader>lh",
-    function() vim.diagnostic.config({ virtual_text = not vim.diagnostic.config()["virtual_text"] }) end,
+    function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end,
     { desc = "Toggle Diagnostics" }
 )
 -- Move text:
