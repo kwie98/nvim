@@ -1,7 +1,4 @@
 vim.loader.enable()
--- https://github.com/neovim/neovim/issues/31675
--- https://github.com/neovim/neovim/pull/31676
--- vim.hl = vim.highlight
 
 -- OPTIONS --
 vim.o.termguicolors = true -- otherwise xcode colorscheme is bwoken
