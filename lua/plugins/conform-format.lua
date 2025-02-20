@@ -21,6 +21,7 @@ return {
             formatters_by_ft = {
                 javascript = { "prettier" },
                 typescript = { "prettier" },
+                typescriptreact = { "prettier" },
 
                 sh = { "shellharden", "shfmt" },
                 css = { "prettier", "rustywind_css" },
@@ -36,11 +37,11 @@ return {
         })
 
         vim.keymap.set("n", "=", function()
-            local success = conform.format({ lsp_fallback = true })
+            local success = conform.format()
             if not success then vim.fn.feedkeys("=", "n") end
         end, { desc = "Format" })
         vim.keymap.set("x", "=", function()
-            local success = conform.format({ lsp_fallback = true })
+            local success = conform.format()
             if not success then vim.fn.feedkeys("=", "n") end
         end, { desc = "Format Range" })
         vim.keymap.set("n", "<Leader>mf", "<CMD>ConformInfo<Enter>", { desc = "Formatter Info" })
