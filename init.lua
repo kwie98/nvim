@@ -6,6 +6,9 @@ vim.o.title = true
 vim.o.background = "light"
 vim.o.concealcursor = "n"
 vim.o.titlestring = "%{substitute(getcwd(), $HOME, '~', '')}"
+-- More context during matching diff hunks:
+vim.opt.diffopt = vim.opt.diffopt + "linematch:60"
+vim.opt.fillchars:append({ diff = "—" })
 -- Status columns and bars around the window:
 vim.o.number = true
 vim.o.relativenumber = true
