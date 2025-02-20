@@ -4,6 +4,7 @@ return {
         "nvim-treesitter/nvim-treesitter",
         "nvim-treesitter/nvim-treesitter-textobjects",
     },
+    enabled = true,
     event = "VeryLazy",
 
     config = function()
@@ -11,16 +12,16 @@ return {
 
         surround.setup({
             keymaps = {
-                normal = "gs",
-                normal_cur = "gss",
-                visual = "gs",
+                normal = "s",
+                normal_cur = "ss",
+                visual = "s",
             },
             aliases = {
-                a = false,
-                b = false,
-                B = false,
-                r = false,
-                s = { "}", "]", ")", ">" },
+                ["a"] = "a",
+                ["b"] = "b",
+                ["B"] = "B",
+                ["r"] = "r",
+                ["s"] = { "}", "]", ")", ">" },
             },
             surrounds = {
                 ["i"] = {
@@ -31,7 +32,7 @@ return {
                         target = "^(%_?)().-(%_?)()$",
                     },
                 },
-                ["b"] = {
+                ["*"] = {
                     add = { "**", "**" },
                     find = "%*%*.-%*%*",
                     delete = "^(%*%*?)().-(%*%*?)()$",
@@ -39,6 +40,7 @@ return {
                         target = "^(%*%*?)().-(%*%*?)()$",
                     },
                 },
+                invalid_key_behavior = false,
             },
         })
     end,
