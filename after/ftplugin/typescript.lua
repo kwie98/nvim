@@ -1,4 +1,11 @@
 vim.bo.commentstring = "// %s"
+require("nvim-surround").buffer_setup({
+    surrounds = {
+        ["p"] = {
+            add = { "console.log(", ")" },
+        },
+    },
+})
 -- local function get_compiled_file()
 --     -- TODO: read SRC and DIST from tsconfig.json
 --     local SRC = "src"
