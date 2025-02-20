@@ -101,6 +101,10 @@ return {
         setup_lsp("gopls")
         setup_lsp("biome")
         setup_lsp("ts_ls")
+        setup_lsp("ruff")
+        setup_lsp("taplo")
+        setup_lsp("yamlls")
+        setup_lsp("bashls")
 
         -- rt.setup({
         --     tools = {
