@@ -46,14 +46,6 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
     command = "set formatoptions-=ro",
 })
 
-vim.api.nvim_create_autocmd("BufEnter", {
-    group = augroup("help_vsplit"),
-    callback = function()
-        if vim.bo.ft == "help" then vim.cmd("vertical resize 80") end
-        if vim.bo.ft == "man" then vim.cmd("vertical resize 100") end
-    end,
-})
-
 vim.api.nvim_create_autocmd("WinEnter", {
     group = augroup("checktime"),
     callback = function() vim.cmd.checktime() end,
