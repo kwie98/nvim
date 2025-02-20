@@ -134,7 +134,10 @@ return {
             table.insert(dap.configurations.python, python_config(file .. " [args ...]", file, args_input))
         end
         for file in vim.fn.system([[rg -l 'FastAPI\(.*\)']]):gmatch("[^\r\n]+") do
-            table.insert(dap.configurations.python, python_config("fastapi run " .. file, "${env:VIRTUAL_ENV}/bin/fastapi", {"run", file}))
+            table.insert(
+                dap.configurations.python,
+                python_config("fastapi run " .. file, "${env:VIRTUAL_ENV}/bin/fastapi", { "run", file })
+            )
         end
 
         -- Set up UI:
