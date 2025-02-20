@@ -43,7 +43,10 @@ return {
             print("stop debugging")
             if close then
                 dapui.close()
-                if dapui_tabpage ~= nil then vim.cmd("tabclose " .. dapui_tabpage) end
+                if dapui_tabpage ~= nil then
+                    vim.cmd("tabclose " .. dapui_tabpage)
+                    dapui_tabpage = nil
+                end
             end
             for _, binds in pairs(override_binds) do
                 local original_rhs = vim.fn.maparg(binds.override[2], binds.override[1])
