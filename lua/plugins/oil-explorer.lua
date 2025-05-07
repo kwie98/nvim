@@ -37,6 +37,9 @@ return {
             preview_win = {
                 preview_method = "load", -- for dcmdump (ftplugin)
             },
+            lsp_file_methods = {
+                timeout_ms = 5000,
+            },
         })
 
         if vim.fn.argc(-1) == 0 then require("oil").open() end
