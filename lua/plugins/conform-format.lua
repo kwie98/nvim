@@ -10,15 +10,20 @@ return {
                 javascript = { "prettier" },
                 typescript = { "prettier" },
                 typescriptreact = { "prettier" },
+                json = { "prettier" },
+                jsonc = { "prettier" },
                 css = { "prettier" },
 
                 sh = { "shellharden", "shfmt" },
-                lua = { "stylua" },
-                markdown = { "prettier", "injected" },
-                nix = { "nixfmt" },
-                python = { "ruff_format" },
-                yaml = { "prettier" },
                 zsh = { "shellharden", "shfmt" },
+
+                lua = { "stylua" },
+                python = { "ruff_format" },
+                rust = { "rustfmt" },
+
+                markdown = { "prettier", "injected" },
+                yaml = { "prettier" },
+                -- nix = { "nixfmt" },
             },
         })
 
