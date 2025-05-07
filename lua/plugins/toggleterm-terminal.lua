@@ -12,7 +12,7 @@ return {
         toggleterm.setup({
             size = function(term)
                 if term.direction == "horizontal" then
-                    return 10
+                    return 20
                 elseif term.direction == "vertical" then
                     return vim.o.columns * 0.5
                 end
@@ -24,7 +24,6 @@ return {
             insert_mappings = false,
             terminal_mappings = false,
             persist_size = true,
-            direction = "horizontal",
             close_on_exit = true,
             auto_scroll = false,
             persist_mode = false,
@@ -33,12 +32,12 @@ return {
         local terms = {
             u = terminal.Terminal:new({
                 cmd = vim.opt.shell:get(),
-                direction = "vertical",
+                direction = "horizontal",
                 count = 1,
             }),
             i = terminal.Terminal:new({
                 cmd = vim.opt.shell:get(),
-                direction = "vertical",
+                direction = "horizontal",
                 count = 2,
             }),
             o = terminal.Terminal:new({
