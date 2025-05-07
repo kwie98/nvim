@@ -4,29 +4,15 @@ return {
 
     config = function()
         local conform = require("conform")
-        conform.formatters.rustywind_css = {
-            command = "rustywind",
-            args = { "--custom-regex", [[@apply ([_a-zA\.-Z0-9\-:\[\] ]+);]], "--stdin" },
-        }
-        conform.formatters.rustywind_htmldjango = {
-            command = "rustywind",
-            args = {
-                "--custom-regex",
-                "\\b(?:class(?:Name)*\\s*=\\s*[\"'])([{}_a-zA-Z0-9\\.\\s\\-:\\[\\]/]+)[\"']",
-                "--stdin",
-            },
-        }
 
         conform.setup({
             formatters_by_ft = {
                 javascript = { "prettier" },
                 typescript = { "prettier" },
                 typescriptreact = { "prettier" },
+                css = { "prettier" },
 
                 sh = { "shellharden", "shfmt" },
-                css = { "prettier", "rustywind_css" },
-                html = { "prettier", "rustywind" },
-                htmldjango = { "djlint", "rustywind_htmldjango" },
                 lua = { "stylua" },
                 markdown = { "prettier", "injected" },
                 nix = { "nixfmt" },
