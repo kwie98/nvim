@@ -5,7 +5,7 @@ return {
 
     config = function()
         require("hlargs").setup({
-            excluded_filetypes = { "TelescopePrompt", "TelescopeResults", "harpoon" },
+            excluded_filetypes = { "TelescopePrompt", "TelescopeResults" },
             extras = { named_parameters = true },
         })
     end,
