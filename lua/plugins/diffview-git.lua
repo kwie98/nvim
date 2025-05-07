@@ -6,10 +6,10 @@ return {
         local diffview = require("diffview")
         diffview.setup({
             enhanced_diff_hl = true,
-            hooks = {
-                -- view_opened = function(view) print(vim.inspect(view)) end
-                diff_buf_read = function() vim.keymap.set("n", "<Leader>c", diffview.close, { buffer = true }) end,
-            },
+            -- hooks = {
+            --     -- view_opened = function(view) print(vim.inspect(view)) end
+            --     diff_buf_read = function() vim.keymap.set("n", "<Leader>c", diffview.close, { buffer = true }) end,
+            -- },
         })
 
         vim.keymap.set("n", "<Leader>gs", diffview.open, { desc = "Status" })

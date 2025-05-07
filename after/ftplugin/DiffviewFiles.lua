@@ -1,1 +1,1 @@
-vim.keymap.set("n", "<Leader>c", require("diffview").close, { buffer = true })
+-- vim.keymap.set("n", "<Leader>c", require("diffview").close, { buffer = true })
