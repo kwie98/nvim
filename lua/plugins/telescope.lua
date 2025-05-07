@@ -154,13 +154,6 @@ return {
             extensions = {
                 live_grep_args = {
                     disable_coordinates = true,
-                    mappings = {
-                        i = {
-                            ["<Right>"] = require("telescope-live-grep-args.actions").quote_prompt({
-                                postfix = " --iglob ",
-                            }),
-                        },
-                    },
                 },
                 advanced_git_search = {
                     diff_plugin = "diffview",
