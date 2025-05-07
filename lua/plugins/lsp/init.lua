@@ -89,11 +89,8 @@ return {
             lspconfig[server].setup(lsp_conf)
         end
 
-        -- Set up Mason's LSPs:
-        mason_lspconfig.setup()
-        mason_lspconfig.setup_handlers({ setup_lsp })
+        mason_lspconfig.setup({ automatic_enable = false })
 
-        -- Set up other LSPs:
         setup_lsp("hls")
         setup_lsp("clangd")
         setup_lsp("lua_ls")
@@ -117,5 +114,12 @@ return {
         --         on_attach = function(client, bufnr) handlers.on_attach(client, bufnr) end,
         --     },
         -- })
+        setup_lsp("cssls")
+        setup_lsp("basedpyright")
+        setup_lsp("dockerls")
+        setup_lsp("emmet_language_server")
+        setup_lsp("html")
+        setup_lsp("jsonls")
+        setup_lsp("markdown_oxide")
     end,
 }
