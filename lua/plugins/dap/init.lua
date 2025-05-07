@@ -153,7 +153,7 @@ return {
                 toggle = "t",
                 -- add = { "a", "i", "o", "O" },
             },
-            expand_lines = true,
+            expand_lines = false,
             layouts = {
                 {
                     elements = {
