@@ -81,7 +81,7 @@ return {
             {
                 condition = function(self)
                     self.clients = {}
-                    for _, client in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
+                    for _, client in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
                         self.clients[#self.clients + 1] = client.name
                     end
                     self.linters = require("lint").linters_by_ft[vim.bo.filetype] or {}
