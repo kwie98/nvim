@@ -41,7 +41,6 @@ return {
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
         -- "folke/neodev.nvim",
-        "simrat39/rust-tools.nvim",
         -- "barreiroleo/ltex_extra.nvim", -- in ltex config
         "b0o/SchemaStore.nvim", -- in jsonls config
         "hrsh7th/cmp-nvim-lsp",
@@ -105,6 +104,7 @@ return {
         setup_lsp("taplo")
         setup_lsp("yamlls")
         setup_lsp("bashls")
+        setup_lsp("rust_analyzer")
 
         -- rt.setup({
         --     tools = {
