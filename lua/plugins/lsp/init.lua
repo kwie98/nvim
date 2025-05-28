@@ -53,5 +53,7 @@ return {
         setup_lsp("html")
         setup_lsp("jsonls")
         setup_lsp("markdown_oxide")
+        setup_lsp("taplo")
+        setup_lsp("nushell")
     end,
 }
