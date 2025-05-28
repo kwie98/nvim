@@ -2,10 +2,10 @@ vim.loader.enable()
 
 -- OPTIONS --
 vim.o.termguicolors = true -- otherwise xcode colorscheme is bwoken
-vim.o.title = true
 vim.o.background = "light"
 vim.o.concealcursor = "n"
-vim.o.titlestring = "%{substitute(getcwd(), $HOME, '~', '')}"
+vim.o.title = true
+vim.o.titlestring = "nvim %{substitute(getcwd(), $HOME, '~', '')}"
 -- More context during matching diff hunks:
 vim.opt.diffopt = vim.opt.diffopt + "linematch:60"
 vim.opt.fillchars:append({ diff = "—" })
