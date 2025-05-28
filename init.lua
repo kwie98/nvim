@@ -119,20 +119,6 @@ vim.keymap.set("i", "<S-Tab>", function()
         vim.snippet.stop()
     end
 end)
--- vim.keymap.set({ "i", "s" }, "<Tab>", function()
---     if vim.snippet.active({ direction = 1 }) then
---         return "<CMD>lua vim.snippet.jump(1)<Enter>"
---     else
---         return "<Tab>"
---     end
--- end, { expr = true })
--- vim.keymap.set({ "i", "s" }, "<Tab>", function()
---     if vim.snippet.active({ direction = -1 }) then
---         return "<CMD>lua vim.snippet.jump(-1)<Enter>"
---     else
---         return "<Tab>"
---     end
--- end, { expr = true })
 -- Misc:
 vim.keymap.set("n", "<leader>w", vim.cmd.w, { desc = "Write" })
 vim.keymap.set("n", "<leader>q", vim.cmd.q, { desc = "Close Window" })
@@ -150,9 +136,6 @@ vim.keymap.set("n", "H", "zH")
 vim.keymap.set("n", "L", "zL")
 
 vim.cmd.colorscheme("tokyonight-day")
-
--- vim.keymap.set("n", "<Leader><Enter>", "<CMD>colorscheme github_smol<Enter>")
--- vim.cmd.colorscheme("github_smol")
 
 -- USER COMMANDS --
 -- Redirect command output to buffer:
