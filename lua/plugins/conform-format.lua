@@ -23,6 +23,7 @@ return {
 
                 markdown = { "prettier", "injected" },
                 yaml = { "prettier" },
+                toml = { "taplo" },
                 -- nix = { "nixfmt" },
             },
         })
