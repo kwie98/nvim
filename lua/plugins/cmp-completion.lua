@@ -78,7 +78,14 @@ return {
                 ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
             },
             sources = cmp.config.sources({
-                { name = "nvim_lsp" },
+                {
+                    name = "nvim_lsp",
+                    option = {
+                        markdown_oxide = {
+                            keyword_pattern = [[\(\k\| \|\/\|#\)\+]],
+                        },
+                    },
+                },
                 { name = "luasnip" },
                 { name = "path", option = { get_cwd = function() return vim.fn.getcwd() end } },
             }, {
