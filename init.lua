@@ -72,8 +72,8 @@ vim.o.clipboard = "unnamedplus"
 vim.g.mapleader = " "
 -- Diagnostics:
 vim.keymap.set("n", "<Leader>k", vim.diagnostic.open_float)
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
+vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1 }) end)
+vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1 }) end)
 vim.keymap.set(
     "n",
     "<Leader>lh",
