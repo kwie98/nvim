@@ -10,13 +10,14 @@ return {
                 javascript = { "prettier" },
                 typescript = { "prettier" },
                 typescriptreact = { "prettier" },
-                json = { "prettier" },
-                jsonc = { "prettier" },
+                json = { "biome" },
+                jsonc = { "biome" },
                 css = { "prettier" },
 
                 sh = { "shellharden", "shfmt" },
                 zsh = { "shellharden", "shfmt" },
 
+                go = { lsp_format = "prefer" },
                 lua = { "stylua" },
                 python = { "ruff_format" },
                 rust = { "rustfmt" },
