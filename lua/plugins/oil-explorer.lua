@@ -41,7 +41,5 @@ return {
                 timeout_ms = 5000,
             },
         })
-
-        if vim.fn.argc(-1) == 0 then require("oil").open() end
     end,
 }
