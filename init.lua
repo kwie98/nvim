@@ -135,7 +135,7 @@ vim.keymap.set("n", ">", ">>")
 vim.keymap.set("n", "H", "zH")
 vim.keymap.set("n", "L", "zL")
 
-vim.cmd.colorscheme("tokyonight-day")
+-- vim.cmd.colorscheme("tokyonight-day")
 
 -- USER COMMANDS --
 -- Redirect command output to buffer:
