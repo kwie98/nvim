@@ -1,6 +1,6 @@
 return {
     "stevearc/oil.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    -- dependencies = { "nvim-tree/nvim-web-devicons" },
     -- keys = { { "-", mode = "n", desc = "Open Explorer" } },
 
     config = function()
@@ -10,7 +10,7 @@ return {
 
         oil.setup({
             default_file_explorer = true,
-            columns = { "permissions", "mtime", "size", "icon" },
+            -- columns = { "permissions", "mtime", "size" },
             delete_to_trash = true,
             cleanup_delay_ms = 0,
             keymaps = {
