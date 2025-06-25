@@ -117,7 +117,7 @@ return {
                 cwd = "${workspaceFolder}",
                 console = "integratedTerminal",
                 justMyCode = false,
-                python = "python",
+                python = ".venv/bin/python", -- for uv
             }
         end
         dap.adapters.python = {
