@@ -31,10 +31,10 @@ return {
             { "<Leader>r", group = "Run/Test" },
             { "<Leader>s", group = "Search" },
 
-            { "<Leader>u", hidden = true },
-            { "<Leader>i", hidden = true },
-            { "<Leader>o", hidden = true },
-            { "<Leader>p", hidden = true },
+            -- { "<Leader>u", hidden = true },
+            -- { "<Leader>i", hidden = true },
+            -- { "<Leader>o", hidden = true },
+            -- { "<Leader>p", hidden = true },
         })
     end,
 }
