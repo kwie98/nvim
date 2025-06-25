@@ -8,6 +8,7 @@ return {
         lint.linters_by_ft = {
             bash = { "shellcheck" },
             dockerfile = { "hadolint" },
+            go = { "golangcilint" },
             htmldjango = { "djlint" },
             lua = { "selene" },
             -- markdown = { "markdownlint" },
