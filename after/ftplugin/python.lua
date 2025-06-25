@@ -7,4 +7,9 @@ require("nvim-surround").buffer_setup({
         },
     },
 })
-vim.keymap.set("n", "<Leader>x", "<CMD>!python %<CR>")
+vim.keymap.set("n", "<Leader>x", "<CMD>!uv run python %<CR>", { desc = "Run this file" })
+vim.keymap.set("n", "<Leader>X", function()
+    local f = vim.fn.expand("%")
+    local input = vim.fn.input("uv run python " .. f .. " ")
+    return "<CMD>!uv run python % " .. input .. "<CR>"
+end, { expr = true, desc = "Run this file with args" })
