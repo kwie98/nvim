@@ -3,8 +3,8 @@ return {
     dependencies = {
         "rcarriga/nvim-dap-ui",
         "nvim-neotest/nvim-nio",
-        "nvim-telescope/telescope.nvim",
-        "rcarriga/cmp-dap",
+        -- "nvim-telescope/telescope.nvim",
+        -- "rcarriga/cmp-dap",
     },
     lazy = true,
     module = false, -- don't load dap even if required (e.g., by rust-tools.nvim)
