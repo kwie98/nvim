@@ -105,20 +105,20 @@ vim.keymap.set("n", "<C-l>", "<CMD>tabnext<Enter>")
 vim.keymap.set("n", "<C-w>t", "<CMD>tab split<Enter>")
 vim.keymap.set("n", "<C-w><C-t>", "<CMD>tab split<Enter>")
 -- Snippets:
-vim.keymap.set("i", "<Tab>", function()
-    if vim.snippet.active({ direction = 1 }) then
-        vim.snippet.jump(1)
-    else
-        vim.snippet.stop()
-    end
-end)
-vim.keymap.set("i", "<S-Tab>", function()
-    if vim.snippet.active({ direction = -1 }) then
-        vim.snippet.jump(-1)
-    else
-        vim.snippet.stop()
-    end
-end)
+-- vim.keymap.set("i", "<Tab>", function()
+--     if vim.snippet.active({ direction = 1 }) then
+--         vim.snippet.jump(1)
+--     else
+--         vim.snippet.stop()
+--     end
+-- end)
+-- vim.keymap.set("i", "<S-Tab>", function()
+--     if vim.snippet.active({ direction = -1 }) then
+--         vim.snippet.jump(-1)
+--     else
+--         vim.snippet.stop()
+--     end
+-- end)
 -- Misc:
 vim.keymap.set("n", "<leader>w", vim.cmd.w, { desc = "Write" })
 vim.keymap.set("n", "<leader>q", vim.cmd.q, { desc = "Close Window" })
