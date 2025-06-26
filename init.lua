@@ -135,6 +135,8 @@ vim.keymap.set("n", ">", ">>")
 vim.keymap.set("n", "H", "zH")
 vim.keymap.set("n", "L", "zL")
 
+vim.lsp.enable("lua_ls")
+vim.lsp.enable("basedpyright")
 
 -- USER COMMANDS --
 -- Redirect command output to buffer:
