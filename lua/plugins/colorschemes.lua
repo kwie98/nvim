@@ -1,4 +1,8 @@
 return {
+    {
+        "zenbones-theme/zenbones.nvim",
+        dependencies = { "rktjmp/lush.nvim" },
+    },
     -- {
     --     "echasnovski/mini.colors",
     --     config = function() require("mini.colors").setup() end,

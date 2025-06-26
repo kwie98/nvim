@@ -135,7 +135,6 @@ vim.keymap.set("n", ">", ">>")
 vim.keymap.set("n", "H", "zH")
 vim.keymap.set("n", "L", "zL")
 
--- vim.cmd.colorscheme("tokyonight-day")
 
 -- USER COMMANDS --
 -- Redirect command output to buffer:
@@ -173,6 +172,8 @@ lazy.setup("plugins", {
     -- },
 })
 vim.keymap.set("n", "<Leader>mp", lazy.show, { desc = "Plugins" })
+
+vim.cmd.colorscheme("zenwritten")
 
 -- AUTOCOMMANDS --
 require("kwie.autocommands")
