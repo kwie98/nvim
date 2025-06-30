@@ -23,8 +23,9 @@ return {
                 rust = { "rustfmt" },
 
                 markdown = { "prettier", "injected" },
-                yaml = { "prettier" },
                 toml = { "taplo" },
+                yaml = { "prettier" },
+                xml = { "xmllint" },
                 -- nix = { "nixfmt" },
             },
         })
