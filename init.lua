@@ -135,6 +135,8 @@ vim.keymap.set(
 -- Quickfix:
 vim.keymap.set("n", "]l", "<CMD>cnext<Enter>")
 vim.keymap.set("n", "[l", "<CMD>cprev<Enter>")
+-- LSP:
+vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, { desc = "vim.lsp.buf.type_definition()" })
 
 vim.lsp.enable("lua_ls")
 vim.lsp.enable("basedpyright")
