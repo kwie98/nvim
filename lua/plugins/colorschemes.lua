@@ -2,6 +2,12 @@ return {
     {
         "zenbones-theme/zenbones.nvim",
         dependencies = { "rktjmp/lush.nvim" },
+        priority = 100,
+        init = function() vim.g.zenbones_italic_strings = false end,
+        config = function()
+            vim.cmd.colorscheme("zenbones")
+            -- vim.api.nvim_set_hl(0, "FzfLuaFzfMarker", { fg="#00ff00", bg = "#ff0000" })
+        end,
     },
     -- {
     --     "echasnovski/mini.colors",

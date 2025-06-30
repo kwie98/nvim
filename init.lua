@@ -223,7 +223,5 @@ lazy.setup("plugins", {
 })
 vim.keymap.set("n", "<Leader>mp", lazy.show, { desc = "Plugins" })
 
-vim.cmd.colorscheme("zenwritten")
-
 -- AUTOCOMMANDS --
 require("kwie.autocommands")
