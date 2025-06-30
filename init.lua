@@ -70,16 +70,6 @@ vim.o.clipboard = "unnamedplus"
 
 -- KEYMAPS --
 vim.g.mapleader = " "
--- Diagnostics:
-vim.keymap.set("n", "<Leader>k", vim.diagnostic.open_float)
-vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1 }) end)
-vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1 }) end)
-vim.keymap.set(
-    "n",
-    "<Leader>lh",
-    function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end,
-    { desc = "Toggle Diagnostics" }
-)
 -- Move text:
 vim.keymap.set("n", "<A-j>", "<Esc>:m .+1<CR>==")
 vim.keymap.set("n", "<A-k>", "<Esc>:m .-2<CR>==")
@@ -96,9 +86,6 @@ vim.keymap.set("n", "k", function()
     if vim.v.count == 0 then return "gk" end
     return "k"
 end, { expr = true })
--- Quickfix:
-vim.keymap.set("n", "]l", "<CMD>cnext<Enter>")
-vim.keymap.set("n", "[l", "<CMD>cprev<Enter>")
 -- Tabs:
 vim.keymap.set("n", "<C-h>", "<CMD>tabprevious<Enter>")
 vim.keymap.set("n", "<C-l>", "<CMD>tabnext<Enter>")
@@ -134,6 +121,19 @@ vim.keymap.set("n", "<", "<<")
 vim.keymap.set("n", ">", ">>")
 vim.keymap.set("n", "H", "zH")
 vim.keymap.set("n", "L", "zL")
+-- Diagnostics:
+vim.keymap.set("n", "<Leader>k", vim.diagnostic.open_float)
+vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1 }) end)
+vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1 }) end)
+vim.keymap.set(
+    "n",
+    "<Leader>lh",
+    function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end,
+    { desc = "Toggle Diagnostics" }
+)
+-- Quickfix:
+vim.keymap.set("n", "]l", "<CMD>cnext<Enter>")
+vim.keymap.set("n", "[l", "<CMD>cprev<Enter>")
 
 vim.lsp.enable("lua_ls")
 vim.lsp.enable("basedpyright")
