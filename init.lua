@@ -179,13 +179,28 @@ vim.lsp.config("jsonls", {
         config.settings.json.schemas = require("schemastore").json.schemas()
     end,
 })
+
+-- vim.lsp.config("basedpyright", {
+--     settings = {
+--         basedpyright = {
+--             analysis = {
+--                 -- trying to make imports of unused pip packages work, no success:
+--                 diagnosticMode = "workspace",
+--                 autoSearchPaths = true,
+--                 useLibraryCodeForTypes = true,
+--             }
+--         }
+--     }
+-- })
 -- vim.lsp.enable("lemminx")
 vim.lsp.enable("lua_ls")
 vim.lsp.enable("basedpyright")
+vim.lsp.enable("ruff")
 vim.lsp.enable("jsonls")
 vim.lsp.enable("yamlls")
 -- vim.lsp.enable("emmet_language_server")
 vim.lsp.enable("emmet_ls")
+vim.lsp.enable("taplo")
 
 -- USER COMMANDS --
 -- Redirect command output to buffer:
