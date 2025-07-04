@@ -4,8 +4,8 @@ return {
         "nvim-treesitter/nvim-treesitter-textobjects",
     },
     build = ":TSUpdate",
-    event = "VeryLazy",
-    enabled = true,
+    -- event = "VeryLazy",
+    -- enabled = true,
 
     config = function()
         local configs = require("nvim-treesitter.configs")
@@ -88,14 +88,18 @@ return {
             auto_install = true,
             highlight = {
                 enable = true,
-                disable = function(_lang, buf)
-                    local max_filesize = 1024 * 1024 -- 1 MB
-                    local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-                    if ok and stats and stats.size > max_filesize then return true end
-                end,
+                -- disable = function(_lang, buf)
+                --     local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+                --     if ok and stats and stats.size > require("kwie.util").BIG_FILESIZE then return true end
+                -- end,
             },
             indent = {
-                enable = false, -- slow in huge files
+                enable = true, -- slow in huge files
+                -- disable = function(_lang, buf)
+                --     print("yyyo")
+                --     local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+                --     if ok and stats and stats.size > require("kwie.util").BIG_FILESIZE then return true end
+                -- end,
             },
             incremental_selection = {
                 enable = true,

@@ -110,3 +110,28 @@ vim.api.nvim_create_autocmd({ "BufWritePost", "LspAttach" }, {
         if check_codelens_support() then vim.lsp.codelens.refresh({ bufnr = 0 }) end
     end,
 })
+
+local ggg = augroup("bigfile_disable_hipatterns")
+vim.api.nvim_create_autocmd("BufReadPre", {
+    group = ggg,
+    callback = function(args)
+        local file = args.file
+        local stat = vim.uv.fs_stat(file)
+        if stat and stat.size > require("kwie.util").BIG_FILESIZE then
+            vim.b.minihipatterns_disable = true
+            vim.cmd("TSBufDisable highlight")
+            vim.cmd("TSBufDisable indent")
+            vim.bo.syntax = "on"
+        end
+    end,
+})
+vim.api.nvim_create_autocmd("BufRead", {
+    group = ggg,
+    callback = function(args)
+        local file = args.file
+        local stat = vim.uv.fs_stat(file)
+        if stat and stat.size > require("kwie.util").BIG_FILESIZE then
+            vim.bo.syntax = "on"
+        end
+    end,
+})
