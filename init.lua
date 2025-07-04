@@ -59,10 +59,11 @@ vim.o.cursorline = true
 vim.o.splitbelow = true
 vim.o.splitright = true
 vim.o.scrolloff = 4
-vim.o.sidescrolloff = 4 -- useful because of clipping scroll bar
+vim.o.smoothscroll = true
+-- vim.o.sidescrolloff = 4 -- useful because of clipping scroll bar
 -- vim.o.spell = true
-vim.o.spellfile = vim.fn.stdpath("data") .. "/spell.en.utf-8.add"
--- vim.o.sidescrolloff = 8
+-- vim.o.spellfile = vim.fn.stdpath("data") .. "/spell.en.utf-8.add"
+vim.o.mousescroll = "ver:1,hor:3"
 vim.o.swapfile = false
 vim.o.undofile = true
 vim.o.clipboard = "unnamedplus"
@@ -78,14 +79,14 @@ vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv")
 -- Paste:
 vim.keymap.set({ "i", "c" }, "<C-v>", "<C-r><C-o>+")
 -- j/k move in wrapped lines, but not when jumping multiple lines:
-vim.keymap.set("n", "j", function()
-    if vim.v.count == 0 then return "gj" end
-    return "j"
-end, { expr = true })
-vim.keymap.set("n", "k", function()
-    if vim.v.count == 0 then return "gk" end
-    return "k"
-end, { expr = true })
+-- vim.keymap.set("n", "j", function()
+--     if vim.v.count == 0 then return "gj" end
+--     return "j"
+-- end, { expr = true })
+-- vim.keymap.set("n", "k", function()
+--     if vim.v.count == 0 then return "gk" end
+--     return "k"
+-- end, { expr = true })
 -- Tabs:
 vim.keymap.set("n", "<C-h>", "<CMD>tabprevious<Enter>")
 vim.keymap.set("n", "<C-l>", "<CMD>tabnext<Enter>")
