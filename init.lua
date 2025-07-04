@@ -124,7 +124,7 @@ vim.keymap.set("n", "H", "zH")
 vim.keymap.set("n", "L", "zL")
 vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
 -- Diagnostics:
-vim.keymap.set("n", "<Leader>k", vim.diagnostic.open_float)
+vim.keymap.set("n", "<Leader>k", vim.diagnostic.open_float, { desc = "Show Diagnostics" })
 vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1 }) end)
 vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1 }) end)
 vim.keymap.set(
