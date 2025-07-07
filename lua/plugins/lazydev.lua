@@ -1,8 +1,10 @@
+---@module "lazydev"
+---@type LazySpec
 return {
     "folke/lazydev.nvim",
     ft = "lua", -- only load on lua files
-
-    config = function ()
-        require("lazydev").setup()
-    end
+    ---@type lazydev.Config
+    opts = {
+        library = { "lazy.nvim" },
+    },
 }
