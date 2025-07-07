@@ -3,9 +3,15 @@ return {
         "zenbones-theme/zenbones.nvim",
         dependencies = { "rktjmp/lush.nvim" },
         priority = 100,
-        init = function() vim.g.zenbones_italic_strings = false end,
+        init = function()
+            -- vim.g.zenbones_italic_strings = false
+            -- vim.g.zenwritten_italic_strings = false
+            vim.g.zenbones_lightness = "bright"
+            vim.g.zenwritten_lightness = "bright"
+        end,
         config = function()
-            vim.cmd.colorscheme("zenbones")
+            vim.cmd.colorscheme("zenwritten")
+            vim.api.nvim_set_hl(0, "@none", { nocombine = true }) -- reest italic hl of string in f-string brackets
             -- vim.api.nvim_set_hl(0, "FzfLuaFzfMarker", { fg="#00ff00", bg = "#ff0000" })
         end,
     },
