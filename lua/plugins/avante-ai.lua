@@ -25,7 +25,7 @@ return {
     --             disable_tools = true,
     --             -- api_key_name = "OLLAMA_API_KEY",
     --             extra_headers = {
-    --                 ["Authorization"] = "Bearer sk-4e665db276ea4d588e3ee13658d4da9e"
+    --                 ["Authorization"] = "TODO GENERATE NEW KEY THAT ISNT ON GITHUB"
     --             }
     --         },
     --     },
