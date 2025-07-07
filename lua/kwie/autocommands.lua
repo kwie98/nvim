@@ -111,9 +111,9 @@ vim.api.nvim_create_autocmd({ "BufWritePost", "LspAttach" }, {
     end,
 })
 
-local ggg = augroup("bigfile_disable_hipatterns")
+local bigfile_augroup = augroup("bigfile")
 vim.api.nvim_create_autocmd("BufReadPre", {
-    group = ggg,
+    group = bigfile_augroup,
     callback = function(args)
         local file = args.file
         local stat = vim.uv.fs_stat(file)
@@ -121,12 +121,12 @@ vim.api.nvim_create_autocmd("BufReadPre", {
             vim.b.minihipatterns_disable = true
             vim.cmd("TSBufDisable highlight")
             vim.cmd("TSBufDisable indent")
-            vim.bo.syntax = "on"
+            -- vim.bo.syntax = "on"
         end
     end,
 })
 vim.api.nvim_create_autocmd("BufRead", {
-    group = ggg,
+    group = bigfile_augroup,
     callback = function(args)
         local file = args.file
         local stat = vim.uv.fs_stat(file)
