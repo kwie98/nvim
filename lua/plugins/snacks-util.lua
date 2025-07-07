@@ -3,7 +3,7 @@ return {
     -- ---@type snacks.Config
     -- opts = {
     --     -- quickfile = {},
-    --     words = {},
-    --     -- picker = {},
+    --     -- words = {},
+    --     picker = {},
     -- },
 }
