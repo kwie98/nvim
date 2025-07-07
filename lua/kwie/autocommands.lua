@@ -60,11 +60,11 @@ vim.api.nvim_create_autocmd("VimResized", {
     end,
 })
 
-vim.api.nvim_create_autocmd("User", {
-    group = augroup("telescope_number"),
-    pattern = "TelescopePreviewerLoaded",
-    callback = function() vim.wo.number = true end,
-})
+-- vim.api.nvim_create_autocmd("User", {
+--     group = augroup("telescope_number"),
+--     pattern = "TelescopePreviewerLoaded",
+--     callback = function() vim.wo.number = true end,
+-- })
 
 -- local cursorline_group = augroup("cursorline")
 -- vim.api.nvim_create_autocmd({ "VimEnter", "WinEnter", "BufWinEnter" }, {
@@ -85,17 +85,17 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
--- Update heirline:
-local heirline_group = augroup("heirline")
-vim.api.nvim_create_autocmd({ "BufEnter", "LspAttach", "LspDetach" }, {
-    group = heirline_group,
-    command = "redrawstatus",
-})
-vim.api.nvim_create_autocmd("User", {
-    group = heirline_group,
-    pattern = "GitSignsUpdate",
-    command = "redrawstatus",
-})
+-- -- Update heirline:
+-- local heirline_group = augroup("heirline")
+-- vim.api.nvim_create_autocmd({ "BufEnter", "LspAttach", "LspDetach" }, {
+--     group = heirline_group,
+--     command = "redrawstatus",
+-- })
+-- vim.api.nvim_create_autocmd("User", {
+--     group = heirline_group,
+--     pattern = "GitSignsUpdate",
+--     command = "redrawstatus",
+-- })
 
 local function check_codelens_support()
     local clients = vim.lsp.get_clients({ bufnr = 0 })
