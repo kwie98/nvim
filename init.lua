@@ -14,15 +14,15 @@ vim.o.number = true
 vim.o.relativenumber = true
 vim.o.signcolumn = "yes"
 -- vim.o.colorcolumn = "+1"
-vim.o.laststatus = 3
-vim.o.showtabline = 0
+-- vim.o.laststatus = 3
+-- vim.o.showtabline = 0
 -- Searching:
 vim.o.smartcase = true
 vim.o.ignorecase = true
 -- Completion:
-vim.o.completeopt = "menuone,noinsert,noselect"
-vim.opt.shortmess:append("c")
-vim.opt.shortmess:append("C")
+-- vim.o.completeopt = "menuone,noinsert,noselect"
+-- vim.opt.shortmess:append("c")
+-- vim.opt.shortmess:append("C")
 -- Text wrapping:
 vim.o.wrap = false
 vim.o.linebreak = true
@@ -32,7 +32,7 @@ vim.o.foldmethod = "expr"
 vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.o.foldlevel = 99
 -- Indenting:
-vim.o.tabstop = 4 -- for telescope previewer
+-- vim.o.tabstop = 4 -- for telescope previewer
 vim.o.shiftwidth = 4
 vim.o.expandtab = true
 -- Displaying invisible characters:
