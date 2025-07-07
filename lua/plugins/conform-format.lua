@@ -13,6 +13,7 @@ return {
                 json = { "biome" },
                 jsonc = { "biome" },
                 css = { "prettier" },
+                html = { "prettier" },
 
                 sh = { "shellharden", "shfmt" },
                 zsh = { "shellharden", "shfmt" },
