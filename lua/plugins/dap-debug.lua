@@ -23,7 +23,7 @@ return {
     config = function()
         local dap = require("dap")
         local dapui = require("dapui")
-        local cmp = require("cmp")
+        -- local cmp = require("cmp")
 
         -- Set up bindings that are only active while debugging, and whose original binds can be restored:
         -- WARNING: This probably only works with original binds with non-function rhs?
@@ -93,11 +93,11 @@ return {
         -- vim.keymap.set("n", "<Leader>db", telescope.extensions.dap.list_breakpoints, { desc = "Breakpoints" })
         -- vim.keymap.set("n", "<Leader>df", telescope.extensions.dap.frames, { desc = "Frames" })
 
-        cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
-            sources = {
-                { name = "dap" },
-            },
-        })
+        -- cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+        --     sources = {
+        --         { name = "dap" },
+        --     },
+        -- })
 
         vim.fn.sign_define("DapBreakpoint", {
             text = "",
