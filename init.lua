@@ -179,6 +179,16 @@ vim.lsp.config("jsonls", {
         config.settings.json.schemas = require("schemastore").json.schemas()
     end,
 })
+vim.lsp.config("markdown_oxide", {
+    capabilities = {
+        workspace = {
+            didChangeWatchedFiles = {
+                dynamicRegistration = true,
+            },
+        },
+    },
+})
+vim.lsp.enable("markdown_oxide")
 
 -- vim.lsp.config("basedpyright", {
 --     settings = {
