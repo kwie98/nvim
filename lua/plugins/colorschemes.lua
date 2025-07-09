@@ -10,8 +10,9 @@ return {
             vim.g.zenwritten_lightness = "bright"
         end,
         config = function()
-            vim.cmd.colorscheme("zenwritten")
+            vim.cmd.colorscheme("zenbones")
             vim.api.nvim_set_hl(0, "@none", { nocombine = true }) -- reest italic hl of string in f-string brackets
+            vim.api.nvim_set_hl(0, "@lsp.type.decorator.markdown", { italic = true, bold = true, fg = "#556570" })
             -- vim.api.nvim_set_hl(0, "FzfLuaFzfMarker", { fg="#00ff00", bg = "#ff0000" })
         end,
     },
