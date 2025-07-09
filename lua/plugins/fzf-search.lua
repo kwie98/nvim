@@ -24,7 +24,7 @@ return {
         { "gd", function() fzf().lsp_definitions() end, desc = "Definions" },
         { "grr", function() fzf().lsp_references() end, desc = "References" },
         { "gra", function() fzf().lsp_code_actions() end, desc = "Code actions" },
-        { "grI", function() fzf().lsp_implementations() end, desc = "Implementations" },
+        { "grm", function() fzf().lsp_implementations() end, desc = "Implementations" },
         { "<Leader>gt", foo, desc = "Git Grep" },
     },
 
