@@ -26,10 +26,11 @@ return {
         which_key.add({
             { "<Leader>d", group = "Debug" },
             { "<Leader>g", group = "Git" },
-            { "<Leader>l", group = "LSP" },
             { "<Leader>m", group = "Module Info" },
             { "<Leader>r", group = "Run/Test" },
             { "<Leader>s", group = "Search" },
+            { "gre", group = "Extract" },
+            { "gri", group = "Inline" },
 
             -- { "<Leader>u", hidden = true },
             -- { "<Leader>i", hidden = true },

@@ -26,7 +26,7 @@ return {
         --     gitsigns.toggle_deleted()
         --     gitsigns.toggle_word_diff()
         -- end, { desc = "Toggle Hunks" })
-        vim.keymap.set("n", "<Leader>gb", gitsigns.toggle_current_line_blame, { desc = "Blame" })
+        vim.keymap.set("n", "<Leader>gb", gitsigns.toggle_current_line_blame, { desc = "Toggle Blame" })
 
         gitsigns.setup({
             signcolumn = false, -- Toggle with `:Gitsigns toggle_signs`
