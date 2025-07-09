@@ -129,7 +129,7 @@ vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1 }) end)
 vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1 }) end)
 vim.keymap.set(
     "n",
-    "<Leader>lh",
+    "grh",
     function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end,
     { desc = "Toggle Diagnostics" }
 )
