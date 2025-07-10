@@ -4,8 +4,6 @@ return {
         "nvim-treesitter/nvim-treesitter-textobjects",
     },
     build = ":TSUpdate",
-    -- event = "VeryLazy",
-    -- enabled = true,
 
     config = function()
         local configs = require("nvim-treesitter.configs")

@@ -19,8 +19,6 @@ return {
                 padding = { 1, 1 },
             },
             show_help = false,
-            -- show_keys = false,
-            -- triggers = "auto",
         })
 
         which_key.add({
@@ -31,11 +29,6 @@ return {
             { "<Leader>s", group = "Search" },
             { "gre", group = "Extract" },
             { "gri", group = "Inline" },
-
-            -- { "<Leader>u", hidden = true },
-            -- { "<Leader>i", hidden = true },
-            -- { "<Leader>o", hidden = true },
-            -- { "<Leader>p", hidden = true },
         })
     end,
 }
