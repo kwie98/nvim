@@ -16,7 +16,7 @@ vim.o.relativenumber = true
 vim.o.signcolumn = "yes"
 -- vim.o.colorcolumn = "+1"
 -- vim.o.laststatus = 3
--- vim.o.showtabline = 0
+vim.o.showtabline = 0
 -- Searching:
 vim.o.smartcase = true
 vim.o.ignorecase = true
@@ -84,25 +84,12 @@ vim.keymap.set("n", "<C-l>", "<CMD>tabnext<Enter>")
 vim.keymap.set("n", "<C-w>t", "<CMD>tab split<Enter>")
 vim.keymap.set("n", "<C-w><C-t>", "<CMD>tab split<Enter>")
 -- Snippets:
--- vim.keymap.set("i", "<Tab>", function()
---     if vim.snippet.active({ direction = 1 }) then
---         vim.snippet.jump(1)
---     else
---         vim.snippet.stop()
---     end
--- end)
--- vim.keymap.set("i", "<S-Tab>", function()
---     if vim.snippet.active({ direction = -1 }) then
---         vim.snippet.jump(-1)
---     else
---         vim.snippet.stop()
---     end
--- end)
 -- Misc:
+vim.keymap.set("n", "<leader>cw", vim.cmd.q, { desc = "Close Window" })
+vim.keymap.set("n", "<leader>ct", vim.cmd.tabc, { desc = "Close Tab" })
 -- vim.keymap.set("n", "<leader>w", vim.cmd.w, { desc = "Write" })
--- vim.keymap.set("n", "<leader>q", vim.cmd.q, { desc = "Close Window" })
--- vim.keymap.set("n", "<leader>Q", vim.cmd.tabc, { desc = "Close Tab" })
-vim.keymap.set("n", "<Leader>n", function() vim.cmd(':let @/ = ""') end, { desc = "Toggle Search Highlight" })
+-- vim.keymap.set("n", "<Leader>n", function() vim.cmd(':let @/ = ""') end, { desc = "Toggle Search Highlight" })
+vim.keymap.set("n", "<Leader>n", vim.cmd.noh, { desc = "Toggle Search Highlight" })
 vim.keymap.set("n", "<Leader>j", "<CMD>Inspect<Enter>", { desc = "Inspect" })
 vim.keymap.set("n", "<C-j>", "<C-w>w")
 vim.keymap.set("n", "<C-k>", "<C-w>W")
