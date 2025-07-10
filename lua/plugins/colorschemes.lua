@@ -1,3 +1,11 @@
+---@param name string
+---@param base string
+---@param val table
+local function update_hl(name, base, val)
+    local old = vim.api.nvim_get_hl(0, { name = base })
+    local new = vim.tbl_extend("force", old, val)
+    vim.api.nvim_set_hl(0, name, new)
+end
 return {
     {
         "zenbones-theme/zenbones.nvim",
@@ -13,6 +21,8 @@ return {
             vim.cmd.colorscheme("zenbones")
             vim.api.nvim_set_hl(0, "@none", { nocombine = true }) -- reest italic hl of string in f-string brackets
             vim.api.nvim_set_hl(0, "@lsp.type.decorator.markdown", { italic = true, bold = true, fg = "#556570" })
+            -- vim.api.nvim_set_hl(0, "@property.yaml", { nocombine = true , force=true})
+            update_hl("@property.yaml", "Identifier", { nocombine = true })
             -- vim.api.nvim_set_hl(0, "FzfLuaFzfMarker", { fg="#00ff00", bg = "#ff0000" })
         end,
     },
