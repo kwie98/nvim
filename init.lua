@@ -7,7 +7,8 @@ vim.o.concealcursor = "n"
 vim.o.title = true
 vim.o.titlestring = "nvim %{substitute(getcwd(), $HOME, '~', '')}"
 -- More context during matching diff hunks:
-vim.opt.diffopt = vim.opt.diffopt + "linematch:60"
+vim.opt.diffopt = vim.opt.diffopt + "linematch:60,context:60,algorithm:histogram"
+-- vim.opt.diffopt = vim.opt.diffopt + "linematch:60"
 vim.opt.fillchars:append({ diff = "—" })
 -- Status columns and bars around the window:
 vim.o.number = true
