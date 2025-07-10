@@ -42,18 +42,8 @@ vim.o.list = true
 vim.opt.listchars = { tab = "  ", nbsp = "·" }
 -- Diagnostics:
 vim.diagnostic.config({
-    virtual_text = false,
-    signs = {
-        text = {
-            [vim.diagnostic.severity.ERROR] = "",
-            [vim.diagnostic.severity.WARN] = "",
-            [vim.diagnostic.severity.HINT] = "",
-            [vim.diagnostic.severity.INFO] = "",
-        },
-    },
-    float = {
-        source = true,
-    },
+    float = { source = true },
+    jump = { float = true },
 })
 -- Misc:
 vim.o.cursorline = true
@@ -124,20 +114,13 @@ vim.keymap.set("n", ">", ">>")
 vim.keymap.set("n", "H", "zH")
 vim.keymap.set("n", "L", "zL")
 vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
--- Diagnostics:
+-- LSP/Diagnostics:
 vim.keymap.set("n", "<Leader>k", vim.diagnostic.open_float, { desc = "Show Diagnostics" })
-vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1 }) end)
-vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1 }) end)
-vim.keymap.set(
-    "n",
-    "grh",
-    function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end,
-    { desc = "Toggle Diagnostics" }
-)
--- Quickfix:
-vim.keymap.set("n", "]l", "<CMD>cnext<Enter>")
-vim.keymap.set("n", "[l", "<CMD>cprev<Enter>")
--- LSP:
+vim.keymap.set("n", "grh", function()
+    vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end, { desc = "Toggle Diagnostics" })
+vim.lsp.inlay_hint.enable()
 vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, { desc = "vim.lsp.buf.type_definition()" })
 
 -- vim.lsp.config("emmet_language_server", {
