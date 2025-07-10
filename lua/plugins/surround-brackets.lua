@@ -1,11 +1,9 @@
 return {
     "kylechui/nvim-surround",
-    dependencies = {
-        "nvim-treesitter/nvim-treesitter",
-        "nvim-treesitter/nvim-treesitter-textobjects",
+    -- event = "VeryLazy",
+    keys = {
+        { "s", mode = { "n", "x" } },
     },
-    enabled = true,
-    event = "VeryLazy",
 
     config = function()
         local surround = require("nvim-surround")
