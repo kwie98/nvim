@@ -1,6 +1,6 @@
 return {
     "stevearc/conform.nvim",
-    event = "VeryLazy",
+    keys = { "=", "<Leader>mf" },
 
     config = function()
         local conform = require("conform")
