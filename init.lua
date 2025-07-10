@@ -127,12 +127,6 @@ vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
 vim.keymap.set("n", "<Leader>k", vim.diagnostic.open_float, { desc = "Show Diagnostics" })
 vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1 }) end)
 vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1 }) end)
-vim.keymap.set("n", "grs", function()
-    vim.lsp.buf.code_action({
-        filter = function(x) return x.kind == "source.organizeImports.ruff" end,
-        apply = true,
-    })
-end)
 vim.keymap.set(
     "n",
     "grh",

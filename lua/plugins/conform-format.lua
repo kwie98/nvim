@@ -20,7 +20,7 @@ return {
 
                 go = { lsp_format = "prefer" },
                 lua = { "stylua" },
-                python = { "ruff_format" },
+                python = { "ruff_organize_imports", "ruff_format" },
                 rust = { "rustfmt" },
 
                 markdown = { "prettier", "injected" },
