@@ -222,3 +222,4 @@ vim.keymap.set("n", "<Leader>mp", lazy.show, { desc = "Plugins" })
 
 -- AUTOCOMMANDS --
 require("kwie.autocommands")
+require("kwie.incr").setup()
