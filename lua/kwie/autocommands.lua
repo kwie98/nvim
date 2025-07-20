@@ -111,27 +111,27 @@ vim.api.nvim_create_autocmd({ "BufWritePost", "LspAttach" }, {
     end,
 })
 
-local bigfile_augroup = augroup("bigfile")
-vim.api.nvim_create_autocmd("BufReadPre", {
-    group = bigfile_augroup,
-    callback = function(args)
-        local file = args.file
-        local stat = vim.uv.fs_stat(file)
-        if stat and stat.size > require("kwie.util").BIG_FILESIZE then
-            vim.b.minihipatterns_disable = true
-            vim.cmd("TSBufDisable highlight")
-            vim.cmd("TSBufDisable indent")
-            -- vim.bo.syntax = "on"
-        end
-    end,
-})
-vim.api.nvim_create_autocmd("BufRead", {
-    group = bigfile_augroup,
-    callback = function(args)
-        local file = args.file
-        local stat = vim.uv.fs_stat(file)
-        if stat and stat.size > require("kwie.util").BIG_FILESIZE then
-            vim.bo.syntax = "on"
-        end
-    end,
-})
+-- local bigfile_augroup = augroup("bigfile")
+-- vim.api.nvim_create_autocmd("BufReadPre", {
+--     group = bigfile_augroup,
+--     callback = function(args)
+--         local file = args.file
+--         local stat = vim.uv.fs_stat(file)
+--         if stat and stat.size > require("kwie.util").BIG_FILESIZE then
+--             vim.b.minihipatterns_disable = true
+--             vim.cmd("TSBufDisable highlight")
+--             vim.cmd("TSBufDisable indent")
+--             -- vim.bo.syntax = "on"
+--         end
+--     end,
+-- })
+-- vim.api.nvim_create_autocmd("BufRead", {
+--     group = bigfile_augroup,
+--     callback = function(args)
+--         local file = args.file
+--         local stat = vim.uv.fs_stat(file)
+--         if stat and stat.size > require("kwie.util").BIG_FILESIZE then
+--             vim.bo.syntax = "on"
+--         end
+--     end,
+-- })
