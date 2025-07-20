@@ -15,10 +15,10 @@ return {
     cmd = "FzfLua",
     keys = {
         { "<Leader>b", function() fzf().buffers() end, desc = "Search Buffers" },
-        { "<Leader>f", function() fzf().files() end, desc = "Search Files" },
-        { "<C-p>", function() fzf().files() end, desc = "Search Files" },
+        { "<Leader>f", function() fzf().global() end, desc = "Search Files" },
+        { "<C-p>", function() fzf().global() end, desc = "Search Files" },
         { "<Leader>t", function() fzf().live_grep_native() end, desc = "Live Grep" },
-        { "<Leader>r", function() fzf().oldfiles({ cwd = "%:p:h" }) end, desc = "Old Files" },
+        { "<Leader>r", function() fzf().oldfiles({ cwd = vim.fn.getcwd() }) end, desc = "Old Files" },
         { "<Leader>R", function() fzf().oldfiles() end, desc = "Old Files (All)" },
         { "<F1>", function() fzf().helptags() end, desc = "Help" },
         { "<Leader>gs", function() fzf().git_status() end, desc = "Git Status" },
@@ -28,10 +28,11 @@ return {
         { "gra", function() fzf().lsp_code_actions() end, desc = "Code actions" },
         { "grm", function() fzf().lsp_implementations() end, desc = "Implementations" },
         { "<Leader>gt", foo, desc = "Git Grep" },
+        { "grd", function() fzf().diagnostics_workspace() end, desc = "Workspace Diagnostics" },
     },
 
-    ---@type fzf-lua.Config
-    opts = {
+    config = function()
+        fzf().setup({
         keymap = {
             builtin = {
                 true, -- inherit default binds
@@ -39,5 +40,12 @@ return {
                 ["<C-d>"] = "preview-half-page-down",
             },
         },
-    },
+        actions = {
+            files = {
+                ["enter"] = fzf().actions.file_edit,
+            }
+        }
+    })
+        fzf().register_ui_select()
+    end,
 }
