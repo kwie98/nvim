@@ -52,5 +52,8 @@ return {
             desc = "extract block to file",
         },
     },
+    init = function()
+        vim.keymap.del("n", "gri")
+    end,
     opts = {},
 }
