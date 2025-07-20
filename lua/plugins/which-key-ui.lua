@@ -19,6 +19,9 @@ return {
                 padding = { 1, 1 },
             },
             show_help = false,
+            -- triggers = {
+            --     { "<auto>", mode = "nso" },
+            -- },
         })
 
         which_key.add({

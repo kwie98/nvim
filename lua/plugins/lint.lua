@@ -9,7 +9,7 @@ return {
             bash = { "shellcheck" },
             dockerfile = { "hadolint" },
             go = { "golangcilint" },
-            htmldjango = { "djlint" },
+            -- htmldjango = { "djlint" },
             lua = { "selene" },
             -- markdown = { "markdownlint" },
             zsh = { "zsh" },
