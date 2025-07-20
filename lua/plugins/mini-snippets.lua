@@ -14,7 +14,8 @@ return {
         vim.api.nvim_set_hl(0, "MiniSnippetsUnvisited", { link = "SnippetTabstop" })
         vim.api.nvim_set_hl(0, "MiniSnippetsCurrentReplace", { link = "SnippetTabstop" })
 
-        vim.api.nvim_create_autocmd("TextChanged", {
+        -- vim.api.nvim_create_autocmd("TextChanged", {
+        vim.api.nvim_create_autocmd("InsertLeave", {
             group = require("kwie.util").augroup("stop_snippets"),
             callback = function() snippets.session.stop() end,
         })
