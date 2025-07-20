@@ -2,7 +2,7 @@ return {
     "saghen/blink.cmp",
     dependencies = { "echasnovski/mini.snippets" },
     version = "1.*", -- use a release tag to download pre-built binaries
-    event = "InsertEnter",
+    event = { "InsertEnter", "CmdlineEnter" },
 
     config = function()
         local blink = require("blink.cmp")

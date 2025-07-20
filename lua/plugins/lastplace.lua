@@ -1,6 +1,6 @@
 return {
     "ethanholz/nvim-lastplace",
-    event = "VeryLazy",
+    lazy = false, -- needed on startup (maybe on bufenter?)
 
     config = function()
         local lastplace = require("nvim-lastplace")
