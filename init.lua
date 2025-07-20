@@ -105,9 +105,27 @@ vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
 vim.keymap.set("n", "<Leader>k", vim.diagnostic.open_float, { desc = "Show Diagnostics" })
 vim.keymap.set("n", "grh", function()
     vim.diagnostic.enable(not vim.diagnostic.is_enabled())
-    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+    -- vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end, { desc = "Toggle Diagnostics" })
-vim.lsp.inlay_hint.enable()
+vim.keymap.set(
+    "n",
+    "<Leader><Leader>",
+    function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
+    { desc = "Toggle Inlay Hints" }
+)
+
+-- local toggle_inlay_hint_group = require("kwie.util").augroup("toggle_inlay_hint")
+-- vim.api.nvim_create_autocmd("ModeChanged", {
+--     group = toggle_inlay_hint_group,
+--     pattern = "*:[vV]*",
+--     callback = function() vim.lsp.inlay_hint.enable() end,
+-- })
+-- vim.api.nvim_create_autocmd("ModeChanged", {
+--     group = toggle_inlay_hint_group,
+--     pattern = "[vV]*:*",
+--     callback = function() vim.lsp.inlay_hint.enable(false) end,
+-- })
+
 vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, { desc = "vim.lsp.buf.type_definition()" })
 
 -- vim.lsp.config("emmet_language_server", {
