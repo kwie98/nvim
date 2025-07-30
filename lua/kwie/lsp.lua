@@ -25,7 +25,7 @@
 --     on_attach = function(client, bufnr) require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr) end,
 -- })
 vim.lsp.config("emmet_ls", {
-    filetypes = { "typescriptreact", "xml" },
+    filetypes = { "xml" },
 })
 vim.lsp.config("jsonls", {
     settings = {
@@ -86,7 +86,7 @@ vim.lsp.enable("yamlls")
 --         },
 --     },
 -- })
--- vim.lsp.enable("emmet_ls")
+vim.lsp.enable("emmet_ls")
 vim.lsp.enable("taplo")
 local inlayHints = {
     -- includeInlayParameterNameHints = "all",
