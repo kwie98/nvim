@@ -42,6 +42,7 @@ return {
         },
         actions = {
             files = {
+                true,
                 ["enter"] = fzf().actions.file_edit,
             }
         }
