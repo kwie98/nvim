@@ -28,7 +28,6 @@ return {
             { "<Leader>d", group = "Debug" },
             { "<Leader>g", group = "Git" },
             { "<Leader>m", group = "Module Info" },
-            { "<Leader>r", group = "Run/Test" },
             { "<Leader>s", group = "Search" },
             { "gre", group = "Extract" },
             { "gri", group = "Inline" },
