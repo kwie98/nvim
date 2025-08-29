@@ -24,9 +24,9 @@
 -- vim.lsp.config("*", {
 --     on_attach = function(client, bufnr) require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr) end,
 -- })
-vim.lsp.config("emmet_ls", {
-    filetypes = { "xml" },
-})
+-- vim.lsp.config("emmet_ls", {
+--     filetypes = { "xml" },
+-- })
 vim.lsp.config("jsonls", {
     settings = {
         json = {
@@ -78,15 +78,8 @@ vim.lsp.enable("basedpyright")
 vim.lsp.enable("ruff")
 vim.lsp.enable("jsonls")
 vim.lsp.enable("yamlls")
--- vim.lsp.enable("emmet_language_server")
--- vim.lsp.config("emmet_ls", {
---     settings = {
---         jsx = {
---             enabled = true,
---         },
---     },
--- })
-vim.lsp.enable("emmet_ls")
+vim.lsp.enable("emmet_language_server")
+-- vim.lsp.enable("emmet_ls")
 vim.lsp.enable("taplo")
 local inlayHints = {
     -- includeInlayParameterNameHints = "all",
@@ -113,3 +106,6 @@ vim.lsp.config("tailwindcss", {
     cmd = { "npx", "tailwindcss-language-server", "--stdio" },
 })
 vim.lsp.enable("tailwindcss")
+
+vim.lsp.enable("rust_analyzer")
+vim.lsp.enable("svelte")

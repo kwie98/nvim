@@ -13,6 +13,8 @@ return {
             lua = { "selene" },
             -- markdown = { "markdownlint" },
             zsh = { "zsh" },
+            svelte = { "eslint" },
+            typescript = { "eslint" },
         }
 
         vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {

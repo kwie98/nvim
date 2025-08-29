@@ -17,14 +17,14 @@ local filetypes = {
     -- "c",
     -- "comment", -- performance issues?
     -- "cpp",
-    -- "css",
+    "css",
     -- "diff",
     -- "gitcommit",
     -- "go",
     -- "gomod",
     -- "haskell",
     -- "hjson",
-    -- "html",
+    "html",
     -- "http",
     "javascript",
     "jsx",
@@ -32,9 +32,10 @@ local filetypes = {
     -- "jsonc",
     -- "make",
     -- "query",
-    -- "rust",
+    "rust",
     "typescriptreact",
     "typescript",
+    "svelte",
 }
 
 return {

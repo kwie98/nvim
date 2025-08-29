@@ -10,10 +10,11 @@ return {
                 javascript = { "prettier" },
                 typescript = { "prettier" },
                 typescriptreact = { "prettier" },
-                json = { "biome" },
-                jsonc = { "biome" },
+                json = { "prettier" },
+                jsonc = { "prettier" },
                 css = { "prettier" },
                 html = { "prettier" },
+                svelte = { "prettier" },
 
                 sh = { "shellharden", "shfmt" },
                 zsh = { "shellharden", "shfmt" },
