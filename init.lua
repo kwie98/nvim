@@ -126,7 +126,6 @@ vim.keymap.set(
 --     callback = function() vim.lsp.inlay_hint.enable(false) end,
 -- })
 
-vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, { desc = "vim.lsp.buf.type_definition()" })
 require("kwie.lsp")
 
 -- USER COMMANDS --
