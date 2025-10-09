@@ -13,3 +13,5 @@ vim.keymap.set("n", "<Leader>X", function()
     local input = vim.fn.input("uv run python " .. f .. " ")
     return "<CMD>!uv run python % " .. input .. "<CR>"
 end, { expr = true, desc = "Run this file with args" })
+
+vim.keymap.set("n", "<Leader>i", "<CMD>vertical terminal uv run python -i %<CR>", { desc = "Run this file interactively" })

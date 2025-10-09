@@ -111,6 +111,12 @@ vim.api.nvim_create_autocmd({ "BufWritePost", "LspAttach" }, {
     end,
 })
 
+vim.api.nvim_create_autocmd("TermClose", {
+    callback = function()
+       vim.cmd("close")
+    end
+})
+
 -- local bigfile_augroup = augroup("bigfile")
 -- vim.api.nvim_create_autocmd("BufReadPre", {
 --     group = bigfile_augroup,
