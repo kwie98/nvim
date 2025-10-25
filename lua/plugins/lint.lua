@@ -14,7 +14,7 @@ return {
             -- markdown = { "markdownlint" },
             zsh = { "zsh" },
             svelte = { "eslint" },
-            typescript = { "eslint" },
+            -- typescript = { "eslint" },
         }
 
         vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
