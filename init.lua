@@ -7,9 +7,9 @@ vim.o.concealcursor = "n"
 vim.o.title = true
 vim.o.titlestring = "nvim %{substitute(getcwd(), $HOME, '~', '')}"
 -- More context during matching diff hunks:
-vim.opt.diffopt = vim.opt.diffopt + "linematch:60,context:60,algorithm:histogram"
+-- vim.opt.diffopt = vim.opt.diffopt + "linematch:60,context:60,algorithm:histogram"
+vim.opt.diffopt:append({ linematch = 60, context = 60, algorithm = "histogram" })
 -- vim.opt.diffopt = vim.opt.diffopt + "linematch:60"
-vim.opt.fillchars:append({ diff = "—" })
 -- Status columns and bars around the window:
 vim.o.number = true
 vim.o.relativenumber = true
@@ -29,9 +29,14 @@ vim.o.wrap = false
 vim.o.linebreak = true
 vim.o.breakindent = true
 -- Folding:
-vim.o.foldmethod = "expr"
-vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.o.foldlevel = 99
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "v:lua.vim.lsp.foldexpr()" -- quicker than treesitter for large xml files
+vim.opt.fillchars:append({ diff = "—" })
+-- vim.opt.fillchars:append({ diff = "—", foldinner = "│" }) -- nvim 0.12
+-- vim.o.foldcolumn = "auto:1" -- 0 or 1 column for fold markers; expensive
+-- vim.o.foldminlines = 2 -- no small folds; buggy though
+-- vim.o.foldtext = "" -- just shows first fold line (bad when long line wraps)
 -- Indenting:
 -- vim.o.tabstop = 4 -- for telescope previewer
 vim.o.shiftwidth = 4
@@ -54,21 +59,22 @@ vim.o.smoothscroll = true
 -- vim.o.sidescrolloff = 4 -- useful because of clipping scroll bar
 -- vim.o.spell = true
 -- vim.o.spellfile = vim.fn.stdpath("data") .. "/spell.en.utf-8.add"
-vim.o.mousescroll = "ver:2,hor:6"
+vim.o.mousescroll = "ver:1,hor:3"
 vim.o.swapfile = false
 vim.o.undofile = true
-vim.o.clipboard = "unnamedplus"
+vim.o.clipboard = "unnamed"
 -- vim.o.bg = "dark"
 
 -- KEYMAPS --
 vim.g.mapleader = " "
+vim.keymap.set("n", "-", "zc")
 -- Move text:
 vim.keymap.set("n", "<A-j>", "<Esc>:m .+1<CR>==")
 vim.keymap.set("n", "<A-k>", "<Esc>:m .-2<CR>==")
 vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv")
 -- Paste:
-vim.keymap.set({ "i", "c" }, "<C-v>", "<C-r><C-o>+")
+-- vim.keymap.set({ "i", "c" }, "<C-v>", "<C-r><C-o>+")
 -- j/k move in wrapped lines, but not when jumping multiple lines:
 -- vim.keymap.set("n", "j", function()
 --     if vim.v.count == 0 then return "gj" end
