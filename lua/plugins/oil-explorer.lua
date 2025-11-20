@@ -3,7 +3,7 @@ return {
     "stevearc/oil.nvim",
     -- dependencies = { "nvim-tree/nvim-web-devicons" },
     keys = {
-        { "-", "<CMD>Oil<CR>", desc = "Oil" },
+        { "<BS>", "<CMD>Oil<CR>", desc = "Oil" },
     },
     lazy = false,
 
@@ -16,7 +16,9 @@ return {
             ["<F1>"] = "actions.show_help",
             ["<Tab>"] = "actions.preview",
             ["~"] = false,
-            ["gd"] = { "actions.cd", opts = { scope = "win" } },
+            -- ["~"] = { "actions.cd", opts = { scope = "win" } },
+            ["<BS>"] = { "actions.parent" },
+            ["-"] = false,
         },
         -- keymaps = {
         --     ["g?"] = "actions.show_help",
