@@ -16,6 +16,7 @@ return {
             -- vim.g.zenwritten_italic_strings = false
             vim.g.zenbones_lightness = "bright"
             vim.g.zenwritten_lightness = "bright"
+            vim.g.zenbones_transparent_background = "true"
         end,
         config = function()
             vim.cmd.colorscheme("zenbones")
