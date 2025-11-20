@@ -79,6 +79,7 @@ vim.lsp.enable("ruff")
 vim.lsp.enable("jsonls")
 vim.lsp.enable("yamlls")
 vim.lsp.enable("emmet_language_server")
+vim.lsp.enable("lemminx")
 -- vim.lsp.enable("emmet_ls")
 vim.lsp.enable("taplo")
 local inlayHints = {
