@@ -62,7 +62,7 @@ vim.o.smoothscroll = true
 vim.o.mousescroll = "ver:1,hor:3"
 vim.o.swapfile = false
 vim.o.undofile = true
-vim.o.clipboard = "unnamed"
+vim.o.clipboard = "unnamedplus"
 -- vim.o.bg = "dark"
 
 -- KEYMAPS --
