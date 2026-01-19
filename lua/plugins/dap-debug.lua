@@ -157,13 +157,13 @@ return {
             layouts = {
                 {
                     elements = {
-                        {
-                            id = "scopes",
-                            size = 2 / 6,
-                        },
+                        -- {
+                        --     id = "scopes",
+                        --     size = 2 / 6,
+                        -- },
                         {
                             id = "watches",
-                            size = 2 / 6,
+                            size = 4 / 6,
                         },
                         {
                             id = "stacks",
