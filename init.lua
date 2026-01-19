@@ -67,7 +67,7 @@ vim.o.clipboard = "unnamedplus"
 
 -- KEYMAPS --
 vim.g.mapleader = " "
-vim.keymap.set("n", "-", "zc")
+vim.keymap.set("n", "g-", "zc")
 -- Move text:
 vim.keymap.set("n", "<A-j>", "<Esc>:m .+1<CR>==")
 vim.keymap.set("n", "<A-k>", "<Esc>:m .-2<CR>==")
