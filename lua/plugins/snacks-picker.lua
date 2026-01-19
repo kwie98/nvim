@@ -1,4 +1,5 @@
-local function test_picker()
+local function picker() return require("snacks").picker end
+local function pick_commit()
     -- local function format(item) return { { item.text, "SnacksPickerLabel" } } end
     -- local items = {
     --     { idx = 1, score = 1, text = "foo text", name = "foo name", file = "init.lua" },
@@ -56,22 +57,23 @@ return {
         },
     },
     keys = {
-        { "<Leader>b", function() Snacks.picker.buffers({ current = false }) end, desc = "Search Buffers" },
-        { "<Leader>f", function() Snacks.picker.files() end, desc = "Search Files" },
-        { "<Leader>t", function() Snacks.picker.grep() end, desc = "Live Grep" },
-        { "<Leader>R", function() Snacks.picker.recent() end, desc = "Recent Files" },
-        { "<F1>", function() Snacks.picker.help() end, desc = "Help" },
-        -- { "<Leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
-        { "<C-S-p>", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
-        { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Definions" },
-        { "grr", function() Snacks.picker.lsp_references() end, desc = "References" },
-        { "grm", function() Snacks.picker.lsp_implementations() end, desc = "Implementations" },
-        { "grt", function() Snacks.picker.lsp_type_definitions() end, desc = "Type Definitions" },
-        { "grd", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
-        { "<Leader>s", function() Snacks.picker.lsp_workspace_symbols() end, desc = "Symbols" },
+        { "<Leader>b", function() picker().buffers({ current = false }) end, desc = "Search Buffers" },
+        { "<Leader>f", function() picker().files() end, desc = "Search Files" },
+        { "<Leader>t", function() picker().grep() end, desc = "Live Grep" },
+        { "<Leader>R", function() picker().recent() end, desc = "Recent Files" },
+        { "<Leader>r", function() picker().recent({ filter = { cwd = true } }) end, desc = "Recent Files" },
+        { "<F1>", function() picker().help() end, desc = "Help" },
+        -- { "<Leader>gs", function() picker().git_status() end, desc = "Git Status" },
+        { "<C-S-p>", function() picker().keymaps() end, desc = "Keymaps" },
+        { "gd", function() picker().lsp_definitions() end, desc = "Definions" },
+        { "grr", function() picker().lsp_references() end, desc = "References" },
+        { "grm", function() picker().lsp_implementations() end, desc = "Implementations" },
+        { "grt", function() picker().lsp_type_definitions() end, desc = "Type Definitions" },
+        { "grd", function() picker().diagnostics() end, desc = "Diagnostics" },
+        { "<Leader>s", function() picker().lsp_workspace_symbols() end, desc = "Symbols" },
         -- { "<Leader>gt", foo, desc = "Git Grep" },
-        -- { "grd", function() Snacks.picker.diagnostics_workspace() end, desc = "Workspace Diagnostics" },
+        -- { "grd", function() picker().diagnostics_workspace() end, desc = "Workspace Diagnostics" },
         -- TODO symbols: global vars maybe???
-        { "<Leader>h", test_picker, desc = "test picker" },
+        { "<Leader>h", pick_commit, desc = "Search commits" },
     },
 }
