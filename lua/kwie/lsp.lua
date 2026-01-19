@@ -61,20 +61,21 @@ vim.lsp.config("lua_ls", {
     },
 })
 vim.lsp.enable("lua_ls")
-vim.lsp.config("basedpyright", {
-    settings = {
-        basedpyright = {
-            analysis = {
-                -- Needed even with workspace-diagnostics plugin:
-                diagnosticMode = "workspace",
-                -- Trying to make imports of unused pip packages work, no success:
-                -- autoSearchPaths = true,
-                -- useLibraryCodeForTypes = true,
-            },
-        },
-    },
-})
-vim.lsp.enable("basedpyright")
+-- vim.lsp.config("basedpyright", {
+--     settings = {
+--         basedpyright = {
+--             analysis = {
+--                 -- Needed even with workspace-diagnostics plugin:
+--                 diagnosticMode = "workspace",
+--                 -- Trying to make imports of unused pip packages work, no success:
+--                 -- autoSearchPaths = true,
+--                 -- useLibraryCodeForTypes = true,
+--             },
+--         },
+--     },
+-- })
+-- vim.lsp.enable("basedpyright")
+vim.lsp.enable("ty")
 vim.lsp.enable("ruff")
 vim.lsp.enable("jsonls")
 vim.lsp.enable("yamlls")
