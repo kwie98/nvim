@@ -33,7 +33,7 @@ local filetypes = {
     -- "make",
     -- "query",
     "rust",
-    "typescriptreact",
+    -- "typescriptreact",
     "typescript",
     "svelte",
 }
