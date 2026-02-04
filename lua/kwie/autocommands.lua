@@ -18,7 +18,10 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- })
 
 vim.filetype.add({
-    extension = { dcm = "dcm" },
+    extension = {
+        dcm = "dcm",
+        parquet = "parquet",
+    },
 })
 
 vim.cmd([[
