@@ -93,7 +93,7 @@ vim.keymap.set("n", "<C-w><C-t>", "<CMD>tab split<Enter>")
 -- Misc:
 vim.keymap.set("n", "<leader>cw", vim.cmd.q, { desc = "Close Window" })
 vim.keymap.set("n", "<leader>ct", vim.cmd.tabc, { desc = "Close Tab" })
--- vim.keymap.set("n", "<leader>w", vim.cmd.w, { desc = "Write" })
+vim.keymap.set("n", "<leader>w", vim.cmd.write, { desc = "Write" })
 -- vim.keymap.set("n", "<Leader>n", function() vim.cmd(':let @/ = ""') end, { desc = "Toggle Search Highlight" })
 vim.keymap.set("n", "<Leader>n", vim.cmd.noh, { desc = "Toggle Search Highlight" })
 vim.keymap.set("n", "<Leader>j", "<CMD>Inspect<Enter>", { desc = "Inspect" })
