@@ -16,4 +16,12 @@ M.words = function(s)
     return words
 end
 
+-- ---Run given `command` with Overseer and show the output
+-- ---@param command string
+-- M.run = function(command)
+--     local overseer = require("overseer")
+--     vim.cmd("OverseerShell " .. command)
+--     overseer.open({ enter = false })
+-- end
+
 return M
