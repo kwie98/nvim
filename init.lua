@@ -2,7 +2,7 @@ vim.loader.enable()
 
 -- OPTIONS --
 vim.o.termguicolors = true -- otherwise xcode colorscheme is bwoken
-vim.o.background = "light"
+-- vim.o.background = "light"
 vim.o.concealcursor = "n"
 vim.o.title = true
 vim.o.titlestring = "nvim %{substitute(getcwd(), $HOME, '~', '')}"
