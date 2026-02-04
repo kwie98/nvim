@@ -35,8 +35,8 @@ local function pick_commit()
             if ft then ctx.preview:highlight({ ft = ft }) end
         end,
 
-        confirm = function(picker, item)
-            picker:close()
+        confirm = function(p, item)
+            p:close()
             -- show commit in which the search string was found in the diff, and select the file with the change:
             require("diffview").open({
                 item.commit .. "~1.." .. item.commit,
@@ -52,15 +52,22 @@ return {
     opts = {
         picker = {
             main = {
-                file = false,
+                file = false, -- open in current window, even if oil or :term is there
+            },
+            win = {
+                input = {
+                    keys = {
+                        ["<Esc>"] = { "close", mode = { "n", "i" } },
+                    },
+                },
             },
         },
     },
     keys = {
         { "<Leader>b", function() picker().buffers({ current = false }) end, desc = "Search Buffers" },
-        { "<Leader>f", function() picker().files() end, desc = "Search Files" },
-        { "<Leader>t", function() picker().grep() end, desc = "Live Grep" },
-        { "<Leader>R", function() picker().recent() end, desc = "Recent Files" },
+        { "<Leader>f", function() picker().files({ hidden = true }) end, desc = "Search Files" },
+        { "<Leader>t", function() picker().grep({ hidden = true }) end, desc = "Live Grep" },
+        -- { "<Leader>R", function() picker().recent() end, desc = "Recent Files" },
         { "<Leader>r", function() picker().recent({ filter = { cwd = true } }) end, desc = "Recent Files" },
         { "<F1>", function() picker().help() end, desc = "Help" },
         -- { "<Leader>gs", function() picker().git_status() end, desc = "Git Status" },
