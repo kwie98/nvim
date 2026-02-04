@@ -3,6 +3,7 @@ return {
     dependencies = {
         "rcarriga/nvim-dap-ui",
         "nvim-neotest/nvim-nio",
+        "folke/snacks.nvim",
         -- "nvim-telescope/telescope.nvim",
         -- "rcarriga/cmp-dap",
     },
