@@ -100,19 +100,20 @@ vim.api.nvim_create_autocmd("FileType", {
 --     command = "redrawstatus",
 -- })
 
-local function check_codelens_support()
-    local clients = vim.lsp.get_clients({ bufnr = 0 })
-    for _, c in ipairs(clients) do
-        if c.server_capabilities.codeLensProvider then return true end
-    end
-    return false
-end
-
-vim.api.nvim_create_autocmd({ "BufWritePost", "LspAttach" }, {
-    callback = function()
-        if check_codelens_support() then vim.lsp.codelens.refresh({ bufnr = 0 }) end
-    end,
-})
+-- lenses are meh:
+-- local function check_codelens_support()
+--     local clients = vim.lsp.get_clients({ bufnr = 0 })
+--     for _, c in ipairs(clients) do
+--         if c.server_capabilities.codeLensProvider then return true end
+--     end
+--     return false
+-- end
+--
+-- vim.api.nvim_create_autocmd({ "BufWritePost", "LspAttach" }, {
+--     callback = function()
+--         if check_codelens_support() then vim.lsp.codelens.refresh({ bufnr = 0 }) end
+--     end,
+-- })
 
 -- vim.api.nvim_create_autocmd("TermClose", {
 --     callback = function()
